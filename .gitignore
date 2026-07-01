@@ -3,3 +3,4 @@ node_modules/
 .superpowers/
 .gstack/
 output/
+.claude/
