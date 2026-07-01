@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java while dowhile loop 课程标题 ：while 循环、do while 循环与循环对比 所属章节 ：Java 流程控制 上课日期 ：2025 09 11 知识点标签 ： while循环 do while循环 for循环复习 " />
+  <title>while循环与do-while循环 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-while-dowhile-loop">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 08 课</p>
+      <h1>while循环与do-while循环</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">while循环与do-while循环</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-while-dowhile-loop</code></li>
+<li><strong>课程标题</strong>：while 循环、do-while 循环与循环对比</li>
+<li><strong>所属章节</strong>：Java 流程控制</li>
+<li><strong>上课日期</strong>：2025-09-11</li>
+<li><strong>知识点标签</strong>：<code>while循环</code> <code>do-while循环</code> <code>for循环复习</code> <code>循环对比</code> <code>数组与矩阵下标</code> <code>参数匹配</code> <code>包package</code></li>
+<li><strong>难度等级</strong>：基础</li>
+<li><strong>适合对象</strong>：已学习 for 循环、正在学习其他循环结构的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课系统讲解了 while 和 do-while 两种循环结构，与 for 循环做了完整对比，同时补充了 Java 包（package）的创建、参数匹配三要素以及数组下标（从0开始）与矩阵下标（从1开始）的对应转换。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先介绍了 Java 中包（package）的概念和创建方式——包是用来组织类的命名空间，包含共同特性的类放在同一个包下。
+2. 课堂中重点讲解了 while 循环的结构——先判断条件，条件为 true 执行循环体，为 false 直接跳过。
+3. 老师通过代码对比演示了 do-while 和 while 的核心区别：do-while 先执行一次再判断，while 先判断再执行。
+4. 本节课还总结了 for 循环的三个表达式（赋值、比较、增加），并强调循环实际上是从第二个表达式（比较）开始转圈的。
+5. 最后讲解了数组下标（从 0 开始）与矩阵下标（从 1 开始）的转换关系，以及方法调用时参数匹配的三要素：个数、顺序、类型。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 理解 Java 中包（package）的概念，能独立创建包并在包下创建类。
+2. 能写出 while 循环的完整语法，并理解&quot;先判断后执行&quot;的执行逻辑。
+3. 能写出 do-while 循环的完整语法（以分号结尾），并理解&quot;先执行后判断&quot;的执行逻辑。
+4. 能对比 while 与 do-while 的区别——while 可能一次都不执行，do-while 至少执行一次。
+5. 能说出 for、while、do-while 三种循环的适用场景和语法区别。
+6. 理解方法调用时参数必须匹配的三要素：个数一致、顺序一致、类型一致。
+7. 能解释数组下标（从0开始）和数学矩阵下标（从1开始）的关系——矩阵下标 = 数组下标 + 1。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：包（package）的概念与创建</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>包（package）</strong> 是 Java 中用来<strong>组织和管理类</strong>的一种命名空间机制。把功能相关的类放在同一个包下，就像把同类型的文件放在同一个文件夹里一样。包名通常采用公司域名的反转（如 <code>com.example.tools</code>），全部小写。</p>
+<h5>为什么要学它？</h5>
+<p>随着项目变大，类越来越多。如果所有类都堆在默认包下，会非常混乱。包可以避免类名冲突（两个包下可以有同名的类），让代码结构更清晰。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 在文件最顶部声明包
+package com.example.tools;
+
+// 导入其他包中的类
+import java.util.Scanner;
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师展示了创建包和默认包的区别：</p>
+<ul>
+<li>在 SRC 下创建包 → New → Package → 输入包名（如 <code>com</code> 或 <code>unit</code>）</li>
+<li>在包下创建类 → 该类自动属于这个包</li>
+<li>&quot;包是具有共同特性的。包含共同特性的这些类就放在一起。&quot;</li>
+</ul>
+<p>老师特别指出：如果不创建包就是&quot;默认包&quot;，默认包下也能直接创建类。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 包名中使用了中文或大写字母——包名一般全用小写英文。
+2. 在不同包下创建同名类后，导入时忘记写完整包名。
+3. 创建包后类文件放错位置——包名对应文件夹结构：com.example 对应 com/example/ 两层文件夹。
+</code></pre>
+<hr>
+<h4>知识点 2：while 循环——先判断后执行</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>while</code> 循环是最基本的循环结构。每次循环开始前，先判断条件表达式，如果为 <strong>true</strong> 就执行循环体；如果为 <strong>false</strong> 就直接跳过（可能一次都不执行）。</p>
+<h5>为什么要学它？</h5>
+<p>当你不确定需要循环多少次（循环次数由运行时条件决定），或者可能根本不需要循环时，while 比 for 更合适。比如&quot;只要用户没输入 quit 就一直读取&quot;。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">while (条件表达式) {
+    // 循环体
+}
+// while 以花括号 } 结尾，不需要额外分号
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师通过一个具体的例子解释了 while 循环：</p>
+<ul>
+<li>初始 i = 0 → 经过 i++ 后 i = 1 → 输出 2（因为先加再加），然后 2&lt;10，继续循环</li>
+<li>当 i = 9 时，进入循环，i++ 后变成 10，输出 10，然后判断 10&lt;10 为 false，退出</li>
+<li>老师让学生数循环次数——从 2 到 10 一共 <strong>9 次</strong></li>
+</ul>
+<p><strong>关键问题</strong>：&quot;while 是先判断条件，再执行循环体。如果第一次条件就是 false，循环体一次都不会执行。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 忘记在循环体内更新条件变量，导致死循环。
+2. while 后面多写分号：while(x&lt;10); → 空语句陷阱。
+3. 混淆 while 和 do-while 的结尾——while 以 } 结尾，不要额外加分号。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class WhileDemo {
+    public static void main(String[] args) {
+        // 从 1 数到 5
+        int i = 1;
+        while (i &lt;= 5) {
+            System.out.println(&quot;第 &quot; + i + &quot; 次&quot;);
+            i++;          // 别忘了更新 i，否则死循环！
+        }
+        System.out.println(&quot;循环结束&quot;);
+
+        // 条件一开始就是 false——循环体一次都不执行
+        int j = 10;
+        while (j &lt; 5) {
+            System.out.println(&quot;这句话永远不会输出&quot;);   // 不会执行
+        }
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. i 从 1 开始，while 每次判断 i&lt;=5。
+2. 循环体内输出 + i++（更新变量）。
+3. 当 i=6 时，6&lt;=5 为 false，退出循环。
+4. j=10，10&lt;5 为 false，while 循环体直接跳过——这就是&quot;可能一次都不执行&quot;。
+</code></pre>
+<hr>
+<h4>知识点 3：do-while 循环——先执行后判断</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>do-while</code> 是 while 的变体。<strong>关键区别</strong>：它先执行一次循环体，然后再判断条件。这意味着无论条件如何，<strong>循环体至少执行一次</strong>。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">do {
+    // 循环体
+} while (条件表达式);    // ← 注意：这里有分号！
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用代码对比来演示：</p>
+<p><strong>场景 A</strong>（条件一开始就是 false）：</p>
+<ul>
+<li>while：条件 false → 一次也不执行</li>
+<li>do-while：先执行一次循环体 → 再判断条件 false → 退出</li>
+</ul>
+<p><strong>场景 B</strong>（条件一开始是 true）：</p>
+<ul>
+<li>while 和 do-while 的执行次数一样</li>
+</ul>
+<p><strong>核心结论</strong>：<strong>do-while 的执行次数 ≥ while 的执行次数。</strong></p>
+<p>老师还特别注意了语法细节——&quot;do-while 是以分号结尾的，而 while 是以大括号结尾的。为什么？因为 while 的大括号是语句组的结尾，而 do-while 在 } 后面又新起了一个 while 条件判断，必须用分号作为语句的结束。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. do-while 结尾忘记写分号——这是最常见的语法错误。
+2. 把 while 和 do-while 的适用场景搞反——需要&quot;至少执行一次&quot;的时候用 do-while。
+3. do 后面不写花括号直接跟语句——do 后面的循环体需要用 { } 包裹。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class DoWhileDemo {
+    public static void main(String[] args) {
+        // ====== 正常情况：条件为 true ======
+        int i = 1;
+        do {
+            System.out.println(&quot;i = &quot; + i);
+            i++;
+        } while (i &lt;= 3);     // ← 分号不能丢！
+
+        // ====== 条件一开始就是 false ======
+        int j = 10;
+        do {
+            System.out.println(&quot;至少输出一次：&quot; + j);  // 会输出！
+        } while (j &lt; 5);
+        // 输出后判断 10&lt;5 是 false，退出循环
+    }
+}
+</code></pre>
+<h5>运行结果：</h5>
+<pre><code class="language-text">i = 1
+i = 2
+i = 3
+至少输出一次：10
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. i=1 → 输出 → i++=2 → 判断 2&lt;=3 true → 循环
+2. i=2 → 输出 → i++=3 → 判断 3&lt;=3 true → 循环
+3. i=3 → 输出 → i++=4 → 判断 4&lt;=3 false → 退出
+4. j=10 → 先执行输出（&quot;至少输出一次：10&quot;），再判断 10&lt;5 为 false → 退出。
+5. 注意第 4 步——虽然条件一开始就是 false，循环体仍然执行了一次。这就是 do-while 和 while 的核心区别。
+</code></pre>
+<hr>
+<h4>知识点 4：三种循环的对比总结</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 有三种循环结构：<strong>for、while、do-while</strong>。它们可以互相转换（任何循环都可用另一种写法实现），但各有最适合的场景。</p>
+<h5>为什么要学它？</h5>
+<p>知道什么时候用哪种循环，是写好代码的基本功。选错了循环结构，代码会显得别扭甚至出错。</p>
+<h5>对比表</h5>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>for</th>
+<th>while</th>
+<th>do-while</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最少执行次数</td>
+<td>0 次</td>
+<td>0 次</td>
+<td><strong>1 次</strong></td>
+</tr>
+<tr>
+<td>循环次数确定时</td>
+<td>✅ 最适合</td>
+<td>可以但不如 for 紧凑</td>
+<td>不常用</td>
+</tr>
+<tr>
+<td>循环次数不确定时</td>
+<td>可以</td>
+<td>✅ 最适合</td>
+<td>需要至少一次用</td>
+</tr>
+<tr>
+<td>条件前置/后置</td>
+<td>前置（先判断）</td>
+<td>前置（先判断）</td>
+<td><strong>后置（先执行）</strong></td>
+</tr>
+<tr>
+<td>语法结尾</td>
+<td><code>}</code></td>
+<td><code>}</code></td>
+<td><code>} while(条件);</code> <strong>（有分号）</strong></td>
+</tr>
+</tbody></table>
+<h5>课堂中的理解方式</h5>
+<p>老师总结：</p>
+<ul>
+<li><strong>for</strong>：三个表达式（赋值、比较、增加）写在一起，结构紧凑，适合&quot;知道循环次数&quot;的场景。</li>
+<li><strong>while</strong>：条件判断在前，可能一次都不执行，适合&quot;不知道循环几次，可能不循环&quot;的场景。</li>
+<li><strong>do-while</strong>：先执行再判断，至少执行一次，适合&quot;至少要做一次，再看要不要继续&quot;的场景。</li>
+</ul>
+<hr>
+<h4>知识点 5：数组下标与矩阵下标的转换</h4>
+<h5>这个知识点是什么？</h5>
+<ul>
+<li><strong>数组下标</strong>（Java/计算机）：从 <strong>0</strong> 开始。第一个元素是 arr[0]。</li>
+<li><strong>矩阵下标</strong>（数学/线性代数）：从 <strong>1</strong> 开始。第一个元素是 a₁₁。</li>
+</ul>
+<p>它们之间的关系：<strong>矩阵下标 = 数组下标 + 1</strong>，或者说：<strong>数组下标 = 矩阵下标 - 1</strong>。</p>
+<h5>基本概念</h5>
+<pre><code class="language-text">数学矩阵中的 a₁₁ → 对应数组中的 arr[0][0]
+数学矩阵中的 a₁₂ → 对应数组中的 arr[0][1]
+数学矩阵中的 a₂₁ → 对应数组中的 arr[1][0]
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师画了一个 4×4 的矩阵来解释：
+&quot;在我们数组里面，这是 0 1 2 3。而在我们学的线性代数里面，这是 1 2 3 4。所以说我们在转换的时候要转换过来——数组下标 = 矩阵下标 - 1。&quot;</p>
+<p>老师还补充了屏幕像素坐标的类似概念：&quot;数学坐标系原点在左下角，(0,0)在中间。而屏幕坐标系原点在左上角，(0,0)在左上。所以也要转换。&quot;</p>
+<hr>
+<h4>知识点 6：参数匹配三要素</h4>
+<h5>这个知识点是什么？</h5>
+<p>调用方法时，传入的**参数（实参）<strong>必须和方法定义时的</strong>参数列表（形参）**完全匹配。匹配有三个要求：</p>
+<ol>
+<li><strong>个数一致</strong>（number）：方法要几个参数，就只能传几个。</li>
+<li><strong>顺序一致</strong>（order）：第一个参数对应第一个形参，第二个对应第二个，不能乱。</li>
+<li><strong>类型一致</strong>（type）：int 对应 int、double 对应 double。类型不匹配时需要类型转换。</li>
+</ol>
+<h5>课堂中的理解方式</h5>
+<p>老师通过一个编译错误的例子来解释：<code>System.out.println</code> 的参数写了一个逗号而不是加号，导致编译器认为传了两个不同类型的参数。&quot;原来的 print 是一个整型参数，但你传的是一个 String + 逗号 + int，个数和类型都不匹配，所以报错了。&quot;</p>
+<p>解决方法是用 <code>+</code> 号拼接成一个 String，因为 <strong>&quot;不管谁跟 String 加，都变成 String&quot;</strong>。</p>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>while</td>
+<td>do-while</td>
+<td>while 先判断后执行（可能0次）；do-while 先执行后判断（至少1次）</td>
+<td><code>while(false){ }</code> 不执行 / <code>do{ }while(false);</code> 执行1次</td>
+</tr>
+<tr>
+<td>while 结尾</td>
+<td>do-while 结尾</td>
+<td>while 以 } 结尾；do-while 以 } while(条件); 结尾（有分号）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>for</td>
+<td>while</td>
+<td>for 三要素集中书写（紧凑）；while 条件单独写（灵活）</td>
+<td><code>for(int i=0;i&lt;10;i++)</code> / <code>while(i&lt;10)</code></td>
+</tr>
+<tr>
+<td>数组下标</td>
+<td>矩阵下标</td>
+<td>数组从 0 开始；数学矩阵从 1 开始</td>
+<td>arr[0] ↔ a₁₁</td>
+</tr>
+<tr>
+<td>参数个数</td>
+<td>参数类型</td>
+<td>个数多了少了都报错；类型不匹配需要转换</td>
+<td><code>println(a,b)</code> ❌ / <code>println(a+b)</code> ✅</td>
+</tr>
+<tr>
+<td>包（package）</td>
+<td>默认包</td>
+<td>有名包有命名空间，避免类名冲突；默认包没有组织</td>
+<td><code>package com.xxx;</code> vs 不写 package</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：while 与 do-while 的对比</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">while 循环、do-while 循环、至少执行一次
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class WhileVsDoWhile {
+    public static void main(String[] args) {
+        System.out.println(&quot;===== while 循环 =====&quot;);
+        int a = 5;
+        while (a &lt; 3) {
+            System.out.println(&quot;while: a = &quot; + a);
+            a++;
+        }
+        System.out.println(&quot;while 循环结束（a&lt;3为false，一次也没执行）&quot;);
+
+        System.out.println(&quot;\n===== do-while 循环 =====&quot;);
+        int b = 5;
+        do {
+            System.out.println(&quot;do-while: b = &quot; + b);  // 至少输出一次！
+            b++;
+        } while (b &lt; 3);
+        System.out.println(&quot;do-while 循环结束（虽然条件为false，但仍然执行了一次）&quot;);
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">===== while 循环 =====
+while 循环结束（a&lt;3为false，一次也没执行）
+
+===== do-while 循环 =====
+do-while: b = 5
+do-while 循环结束（虽然条件为false，但仍然执行了一次）
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. a=5, 5&lt;3 是 false, while 直接跳过循环体——输出&quot;一次也没执行&quot;。
+2. b=5, do 先执行一次输出，然后判断 5&lt;3 是 false，退出循环。
+3. 对比明显：相同条件，while 一次不执行，do-while 执行了一次。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 当需要&quot;至少执行一次&quot;的操作时（如显示菜单），用 do-while。
+- 当可能&quot;一次都不用执行&quot;时（如检查条件），用 while。
+</code></pre>
+<hr>
+<h4>示例 2：用 for 循环操作二维数组（模拟矩阵）</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">双重 for 循环、二维数组、下标转换
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class MatrixDemo {
+    public static void main(String[] args) {
+        int[][] matrix = new int[3][3];
+
+        // 赋值：模拟数学矩阵 A₁₁=1, A₁₂=2, ...
+        // 数组下标 = 矩阵下标 - 1
+        for (int i = 0; i &lt; 3; i++) {          // i=0,1,2 对应矩阵行 1,2,3
+            for (int j = 0; j &lt; 3; j++) {      // j=0,1,2 对应矩阵列 1,2,3
+                matrix[i][j] = (i + 1) * (j + 1);  // i+1 = 矩阵行号, j+1 = 矩阵列号
+            }
+        }
+
+        // 输出表格形式
+        System.out.println(&quot;3×3 矩阵：&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                System.out.print(matrix[i][j] + &quot;\t&quot;);
+            }
+            System.out.println();   // 每行输出完换行
+        }
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">3×3 矩阵：
+1	2	3	
+2	4	6	
+3	6	9
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. 外层 for (i) 控制行，内层 for (j) 控制列——这是双重循环的固定模式。
+2. (i+1)*(j+1) 实现了&quot;矩阵行号 × 矩阵列号&quot;的计算（因为数组下标从0开始）。
+3. \t 是制表符，用来对齐列。每行输出完后用空的 println() 换行。
+4. 这说明双重循环处理矩阵时，下标转换的核心就是&quot;数组下标 + 1 = 矩阵下标&quot;。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 双重循环遍历二维数组：外层走行，内层走列。口诀：&quot;外行内列&quot;。
+- 矩阵和数组的下标差 1 是最容易出错的地方，记住公式：矩阵下标 = 数组下标 + 1。
+</code></pre>
+<hr>
+<h4>示例 3：参数匹配——正确与错误对比</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">方法调用、参数匹配（个数、顺序、类型）
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class ParamMatchDemo {
+    public static void main(String[] args) {
+        int a = 10, b = 20;
+
+        // ✅ 正确：+ 号将两个 int 拼接成一个 String
+        System.out.println(&quot;和：&quot; + (a + b));       // 和：30
+
+        // ✅ 正确：多个 + 号拼接，最终是一个 String
+        System.out.println(&quot;a=&quot; + a + &quot;, b=&quot; + b);  // a=10, b=20
+
+        // ❌ 错误写法示意（如果用逗号的话）：
+        // System.out.println(&quot;和：&quot;, a + b);  // 编译错误！参数个数不匹配
+        // println 方法只需要一个参数，但这里传了两个（一个 String + 一个 int）
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">和：30
+a=10, b=20
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. println 方法期望接收的参数个数、类型取决于具体的重载版本。
+2. println(String) 需要一个 String——用 &quot;和：&quot; + (a+b) 拼成 &quot;和：30&quot; 传进去。
+3. println(a + &quot;, b=&quot; + b) 同理，用 + 号把所有内容拼成一个 String。
+4. 如果用逗号 println(&quot;和：&quot;, a+b)，就是传了两个参数，和方法定义不匹配。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 不确定方法要几个参数时，看编译器的红色提示——它会告诉你怎么不对。
+- 参数匹配三要素（个数、顺序、类型）适用于所有 Java 方法调用。
+- 需要一次输出多个不同类型的值 → 用 + 号拼接成一个 String。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：while 循环——先检查再进入</h4>
+<ul>
+<li><strong>案例名称</strong>：进门前先敲门</li>
+<li><strong>对应知识点</strong>：while 循环</li>
+<li><strong>案例背景</strong>：while 就像&quot;进门前先敲门&quot;——如果门是锁的（条件 false），你就不进去（不执行循环体）；如果门是开的（条件 true），就进去然后再敲下一次门。</li>
+<li><strong>解决思路</strong>：while 先判断条件 → true 就执行 → 执行完再判断 → 直到 false 退出。</li>
+</ul>
+<h4>案例 2：do-while 循环——先进门再检查</h4>
+<ul>
+<li><strong>案例名称</strong>：至少进去一次</li>
+<li><strong>对应知识点</strong>：do-while 循环</li>
+<li><strong>案例背景</strong>：do-while 就像&quot;先进门，进去后再说&quot;——不管怎样先执行一次，然后再问&quot;要不要再来一次？&quot;</li>
+<li><strong>解决思路</strong>：do 先执行循环体 → 然后判断条件 → true 继续，false 停止。至少走一趟。</li>
+</ul>
+<h4>案例 3：参数匹配——三个要一致</h4>
+<ul>
+<li><strong>案例名称</strong>：给函数&quot;对号入座&quot;</li>
+<li><strong>对应知识点</strong>：参数匹配三要素</li>
+<li><strong>案例背景</strong>：老师用一个类比——就像电影院对号入座，座位号（个数）、前后排（顺序）、座位大小（类型）都要对得上。</li>
+<li><strong>解决思路</strong>：方法调用时，传入的实参在个数、顺序、类型上必须和方法定义的形参列表匹配。不匹配 → 编译错误。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：do-while 结尾忘记分号
+错误示例：
+do {
+    i++;
+} while (i &lt; 10)    // 缺少分号！
+
+正确写法：
+do {
+    i++;
+} while (i &lt; 10);   // 分号必须有！
+
+解释：
+do-while 的 while 条件判断是另一条语句的开始，必须以分号结尾。这在所有循环结构中只适用于 do-while。
+
+
+易错点 2：while 循环忘记更新条件变量
+错误示例：
+int i = 0;
+while (i &lt; 10) {
+    System.out.println(i);
+    // 忘记 i++ → 死循环！i 永远是 0
+}
+
+正确写法：
+int i = 0;
+while (i &lt; 10) {
+    System.out.println(i);
+    i++;    // 必须更新，否则无限循环
+}
+
+解释：
+忘记更新条件变量是 while 循环中最常见的错误，会导致程序永远停不下来（死循环）。
+
+
+易错点 3：混淆 while 和 do-while 的适用场景
+错误示例：
+// 先检查文件是否存在再读取，应该用 while
+do {
+    readLine();    // 文件不存在也会读一次！
+} while (file.exists());
+
+正确写法：
+while (file.exists()) {
+    readLine();    // 先检查，存在才读
+}
+
+解释：
+当操作可能有&quot;零次执行&quot;的场景时，用 while。只有&quot;至少执行一次&quot;时，才用 do-while。
+
+
+易错点 4：数组遍历时下标越界
+错误示例：
+int[] arr = {10, 20, 30};
+for (int i = 1; i &lt;= arr.length; i++) {   // i 从 1 开始
+    System.out.println(arr[i]);            // arr[3] 越界！
+}
+
+正确写法：
+for (int i = 0; i &lt; arr.length; i++) {    // i 从 0 开始
+    System.out.println(arr[i]);            // arr[0], arr[1], arr[2]
+}
+
+解释：
+数组下标从 0 开始。遍历数组的标准模板是 for(int i=0; i&lt;arr.length; i++)。用 &lt;= 或从 1 开始都会导致越界。
+
+
+易错点 5：参数类型不匹配时不会自动拼接
+错误示例：
+System.out.println(&quot;结果&quot;, 100);   // 编译错误！
+
+正确写法：
+System.out.println(&quot;结果&quot; + 100);  // 用 + 拼接成 String
+
+解释：
+println 方法不会自动把多个参数拼成一个字符串。你需要主动用 + 号把它们拼接起来。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：以下 while 循环会输出什么？
+
+int i = 3;
+while (i &lt; 3) {
+    System.out.println(&quot;执行了&quot;);
+    i++;
+}
+System.out.println(&quot;结束了&quot;);
+
+A. 执行了 / 结束了
+B. 结束了
+C. 死循环
+D. 编译错误
+
+正确答案：B
+
+解析：
+i=3，3&lt;3 为 false，while 循环体一次也不执行，直接跳到后面输出&quot;结束了&quot;。
+
+
+题目 2：以下 do-while 循环会输出什么？
+
+int i = 3;
+do {
+    System.out.println(&quot;执行了&quot;);
+    i++;
+} while (i &lt; 3);
+System.out.println(&quot;结束了&quot;);
+
+A. 执行了 / 结束了
+B. 结束了
+C. 死循环
+D. 编译错误
+
+正确答案：A
+
+解析：
+do 先执行一次输出&quot;执行了&quot;，i 变成 4。然后判断 4&lt;3 为 false，退出循环，输出&quot;结束了&quot;。
+
+
+题目 3：关于 for、while、do-while 三种循环，以下说法正确的是？
+
+A. 三种循环完全不能互相替代
+B. for 循环最少执行次数一定是 0
+C. do-while 循环至少执行一次
+D. while 循环一定至少执行一次
+
+正确答案：C
+
+解析：
+do-while 至少执行一次（先执行后判断）。for 也可能一次不执行（条件一开始就是 false）。三种循环可以互相替代（用不同的写法实现相同的功能）。
+
+
+题目 4：数组 arr = {10, 20, 30}，arr[1] 的值是多少？
+
+A. 10
+B. 20
+C. 30
+D. 下标越界
+
+正确答案：B
+
+解析：
+数组下标从 0 开始：arr[0]=10, arr[1]=20, arr[2]=30。
+
+
+题目 5：以下关于方法参数匹配的说法，哪个是错误的？
+
+A. 实参和形参的个数必须一致
+B. 实参和形参的类型必须一致
+C. 实参和形参的名字必须一致
+D. 实参和形参的顺序必须一致
+
+正确答案：C
+
+解析：
+参数匹配要求个数、顺序、类型一致，但参数的名字可以不同。调用时的变量名（实参）和方法定义时的参数名（形参）没有关系。
+
+
+题目 6：关于 Java 包（package），以下说法正确的是？
+
+A. 一个 Java 项目只能有一个包
+B. 包名建议使用大写字母
+C. 包用来组织和管理类，避免类名冲突
+D. 所有类必须放在包中
+
+正确答案：C
+
+解析：
+包的主要作用就是组织类、避免命名冲突。一个项目可以有多个包，包名通常全小写。类也可以不放在任何包中（默认包）。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. while 循环 —— 先判断条件再执行循环体，可能一次都不执行
+2. do-while 循环 —— 先执行一次循环体再判断条件，至少执行一次
+3. for 循环 —— 将初始化、条件、迭代三个要素集中写在一起
+4. 包（package） —— 用来组织和管理类的命名空间，避免类名冲突
+5. 死循环 —— 条件永远为 true 或忘记更新循环变量导致的永不停止的循环
+6. 数组下标 —— 从 0 开始计数，arr[0] 是第一个元素
+7. 矩阵下标 —— 数学中从 1 开始计数，a₁₁ 是第一个元素
+8. 参数匹配 —— 方法调用时实参和形参在个数、顺序、类型上必须一致
+9. 累加求和 —— 用 sum += i 在循环中不断累加当前值
+10. 双重 for 循环 —— 外层走行、内层走列，用于遍历二维数组或矩阵
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">while 与 do-while 的执行流程对比：
+
+【while 循环流程】
+1. 程序执行到 while 语句。
+2. 计算括号中的条件表达式（true 或 false）。
+3. 如果 false → 直接跳过整个循环体，继续执行 while 后面的代码。
+4. 如果 true → 执行循环体中的所有语句。
+5. 循环体执行完毕后 → 回到第 2 步，重新判断条件。
+6. 重复以上步骤，直到条件为 false。
+
+【do-while 循环流程】
+1. 程序执行到 do 语句。
+2. 无条件执行一次循环体中的所有语句（不管条件是 true 还是 false）。
+3. 循环体执行完毕后 → 计算 while 括号中的条件表达式。
+4. 如果 true → 回到第 2 步，再次执行循环体。
+5. 如果 false → 退出循环，继续执行后面的代码。
+6. 关键区别：do-while 能保证循环体至少执行一次。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习 1：用 while 循环计算 1 到 100 的和。
+
+考查知识点：
+while 循环、累加求和
+
+参考答案：
+
+public class WhileSum {
+    public static void main(String[] args) {
+        int i = 1;
+        int sum = 0;
+        while (i &lt;= 100) {
+            sum += i;
+            i++;
+        }
+        System.out.println(&quot;1到100的和：&quot; + sum);   // 5050
+    }
+}
+
+解题思路：
+while 版本的求和与 for 版本思路完全一样，只是把初始化和迭代分别写在循环前后。
+
+
+练习 2：用 do-while 循环实现：不断生成 1-10 的随机数，直到生成 5 为止，输出每次生成的数字。
+
+考查知识点：
+do-while 循环、至少执行一次、Math.random()
+
+参考答案：
+
+public class GuessFive {
+    public static void main(String[] args) {
+        int num;
+        int count = 0;
+        do {
+            num = (int)(Math.random() * 10) + 1;   // 生成 1-10 的随机数
+            count++;
+            System.out.println(&quot;第&quot; + count + &quot;次：&quot; + num);
+        } while (num != 5);
+        System.out.println(&quot;恭喜，生成到 5！共尝试了 &quot; + count + &quot; 次。&quot;);
+    }
+}
+
+解题思路：
+这个场景必须至少执行一次（至少要生成一个数），所以用 do-while 最合适。每次循环生成随机数并计数，直到 num==5 时退出。
+
+
+练习 3：使用双重 for 循环，输出 9×9 乘法表。
+
+考查知识点：
+双重 for 循环、格式化输出
+
+参考答案：
+
+public class MultiplicationTable {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt;= 9; i++) {           // 外层：行
+            for (int j = 1; j &lt;= i; j++) {       // 内层：列（注意 j&lt;=i 是上三角）
+                System.out.print(j + &quot;×&quot; + i + &quot;=&quot; + (i * j) + &quot;\t&quot;);
+            }
+            System.out.println();   // 一行结束换行
+        }
+    }
+}
+
+解题思路：
+外层 i 控制行数（1-9），内层 j 控制每行的列数（1 到 i）。乘积 = i × j。
+
+
+练习 4：指出以下代码中的错误并修改。
+
+public class Test {
+    public static void main(String[] args) {
+        int i = 10;
+        while (i &lt; 5) {
+            System.out.println(i);
+        }    // 错误1
+
+        do {
+            System.out.println(&quot;执行一次&quot;);
+        } while (i &lt; 5)    // 错误2
+
+        int[] arr = {1, 2, 3};
+        System.out.println(arr[3]);   // 错误3
+    }
+}
+
+考查知识点：
+while 死循环、do-while 分号、数组越界
+
+参考答案：
+错误1：while 循环体中缺少 i++ 或 i-- 更新语句——如果 i&lt;5 为 true 会死循环。
+错误2：do-while 结尾缺少分号 ; —— 应写成 } while (i &lt; 5);
+错误3：arr[3] 越界——长度为 3 的数组下标范围是 0~2，应为 arr[2] 或 arr[0]。
+
+
+练习 5：将以下 for 循环改写为 while 循环和 do-while 循环，三种写法实现相同的功能。
+
+for (int i = 0; i &lt; 5; i++) {
+    System.out.print(i + &quot; &quot;);
+}
+
+考查知识点：
+三种循环的互转
+
+参考答案：
+// while 版本
+int i = 0;
+while (i &lt; 5) {
+    System.out.print(i + &quot; &quot;);
+    i++;
+}
+
+// do-while 版本（注意：当 i=0 开始，条件是 i&lt;5）
+int j = 0;
+do {
+    System.out.print(j + &quot; &quot;);
+    j++;
+} while (j &lt; 5);
+
+解题思路：
+for 的三个表达式分别对应：表达式1 → while/do-while 的初始化；表达式2 → 循环条件；表达式3 → 循环体末尾的更新。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">while、do-while 循环与循环对比
+├── 包（package）
+│   ├── 概念：组织和管理类的命名空间
+│   ├── 创建：New → Package → 输入包名
+│   └── 默认包（不写 package）
+├── while 循环
+│   ├── 语法：while(条件) { 循环体 }
+│   ├── 执行逻辑：先判断，后执行
+│   ├── 可能一次都不执行
+│   └── 注意：循环体内要更新条件变量
+├── do-while 循环
+│   ├── 语法：do { 循环体 } while(条件);
+│   ├── 执行逻辑：先执行，后判断
+│   ├── 至少执行一次
+│   └── 注意：结尾必须写分号
+├── 三种循环对比
+│   ├── for：三要素集中，适合已知次数
+│   ├── while：条件前置，适合不确定次数
+│   └── do-while：条件后置，适合至少一次
+├── 数组下标与矩阵下标
+│   ├── 数组从 0 开始 → arr[0][0]
+│   └── 矩阵从 1 开始 → a₁₁
+├── 参数匹配三要素
+│   ├── 个数一致
+│   ├── 顺序一致
+│   └── 类型一致
+└── 字符串拼接与类型转换
+    └── 任何类型 + String → 自动转换为 String
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>java-while-dowhile-loop</code></li>
+<li><strong>建议课程标题</strong>：while 循环、do-while 循环与循环对比</li>
+<li><strong>建议章节</strong>：Java 流程控制</li>
+<li><strong>建议标签</strong>：<code>while</code> <code>do-while</code> <code>循环对比</code> <code>package</code> <code>数组下标</code> <code>矩阵</code> <code>参数匹配</code></li>
+<li><strong>适合放入 summary 的内容</strong>：第 2 节课堂摘要 5 条</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：知识点 1-6 的核心概念</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：第 6 节 3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：第 9 节 6 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：第 10 节 10 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：第 11 节 while 与 do-while 执行流程对比</li>
+<li><strong>适合放入 exercises 的内容</strong>：第 12 节 5 道练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：第 15 节课后总结</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是掌握 while 和 do-while 两种循环结构，理解它们与 for 循环的区别和适用场景——while 可能一次都不执行，do-while 至少执行一次。
+2. 学习循环时要特别注意 do-while 结尾的分号不能忘——这是三种循环中唯一需要分号的。
+3. 通过本节课应该能够在三种循环（for、while、do-while）之间自由选择，并理解包（package）、参数匹配、数组下标等配套基础知识。
+4. 循环是 Java 编程中最核心的控制结构。后续学习数组遍历、集合操作、数据处理、算法实现等所有内容都离不开循环。现在多练几种循环写法，以后事半功倍。
+5. 课后建议多练习：(1) 用 while 和 do-while 分别实现 1-100 求和；(2) 用双重循环输出九九乘法表；(3) 练习将同一需求用三种循环各写一遍；(4) 创建自己的包并在包下创建类。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-07.html"><span>上一篇</span><strong>switch开关语句与for循环详解</strong></a><a class="article-pager-link next" rel="next" href="java-09.html"><span>下一篇</span><strong>数组与for循环综合复习</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

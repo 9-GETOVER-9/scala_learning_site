@@ -1,0 +1,2073 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结：2026 04 16 Scala 编程相关知识讲解 1. 课程基本信息 课程 ID 建议： scala pattern match case class case object 课程标题： 2026 04 16 Scala 编程相关知识讲解 所属章节： Scala 模式匹配、Scala 样" />
+  <title>Scala模式匹配样例类与样例对象 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-04-16-pattern-case-classes">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-04-16</p>
+      <h1>Scala模式匹配样例类与样例对象</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala模式匹配样例类与样例对象</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结：2026-04-16 Scala 编程相关知识讲解</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议：</strong> <code>scala-pattern-match-case-class-case-object</code></li>
+<li><strong>课程标题：</strong> 2026-04-16 Scala 编程相关知识讲解</li>
+<li><strong>所属章节：</strong> Scala 模式匹配、Scala 样例类 Case Class</li>
+<li><strong>上课日期：</strong> 2026-04-16</li>
+<li><strong>知识点标签：</strong> Scala 与 Java 对比、对象、伴生对象、参数传递、引用类型、模式匹配、match、case、模式守卫、Any、Array 匹配、List 匹配、Tuple 匹配、样例类、样例对象、case class、case object、copy、equals、抽象类、override</li>
+<li><strong>难度等级：</strong> 初级到中级入门</li>
+<li><strong>适合对象：</strong> 已经学习过 Scala 类、对象、伴生对象、集合基础，准备学习模式匹配和样例类的学生</li>
+<li><strong>本节课一句话概括：</strong> 本节课围绕 Scala 中对象思想、参数传递、模式匹配、模式守卫、样例类和样例对象展开，重点帮助学生理解如何用 <code>match case</code> 和 <code>case class</code> 表达结构化数据与分类逻辑。</li>
+</ul>
+<blockquote>
+<p>说明：原始转写中存在若干识别错误，例如“半生对象”按 Scala 术语整理为“伴生对象”，“样一类/量类”整理为“样例类”，“守位/首位”整理为“模式守卫”，“主过滤器/主路由器”整理为“主构造器”。<br>原文多次提到 AI 编程工具、课程作业与考试安排，这些内容不属于 Scala 核心知识点，已放入“课堂补充说明”。</p>
+</blockquote>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课开头复习了抽象类和重写，说明如果父类或抽象类中定义了抽象方法，子类或对象实现时需要使用 <code>override</code> 补充方法体。</li>
+<li>课堂再次强调 Scala 中 <code>object</code> 是非常重要的概念，很多全局性、静态性、传递性任务可以通过对象或伴生对象完成。</li>
+<li>老师通过 Java 的静态方法和动态方法对比 Scala 的 <code>class</code> 与 <code>object</code>，说明类适合表达某一模块内部的普通功能，对象适合表达全局或跨模块信息传递。</li>
+<li>本节课讲解了参数传递的重要性，说明普通值类型参数更像局部变量，而数组、对象等引用类型可以携带更多结构化信息。</li>
+<li>课堂复习了伴生对象和 <code>apply</code> 方法，说明没有 <code>new</code> 的对象创建写法通常与伴生对象中的 <code>apply</code> 方法有关。</li>
+<li>本节课重点讲解了模式匹配的基本语法：使用 <code>match</code> 开始匹配，用多个 <code>case</code> 分支描述不同情况，并从上到下依次匹配。</li>
+<li>课堂进一步说明模式匹配不仅能匹配简单值，还可以匹配 <code>Array</code>、<code>List</code>、元组、类对象、样例类对象和 <code>Option</code> 等结构。</li>
+<li>本节课介绍了模式守卫，即在 <code>case</code> 后添加 <code>if</code> 条件，让匹配逻辑更加精确。</li>
+<li>课堂重点讲解了样例类 <code>case class</code>，说明它适合快速定义保存数据的类，创建对象时可以省略 <code>new</code>，并自动生成 <code>toString</code>、<code>equals</code>、<code>hashCode</code>、<code>copy</code> 等方法。</li>
+<li>本节课还讲到样例对象 <code>case object</code>，说明它是一种没有参数、没有主构造器的单例对象，常用于表示固定枚举值或特定消息。</li>
+<li>最后老师布置了样例类相关作业，并说明第八周交实验报告一、第十周交实验报告二，测试内容不作为考试重点。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解 Scala 中 <code>object</code>、伴生对象和伴生类在传递信息、组织全局功能方面的作用。</li>
+<li>能区分普通参数和引用类型参数，知道对象、数组、列表等结构化数据为什么更适合传递复杂信息。</li>
+<li>能写出基本的 <code>match case</code> 模式匹配语法，并理解分支从上到下依次匹配的执行顺序。</li>
+<li>能使用 <code>_</code> 作为默认匹配分支，处理前面所有 <code>case</code> 都不匹配的情况。</li>
+<li>能使用模式守卫 <code>case x if 条件 =&gt;</code> 进一步限定匹配条件。</li>
+<li>能看懂并编写对简单值、数组、列表、元组和对象类型的模式匹配。</li>
+<li>能定义简单样例类 <code>case class</code>，并使用它保存结构化数据。</li>
+<li>能解释样例类为什么可以省略 <code>new</code> 创建对象。</li>
+<li>能使用样例类自动生成的 <code>toString</code>、<code>equals</code>、<code>copy</code> 等方法。</li>
+<li>能定义简单样例对象 <code>case object</code>，并知道它适合表示固定值或消息类型。</li>
+<li>能结合样例类和模式匹配完成基础分类任务，例如识别学生、老师、订单、顾客等对象。</li>
+<li>能理解抽象类与 <code>override</code> 的关系，为后续学习特质 <code>trait</code> 和多态打基础。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：抽象类与 override 复习</h4>
+<h5>这个知识点是什么？</h5>
+<p>抽象类可以定义没有方法体的抽象方法，子类继承后需要实现这些方法。在 Scala 中，如果子类重写父类已有的方法，通常要写 <code>override</code>。</p>
+<pre><code class="language-scala">abstract class Action {
+  def execute(): Unit
+}
+
+class OpenAction extends Action {
+  override def execute(): Unit = {
+    println(&quot;执行打开操作&quot;)
+  }
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>抽象类用于定义规则。父类规定“必须做什么”，子类负责说明“具体怎么做”。这是模式匹配、样例类、特质和多态学习中的基础思想。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">abstract class 父类名 {
+  def 抽象方法名(): 返回类型
+}
+
+class 子类名 extends 父类名 {
+  override def 抽象方法名(): 返回类型 = {
+    // 具体实现
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师从 Java 中的抽象类讲起：子类必须实现父类中的抽象方法。Scala 也是如此，只不过 Scala 中不但 <code>class</code> 可以继承和重写，<code>object</code> 如果继承抽象类或特质，也可以重写其中的方法。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>继承抽象类后忘记实现抽象方法。</li>
+<li>重写父类已有具体方法时忘记写 <code>override</code>。</li>
+<li>以为 <code>object</code> 不能继承抽象类或特质。</li>
+<li>把“重载”和“重写”混淆。</li>
+<li>不理解抽象类的核心是定义规则。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">abstract class MessageHandler {
+  def handle(message: String): Unit
+}
+
+object ConsoleHandler extends MessageHandler {
+  override def handle(message: String): Unit = {
+    println(&quot;收到消息：&quot; + message)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    ConsoleHandler.handle(&quot;Hello Scala&quot;)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>MessageHandler</code> 是抽象类。</li>
+<li><code>handle</code> 是抽象方法，只有方法头。</li>
+<li><code>ConsoleHandler</code> 是单例对象，也可以继承抽象类。</li>
+<li><code>override def handle(...)</code> 实现了父类规则。</li>
+<li>调用 <code>ConsoleHandler.handle(...)</code> 输出消息。</li>
+</ol>
+<hr>
+<h4>知识点 2：Scala 中 object 的作用复习</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>object</code> 是 Scala 中的单例对象。在程序中，一个 <code>object</code> 只有一个实例，不需要使用 <code>new</code> 创建。它常用于：</p>
+<ul>
+<li>程序入口。</li>
+<li>工具方法。</li>
+<li>全局常量。</li>
+<li>类似 Java <code>static</code> 的方法或字段。</li>
+<li>消息传递或跨模块共享的信息。</li>
+<li>伴生对象。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>Scala 中没有直接照搬 Java 的 <code>static</code> 关键字。理解 <code>object</code>，才能理解 Scala 如何组织全局功能、伴生对象、<code>apply</code> 方法、样例对象等。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">object Config {
+  val appName = &quot;ScalaCourse&quot;
+
+  def printInfo(): Unit = {
+    println(appName)
+  }
+}
+</code></pre>
+<p>调用：</p>
+<pre><code class="language-scala">Config.printInfo()
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 <code>object</code> 理解为一种特殊封装体。对于全局性作用域、跨模块传递信息、工具性功能，可以考虑放在 <code>object</code> 中；而某个模块内部的普通属性和行为，则更适合放在 <code>class</code> 中。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>用 <code>new</code> 创建 <code>object</code>。</li>
+<li>把所有内容都写进 <code>object</code>，不用 <code>class</code> 表示具体对象。</li>
+<li>在 Scala 中寻找 Java 风格的 <code>static</code>。</li>
+<li>不理解 <code>object</code> 和伴生对象的区别。</li>
+<li>不知道 <code>object</code> 也可以继承抽象类或特质。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object MathService {
+  def distance(x1: Double, y1: Double, x2: Double, y2: Double): Double = {
+    val dx = x1 - x2
+    val dy = y1 - y2
+    math.sqrt(dx * dx + dy * dy)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    println(MathService.distance(0, 0, 3, 4))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>MathService</code> 是单例对象。</li>
+<li><code>distance</code> 是工具方法。</li>
+<li>工具方法不依赖某个具体实例，所以适合放在 <code>object</code> 中。</li>
+<li>调用时直接使用 <code>MathService.distance(...)</code>。</li>
+</ol>
+<hr>
+<h4>知识点 3：参数传递与引用类型</h4>
+<h5>这个知识点是什么？</h5>
+<p>参数是函数或方法之间传递信息的方式。Scala 中可以传递简单值，也可以传递结构化对象。</p>
+<p>简单值示例：</p>
+<pre><code class="language-scala">def add(a: Int, b: Int): Int = a + b
+</code></pre>
+<p>对象参数示例：</p>
+<pre><code class="language-scala">class Point(val x: Double, val y: Double)
+
+def printPoint(p: Point): Unit = {
+  println(p.x + &quot;, &quot; + p.y)
+}
+</code></pre>
+<p>数组参数示例：</p>
+<pre><code class="language-scala">def printArray(arr: Array[Int]): Unit = {
+  arr.foreach(println)
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>课堂中强调，参数设计会影响代码复用率和数据结构设计。传递一个 <code>Int</code> 只能携带一个数字，而传递一个对象可以携带多个字段和方法，因此对象、数组、列表等结构化参数能表达更多信息。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">def 方法名(参数名: 参数类型): 返回类型 = {
+  方法体
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师举了 <code>Point</code> 的例子：如果计算两点距离，传递 <code>x1</code>、<code>y1</code>、<code>x2</code>、<code>y2</code> 可以完成任务，但传递 <code>Point</code> 对象更有结构，因为 <code>Point</code> 不只包含坐标，还可以包含其他属性和方法。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>方法参数过多，导致调用混乱。</li>
+<li>明明是一组相关数据，却拆成多个普通参数传递。</li>
+<li>不理解对象参数可以携带属性和方法。</li>
+<li>误以为所有参数都是全局共享变量。</li>
+<li>忽略参数类型设计对代码复用的影响。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Point(val x: Double, val y: Double)
+
+object Geometry {
+  def distance(p1: Point, p2: Point): Double = {
+    val dx = p1.x - p2.x
+    val dy = p1.y - p2.y
+    math.sqrt(dx * dx + dy * dy)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = new Point(0, 0)
+    val p2 = new Point(3, 4)
+
+    println(Geometry.distance(p1, p2))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Point</code> 把 <code>x</code> 和 <code>y</code> 封装成一个整体。</li>
+<li><code>distance</code> 方法接收两个 <code>Point</code> 对象。</li>
+<li>方法内部通过 <code>p1.x</code>、<code>p1.y</code>、<code>p2.x</code>、<code>p2.y</code> 访问坐标。</li>
+<li>这种写法比传递四个零散数字更清晰。</li>
+</ol>
+<hr>
+<h4>知识点 4：伴生对象与 apply 方法复习</h4>
+<h5>这个知识点是什么？</h5>
+<p>伴生对象是与某个类同名的 <code>object</code>。如果伴生对象定义了 <code>apply</code> 方法，就可以使用 <code>类名(...)</code> 的方式创建或获取对象。</p>
+<pre><code class="language-scala">class Test {
+  def show(): Unit = {
+    println(&quot;have a class&quot;)
+  }
+}
+
+object Test {
+  def apply(): Test = {
+    println(&quot;Hello Scala object&quot;)
+    new Test()
+  }
+}
+</code></pre>
+<p>调用：</p>
+<pre><code class="language-scala">val t = Test()
+t.show()
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>Scala 中很多没有 <code>new</code> 的写法都和伴生对象的 <code>apply</code> 方法有关，例如：</p>
+<pre><code class="language-scala">Array(1, 2, 3)
+List(1, 2, 3)
+Person(&quot;Tom&quot;, 18)
+</code></pre>
+<p>理解 <code>apply</code> 有助于理解 Scala 标准库和样例类。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 类名(参数列表)
+
+object 类名 {
+  def apply(参数列表): 类名 = {
+    new 类名(参数列表)
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师反复强调：当看到没有 <code>new</code> 的对象创建形式时，要想到可能是伴生对象在起作用。伴生对象中的 <code>apply</code> 方法可以返回类对象，因此调用 <code>Test()</code> 时，实际上可能是先进入 <code>object Test</code> 的 <code>apply</code>，再创建 <code>class Test</code> 的对象。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>看到 <code>Person(&quot;Tom&quot;)</code> 以为没有创建对象。</li>
+<li>不知道 <code>Person(&quot;Tom&quot;)</code> 实际可能是 <code>Person.apply(&quot;Tom&quot;)</code>。</li>
+<li>伴生对象和伴生类名字不一致。</li>
+<li><code>apply</code> 方法没有返回正确类型。</li>
+<li>不理解 <code>new Test()</code> 和 <code>Test()</code> 的区别。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Student(val name: String, val age: Int)
+
+object Student {
+  def apply(name: String, age: Int): Student = {
+    new Student(name, age)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s1 = new Student(&quot;Tom&quot;, 18)
+    val s2 = Student(&quot;Jerry&quot;, 20)
+
+    println(s1.name)
+    println(s2.name)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>new Student(&quot;Tom&quot;, 18)</code> 直接调用主构造器。</li>
+<li><code>Student(&quot;Jerry&quot;, 20)</code> 调用伴生对象的 <code>apply</code>。</li>
+<li><code>apply</code> 内部返回一个新的 <code>Student</code> 对象。</li>
+<li>两种方式最后都得到 <code>Student</code> 实例。</li>
+</ol>
+<hr>
+<h4>知识点 5：模式匹配 match case 基本语法</h4>
+<h5>这个知识点是什么？</h5>
+<p>模式匹配是 Scala 中非常重要的分支结构。它使用 <code>match</code> 关键字开始匹配，用 <code>case</code> 表示不同分支。</p>
+<pre><code class="language-scala">x match {
+  case 1 =&gt; println(&quot;one&quot;)
+  case 2 =&gt; println(&quot;two&quot;)
+  case _ =&gt; println(&quot;many&quot;)
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>模式匹配比普通 <code>if-else</code> 和 Java <code>switch</code> 更强大。它不仅能匹配具体值，还能匹配类型、数组结构、列表结构、元组结构、样例类对象等，是 Scala 中非常核心的语法。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">待匹配的值 match {
+  case 模式1 =&gt; 代码1
+  case 模式2 =&gt; 代码2
+  case _ =&gt; 默认代码
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把模式匹配和 Java 中的 <code>switch</code> 类比：程序从第一个 <code>case</code> 开始匹配，如果匹配成功，就执行对应逻辑；如果不成功，就继续匹配下一个分支。不同的是，Scala 的模式匹配能处理的情况更丰富。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>忘记写 <code>match</code>。</li>
+<li><code>case</code> 分支后写错箭头，应使用 <code>=&gt;</code>。</li>
+<li>忘记默认分支 <code>_</code>，导致匹配不完整。</li>
+<li>认为 <code>match case</code> 只能匹配数字。</li>
+<li>以为每个 <code>case</code> 后需要写 <code>break</code>。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val day = 2
+
+    day match {
+      case 1 =&gt; println(&quot;星期一&quot;)
+      case 2 =&gt; println(&quot;星期二&quot;)
+      case 3 =&gt; println(&quot;星期三&quot;)
+      case _ =&gt; println(&quot;其他日期&quot;)
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>day match</code> 表示对 <code>day</code> 的值进行匹配。</li>
+<li><code>case 1</code> 匹配值为 <code>1</code> 的情况。</li>
+<li><code>case 2</code> 匹配值为 <code>2</code> 的情况。</li>
+<li>当前 <code>day</code> 是 <code>2</code>，所以输出“星期二”。</li>
+<li><code>_</code> 表示其他所有情况。</li>
+</ol>
+<hr>
+<h4>知识点 6：默认分支 <code>_</code> 与自动中断</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Scala 模式匹配中，<code>_</code> 表示通配符，也就是“其他所有情况”。</p>
+<pre><code class="language-scala">x match {
+  case 1 =&gt; &quot;one&quot;
+  case 2 =&gt; &quot;two&quot;
+  case _ =&gt; &quot;other&quot;
+}
+</code></pre>
+<p>Scala 的 <code>match case</code> 不需要像 Java <code>switch</code> 一样手动写 <code>break</code>，匹配成功后会执行对应分支并结束匹配。</p>
+<h5>为什么要学它？</h5>
+<p>默认分支可以避免匹配不完整。自动中断可以避免 Java <code>switch</code> 中忘记写 <code>break</code> 导致的穿透问题。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case _ =&gt; 默认处理逻辑
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师提到：所有 <code>case</code> 都匹配不上时，就执行 <code>_</code> 这个分支；每个 <code>case</code> 后不需要使用 <code>break</code>，它会自动结束当前匹配。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>忘记写 <code>_</code> 默认分支。</li>
+<li>把 <code>_</code> 当成普通变量名。</li>
+<li>在每个 <code>case</code> 后面写 <code>break</code>。</li>
+<li>把默认分支放在最前面，导致后面的分支永远匹配不到。</li>
+<li>不知道模式匹配是从上到下执行的。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val score = &quot;B&quot;
+
+    val result = score match {
+      case &quot;A&quot; =&gt; &quot;优秀&quot;
+      case &quot;B&quot; =&gt; &quot;良好&quot;
+      case &quot;C&quot; =&gt; &quot;及格&quot;
+      case _ =&gt; &quot;需要重新输入&quot;
+    }
+
+    println(result)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>score</code> 的值是 <code>&quot;B&quot;</code>。</li>
+<li>程序先尝试匹配 <code>&quot;A&quot;</code>，失败。</li>
+<li>再匹配 <code>&quot;B&quot;</code>，成功。</li>
+<li>返回结果 <code>&quot;良好&quot;</code>。</li>
+<li>匹配成功后不会继续执行后面的分支。</li>
+</ol>
+<hr>
+<h4>知识点 7：模式守卫</h4>
+<h5>这个知识点是什么？</h5>
+<p>模式守卫是在 <code>case</code> 模式后添加 <code>if</code> 条件，用来进一步限制匹配。</p>
+<pre><code class="language-scala">x match {
+  case n if n &gt;= 0 =&gt; &quot;非负数&quot;
+  case n if n &lt; 0 =&gt; &quot;负数&quot;
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>有时候只匹配值或类型还不够，还要判断附加条件。例如成绩是 B 且学生名字是 Leo，或者数字是正数，或者年龄大于 18。这时就可以使用模式守卫。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case 模式 if 条件 =&gt; 代码
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把模式守卫理解为“在模式后面嵌入一个条件”，类似在 <code>for</code> 循环或其他结构中加入 <code>if</code> 过滤条件。它的作用就是让匹配更加精确。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>if</code> 写在 <code>match</code> 外面，导致逻辑不清晰。</li>
+<li>忘记守卫条件必须写在 <code>case</code> 模式后。</li>
+<li>把模式守卫和普通 <code>if-else</code> 完全混淆。</li>
+<li>守卫条件写得太宽，导致后续分支无法执行。</li>
+<li>默认分支放太前，导致守卫分支失效。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val name = &quot;Leo&quot;
+    val grade = &quot;B&quot;
+
+    val comment = grade match {
+      case &quot;A&quot; =&gt; &quot;优秀&quot;
+      case &quot;B&quot; if name == &quot;Leo&quot; =&gt; &quot;Leo 是良好&quot;
+      case &quot;B&quot; =&gt; &quot;良好&quot;
+      case &quot;C&quot; =&gt; &quot;及格&quot;
+      case _ =&gt; &quot;未知等级&quot;
+    }
+
+    println(comment)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>grade</code> 是 <code>&quot;B&quot;</code>。</li>
+<li>先匹配 <code>&quot;A&quot;</code>，失败。</li>
+<li>匹配 <code>&quot;B&quot; if name == &quot;Leo&quot;</code>，因为名字是 Leo，所以成功。</li>
+<li>输出 <code>&quot;Leo 是良好&quot;</code>。</li>
+<li>如果名字不是 Leo，就会继续匹配普通的 <code>&quot;B&quot;</code> 分支。</li>
+</ol>
+<hr>
+<h4>知识点 8：匹配类型与 Any</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 的模式匹配可以匹配不同类型的数据。为了让一个参数能接收不同类型，可以使用 <code>Any</code>。<code>Any</code> 是 Scala 类型层级中最顶层的类型，可以接收很多类型的值。</p>
+<pre><code class="language-scala">def describe(x: Any): String = {
+  x match {
+    case i: Int =&gt; &quot;整数：&quot; + i
+    case s: String =&gt; &quot;字符串：&quot; + s
+    case _ =&gt; &quot;其他类型&quot;
+  }
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>课堂中多次提到模式匹配可以匹配数组、列表、类对象、样例类对象等。如果一个方法参数要接收这些不同类型，就不能把类型写死，可以使用 <code>Any</code> 作为入门阶段的统一入口。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">变量 match {
+  case 变量名: 类型 =&gt; 处理逻辑
+  case _ =&gt; 默认处理
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师指出，模式匹配不仅能匹配简单值，还能匹配 <code>Array</code>、<code>List</code>、<code>Tuple</code>、<code>Class</code> 等结构，所以参数有时会写成 <code>Any</code>。这样传入学生对象、老师对象、数组或字符串时，都可以进入同一个匹配方法中处理。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为 <code>Any</code> 只能表示任意字符串。</li>
+<li>类型匹配时漏写冒号。</li>
+<li>使用 <code>Any</code> 后不做模式匹配，直接当具体类型用。</li>
+<li>不理解 <code>Any</code> 只是接收范围广，不代表可以随便调用所有方法。</li>
+<li>类型匹配分支顺序不合理。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def describe(x: Any): String = {
+    x match {
+      case i: Int =&gt; &quot;这是整数：&quot; + i
+      case s: String =&gt; &quot;这是字符串：&quot; + s
+      case arr: Array[Int] =&gt; &quot;这是整数数组，长度为：&quot; + arr.length
+      case _ =&gt; &quot;未知类型&quot;
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(describe(10))
+    println(describe(&quot;Scala&quot;))
+    println(describe(Array(1, 2, 3)))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>describe</code> 的参数类型是 <code>Any</code>，可以接收多种类型。</li>
+<li><code>case i: Int</code> 匹配整数。</li>
+<li><code>case s: String</code> 匹配字符串。</li>
+<li><code>case arr: Array[Int]</code> 匹配整型数组。</li>
+<li><code>_</code> 处理其他类型。</li>
+</ol>
+<hr>
+<h4>知识点 9：匹配 Array、List 和 Tuple</h4>
+<h5>这个知识点是什么？</h5>
+<p>模式匹配不仅能匹配值和类型，还能匹配集合结构。</p>
+<p>匹配数组：</p>
+<pre><code class="language-scala">arr match {
+  case Array(1, 2, 3) =&gt; &quot;数组是 1,2,3&quot;
+  case Array(0, _*) =&gt; &quot;以 0 开头的数组&quot;
+  case _ =&gt; &quot;其他数组&quot;
+}
+</code></pre>
+<p>匹配列表：</p>
+<pre><code class="language-scala">list match {
+  case List(1, 2, 3) =&gt; &quot;列表是 1,2,3&quot;
+  case head :: tail =&gt; &quot;有头有尾的列表&quot;
+  case Nil =&gt; &quot;空列表&quot;
+}
+</code></pre>
+<p>匹配元组：</p>
+<pre><code class="language-scala">tuple match {
+  case (name, age) =&gt; s&quot;$name 的年龄是 $age&quot;
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>集合和元组是 Scala 中常见的数据结构。能对结构进行匹配，就可以更自然地处理不同数据格式。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case Array(...) =&gt; ...
+case List(...) =&gt; ...
+case (a, b) =&gt; ...
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师提到模式匹配可以匹配 <code>Array</code>、<code>List</code>、<code>Tuple</code>，因为这些都是数据结构。Scala 程序中经常传递结构化数据，模式匹配可以直接根据结构做不同处理。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>只会匹配数字，不知道可以匹配集合。</li>
+<li>不理解 <code>_ *</code> 可以匹配数组中的多个剩余元素。</li>
+<li>把数组和列表写法混淆。</li>
+<li>匹配元组时元素个数不一致。</li>
+<li>不知道列表的 <code>head :: tail</code> 写法。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def describe(value: Any): String = {
+    value match {
+      case Array(1, 2, 3) =&gt; &quot;数组正好是 1, 2, 3&quot;
+      case Array(0, _*) =&gt; &quot;数组以 0 开头&quot;
+      case List(&quot;hi&quot;, name) =&gt; &quot;向 &quot; + name + &quot; 打招呼&quot;
+      case (name: String, age: Int) =&gt; name + &quot; 的年龄是 &quot; + age
+      case _ =&gt; &quot;其他数据&quot;
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(describe(Array(1, 2, 3)))
+    println(describe(Array(0, 5, 6)))
+    println(describe(List(&quot;hi&quot;, &quot;Tom&quot;)))
+    println(describe((&quot;Alice&quot;, 18)))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Array(1, 2, 3)</code> 匹配固定数组。</li>
+<li><code>Array(0, _*)</code> 匹配以 0 开头的数组。</li>
+<li><code>List(&quot;hi&quot;, name)</code> 匹配两个元素的列表，并把第二个元素绑定给 <code>name</code>。</li>
+<li><code>(name: String, age: Int)</code> 匹配二元组。</li>
+<li><code>_</code> 处理其他情况。</li>
+</ol>
+<hr>
+<h4>知识点 10：样例类 case class</h4>
+<h5>这个知识点是什么？</h5>
+<p>样例类是使用 <code>case class</code> 定义的特殊类，常用于保存数据，并且非常适合与模式匹配配合使用。</p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+</code></pre>
+<p>创建对象：</p>
+<pre><code class="language-scala">val p = Person(&quot;Tom&quot;, 18)
+</code></pre>
+<p>不需要写 <code>new</code>。</p>
+<h5>为什么要学它？</h5>
+<p>样例类是 Scala 中非常重要的结构化数据表示方式。它适合表示人、订单、顾客、账单、票据、记录等结构相同但内容不同的数据。后续学习模式匹配、集合处理、函数式编程都会经常使用它。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case class 类名(字段1: 类型, 字段2: 类型, ...)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把样例类比作一种固定格式的数据结构，类似一张表或一条记录。比如 <code>Person(name, age)</code> 就像有两个单元格：姓名和年龄。每次创建一个 <code>Person</code>，就是按照这个格式保存一条数据。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>忘记写 <code>case</code>。</li>
+<li>写成 <code>case object Person(name: String)</code>，混淆样例类和样例对象。</li>
+<li>以为样例类必须使用 <code>new</code> 创建。</li>
+<li>不知道样例类字段默认通常是不可变的 <code>val</code>。</li>
+<li>不会结合模式匹配提取样例类字段。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;Alice&quot;, 25)
+    val p2 = Person(&quot;Bob&quot;, 32)
+
+    println(p1)
+    println(p2.name)
+    println(p2.age)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>case class Person(name: String, age: Int)</code> 定义样例类。</li>
+<li><code>Person(&quot;Alice&quot;, 25)</code> 创建样例类对象，不需要 <code>new</code>。</li>
+<li><code>println(p1)</code> 会自动输出友好的字符串形式。</li>
+<li><code>p2.name</code> 读取姓名。</li>
+<li><code>p2.age</code> 读取年龄。</li>
+</ol>
+<hr>
+<h4>知识点 11：样例类自动生成的方法</h4>
+<h5>这个知识点是什么？</h5>
+<p>样例类会自动生成一些常用方法，例如：</p>
+<ul>
+<li><code>apply</code>：支持省略 <code>new</code> 创建对象。</li>
+<li><code>toString</code>：输出友好的字符串。</li>
+<li><code>equals</code>：按内容比较两个对象是否相等。</li>
+<li><code>hashCode</code>：生成哈希值，配合集合使用。</li>
+<li><code>copy</code>：复制对象，并可以修改部分字段。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>普通类要手写很多方法，而样例类自动生成这些方法，特别适合保存数据、比较数据、复制数据。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p1 = Person(&quot;李四&quot;, 21)
+val p2 = p1.copy(name = &quot;王五&quot;)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师讲到 <code>copy</code> 的例子：可以复制一个样例类对象，并只修改其中一部分内容。例如把姓名从“李四”改成“王五”，年龄保持不变。这在记账、票据、报表等场景中很方便。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不知道 <code>copy</code> 会返回新对象，而不是修改原对象。</li>
+<li>以为样例类比较的是内存地址；实际上默认按字段内容比较。</li>
+<li>不知道样例类可以直接打印出可读内容。</li>
+<li>对样例类对象使用 <code>copy</code> 时字段名写错。</li>
+<li>误以为所有类都有这些自动方法。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;李四&quot;, 21)
+    val p2 = Person(&quot;李四&quot;, 21)
+    val p3 = p1.copy(name = &quot;王五&quot;)
+
+    println(p1)
+    println(p1 == p2)
+    println(p3)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>p1</code> 和 <code>p2</code> 字段内容相同。</li>
+<li><code>p1 == p2</code> 返回 <code>true</code>，因为样例类默认按内容比较。</li>
+<li><code>p1.copy(name = &quot;王五&quot;)</code> 创建一个新对象。</li>
+<li>新对象姓名变成“王五”，年龄仍然是 <code>21</code>。</li>
+<li>原对象 <code>p1</code> 不会被修改。</li>
+</ol>
+<hr>
+<h4>知识点 12：样例类与模式匹配</h4>
+<h5>这个知识点是什么？</h5>
+<p>样例类特别适合和模式匹配结合使用，可以直接匹配对象类型，并提取字段。</p>
+<pre><code class="language-scala">case class Student(name: String, age: Int)
+case class Teacher(name: String, subject: String)
+
+def show(person: Any): Unit = {
+  person match {
+    case Student(name, age) =&gt; println(s&quot;学生：$name，年龄：$age&quot;)
+    case Teacher(name, subject) =&gt; println(s&quot;老师：$name，学科：$subject&quot;)
+    case _ =&gt; println(&quot;未知身份&quot;)
+  }
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>这部分是考试和实际编程都很重要的内容。通过样例类与模式匹配，可以把不同结构的数据放到一起处理，并根据类型自动分支。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">对象 match {
+  case 样例类名(字段变量1, 字段变量2) =&gt; 处理逻辑
+  case _ =&gt; 默认逻辑
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用 <code>Customer</code> 和 <code>Order</code>、<code>Student</code> 和 <code>Teacher</code> 的例子说明：定义多个样例类后，可以把它们作为 <code>Any</code> 类型传入同一个匹配函数，再根据具体对象类型输出不同内容。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li><code>case Student(name, age)</code> 中字段数量和样例类定义不一致。</li>
+<li>忘记默认分支。</li>
+<li>用普通类进行同样写法但没有定义提取器，导致匹配不成功。</li>
+<li>不理解 <code>name</code>、<code>age</code> 是从对象中提取出来的新变量。</li>
+<li>把样例类对象和字符串混淆。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">case class Customer(name: String, age: Int)
+case class Order(id: Int)
+
+object Main {
+  def printInfo(value: Any): Unit = {
+    value match {
+      case Customer(name, age) =&gt;
+        println(s&quot;顾客姓名：$name，年龄：$age&quot;)
+      case Order(id) =&gt;
+        println(s&quot;订单编号：$id&quot;)
+      case _ =&gt;
+        println(&quot;未匹配的数据&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val c: Any = Customer(&quot;唐唐&quot;, 73)
+    val o: Any = Order(123)
+
+    printInfo(c)
+    printInfo(o)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Customer</code> 和 <code>Order</code> 都是样例类。</li>
+<li><code>printInfo</code> 接收 <code>Any</code>，可以传入不同类型。</li>
+<li><code>case Customer(name, age)</code> 匹配顾客对象，并提取姓名和年龄。</li>
+<li><code>case Order(id)</code> 匹配订单对象，并提取订单编号。</li>
+<li><code>_</code> 处理其他数据。</li>
+</ol>
+<hr>
+<h4>知识点 13：样例对象 case object</h4>
+<h5>这个知识点是什么？</h5>
+<p>样例对象使用 <code>case object</code> 定义。它是单例对象，没有主构造器，不能带参数，常用于表示固定值或固定消息。</p>
+<pre><code class="language-scala">sealed trait Sex
+case object Male extends Sex
+case object Female extends Sex
+</code></pre>
+<p>样例对象可以作为样例类中的字段值：</p>
+<pre><code class="language-scala">case class Person(name: String, sex: Sex)
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>样例对象适合表示“固定的几个值”，例如性别、状态、命令、消息类型等。它经常和样例类、模式匹配一起使用。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case object 对象名
+</code></pre>
+<p>常见配合写法：</p>
+<pre><code class="language-scala">trait 类型名
+case object 值1 extends 类型名
+case object 值2 extends 类型名
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师通过 <code>Male</code>、<code>Female</code> 的例子说明：样例对象没有参数，不像样例类那样有主构造器。它可以作为某个字段的值，例如 <code>Person(&quot;张三&quot;, Male)</code>。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>给 <code>case object</code> 写参数列表。</li>
+<li>把 <code>case object</code> 当成可以 <code>new</code> 的类。</li>
+<li>不理解样例对象是单例。</li>
+<li>不知道它常和 <code>trait</code> 一起表示固定取值范围。</li>
+<li>混淆 <code>case class</code> 和 <code>case object</code>。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">sealed trait Sex
+case object Male extends Sex
+case object Female extends Sex
+
+case class Person(name: String, sex: Sex)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;张三&quot;, Male)
+    val p2 = Person(&quot;李四&quot;, Female)
+
+    println(p1)
+    println(p2)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Sex</code> 表示性别这一类取值。</li>
+<li><code>Male</code> 和 <code>Female</code> 是两个样例对象。</li>
+<li><code>Person</code> 的 <code>sex</code> 字段类型是 <code>Sex</code>。</li>
+<li>创建对象时可以传入 <code>Male</code> 或 <code>Female</code>。</li>
+<li>样例对象没有参数，也不需要 <code>new</code>。</li>
+</ol>
+<hr>
+<h4>知识点 14：在模式中进行变量赋值</h4>
+<h5>这个知识点是什么？</h5>
+<p>在模式匹配中，可以把匹配到的内容绑定到变量中，然后在右侧代码中使用。</p>
+<pre><code class="language-scala">grade match {
+  case &quot;A&quot; =&gt; &quot;优秀&quot;
+  case other =&gt; &quot;其他等级：&quot; + other
+}
+</code></pre>
+<p>也可以在样例类中提取字段：</p>
+<pre><code class="language-scala">case Student(name, age) =&gt; println(name + age)
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>模式匹配不只是判断“是不是某个值”，还可以把匹配到的数据取出来继续使用。这是它比普通 <code>switch</code> 更强大的地方。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">case 变量名 =&gt; 使用变量名
+case 样例类名(变量1, 变量2) =&gt; 使用变量1和变量2
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师讲到可以用变量替代 <code>_</code>，这样不仅能匹配，还能拿到匹配的值。例如成绩匹配中，如果不是 A、B、C，可以把其他输入保存到变量中，再输出提示。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把变量绑定和常量匹配混淆。</li>
+<li>默认分支中只写 <code>_</code>，但后面又想使用匹配到的值。</li>
+<li>样例类字段提取数量不一致。</li>
+<li>变量名与外部变量重名，导致理解混乱。</li>
+<li>不知道 <code>case other =&gt;</code> 会匹配所有剩余情况。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def comment(grade: String): String = {
+    grade match {
+      case &quot;A&quot; =&gt; &quot;优秀&quot;
+      case &quot;B&quot; =&gt; &quot;良好&quot;
+      case &quot;C&quot; =&gt; &quot;及格&quot;
+      case other =&gt; &quot;未知等级：&quot; + other
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(comment(&quot;A&quot;))
+    println(comment(&quot;D&quot;))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>&quot;A&quot;</code>、<code>&quot;B&quot;</code>、<code>&quot;C&quot;</code> 是明确匹配。</li>
+<li><code>case other</code> 会匹配剩余所有情况。</li>
+<li><code>other</code> 保存传进来的值。</li>
+<li>当输入 <code>&quot;D&quot;</code> 时，输出 <code>&quot;未知等级：D&quot;</code>。</li>
+</ol>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>class</code></td>
+<td><code>object</code></td>
+<td><code>class</code> 表示对象模板；<code>object</code> 表示单例对象，常用于全局功能或静态类比功能</td>
+<td><code>class Student</code>；<code>object StudentService</code></td>
+</tr>
+<tr>
+<td>普通参数</td>
+<td>对象参数</td>
+<td>普通参数只携带单个值；对象参数可以携带多个字段和方法</td>
+<td><code>distance(x, y)</code>；<code>distance(point)</code></td>
+</tr>
+<tr>
+<td>值类型参数</td>
+<td>引用类型参数</td>
+<td>值类型常用于简单计算；数组、对象等引用类型能代表结构化信息</td>
+<td><code>Int</code>；<code>Array[Int]</code>、<code>Person</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td><code>if-else</code></td>
+<td><code>match</code> 适合多种模式和结构匹配；<code>if-else</code> 适合条件判断</td>
+<td><code>x match { case 1 =&gt; ... }</code>；<code>if (x == 1)</code></td>
+</tr>
+<tr>
+<td>Scala <code>match</code></td>
+<td>Java <code>switch</code></td>
+<td>Scala 可匹配值、类型、集合、样例类；Java 传统 switch 能力较有限</td>
+<td><code>case Student(n,a)</code>；<code>case 1:</code></td>
+</tr>
+<tr>
+<td><code>case _</code></td>
+<td><code>case other</code></td>
+<td><code>_</code> 匹配但不保存值；<code>other</code> 匹配并保存值</td>
+<td><code>case _ =&gt;</code>；<code>case other =&gt;</code></td>
+</tr>
+<tr>
+<td>普通 case</td>
+<td>模式守卫</td>
+<td>普通 case 只按模式匹配；模式守卫还要满足 if 条件</td>
+<td><code>case &quot;B&quot;</code>；<code>case &quot;B&quot; if name == &quot;Leo&quot;</code></td>
+</tr>
+<tr>
+<td><code>case class</code></td>
+<td>普通 <code>class</code></td>
+<td>样例类自动生成 <code>apply</code>、<code>toString</code>、<code>equals</code>、<code>hashCode</code>、<code>copy</code> 等方法</td>
+<td><code>case class Person(...)</code>；<code>class Person(...)</code></td>
+</tr>
+<tr>
+<td><code>case class</code></td>
+<td><code>case object</code></td>
+<td>样例类可以带参数并创建多个对象；样例对象无参数，是单例</td>
+<td><code>case class Person(name: String)</code>；<code>case object Male</code></td>
+</tr>
+<tr>
+<td><code>new Person(...)</code></td>
+<td><code>Person(...)</code></td>
+<td>前者直接调用构造器；后者通常调用伴生对象或样例类自动生成的 <code>apply</code></td>
+<td><code>new Person(&quot;Tom&quot;)</code>；<code>Person(&quot;Tom&quot;)</code></td>
+</tr>
+<tr>
+<td><code>equals</code></td>
+<td><code>copy</code></td>
+<td><code>equals</code> 比较内容是否相等；<code>copy</code> 复制对象并可修改部分字段</td>
+<td><code>p1 == p2</code>；<code>p1.copy(name=&quot;王五&quot;)</code></td>
+</tr>
+<tr>
+<td>抽象类</td>
+<td>样例类</td>
+<td>抽象类用于定义规则；样例类主要用于保存数据并支持匹配</td>
+<td><code>abstract class Action</code>；<code>case class Order(id: Int)</code></td>
+</tr>
+<tr>
+<td><code>Any</code></td>
+<td>具体类型</td>
+<td><code>Any</code> 可接收多种类型；具体类型限制更明确</td>
+<td><code>def f(x: Any)</code>；<code>def f(s: Student)</code></td>
+</tr>
+<tr>
+<td><code>Array</code> 匹配</td>
+<td><code>List</code> 匹配</td>
+<td>数组用 <code>Array(...)</code> 模式；列表可用 <code>List(...)</code> 或 <code>head :: tail</code></td>
+<td><code>case Array(1,2,3)</code>；<code>case head :: tail</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：基本 match case 匹配</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">match、case、默认分支、自动中断
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val number = 2
+
+    val result = number match {
+      case 1 =&gt; &quot;one&quot;
+      case 2 =&gt; &quot;two&quot;
+      case 3 =&gt; &quot;three&quot;
+      case _ =&gt; &quot;many&quot;
+    }
+
+    println(result)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">two
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>number match</code> 表示对 <code>number</code> 进行模式匹配。</li>
+<li><code>case 1</code> 匹配数字 1。</li>
+<li><code>case 2</code> 匹配数字 2。</li>
+<li>当前值是 2，所以结果是 <code>&quot;two&quot;</code>。</li>
+<li><code>_</code> 用于处理其他情况。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 的 match case 不需要写 break，匹配成功后会自动结束。
+</code></pre>
+<hr>
+<h4>示例 2：使用模式守卫判断成绩</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">模式守卫、case if、字符串匹配、默认分支
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val name = &quot;Leo&quot;
+    val grade = &quot;B&quot;
+
+    val comment = grade match {
+      case &quot;A&quot; =&gt; &quot;优秀&quot;
+      case &quot;B&quot; if name == &quot;Leo&quot; =&gt; &quot;Leo 同学表现良好&quot;
+      case &quot;B&quot; =&gt; &quot;良好&quot;
+      case &quot;C&quot; =&gt; &quot;及格&quot;
+      case _ =&gt; &quot;未知等级&quot;
+    }
+
+    println(comment)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">Leo 同学表现良好
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>grade</code> 的值是 <code>&quot;B&quot;</code>。</li>
+<li>第一个分支 <code>&quot;A&quot;</code> 不匹配。</li>
+<li>第二个分支要求成绩是 <code>&quot;B&quot;</code> 且姓名是 <code>&quot;Leo&quot;</code>。</li>
+<li>两个条件都满足，所以输出特殊评价。</li>
+<li>如果姓名不是 Leo，就会进入普通 <code>&quot;B&quot;</code> 分支。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">模式守卫适合处理“匹配某种模式，并且还要满足某个条件”的情况。
+</code></pre>
+<hr>
+<h4>示例 3：匹配不同类型的数据</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">Any、类型匹配、Array、String、Int
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def describe(value: Any): String = {
+    value match {
+      case i: Int =&gt; &quot;整数：&quot; + i
+      case s: String =&gt; &quot;字符串：&quot; + s
+      case arr: Array[Int] =&gt; &quot;整型数组，长度：&quot; + arr.length
+      case _ =&gt; &quot;其他类型&quot;
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(describe(100))
+    println(describe(&quot;Scala&quot;))
+    println(describe(Array(1, 2, 3)))
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">整数：100
+字符串：Scala
+整型数组，长度：3
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>describe</code> 接收 <code>Any</code> 类型参数。</li>
+<li><code>case i: Int</code> 匹配整数。</li>
+<li><code>case s: String</code> 匹配字符串。</li>
+<li><code>case arr: Array[Int]</code> 匹配整型数组。</li>
+<li>不符合以上情况时进入 <code>_</code> 分支。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Any 能接收很多类型，但使用时通常需要通过模式匹配判断具体类型。
+</code></pre>
+<hr>
+<h4>示例 4：样例类的创建、比较和复制</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">case class、apply、toString、equals、copy
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;李四&quot;, 21)
+    val p2 = Person(&quot;李四&quot;, 21)
+    val p3 = p1.copy(name = &quot;王五&quot;)
+
+    println(p1)
+    println(p1 == p2)
+    println(p3)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">Person(李四,21)
+true
+Person(王五,21)
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>case class Person</code> 定义样例类。</li>
+<li><code>Person(&quot;李四&quot;, 21)</code> 创建对象，不需要 <code>new</code>。</li>
+<li><code>println(p1)</code> 自动调用友好的 <code>toString</code>。</li>
+<li><code>p1 == p2</code> 比较字段内容，结果为 <code>true</code>。</li>
+<li><code>copy(name = &quot;王五&quot;)</code> 复制对象并修改姓名。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">copy 会返回一个新对象，不会修改原来的对象。
+</code></pre>
+<hr>
+<h4>示例 5：样例类与模式匹配识别不同对象</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">case class、模式匹配、字段提取、Any
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">case class Student(name: String, age: Int)
+case class Teacher(name: String, subject: String)
+
+object Main {
+  def show(person: Any): Unit = {
+    person match {
+      case Student(name, age) =&gt;
+        println(s&quot;学生：$name，年龄：$age&quot;)
+      case Teacher(name, subject) =&gt;
+        println(s&quot;老师：$name，学科：$subject&quot;)
+      case _ =&gt;
+        println(&quot;未知身份&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    show(Student(&quot;Tom&quot;, 12))
+    show(Teacher(&quot;John&quot;, &quot;数学&quot;))
+    show(&quot;其他数据&quot;)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">学生：Tom，年龄：12
+老师：John，学科：数学
+未知身份
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Student</code> 和 <code>Teacher</code> 是两个样例类。</li>
+<li><code>show</code> 方法接收 <code>Any</code>。</li>
+<li><code>case Student(name, age)</code> 匹配学生对象并取出字段。</li>
+<li><code>case Teacher(name, subject)</code> 匹配老师对象并取出字段。</li>
+<li>如果都不匹配，输出“未知身份”。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">样例类非常适合与模式匹配配合使用，这是 Scala 中常见写法。
+</code></pre>
+<hr>
+<h4>示例 6：样例对象表示固定取值</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">case object、trait、样例类字段、模式匹配
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">sealed trait Sex
+case object Male extends Sex
+case object Female extends Sex
+
+case class Person(name: String, sex: Sex)
+
+object Main {
+  def show(person: Person): Unit = {
+    person.sex match {
+      case Male =&gt; println(person.name + &quot; 是男性&quot;)
+      case Female =&gt; println(person.name + &quot; 是女性&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;张三&quot;, Male)
+    val p2 = Person(&quot;李四&quot;, Female)
+
+    show(p1)
+    show(p2)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">张三 是男性
+李四 是女性
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Sex</code> 表示性别这一类取值。</li>
+<li><code>Male</code> 和 <code>Female</code> 是样例对象。</li>
+<li><code>Person</code> 的 <code>sex</code> 字段类型是 <code>Sex</code>。</li>
+<li>模式匹配根据 <code>Male</code> 或 <code>Female</code> 执行不同逻辑。</li>
+<li>样例对象没有参数，也不用 <code>new</code>。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">case object 常用于表示固定状态、固定命令或固定枚举值。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：用对象参数表示点并计算距离</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">参数传递、对象参数、引用类型、代码复用
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到，如果计算两个点之间的距离，直接传递 <code>x</code> 和 <code>y</code> 也可以，但传递 <code>Point</code> 对象更清晰，因为对象可以携带更多结构信息。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义 <code>Point</code> 类，保存 <code>x</code> 和 <code>y</code>。</li>
+<li>定义工具对象 <code>Geometry</code>。</li>
+<li>让 <code>distance</code> 方法接收两个 <code>Point</code> 对象。</li>
+<li>根据坐标差计算距离。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">case class Point(x: Double, y: Double)
+
+object Geometry {
+  def distance(p1: Point, p2: Point): Double = {
+    val dx = p1.x - p2.x
+    val dy = p1.y - p2.y
+    math.sqrt(dx * dx + dy * dy)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Point(0, 0)
+    val p2 = Point(3, 4)
+
+    println(Geometry.distance(p1, p2))
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解对象参数比零散参数更有结构，便于后续扩展和复用。</p>
+<hr>
+<h4>案例 2：根据星期匹配任务</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">match case、字符串匹配、代码块、任务分配
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中举到类似“星期一做什么，星期二做什么”的任务分配例子。这适合用模式匹配表达多分支任务选择。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义一个星期字符串。</li>
+<li>使用 <code>match</code> 匹配不同星期。</li>
+<li>每个 <code>case</code> 中写对应任务。</li>
+<li>使用 <code>_</code> 处理未知输入。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val day = &quot;星期一&quot;
+
+    day match {
+      case &quot;星期一&quot; =&gt;
+        println(&quot;整理课堂笔记&quot;)
+        println(&quot;完成 Scala 练习&quot;)
+      case &quot;星期二&quot; =&gt;
+        println(&quot;复习集合和循环&quot;)
+      case &quot;星期三&quot; =&gt;
+        println(&quot;练习模式匹配&quot;)
+      case _ =&gt;
+        println(&quot;自由复习&quot;)
+    }
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解 <code>case</code> 右侧可以不只是单行代码，也可以是一个代码块，用来执行多个操作。</p>
+<hr>
+<h4>案例 3：顾客和订单的样例类匹配</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">case class、Any、模式匹配、字段提取
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到创建两个样例类 <code>Customer</code> 和 <code>Order</code>，再用模式匹配分别打印成员变量。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义 <code>Customer</code> 样例类。</li>
+<li>定义 <code>Order</code> 样例类。</li>
+<li>把对象作为 <code>Any</code> 类型传入方法。</li>
+<li>使用 <code>match case</code> 根据对象类型输出内容。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">case class Customer(name: String, age: Int)
+case class Order(id: Int)
+
+object Main {
+  def printData(data: Any): Unit = {
+    data match {
+      case Customer(name, age) =&gt;
+        println(s&quot;Customer name = $name, age = $age&quot;)
+      case Order(id) =&gt;
+        println(s&quot;Order id = $id&quot;)
+      case _ =&gt;
+        println(&quot;未匹配&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val c: Any = Customer(&quot;唐唐&quot;, 73)
+    val o: Any = Order(123)
+
+    printData(c)
+    printData(o)
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解样例类与模式匹配的典型组合：既能判断对象属于哪种结构，又能提取字段值。</p>
+<hr>
+<h4>案例 4：学生和老师门禁识别</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">抽象父类、样例类、模式匹配、分类识别
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到“门禁识别”类似案例：传入一个人，如果是老师就输出老师信息，如果是学生就输出学生信息，否则提示非法输入。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义父类型 <code>Person</code>。</li>
+<li>定义 <code>Student</code> 和 <code>Teacher</code> 两个样例类。</li>
+<li>编写识别函数。</li>
+<li>使用模式匹配输出不同身份的信息。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">sealed trait Person
+
+case class Student(name: String, grade: Int) extends Person
+case class Teacher(name: String, subject: String) extends Person
+
+object Main {
+  def check(person: Person): Unit = {
+    person match {
+      case Student(name, grade) =&gt;
+        println(s&quot;学生：$name，年级：$grade&quot;)
+      case Teacher(name, subject) =&gt;
+        println(s&quot;老师：$name，学科：$subject&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    check(Student(&quot;Tom&quot;, 12))
+    check(Teacher(&quot;John&quot;, &quot;数学&quot;))
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解样例类可以继承同一个父类型，然后用模式匹配做身份识别和分类处理。</p>
+<hr>
+<h4>案例 5：样例对象表示性别</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">case object、trait、样例类字段、固定取值
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到了 <code>Male</code> 和 <code>Female</code> 这类样例对象。它们没有参数，适合表示固定的离散值。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义 <code>Sex</code> 作为性别类型。</li>
+<li>用 <code>case object</code> 定义 <code>Male</code> 和 <code>Female</code>。</li>
+<li>在 <code>Person</code> 样例类中使用 <code>Sex</code> 类型字段。</li>
+<li>创建不同性别的人。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">sealed trait Sex
+case object Male extends Sex
+case object Female extends Sex
+
+case class Person(name: String, sex: Sex)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;张三&quot;, Male)
+    val p2 = Person(&quot;李四&quot;, Female)
+
+    println(p1)
+    println(p2)
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解样例对象可以作为样例类字段的取值，用于表示固定状态或固定类别。</p>
+<hr>
+<h4>课堂补充说明：AI 编程、学习建议与作业考试安排</h4>
+<p>原始文本中包含较长一段关于 AI 编程工具、智能体、插件、毕业设计、项目生成、数学基础和考研学习的讨论。这些内容不是本节 Scala 主线知识，但可以整理为学习提醒。</p>
+<ul>
+<li><strong>AI 编程建议：</strong> AI 工具可以帮助生成代码、项目框架或论文草稿，但学生必须先学会基础语法和编程思想，才能看懂、修改和优化 AI 生成的内容。</li>
+<li><strong>参数与数据结构意识：</strong> 老师强调参数设计、数据结构设计和代码复用率很重要，这与后续 AI 编程、数据分析和大数据开发都有关系。</li>
+<li><strong>基础学习提醒：</strong> 数学、统计学、算法和模式识别是后续机器学习、大数据和智能调度的重要基础。</li>
+<li><strong>课程作业：</strong> 本节课布置样例类相关作业，重点练习 <code>case class</code> 与模式匹配。</li>
+<li><strong>实验报告安排：</strong> 原文提到第八周交实验报告一，第十周交实验报告二。</li>
+<li><strong>考试说明：</strong> 原文提到测试内容不考，考试重点应放在基础语法、样例类、模式匹配等课堂核心内容上。</li>
+<li><strong>处理方式：</strong> 这些内容适合放入后续课程网站的“课堂提醒”或“学习建议”，不放入 Scala 核心知识点正文。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<h4>易错点 1：match case 忘记默认分支</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">val x = 5
+
+x match {
+  case 1 =&gt; println(&quot;one&quot;)
+  case 2 =&gt; println(&quot;two&quot;)
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">val x = 5
+
+x match {
+  case 1 =&gt; println(&quot;one&quot;)
+  case 2 =&gt; println(&quot;two&quot;)
+  case _ =&gt; println(&quot;other&quot;)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>如果没有默认分支，遇到未匹配的值可能导致运行时匹配错误。初学阶段建议补上 <code>case _</code>。</p>
+<hr>
+<h4>易错点 2：case 后面写错箭头</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">x match {
+  case 1 -&gt; println(&quot;one&quot;)
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">x match {
+  case 1 =&gt; println(&quot;one&quot;)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>模式匹配分支使用 <code>=&gt;</code>，不是 <code>-&gt;</code>。<code>-&gt;</code> 常用于构造 Map 键值对。</p>
+<hr>
+<h4>易错点 3：把默认分支放在最前面</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">x match {
+  case _ =&gt; println(&quot;other&quot;)
+  case 1 =&gt; println(&quot;one&quot;)
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">x match {
+  case 1 =&gt; println(&quot;one&quot;)
+  case _ =&gt; println(&quot;other&quot;)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>模式匹配从上到下执行，<code>case _</code> 会匹配所有情况。如果放在最前面，后面的分支永远不会执行。</p>
+<hr>
+<h4>易错点 4：误以为 match case 必须写 break</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">x match {
+  case 1 =&gt;
+    println(&quot;one&quot;)
+    break
+  case 2 =&gt;
+    println(&quot;two&quot;)
+    break
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">x match {
+  case 1 =&gt; println(&quot;one&quot;)
+  case 2 =&gt; println(&quot;two&quot;)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 的 <code>match case</code> 匹配成功后会自动结束，不需要写 <code>break</code>。</p>
+<hr>
+<h4>易错点 5：样例类创建时多写 new</h4>
+<p><strong>不推荐写法：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p = new Person(&quot;Tom&quot;, 18)
+</code></pre>
+<p><strong>推荐写法：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p = Person(&quot;Tom&quot;, 18)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>样例类会自动生成伴生对象和 <code>apply</code> 方法，因此通常可以省略 <code>new</code>。</p>
+<hr>
+<h4>易错点 6：样例类模式匹配字段数量不一致</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p = Person(&quot;Tom&quot;, 18)
+
+p match {
+  case Person(name) =&gt; println(name)
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p = Person(&quot;Tom&quot;, 18)
+
+p match {
+  case Person(name, age) =&gt; println(name + &quot; &quot; + age)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>样例类匹配时，字段数量通常要和样例类定义的参数数量一致。</p>
+<hr>
+<h4>易错点 7：误以为 copy 会修改原对象</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p1 = Person(&quot;李四&quot;, 21)
+p1.copy(name = &quot;王五&quot;)
+println(p1)
+</code></pre>
+<p>误以为 <code>p1</code> 会变成王五。</p>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+val p1 = Person(&quot;李四&quot;, 21)
+val p2 = p1.copy(name = &quot;王五&quot;)
+
+println(p1)
+println(p2)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>copy</code> 返回新对象，不会改变原对象。</p>
+<hr>
+<h4>易错点 8：给 case object 写参数</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">case object Male(name: String)
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">case object Male
+</code></pre>
+<p>或者如果需要参数，应使用样例类：</p>
+<pre><code class="language-scala">case class Person(name: String)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>case object</code> 是单例对象，没有主构造器，不能带参数。</p>
+<hr>
+<h4>易错点 9：把 Any 当成具体类型直接使用</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">def printName(x: Any): Unit = {
+  println(x.name)
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">case class Person(name: String)
+
+def printName(x: Any): Unit = {
+  x match {
+    case Person(name) =&gt; println(name)
+    case _ =&gt; println(&quot;不是 Person&quot;)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>Any</code> 可以接收很多类型，但不能直接调用某个具体类型的字段。需要先匹配具体类型。</p>
+<hr>
+<h4>易错点 10：子类或对象实现抽象方法时漏写方法体</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">abstract class Action {
+  def run(): Unit
+}
+
+class OpenAction extends Action {
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">abstract class Action {
+  def run(): Unit
+}
+
+class OpenAction extends Action {
+  override def run(): Unit = {
+    println(&quot;打开&quot;)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>继承抽象类的普通子类必须实现抽象方法，否则它自己也必须声明为抽象类。</p>
+<hr>
+<h3>9. 小测验题目</h3>
+<h4>题目 1：Scala 模式匹配使用哪个关键字开始？</h4>
+<p>A. <code>switch</code><br>B. <code>match</code><br>C. <code>select</code><br>D. <code>choose</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 使用 <code>match</code> 开始模式匹配，每个分支使用 <code>case</code> 声明。</p>
+<hr>
+<h4>题目 2：模式匹配中的默认分支通常写成什么？</h4>
+<p>A. <code>case default</code><br>B. <code>case else</code><br>C. <code>case _</code><br>D. <code>case any()</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>_</code> 是通配符，表示匹配其他所有情况。</p>
+<hr>
+<h4>题目 3：下面哪个是正确的 <code>case</code> 分支写法？</h4>
+<p>A. <code>case 1 -&gt; println(&quot;one&quot;)</code><br>B. <code>case 1 =&gt; println(&quot;one&quot;)</code><br>C. <code>case 1: println(&quot;one&quot;)</code><br>D. <code>case 1 = println(&quot;one&quot;)</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 模式匹配中，<code>case</code> 后的处理逻辑使用 <code>=&gt;</code> 连接。</p>
+<hr>
+<h4>题目 4：下面哪个是模式守卫？</h4>
+<p>A. <code>case x if x &gt; 0 =&gt; &quot;positive&quot;</code><br>B. <code>if case x &gt; 0 =&gt; &quot;positive&quot;</code><br>C. <code>case if x &gt; 0 =&gt; &quot;positive&quot;</code><br>D. <code>match if x &gt; 0 case</code></p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解析：</strong></p>
+<p>模式守卫是在 <code>case</code> 模式后添加 <code>if</code> 条件。</p>
+<hr>
+<h4>题目 5：关于样例类，下面说法正确的是？</h4>
+<p>A. 样例类必须用 <code>new</code> 创建<br>B. 样例类不能用于模式匹配<br>C. 样例类使用 <code>case class</code> 定义<br>D. 样例类不能有字段</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p>样例类使用 <code>case class</code> 定义，常用于保存数据并配合模式匹配。</p>
+<hr>
+<h4>题目 6：样例类自动生成的方法不包括下面哪个？</h4>
+<p>A. <code>toString</code><br>B. <code>equals</code><br>C. <code>copy</code><br>D. <code>main</code></p>
+<p><strong>正确答案：D</strong></p>
+<p><strong>解析：</strong></p>
+<p>样例类会自动生成 <code>toString</code>、<code>equals</code>、<code>hashCode</code>、<code>copy</code>、<code>apply</code> 等，但不会自动生成程序入口 <code>main</code>。</p>
+<hr>
+<h4>题目 7：<code>case object</code> 的特点是什么？</h4>
+<p>A. 可以带多个构造参数<br>B. 是单例对象，没有主构造器<br>C. 必须使用 <code>new</code> 创建<br>D. 只能定义在方法内部</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>case object</code> 是样例对象，本质是单例对象，没有主构造器，也不带参数。</p>
+<hr>
+<h4>题目 8：下面代码中 <code>Student(name, age)</code> 的作用是什么？</h4>
+<pre><code class="language-scala">person match {
+  case Student(name, age) =&gt; println(name)
+}
+</code></pre>
+<p>A. 创建一个新的 Student 对象<br>B. 匹配 Student 对象并提取字段<br>C. 删除 Student 对象<br>D. 把 person 强制转换为字符串</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>在 <code>case</code> 分支中，<code>Student(name, age)</code> 表示匹配 <code>Student</code> 样例类对象，并提取其中的字段。</p>
+<hr>
+<h4>题目 9：<code>copy</code> 方法的作用是什么？</h4>
+<p>A. 修改原对象<br>B. 删除原对象<br>C. 复制对象并可修改部分字段<br>D. 把对象转换成数组</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p>样例类的 <code>copy</code> 方法会返回一个新对象，可以在复制时修改部分字段，原对象不变。</p>
+<hr>
+<h4>题目 10：为什么方法参数有时使用 <code>Any</code>？</h4>
+<p>A. 因为 Any 只能接收整数<br>B. 因为 Any 可以接收多种类型，便于统一匹配<br>C. 因为 Any 只能接收数组<br>D. 因为 Any 会自动删除类型信息</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>Any</code> 是 Scala 类型层级顶层类型，可以接收多种类型。配合模式匹配，可以根据具体类型分支处理。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<ol>
+<li><code>match</code> —— 开始模式匹配</li>
+<li><code>case</code> —— 定义匹配分支</li>
+<li><code>_</code> —— 匹配其他所有情况</li>
+<li><code>=&gt;</code> —— 连接模式和执行代码</li>
+<li>模式守卫 —— 在 case 后添加 if 条件</li>
+<li><code>Any</code> —— 可以接收多种类型的顶层类型</li>
+<li><code>case class</code> —— 定义样例类</li>
+<li><code>case object</code> —— 定义样例对象</li>
+<li><code>copy</code> —— 复制样例类对象</li>
+<li><code>equals</code> —— 比较对象内容是否相等</li>
+<li><code>toString</code> —— 生成对象字符串表示</li>
+<li><code>apply</code> —— 支持省略 new 创建对象</li>
+<li><code>override</code> —— 重写父类方法</li>
+<li>抽象类 —— 定义规则的类</li>
+<li>引用类型参数 —— 可以携带结构化信息的参数</li>
+<li><code>Array</code> 匹配 —— 匹配数组结构</li>
+<li><code>List</code> 匹配 —— 匹配列表结构</li>
+<li>样例类匹配 —— 匹配对象并提取字段</li>
+</ol>
+<hr>
+<h3>11. 流程动画素材</h3>
+<h4>流程主题：样例类对象进行模式匹配</h4>
+<pre><code class="language-text">1. 程序创建样例类对象，例如 Student(&quot;Tom&quot;, 12)。
+2. 程序把这个对象传入一个接收 Any 类型参数的方法。
+3. 方法执行到 value match。
+4. Scala 从第一个 case 分支开始尝试匹配。
+5. 如果第一个分支是 Customer(name, age)，Scala 会检查当前对象是否是 Customer。
+6. 如果类型不匹配，继续检查下一个 case。
+7. 如果下一个分支是 Student(name, age)，Scala 发现类型匹配。
+8. Scala 从 Student 对象中提取 name 和 age 字段。
+9. 提取出的字段被绑定到变量 name 和 age。
+10. 程序执行该 case 右侧的代码。
+11. 匹配成功后，后续 case 不再执行。
+12. 如果所有分支都不匹配，就执行 case _ 默认分支。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<h4>练习 1：使用 match case 判断星期任务</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个字符串变量 <code>day</code>，根据它的值输出当天任务：星期一输出“整理笔记”，星期二输出“完成练习”，星期三输出“复习模式匹配”，其他情况输出“自由复习”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">match、case、字符串匹配、默认分支
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val day = &quot;星期一&quot;
+
+    day match {
+      case &quot;星期一&quot; =&gt; println(&quot;整理笔记&quot;)
+      case &quot;星期二&quot; =&gt; println(&quot;完成练习&quot;)
+      case &quot;星期三&quot; =&gt; println(&quot;复习模式匹配&quot;)
+      case _ =&gt; println(&quot;自由复习&quot;)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>使用 <code>day match</code> 对字符串进行匹配，每个 <code>case</code> 对应一个星期，最后用 <code>_</code> 处理其他情况。</p>
+<hr>
+<h4>练习 2：使用模式守卫判断正负数</h4>
+<p><strong>题目：</strong></p>
+<p>定义方法 <code>describeNumber(x: Int)</code>，如果数字大于 0，返回“正数”；如果小于 0，返回“负数”；如果等于 0，返回“零”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">模式守卫、Int、match case
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def describeNumber(x: Int): String = {
+    x match {
+      case n if n &gt; 0 =&gt; &quot;正数&quot;
+      case n if n &lt; 0 =&gt; &quot;负数&quot;
+      case _ =&gt; &quot;零&quot;
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(describeNumber(10))
+    println(describeNumber(-5))
+    println(describeNumber(0))
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>使用 <code>case n if 条件</code> 给匹配增加判断条件。大于 0、小于 0 分别处理，剩下的就是 0。</p>
+<hr>
+<h4>练习 3：定义样例类 Person 并使用 copy</h4>
+<p><strong>题目：</strong></p>
+<p>定义样例类 <code>Person(name: String, age: Int)</code>，创建 <code>Person(&quot;李四&quot;, 21)</code>，再使用 <code>copy</code> 复制一个新对象，把姓名改成“王五”，年龄不变。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">case class、copy、toString、不可变数据
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">case class Person(name: String, age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;李四&quot;, 21)
+    val p2 = p1.copy(name = &quot;王五&quot;)
+
+    println(p1)
+    println(p2)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>样例类自动生成 <code>copy</code> 方法。复制时指定 <code>name = &quot;王五&quot;</code>，未指定的 <code>age</code> 会沿用原对象的值。</p>
+<hr>
+<h4>练习 4：匹配 Customer 和 Order</h4>
+<p><strong>题目：</strong></p>
+<p>定义两个样例类：<code>Customer(name: String, age: Int)</code> 和 <code>Order(id: Int)</code>。编写方法 <code>show(value: Any)</code>，如果传入顾客，输出姓名和年龄；如果传入订单，输出订单编号；否则输出“未匹配”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">样例类、Any、模式匹配、字段提取
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">case class Customer(name: String, age: Int)
+case class Order(id: Int)
+
+object Main {
+  def show(value: Any): Unit = {
+    value match {
+      case Customer(name, age) =&gt;
+        println(s&quot;顾客：$name，年龄：$age&quot;)
+      case Order(id) =&gt;
+        println(s&quot;订单编号：$id&quot;)
+      case _ =&gt;
+        println(&quot;未匹配&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    show(Customer(&quot;Amy&quot;, 30))
+    show(Order(1001))
+    show(&quot;hello&quot;)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p><code>Any</code> 让方法可以接收不同类型。用 <code>case Customer(...)</code> 和 <code>case Order(...)</code> 判断类型并提取字段。</p>
+<hr>
+<h4>练习 5：定义样例对象表示性别</h4>
+<p><strong>题目：</strong></p>
+<p>定义 <code>Sex</code> 类型，并用 <code>case object Male</code> 和 <code>case object Female</code> 表示两个固定性别。定义 <code>Person(name: String, sex: Sex)</code>，创建两个对象并输出。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">case object、trait、case class、固定取值
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">sealed trait Sex
+case object Male extends Sex
+case object Female extends Sex
+
+case class Person(name: String, sex: Sex)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = Person(&quot;张三&quot;, Male)
+    val p2 = Person(&quot;李四&quot;, Female)
+
+    println(p1)
+    println(p2)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p><code>case object</code> 用来表示固定值，<code>Person</code> 的 <code>sex</code> 字段使用统一的 <code>Sex</code> 类型，使可选值更清晰。</p>
+<hr>
+<h4>练习 6：匹配数组和列表</h4>
+<p><strong>题目：</strong></p>
+<p>编写方法 <code>describe(value: Any)</code>，如果传入 <code>Array(1, 2, 3)</code>，输出“标准数组”；如果传入 <code>List(&quot;hi&quot;, name)</code>，输出“你好 name”；否则输出“其他”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">Array 匹配、List 匹配、Any、模式匹配
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def describe(value: Any): Unit = {
+    value match {
+      case Array(1, 2, 3) =&gt;
+        println(&quot;标准数组&quot;)
+      case List(&quot;hi&quot;, name) =&gt;
+        println(&quot;你好 &quot; + name)
+      case _ =&gt;
+        println(&quot;其他&quot;)
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    describe(Array(1, 2, 3))
+    describe(List(&quot;hi&quot;, &quot;Tom&quot;))
+    describe(List(1, 2))
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>模式匹配可以匹配集合结构。<code>Array(1,2,3)</code> 匹配固定数组，<code>List(&quot;hi&quot;, name)</code> 匹配两元素列表并提取第二个元素。</p>
+<hr>
+<h4>练习 7：使用抽象类和 override</h4>
+<p><strong>题目：</strong></p>
+<p>定义抽象类 <code>Task</code>，包含抽象方法 <code>run(): Unit</code>。定义对象 <code>PrintTask</code> 继承它并重写 <code>run</code> 方法，输出“执行打印任务”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">抽象类、object 继承、override、方法实现
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">abstract class Task {
+  def run(): Unit
+}
+
+object PrintTask extends Task {
+  override def run(): Unit = {
+    println(&quot;执行打印任务&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    PrintTask.run()
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p><code>object</code> 也可以继承抽象类。继承后必须实现抽象方法，并使用 <code>override</code> 标明重写。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 模式匹配与样例类
+├── 对象思想复习
+│   ├── class
+│   │   ├── 表示普通模块或具体对象模板
+│   │   └── 保存实例属性和方法
+│   ├── object
+│   │   ├── 单例对象
+│   │   ├── 可表示全局功能
+│   │   └── 类似 Java static 的部分作用
+│   └── 伴生对象
+│       ├── 与伴生类同名
+│       ├── 可定义 apply
+│       └── 可返回类对象
+├── 参数传递
+│   ├── 普通参数
+│   │   ├── Int
+│   │   ├── String
+│   │   └── 局部计算常用
+│   └── 结构化参数
+│       ├── Array
+│       ├── List
+│       ├── Tuple
+│       └── 对象
+├── 模式匹配
+│   ├── match
+│   ├── case
+│   ├── =&gt;
+│   ├── case _
+│   └── 自动中断，无需 break
+├── 模式守卫
+│   ├── case 模式 if 条件
+│   ├── 用于进一步筛选
+│   └── 类似在匹配中加入过滤条件
+├── 匹配内容
+│   ├── 值匹配
+│   │   ├── 数字
+│   │   └── 字符串
+│   ├── 类型匹配
+│   │   ├── Int
+│   │   ├── String
+│   │   └── Array[Int]
+│   ├── 集合匹配
+│   │   ├── Array
+│   │   └── List
+│   ├── 元组匹配
+│   └── 样例类匹配
+├── 样例类 case class
+│   ├── 快速定义数据类
+│   ├── 创建时可省略 new
+│   ├── 自动生成 apply
+│   ├── 自动生成 toString
+│   ├── 自动生成 equals
+│   ├── 自动生成 hashCode
+│   ├── 自动生成 copy
+│   └── 适合模式匹配
+├── 样例对象 case object
+│   ├── 单例对象
+│   ├── 无参数
+│   ├── 无主构造器
+│   ├── 表示固定值
+│   └── 常与 trait 配合
+├── 抽象类与重写
+│   ├── 抽象类定义规则
+│   ├── 子类实现规则
+│   ├── object 也可继承
+│   └── override 标明重写
+└── 常见考试练习
+    ├── 写 match case
+    ├── 写模式守卫
+    ├── 定义样例类
+    ├── 使用 copy
+    ├── 匹配 Student 和 Teacher
+    └── 定义 case object
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID：</strong> <code>scala-pattern-match-case-class-case-object</code></li>
+<li><strong>建议课程标题：</strong> 2026-04-16 Scala 编程相关知识讲解</li>
+<li><strong>建议章节：</strong> Scala 模式匹配、Scala 样例类 Case Class</li>
+<li><strong>建议标签：</strong><ul>
+<li>Scala 模式匹配</li>
+<li>match</li>
+<li>case</li>
+<li>模式守卫</li>
+<li>Any</li>
+<li>Array 匹配</li>
+<li>List 匹配</li>
+<li>Tuple 匹配</li>
+<li>case class</li>
+<li>case object</li>
+<li>copy</li>
+<li>equals</li>
+<li>apply</li>
+<li>override</li>
+<li>抽象类</li>
+<li>参数传递</li>
+</ul>
+</li>
+<li><strong>适合放入 summary 的内容：</strong><ul>
+<li>本节课讲解 Scala 中模式匹配、模式守卫、样例类和样例对象。</li>
+<li>模式匹配使用 <code>match case</code>，可以匹配值、类型、集合、元组和样例类对象。</li>
+<li>样例类使用 <code>case class</code> 定义，适合保存数据，并自动生成常用方法。</li>
+<li>样例对象使用 <code>case object</code> 定义，适合表示固定值或特定消息。</li>
+</ul>
+</li>
+<li><strong>适合放入 keyPoints 的内容：</strong><ul>
+<li><code>case _</code> 是默认分支。</li>
+<li><code>case 模式 if 条件</code> 是模式守卫。</li>
+<li><code>Any</code> 可以接收多种类型，常配合模式匹配使用。</li>
+<li>样例类创建时通常不用 <code>new</code>。</li>
+<li>样例类自动生成 <code>copy</code>、<code>equals</code>、<code>toString</code> 等方法。</li>
+<li>样例对象没有参数，是单例。</li>
+</ul>
+</li>
+<li><strong>适合放入 codeExamples 的内容：</strong><ul>
+<li>基本 <code>match case</code>。</li>
+<li>模式守卫判断成绩或正负数。</li>
+<li><code>Any</code> 类型匹配。</li>
+<li>样例类创建、比较和复制。</li>
+<li>样例类与模式匹配。</li>
+<li>样例对象表示性别。</li>
+</ul>
+</li>
+<li><strong>适合放入 quiz 的内容：</strong><ul>
+<li><code>match</code> 和 <code>case</code> 语法。</li>
+<li><code>_</code> 默认分支。</li>
+<li>模式守卫写法。</li>
+<li>样例类定义方式。</li>
+<li>样例类自动生成方法。</li>
+<li><code>case class</code> 与 <code>case object</code> 区别。</li>
+</ul>
+</li>
+<li><strong>适合放入 dragMatch 的内容：</strong><ul>
+<li><code>match</code> —— 开始模式匹配</li>
+<li><code>case</code> —— 定义匹配分支</li>
+<li><code>_</code> —— 默认匹配</li>
+<li><code>case class</code> —— 样例类</li>
+<li><code>case object</code> —— 样例对象</li>
+<li><code>copy</code> —— 复制对象</li>
+<li><code>Any</code> —— 顶层类型</li>
+<li>模式守卫 —— 匹配时附加条件</li>
+</ul>
+</li>
+<li><strong>适合放入 flow 的内容：</strong><ul>
+<li>样例类对象传入方法 → <code>match</code> 开始 → 逐个 <code>case</code> 匹配 → 匹配成功 → 提取字段 → 执行对应代码 → 结束。</li>
+</ul>
+</li>
+<li><strong>适合放入 exercises 的内容：</strong><ul>
+<li>判断星期任务。</li>
+<li>使用模式守卫判断正负数。</li>
+<li>定义样例类并使用 <code>copy</code>。</li>
+<li>匹配 <code>Customer</code> 和 <code>Order</code>。</li>
+<li>定义 <code>case object</code> 表示固定值。</li>
+<li>匹配数组和列表。</li>
+</ul>
+</li>
+<li><strong>适合放入 conclusion 的内容：</strong><ul>
+<li>本节课是 Scala 模式匹配与样例类的核心基础。</li>
+<li>学生必须掌握 <code>match case</code> 和 <code>case class</code> 的配合使用。</li>
+<li>样例类和模式匹配会在后续集合处理、特质、多态、错误处理和实际项目中频繁出现。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li>本节课的核心是模式匹配和样例类，它们是 Scala 中非常重要、也很有特色的语法。</li>
+<li>学习模式匹配时要先掌握基本结构：<code>值 match { case 模式 =&gt; 代码 }</code>，再逐步学习类型匹配、集合匹配和样例类匹配。</li>
+<li><code>case _</code> 是默认分支，建议初学阶段尽量写上，避免匹配不完整。</li>
+<li>模式守卫可以在 <code>case</code> 后增加 <code>if</code> 条件，让匹配逻辑更精确。</li>
+<li><code>Any</code> 可以让一个方法接收多种类型，但使用时必须通过模式匹配判断具体类型。</li>
+<li>样例类 <code>case class</code> 适合保存结构化数据，例如人、订单、顾客、账单、票据等。</li>
+<li>样例类自动生成 <code>apply</code>、<code>toString</code>、<code>equals</code>、<code>hashCode</code>、<code>copy</code> 等方法，这是它比普通类更方便的原因。</li>
+<li>样例对象 <code>case object</code> 是没有参数的单例对象，适合表示固定值、固定状态或固定消息。</li>
+<li>本节课的代码看懂不等于会写，课后必须亲手练习 <code>Customer</code>、<code>Order</code>、<code>Student</code>、<code>Teacher</code> 等样例类匹配案例。</li>
+<li>抽象类、<code>override</code>、样例类、样例对象和后续的 <code>trait</code> 都围绕“定义规则、实现规则、匹配结构”展开，后面学习会继续用到。</li>
+<li>课后建议把 <code>match case</code>、模式守卫、<code>case class</code>、<code>copy</code>、<code>case object</code> 各写 2 到 3 遍，形成基本代码手感。</li>
+<li>AI 编程工具可以辅助生成代码，但本节课这些基础语法必须自己理解，否则后续即使 AI 生成代码，也难以判断对错和修改问题。</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-04-09-part-2.html"><span>上一篇</span><strong>Scala单例对象伴生对象与抽象类</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-04-21-part-1.html"><span>下一篇</span><strong>Scala覆盖重写抽象类与Trait</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

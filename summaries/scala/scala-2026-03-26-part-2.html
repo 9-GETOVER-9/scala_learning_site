@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结：2026 03 26 Scala 编程基础要点及练习讲解 1. 课程基本信息 课程 ID 建议： scala collections map foreach basic 课程标题： 2026 03 26 Scala 编程基础要点及练习讲解 所属章节： Scala 数组与集合基础 上课日期：" />
+  <title>Scala编程基础要点及练习讲解 - 下 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-03-26-collections-map-foreach">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-03-26 · 下半节</p>
+      <h1>Scala编程基础要点及练习讲解 - 下</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala编程基础要点及练习讲解 - 下</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结：2026-03-26 Scala 编程基础要点及练习讲解</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议：</strong> <code>scala-collections-map-foreach-basic</code></li>
+<li><strong>课程标题：</strong> 2026-03-26 Scala 编程基础要点及练习讲解</li>
+<li><strong>所属章节：</strong> Scala 数组与集合基础</li>
+<li><strong>上课日期：</strong> 2026-03-26</li>
+<li><strong>知识点标签：</strong> Scala 集合、List、Array、Set、Map、Range、for 循环、foreach、toArray、元组、匿名函数</li>
+<li><strong>难度等级：</strong> 入门</li>
+<li><strong>适合对象：</strong> 已经接触 Scala 基本语法，正在学习集合、循环和简单编程练习的初学者</li>
+<li><strong>本节课一句话概括：</strong> 本节课围绕 Scala 集合的基本使用展开，重点讲解 List、Array、Set、Map、Range、for 循环、Map 转数组以及 foreach 遍历，为考试中的基础编程题做准备。</li>
+</ul>
+<blockquote>
+<p>说明：原始转写中有部分口语化和识别错误，例如“Tuple 方法将 map 转换为数组”根据上下文应理解为 <code>toArray</code> 方法；“列表的值可变”也需要修正，Scala 默认的 <code>List</code> 是不可变集合。</p>
+</blockquote>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先回顾了 Scala 中集合的基本使用，包括定义集合、组合集合、输出集合以及根据集合内容得到新的结果。</li>
+<li>课堂中重点说明了考试常见题型通常不会太复杂，主要考查学生能否定义集合、遍历集合、使用循环筛选数据并输出结果。</li>
+<li>老师通过区间 <code>Range</code> 的例子说明了如何生成一段连续数字，并结合步长、偶数筛选、求和、倒序输出等操作进行练习。</li>
+<li>本节课讲到了 <code>List</code>、<code>Array</code>、<code>Set</code>、<code>Map</code> 等常见数据结构，并说明它们在遍历方式和使用场景上的相似点与差异。</li>
+<li>课堂中通过“单位矩阵”的例子帮助学生理解嵌套集合，即一个集合中的元素本身也可以是集合。</li>
+<li>本节课还介绍了 Map 的键值对结构，以及如何使用 <code>toArray</code> 将 Map 转换成由元组组成的数组。</li>
+<li>老师强调了 <code>foreach</code> 的作用：它可以依次取出集合中的每个元素，并对每个元素执行指定操作。</li>
+<li>最后，课堂结合考试和笔记检查安排，提醒学生要重点掌握集合、循环和简单输出类题目。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解 Scala 中集合的基本概念，知道 <code>List</code>、<code>Array</code>、<code>Set</code>、<code>Map</code> 分别适合表示什么数据。</li>
+<li>能使用 <code>Range</code> 表示一段连续数字，并结合步长生成指定规律的数字序列。</li>
+<li>能使用 <code>for</code> 循环遍历集合或区间，并完成筛选、求和、输出等基础任务。</li>
+<li>能理解 <code>Map</code> 的键值对结构，并能根据键和值组织简单映射数据。</li>
+<li>能使用 <code>toArray</code> 将 Map 转换为数组，并理解转换后的数组元素是元组。</li>
+<li>能使用 <code>foreach</code> 遍历集合，并理解匿名函数 <code>x =&gt; println(x)</code> 的基本含义。</li>
+<li>能区分 <code>List</code> 和 <code>Array</code> 的基本特点，尤其是不可变集合和可变数组之间的区别。</li>
+<li>能看懂嵌套集合的结构，例如用 <code>List[List[Int]]</code> 表示类似二维数组或矩阵的数据。</li>
+<li>能发现并修正常见错误，例如混淆 <code>toArray</code> 与 Tuple、误认为默认 <code>List</code> 可以修改、错误使用 Map 键值对等。</li>
+<li>能完成考试中常见的 Scala 集合和循环基础编程题。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：Scala 集合的基本概念</h4>
+<h5>这个知识点是什么？</h5>
+<p>集合是用来存放一组数据的结构。Scala 中常见的集合包括：</p>
+<ul>
+<li><code>List</code>：列表，常用于保存一串有顺序的数据。</li>
+<li><code>Array</code>：数组，长度固定，可以通过下标访问和修改元素。</li>
+<li><code>Set</code>：集合，用于保存不重复的元素。</li>
+<li><code>Map</code>：映射，用于保存“键 -&gt; 值”的对应关系。</li>
+</ul>
+<p>集合可以帮助我们一次性管理多个数据，而不是为每个数据单独定义一个变量。</p>
+<h5>为什么要学它？</h5>
+<p>实际编程中经常需要处理一批数据，例如一组成绩、一周的星期名称、多个商品价格或一组学生姓名。集合就是管理这些数据的基础工具。后续学习函数式编程、模式匹配、集合高级操作时，也都会频繁使用集合。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val numbers = List(1, 2, 3, 4, 5)
+
+val scores = Array(90, 85, 100)
+
+val names = Set(&quot;Tom&quot;, &quot;Jerry&quot;, &quot;Alice&quot;)
+
+val weekMap = Map(
+  1 -&gt; &quot;星期一&quot;,
+  2 -&gt; &quot;星期二&quot;,
+  3 -&gt; &quot;星期三&quot;
+)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师从“定义一个集合，然后对集合进行操作”开始讲解。例如可以定义两个集合，对它们进行组合或输出；也可以定义一个 <code>Map</code>，把数字和星期几对应起来，然后输出这些对应关系。课堂强调考试中经常会考这种基础题型：定义、遍历、转换、输出。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>认为所有集合都可以随意修改，忽略了 Scala 中有可变集合和不可变集合之分。</li>
+<li>混淆 <code>List</code>、<code>Array</code>、<code>Set</code>、<code>Map</code> 的作用。</li>
+<li>把 <code>Map</code> 理解成普通数组，而没有理解“键值对”的含义。</li>
+<li>输出集合时只打印变量名，却不知道如何逐个遍历元素。</li>
+<li>不知道 Scala 集合很多方法会返回新集合，而不是修改原集合。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val numbers = List(1, 2, 3)
+    val weekMap = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;, 3 -&gt; &quot;星期三&quot;)
+
+    println(numbers)
+    println(weekMap)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>object Main</code> 定义一个单例对象。</li>
+<li><code>def main(args: Array[String]): Unit</code> 是程序入口。</li>
+<li><code>val numbers = List(1, 2, 3)</code> 定义一个整数列表。</li>
+<li><code>val weekMap = Map(...)</code> 定义一个数字到星期名称的映射。</li>
+<li><code>println(numbers)</code> 输出整个列表。</li>
+<li><code>println(weekMap)</code> 输出整个映射。</li>
+</ol>
+<hr>
+<h4>知识点 2：List 列表</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>List</code> 是 Scala 中常用的列表集合。它有顺序，可以保存多个元素。Scala 默认的 <code>List</code> 是不可变集合，也就是说创建之后不能直接修改原列表中的元素。</p>
+<p>需要注意：课堂原文中提到“列表的值可变”，这在 Scala 默认 <code>List</code> 中不准确。Scala 标准库中的 <code>List</code> 默认是不可变的。如果需要可变列表，应使用 <code>ListBuffer</code> 等可变集合。</p>
+<h5>为什么要学它？</h5>
+<p><code>List</code> 是 Scala 中非常常见的数据结构，尤其适合函数式编程。很多递归、模式匹配、集合转换操作都可以基于 <code>List</code> 学习。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val nums = List(1, 2, 3, 4)
+
+val words = List(&quot;Scala&quot;, &quot;Java&quot;, &quot;Python&quot;)
+
+val nested = List(
+  List(1, 0, 0),
+  List(0, 1, 0),
+  List(0, 0, 1)
+)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把列表和数组进行类比，说明列表中可以存放多个元素，也可以出现“列表里面再放列表”的嵌套结构。课堂中的单位矩阵例子就可以整理为一个嵌套列表：</p>
+<pre><code class="language-scala">List(
+  List(1, 0, 0),
+  List(0, 1, 0),
+  List(0, 0, 1)
+)
+</code></pre>
+<p>这个结构可以理解为三行三列的数据。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>认为 <code>List</code> 创建后可以像数组一样直接修改某个下标的值。</li>
+<li>忘记 <code>List</code> 默认是不可变集合。</li>
+<li>把嵌套列表看成普通一维列表，不理解里面每个元素还是一个列表。</li>
+<li>认为 <code>List(1, &quot;a&quot;)</code> 是推荐写法；虽然 Scala 可以推断为 <code>List[Any]</code>，但初学阶段应尽量保持元素类型一致。</li>
+<li>使用下标访问时忘记下标从 <code>0</code> 开始。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val nums = List(10, 20, 30)
+
+    println(nums.head)
+    println(nums.tail)
+    println(nums)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>List(10, 20, 30)</code> 创建一个不可变列表。</li>
+<li><code>nums.head</code> 获取列表的第一个元素，结果是 <code>10</code>。</li>
+<li><code>nums.tail</code> 获取除第一个元素之外的剩余部分，结果是 <code>List(20, 30)</code>。</li>
+<li><code>println(nums)</code> 输出原列表，原列表不会被改变。</li>
+</ol>
+<hr>
+<h4>知识点 3：Array 数组</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>Array</code> 是数组，用来保存一组长度固定的元素。数组的元素可以通过下标访问，下标从 <code>0</code> 开始。和默认 <code>List</code> 不同，<code>Array</code> 中已有位置上的元素可以被修改。</p>
+<h5>为什么要学它？</h5>
+<p>数组是很多编程语言都会讲的基础数据结构。它适合理解下标、遍历、二维数据、矩阵等内容。课堂中老师也用数组和列表进行类比，帮助大家理解嵌套结构。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val arr = Array(10, 20, 30)
+
+println(arr(0))
+
+arr(1) = 99
+println(arr.mkString(&quot;, &quot;))
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师提到数组需要“一个一个地遍历”。这说明数组不是只看整体结果，还要能通过循环逐个访问里面的元素。数组和列表在思想上都可以表示一组数据，但写法和可变性不同。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>使用 <code>arr[0]</code> 访问数组元素，这是 Java、C 风格写法；Scala 中应写 <code>arr(0)</code>。</li>
+<li>忘记数组下标从 <code>0</code> 开始。</li>
+<li>访问不存在的下标，例如数组长度为 3 却访问 <code>arr(3)</code>。</li>
+<li>认为 <code>val arr = Array(...)</code> 表示数组内容完全不能改；实际上 <code>val</code> 只是不能让 <code>arr</code> 指向另一个数组，数组内部元素仍可修改。</li>
+<li>直接 <code>println(arr)</code>，结果可能不是想要的内容，通常应使用 <code>mkString</code> 格式化输出。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val scores = Array(90, 80, 100)
+
+    scores(1) = 85
+
+    for (score &lt;- scores) {
+      println(score)
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Array(90, 80, 100)</code> 创建一个数组。</li>
+<li><code>scores(1) = 85</code> 修改下标为 <code>1</code> 的元素，也就是第二个元素。</li>
+<li><code>for (score &lt;- scores)</code> 逐个取出数组中的元素。</li>
+<li><code>println(score)</code> 输出每个分数。</li>
+</ol>
+<hr>
+<h4>知识点 4：Range 区间与步长</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>Range</code> 表示一段连续的数字区间。它常用于循环，例如从 <code>1</code> 遍历到 <code>10</code>，或者按指定步长生成数字。</p>
+<p>Scala 中常见写法包括：</p>
+<pre><code class="language-scala">1 to 10        // 包含 10
+1 until 10     // 不包含 10
+1 to 10 by 2   // 步长为 2
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>课堂中提到考试常考类似题目：输出某个范围内的偶数、倒序输出、求某些数字的和等。这些题目通常都需要使用 <code>Range</code> 和循环完成。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val r1 = 1 to 10
+val r2 = 1 until 10
+val r3 = 1 to 10 by 2
+val r4 = 10 to 1 by -1
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师举了类似“1 到 10 之间输出偶数”“步长为 4 的数求和”“从小到大输入再倒序输出”的例子。本质上都是先得到一个数字范围，再对范围中的数字进行筛选、遍历或统计。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>混淆 <code>to</code> 和 <code>until</code>：<code>to</code> 包含结束值，<code>until</code> 不包含结束值。</li>
+<li>忘记步长写在 <code>by</code> 后面。</li>
+<li>倒序时仍然写正步长，导致区间不符合预期。</li>
+<li>筛选偶数时把 <code>%</code> 取余运算写错。</li>
+<li>求和时只输出每个数，没有累加。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val evenNumbers = 1 to 10 by 1
+
+    for (num &lt;- evenNumbers) {
+      if (num % 2 == 0) {
+        println(num)
+      }
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>1 to 10 by 1</code> 表示从 1 到 10，步长为 1。</li>
+<li><code>for (num &lt;- evenNumbers)</code> 依次取出每一个数字。</li>
+<li><code>num % 2 == 0</code> 判断数字是否为偶数。</li>
+<li>如果条件成立，就输出这个偶数。</li>
+</ol>
+<hr>
+<h4>知识点 5：for 循环遍历集合</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>for</code> 循环可以遍历区间、数组、列表、集合等数据结构。它的基本思想是：从集合中依次取出每一个元素，然后对每个元素执行一段代码。</p>
+<h5>为什么要学它？</h5>
+<p>课堂中明确强调，基础考试题通常重点考查 <code>for</code> 循环和集合应用。只要能熟练写出循环，就能完成很多基础题，例如输出偶数、求和、遍历 Map、打印数组等。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">for (变量 &lt;- 集合或区间) {
+  要执行的代码
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-scala">for (i &lt;- 1 to 5) {
+  println(i)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 <code>for</code> 循环理解为“一个一个地遍历它”。例如数组、列表、区间都可以用 <code>for</code> 遍历。考试中如果要求“输出什么”“求什么值”，通常都可以先写循环，再在循环中完成判断或计算。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>&lt;-</code> 写成 <code>-&gt;</code>。</li>
+<li>忘记循环变量只是临时变量，不需要提前声明。</li>
+<li>在循环中只写判断条件，却没有写输出或累加语句。</li>
+<li>循环范围写错，例如想遍历 1 到 10 却写成 <code>1 until 10</code>。</li>
+<li>把 Scala 的 <code>for</code> 写成 Java 风格的 <code>for (int i = 0; i &lt; 10; i++)</code>。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    var sum = 0
+
+    for (i &lt;- 1 to 10) {
+      sum = sum + i
+    }
+
+    println(sum)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>var sum = 0</code> 定义一个可变变量，用来保存累加结果。</li>
+<li><code>for (i &lt;- 1 to 10)</code> 从 1 遍历到 10。</li>
+<li><code>sum = sum + i</code> 每次把当前数字加到 <code>sum</code> 中。</li>
+<li><code>println(sum)</code> 输出最终结果 <code>55</code>。</li>
+</ol>
+<hr>
+<h4>知识点 6：Map 映射与键值对</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>Map</code> 是映射，用来保存“键 -&gt; 值”的关系。例如可以用数字表示星期：</p>
+<pre><code class="language-scala">1 -&gt; &quot;星期一&quot;
+2 -&gt; &quot;星期二&quot;
+3 -&gt; &quot;星期三&quot;
+</code></pre>
+<p>其中左边是键，右边是值。可以通过键找到对应的值。</p>
+<h5>为什么要学它？</h5>
+<p>Map 很适合表示“对应关系”，例如学生学号对应姓名、商品编号对应价格、数字对应星期名称等。课堂中老师举了星期一、星期二、星期三的例子，这就是典型的 Map 使用场景。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val weekMap = Map(
+  1 -&gt; &quot;星期一&quot;,
+  2 -&gt; &quot;星期二&quot;,
+  3 -&gt; &quot;星期三&quot;
+)
+
+println(weekMap(1))
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 Map 当作一种“映射”来讲，也就是一个数据对应另一个数据。比如数字 <code>1</code> 对应“星期一”，数字 <code>2</code> 对应“星期二”。如果题目要求输出这种对应关系，就可以使用 Map。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>1 -&gt; &quot;星期一&quot;</code> 写成 <code>1, &quot;星期一&quot;</code>。</li>
+<li>使用不存在的键直接访问，可能导致异常。</li>
+<li>认为 Map 的输出顺序一定和定义顺序完全一样；实际上具体顺序取决于 Map 类型，初学阶段不要依赖普通 Map 的遍历顺序。</li>
+<li>混淆键和值，例如把“星期一”当键，把 <code>1</code> 当值。</li>
+<li>不理解 Map 转数组后每个元素是一个二元组。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val weekMap = Map(
+      1 -&gt; &quot;星期一&quot;,
+      2 -&gt; &quot;星期二&quot;,
+      3 -&gt; &quot;星期三&quot;
+    )
+
+    println(weekMap(1))
+    println(weekMap.getOrElse(4, &quot;没有这个星期编号&quot;))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Map(...)</code> 创建一个映射。</li>
+<li><code>1 -&gt; &quot;星期一&quot;</code> 表示键 <code>1</code> 对应值 <code>&quot;星期一&quot;</code>。</li>
+<li><code>weekMap(1)</code> 根据键 <code>1</code> 获取值。</li>
+<li><code>getOrElse(4, &quot;没有这个星期编号&quot;)</code> 表示如果键 <code>4</code> 不存在，就返回默认提示，避免直接报错。</li>
+</ol>
+<hr>
+<h4>知识点 7：Map 的 <code>toArray</code> 转换</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>toArray</code> 是集合常用方法之一，可以把集合转换成数组。对 <code>Map</code> 使用 <code>toArray</code> 时，得到的是一个数组，数组中的每个元素是一个二元组：</p>
+<pre><code class="language-scala">Array((1, &quot;星期一&quot;), (2, &quot;星期二&quot;), (3, &quot;星期三&quot;))
+</code></pre>
+<p>每个二元组可以理解为一组键值对。</p>
+<h5>为什么要学它？</h5>
+<p>课堂中练习题要求“定义一个 Map，然后转换成数组输出”。这类题考查学生是否理解集合转换，以及是否能看懂元组结构。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val arr = map.toArray
+</code></pre>
+<p>完整示例：</p>
+<pre><code class="language-scala">val weekMap = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;, 3 -&gt; &quot;星期三&quot;)
+val weekArray = weekMap.toArray
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>原文中出现“Tuple 方法将 map 转换为数组”的说法。根据上下文推测，老师实际讲的是 <code>toArray</code> 方法。<code>Map.toArray</code> 的结果不是把键和值拆散，而是把每个键值对变成一个元组，然后放进数组中。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>toArray</code> 写成 <code>to array</code> 或 <code>toarray</code>。</li>
+<li>认为转换后原来的 Map 会消失或被修改；实际上 <code>toArray</code> 会返回新数组，不会改变原 Map。</li>
+<li>不知道数组中的元素是元组，例如 <code>(1, &quot;星期一&quot;)</code>。</li>
+<li>直接打印数组时结果不直观，应使用 <code>foreach</code> 或 <code>mkString</code> 辅助输出。</li>
+<li>依赖 Map 转数组后的顺序；普通 Map 不建议依赖遍历顺序。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val weekMap = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;, 3 -&gt; &quot;星期三&quot;)
+
+    val weekArray = weekMap.toArray
+
+    weekArray.foreach(item =&gt; println(item))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>weekMap</code> 保存数字到星期名称的映射。</li>
+<li><code>weekMap.toArray</code> 把 Map 转成数组。</li>
+<li><code>weekArray</code> 的每个元素类似 <code>(1, &quot;星期一&quot;)</code>。</li>
+<li><code>foreach(item =&gt; println(item))</code> 逐个输出数组中的元组。</li>
+</ol>
+<hr>
+<h4>知识点 8：foreach 与匿名函数</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>foreach</code> 是集合常用的遍历方法。它会依次取出集合中的每个元素，并对每个元素执行指定操作。</p>
+<p>常见写法：</p>
+<pre><code class="language-scala">collection.foreach(element =&gt; println(element))
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><code>collection</code> 是要遍历的集合。</li>
+<li><code>element</code> 是每次取出的元素。</li>
+<li><code>element =&gt; println(element)</code> 是匿名函数。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p><code>foreach</code> 是 Scala 中非常常见的集合遍历方式。它比传统 <code>for</code> 循环更简洁，也能帮助学生逐步理解函数式编程中的“把函数作为操作传入集合方法”的思想。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">集合.foreach(元素变量 =&gt; 对元素执行的操作)
+</code></pre>
+<p>例如：</p>
+<pre><code class="language-scala">val numbers = List(1, 2, 3)
+numbers.foreach(num =&gt; println(num))
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 <code>foreach</code> 解释为“对集合中的每一个元素执行特定操作”。课堂中还提到 <code>number</code> 类似函数中的参数，后面的 <code>println(number)</code> 类似函数体。也就是说，<code>num =&gt; println(num)</code> 可以理解为一个没有名字的函数。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>foreach</code> 写成 <code>forEach</code>。Scala 标准集合中常用方法名是全小写 <code>foreach</code>。</li>
+<li>不理解 <code>num =&gt; println(num)</code> 中的 <code>num</code> 是临时参数。</li>
+<li>以为 <code>foreach</code> 会自动返回一个新集合；实际上 <code>foreach</code> 主要用于执行操作，返回值通常是 <code>Unit</code>。</li>
+<li>在 <code>foreach</code> 中写了复杂逻辑但忘记输出结果。</li>
+<li>混淆 <code>foreach</code> 和 <code>map</code>：<code>foreach</code> 偏向执行动作，<code>map</code> 偏向生成新集合。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val numbers = List(1, 2, 3, 4, 5)
+
+    numbers.foreach(num =&gt; println(num))
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>numbers</code> 是一个列表。</li>
+<li><code>foreach</code> 会依次取出 <code>1</code>、<code>2</code>、<code>3</code>、<code>4</code>、<code>5</code>。</li>
+<li><code>num</code> 表示当前取出的元素。</li>
+<li><code>println(num)</code> 表示把当前元素打印出来。</li>
+</ol>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>List</code></td>
+<td><code>Array</code></td>
+<td><code>List</code> 默认不可变，适合函数式处理；<code>Array</code> 长度固定，但已有元素可以修改</td>
+<td><code>val xs = List(1,2,3)</code>；<code>val arr = Array(1,2,3)</code></td>
+</tr>
+<tr>
+<td><code>Set</code></td>
+<td><code>List</code></td>
+<td><code>Set</code> 不保留重复元素；<code>List</code> 可以保留重复元素并强调顺序</td>
+<td><code>Set(1,1,2)</code> 结果只有 <code>1,2</code>；<code>List(1,1,2)</code> 保留两个 <code>1</code></td>
+</tr>
+<tr>
+<td><code>Map</code></td>
+<td><code>Array</code></td>
+<td><code>Map</code> 通过键找值；<code>Array</code> 通过下标找元素</td>
+<td><code>map(1)</code> 获取键 1 的值；<code>arr(0)</code> 获取第一个元素</td>
+</tr>
+<tr>
+<td><code>to</code></td>
+<td><code>until</code></td>
+<td><code>to</code> 包含结束值；<code>until</code> 不包含结束值</td>
+<td><code>1 to 3</code> 是 1、2、3；<code>1 until 3</code> 是 1、2</td>
+</tr>
+<tr>
+<td><code>for</code></td>
+<td><code>foreach</code></td>
+<td><code>for</code> 是循环语法；<code>foreach</code> 是集合方法，接收一个函数对每个元素执行操作</td>
+<td><code>for (x &lt;- xs) println(x)</code>；<code>xs.foreach(x =&gt; println(x))</code></td>
+</tr>
+<tr>
+<td><code>foreach</code></td>
+<td><code>map</code></td>
+<td><code>foreach</code> 主要用于执行动作，不生成新集合；<code>map</code> 会把每个元素转换后生成新集合</td>
+<td><code>xs.foreach(println)</code>；<code>xs.map(x =&gt; x * 2)</code></td>
+</tr>
+<tr>
+<td><code>val</code></td>
+<td><code>var</code></td>
+<td><code>val</code> 定义后不能重新赋值；<code>var</code> 可以重新赋值</td>
+<td><code>val a = 1</code>；<code>var b = 1; b = 2</code></td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td><code>==</code></td>
+<td><code>=</code> 用于赋值；<code>==</code> 用于比较是否相等</td>
+<td><code>sum = sum + i</code>；<code>i % 2 == 0</code></td>
+</tr>
+<tr>
+<td>键</td>
+<td>值</td>
+<td>Map 中键用于查找，值是查找后得到的数据</td>
+<td><code>1 -&gt; &quot;星期一&quot;</code> 中 <code>1</code> 是键，<code>&quot;星期一&quot;</code> 是值</td>
+</tr>
+<tr>
+<td>元组</td>
+<td>列表</td>
+<td>元组常表示固定数量、不同含义的一组数据；列表表示一串同类数据</td>
+<td><code>(1, &quot;星期一&quot;)</code> 是二元组；<code>List(1,2,3)</code> 是列表</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：定义 List、Set 和 Map 并输出</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">集合基础、List、Set、Map、输出语句
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val numbers = List(1, 2, 3, 3)
+    val uniqueNumbers = Set(1, 2, 3, 3)
+    val weekMap = Map(
+      1 -&gt; &quot;星期一&quot;,
+      2 -&gt; &quot;星期二&quot;,
+      3 -&gt; &quot;星期三&quot;
+    )
+
+    println(numbers)
+    println(uniqueNumbers)
+    println(weekMap)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">List(1, 2, 3, 3)
+Set(1, 2, 3)
+Map(1 -&gt; 星期一, 2 -&gt; 星期二, 3 -&gt; 星期三)
+</code></pre>
+<blockquote>
+<p>说明：不同 Scala 版本或不同 Map/Set 实现中，<code>Set</code> 和 <code>Map</code> 的打印顺序可能不同，学习时重点理解结构，不要死记输出顺序。</p>
+</blockquote>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>numbers</code> 是一个列表，可以保留重复元素。</li>
+<li><code>uniqueNumbers</code> 是一个集合，重复的 <code>3</code> 只保留一份。</li>
+<li><code>weekMap</code> 是一个映射，保存数字到星期名称的对应关系。</li>
+<li>三个 <code>println</code> 分别输出不同集合。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">List、Set、Map 都是集合，但它们强调的重点不同：List 强调顺序，Set 强调不重复，Map 强调键值对应。
+</code></pre>
+<hr>
+<h4>示例 2：使用 Range 和 for 循环输出 1 到 10 的偶数</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">Range、for 循环、if 判断、取余运算
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10) {
+      if (i % 2 == 0) {
+        println(i)
+      }
+    }
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">2
+4
+6
+8
+10
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>1 to 10</code> 生成从 1 到 10 的区间，包含 10。</li>
+<li><code>for (i &lt;- 1 to 10)</code> 依次取出每个数字。</li>
+<li><code>i % 2 == 0</code> 判断当前数字是否为偶数。</li>
+<li>如果是偶数，就执行 <code>println(i)</code>。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">% 是取余运算。一个整数对 2 取余结果为 0，说明它是偶数。
+</code></pre>
+<hr>
+<h4>示例 3：求 1 到 20 中步长为 4 的数字之和</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">Range、by 步长、for 循环、累加
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    var sum = 0
+
+    for (i &lt;- 1 to 20 by 4) {
+      sum = sum + i
+    }
+
+    println(sum)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">45
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>1 to 20 by 4</code> 得到数字：1、5、9、13、17。</li>
+<li><code>var sum = 0</code> 用来保存累加结果。</li>
+<li>循环每执行一次，就把当前数字加到 <code>sum</code> 中。</li>
+<li>最终输出 <code>45</code>。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">需要不断改变累加结果时，可以使用 var。若只是保存固定数据，优先使用 val。
+</code></pre>
+<hr>
+<h4>示例 4：Map 转数组并使用 foreach 输出</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">Map、toArray、元组、foreach、匿名函数
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val weekMap = Map(
+      1 -&gt; &quot;星期一&quot;,
+      2 -&gt; &quot;星期二&quot;,
+      3 -&gt; &quot;星期三&quot;
+    )
+
+    val weekArray = weekMap.toArray
+
+    weekArray.foreach(item =&gt; println(item))
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">(1,星期一)
+(2,星期二)
+(3,星期三)
+</code></pre>
+<blockquote>
+<p>说明：普通 <code>Map</code> 的遍历顺序不建议作为考试判断重点。真正重要的是理解 <code>toArray</code> 后每个元素是一个键值对元组。</p>
+</blockquote>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>weekMap</code> 定义一个映射。</li>
+<li><code>toArray</code> 将 Map 转换成数组。</li>
+<li><code>weekArray</code> 中的每个元素都是一个二元组。</li>
+<li><code>foreach</code> 遍历数组。</li>
+<li><code>item =&gt; println(item)</code> 表示对每个元素执行打印操作。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Map.toArray 不会修改原来的 Map，它会返回一个新的数组。
+</code></pre>
+<hr>
+<h4>示例 5：使用嵌套 List 表示单位矩阵</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">嵌套集合、List、矩阵思想、遍历
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val matrix = List(
+      List(1, 0, 0),
+      List(0, 1, 0),
+      List(0, 0, 1)
+    )
+
+    matrix.foreach(row =&gt; println(row.mkString(&quot; &quot;)))
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">1 0 0
+0 1 0
+0 0 1
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>matrix</code> 是一个嵌套列表。</li>
+<li>外层 <code>List</code> 表示多行。</li>
+<li>每个内层 <code>List</code> 表示一行数据。</li>
+<li><code>foreach(row =&gt; ...)</code> 逐行遍历。</li>
+<li><code>row.mkString(&quot; &quot;)</code> 把一行中的数字用空格拼接起来输出。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">嵌套集合可以理解为“集合里面还有集合”，常用于表示表格、矩阵、二维数据。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：数字和星期名称的映射</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">Map、键值对、toArray、foreach
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到可以定义一个 <code>Map</code>，让数字 <code>1</code>、<code>2</code>、<code>3</code> 分别对应“星期一”“星期二”“星期三”，然后将这个映射转换成数组并输出。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>先用 <code>Map</code> 保存数字和星期名称的对应关系。</li>
+<li>使用 <code>toArray</code> 把 Map 转换成数组。</li>
+<li>使用 <code>foreach</code> 遍历数组中的每个键值对。</li>
+<li>输出每个键值对。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val days = Map(
+      1 -&gt; &quot;星期一&quot;,
+      2 -&gt; &quot;星期二&quot;,
+      3 -&gt; &quot;星期三&quot;
+    )
+
+    val dayArray = days.toArray
+
+    dayArray.foreach(day =&gt; println(day))
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解 Map 的键值对结构，以及 <code>toArray</code> 转换后每个元素会变成一个二元组。</p>
+<hr>
+<h4>案例 2：输出 1 到 10 的偶数并倒序输出</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">Range、for 循环、if 判断、倒序遍历
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到类似考试题：在一个数字范围内筛选偶数，或者将数字倒序输出。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>使用 <code>1 to 10</code> 生成数字区间。</li>
+<li>通过 <code>if (i % 2 == 0)</code> 判断偶数。</li>
+<li>正序输出偶数。</li>
+<li>使用 <code>10 to 1 by -1</code> 倒序遍历数字，并筛选偶数。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    println(&quot;正序偶数：&quot;)
+    for (i &lt;- 1 to 10) {
+      if (i % 2 == 0) {
+        println(i)
+      }
+    }
+
+    println(&quot;倒序偶数：&quot;)
+    for (i &lt;- 10 to 1 by -1) {
+      if (i % 2 == 0) {
+        println(i)
+      }
+    }
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解循环、条件判断、区间、步长和倒序遍历之间的关系。</p>
+<hr>
+<h4>案例 3：单位矩阵的嵌套列表表示</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">List、嵌套集合、二维数据
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中老师看到类似三行三列的结构，并引导学生联想到“单位矩阵”。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>使用外层 <code>List</code> 表示整个矩阵。</li>
+<li>使用内层 <code>List</code> 表示每一行。</li>
+<li>每一行包含三个数字。</li>
+<li>使用 <code>foreach</code> 按行输出。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val identityMatrix = List(
+      List(1, 0, 0),
+      List(0, 1, 0),
+      List(0, 0, 1)
+    )
+
+    for (row &lt;- identityMatrix) {
+      println(row.mkString(&quot; &quot;))
+    }
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生把“列表中还有列表”的结构和二维表格、矩阵联系起来，理解嵌套集合的实际意义。</p>
+<hr>
+<h4>课堂补充说明：AI 使用技巧与课程安排</h4>
+<p>原始文本中夹杂了非 Scala 主线内容，例如“下周周二试听课”“周四检查笔记本”等课程安排。这些内容不属于 Scala 知识点，但可以作为课堂补充说明保留。</p>
+<ul>
+<li><strong>课程安排：</strong> 根据原文，下周周二有试听课，下周周四检查笔记本。</li>
+<li><strong>学习建议：</strong> 老师提醒学生需要抄写笔记、完成基础练习，并重点掌握考试可能出现的集合与循环题型。</li>
+<li><strong>处理方式：</strong> 这些内容不进入核心知识点，但可在后续课程网站中作为“课堂提醒”或“备注”展示。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<h4>易错点 1：把 Scala 默认 <code>List</code> 当成可变集合</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">val nums = List(1, 2, 3)
+nums(0) = 100
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">val nums = List(1, 2, 3)
+val newNums = 100 :: nums.tail
+
+println(newNums)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 默认的 <code>List</code> 是不可变集合，不能像数组一样直接修改某个位置的值。如果确实要频繁修改元素，可以考虑使用 <code>Array</code> 或可变集合。</p>
+<hr>
+<h4>易错点 2：用 Java 风格访问数组元素</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">val arr = Array(10, 20, 30)
+println(arr[0])
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">val arr = Array(10, 20, 30)
+println(arr(0))
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 中访问数组元素使用圆括号 <code>()</code>，不是方括号 <code>[]</code>。因此第一个元素应写成 <code>arr(0)</code>。</p>
+<hr>
+<h4>易错点 3：混淆 <code>to</code> 和 <code>until</code></h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">for (i &lt;- 1 until 10) {
+  println(i)
+}
+</code></pre>
+<p>如果题目要求输出 1 到 10，这段代码不会输出 10。</p>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">for (i &lt;- 1 to 10) {
+  println(i)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>to</code> 包含结束值，<code>until</code> 不包含结束值。题目如果明确要求包含 10，应使用 <code>1 to 10</code>。</p>
+<hr>
+<h4>易错点 4：把 <code>foreach</code> 写成 <code>forEach</code></h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">val nums = List(1, 2, 3)
+nums.forEach(num =&gt; println(num))
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">val nums = List(1, 2, 3)
+nums.foreach(num =&gt; println(num))
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 标准集合中常用方法名是 <code>foreach</code>，全部小写。<code>forEach</code> 是很多 Java API 中常见的方法名，不能直接照搬到 Scala 集合上。</p>
+<hr>
+<h4>易错点 5：认为 <code>Map.toArray</code> 会修改原 Map</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">val days = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;)
+days.toArray
+println(days)
+</code></pre>
+<p>误以为 <code>days</code> 已经变成数组。</p>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">val days = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;)
+val dayArray = days.toArray
+
+println(days)
+dayArray.foreach(item =&gt; println(item))
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>toArray</code> 会返回一个新数组，不会改变原来的 Map。需要用一个新变量接收转换结果。</p>
+<hr>
+<h4>易错点 6：不理解 Map 转数组后的元素是元组</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">val days = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;)
+val arr = days.toArray
+
+arr.foreach(day =&gt; println(day + 1))
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">val days = Map(1 -&gt; &quot;星期一&quot;, 2 -&gt; &quot;星期二&quot;)
+val arr = days.toArray
+
+arr.foreach {
+  case (num, name) =&gt; println(num + &quot; 对应 &quot; + name)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>Map.toArray</code> 得到的是 <code>Array[(Int, String)]</code>，每个元素是一个二元组 <code>(键, 值)</code>，不能把整个元组当成普通数字加 1。</p>
+<hr>
+<h4>易错点 7：求和时忘记累加变量</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">for (i &lt;- 1 to 10) {
+  i + i
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">var sum = 0
+
+for (i &lt;- 1 to 10) {
+  sum = sum + i
+}
+
+println(sum)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>求和需要一个变量保存累计结果，只写 <code>i + i</code> 不会自动保存最终和。</p>
+<hr>
+<h3>9. 小测验题目</h3>
+<h4>题目 1：下面哪个是 Scala 中正确的 List 定义方式？</h4>
+<p>A. <code>val nums = List(1, 2, 3)</code><br>B. <code>List nums = [1, 2, 3]</code><br>C. <code>val nums = list{1, 2, 3}</code><br>D. <code>nums List = 1, 2, 3</code></p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中可以使用 <code>List(元素1, 元素2, ...)</code> 创建列表，并使用 <code>val</code> 保存引用。</p>
+<hr>
+<h4>题目 2：关于 Scala 默认 <code>List</code>，下面说法正确的是？</h4>
+<p>A. 默认 <code>List</code> 创建后可以直接修改任意下标的值<br>B. 默认 <code>List</code> 是不可变集合<br>C. <code>List</code> 只能保存字符串<br>D. <code>List</code> 不能被遍历</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 默认 <code>List</code> 是不可变集合，创建后不能直接修改其中某个位置的元素。</p>
+<hr>
+<h4>题目 3：<code>1 until 5</code> 表示哪些数字？</h4>
+<p>A. 1、2、3、4、5<br>B. 1、2、3、4<br>C. 0、1、2、3、4<br>D. 2、3、4、5</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>until</code> 不包含结束值，所以 <code>1 until 5</code> 生成 1、2、3、4。</p>
+<hr>
+<h4>题目 4：下面哪个方法可以把 Map 转换为数组？</h4>
+<p>A. <code>toList</code><br>B. <code>toMap</code><br>C. <code>toArray</code><br>D. <code>foreach</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>toArray</code> 可以将集合转换为数组。对 Map 使用 <code>toArray</code> 时，得到的数组元素是键值对元组。</p>
+<hr>
+<h4>题目 5：<code>foreach</code> 的主要作用是什么？</h4>
+<p>A. 删除集合中的所有元素<br>B. 对集合中的每个元素执行指定操作<br>C. 把所有集合都变成 Map<br>D. 创建一个新的类</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>foreach</code> 用于遍历集合，对每个元素执行指定操作，例如打印元素。</p>
+<hr>
+<h4>题目 6：下面哪个是正确的匿名函数写法？</h4>
+<p>A. <code>num -&gt; println(num)</code><br>B. <code>num =&gt; println(num)</code><br>C. <code>num = println(num)</code><br>D. <code>println =&gt; num(num)</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中匿名函数常用 <code>参数 =&gt; 函数体</code> 的形式，例如 <code>num =&gt; println(num)</code>。</p>
+<hr>
+<h4>题目 7：下面代码的输出结果是什么？</h4>
+<pre><code class="language-scala">val nums = Set(1, 1, 2, 3)
+println(nums)
+</code></pre>
+<p>A. 一定输出 <code>Set(1, 1, 2, 3)</code><br>B. 集合中不会保留重复的 <code>1</code><br>C. 程序无法编译<br>D. Set 只能保存字符串</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Set 的特点是不保存重复元素，所以重复的 <code>1</code> 只会保留一份。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<ol>
+<li><code>List</code> —— 有顺序的列表集合</li>
+<li><code>Array</code> —— 长度固定的数组</li>
+<li><code>Set</code> —— 不保存重复元素的集合</li>
+<li><code>Map</code> —— 保存键值对的映射</li>
+<li><code>Range</code> —— 表示一段连续数字</li>
+<li><code>to</code> —— 创建包含结束值的区间</li>
+<li><code>until</code> —— 创建不包含结束值的区间</li>
+<li><code>by</code> —— 指定区间步长</li>
+<li><code>foreach</code> —— 遍历集合并执行操作</li>
+<li><code>toArray</code> —— 将集合转换为数组</li>
+<li><code>-&gt;</code> —— 创建 Map 键值对</li>
+<li><code>=&gt;</code> —— 表示匿名函数</li>
+<li><code>head</code> —— 获取 List 第一个元素</li>
+<li><code>tail</code> —— 获取 List 去掉第一个元素后的部分</li>
+<li><code>mkString</code> —— 将集合元素拼接成字符串</li>
+</ol>
+<hr>
+<h3>11. 流程动画素材</h3>
+<h4>流程主题：Map 转数组并使用 foreach 输出</h4>
+<pre><code class="language-text">1. 程序从 main 方法开始执行。
+2. 使用 Map 定义数字和星期名称的对应关系。
+3. 调用 toArray 方法，把 Map 转换为数组。
+4. 转换后的数组中，每个元素都是一个二元组，例如 (1, &quot;星期一&quot;)。
+5. 程序调用 foreach 方法，准备逐个处理数组中的元素。
+6. foreach 每次取出一个元组，并把它交给匿名函数中的参数。
+7. 匿名函数执行 println，将当前元组输出到控制台。
+8. 所有元素处理完后，foreach 结束。
+9. 程序继续向下执行，如果没有更多代码，程序结束。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<h4>练习 1：定义一个 List 并输出所有元素</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个列表，保存数字 1、2、3、4、5，并使用 <code>foreach</code> 输出每个数字。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">List、foreach、匿名函数、输出语句
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val nums = List(1, 2, 3, 4, 5)
+
+    nums.foreach(num =&gt; println(num))
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>先用 <code>List</code> 定义数字列表，再调用 <code>foreach</code>，把每个元素传给匿名函数并输出。</p>
+<hr>
+<h4>练习 2：输出 1 到 20 之间的偶数</h4>
+<p><strong>题目：</strong></p>
+<p>使用 <code>for</code> 循环输出 1 到 20 之间所有偶数。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">Range、for 循环、if 判断、取余运算
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 20) {
+      if (i % 2 == 0) {
+        println(i)
+      }
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>先使用 <code>1 to 20</code> 生成区间，再通过 <code>i % 2 == 0</code> 判断偶数，满足条件就输出。</p>
+<hr>
+<h4>练习 3：计算 1 到 100 的和</h4>
+<p><strong>题目：</strong></p>
+<p>使用 <code>for</code> 循环计算 1 到 100 的所有整数之和。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">for 循环、Range、var、累加
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    var sum = 0
+
+    for (i &lt;- 1 to 100) {
+      sum = sum + i
+    }
+
+    println(sum)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>定义变量 <code>sum</code> 保存累计结果，每遍历一个数字就加到 <code>sum</code> 中，最后输出总和。</p>
+<hr>
+<h4>练习 4：定义星期 Map 并根据键取值</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个 Map，让 1、2、3 分别对应“星期一”“星期二”“星期三”，然后输出键 2 对应的值。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">Map、键值对、按键取值
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val days = Map(
+      1 -&gt; &quot;星期一&quot;,
+      2 -&gt; &quot;星期二&quot;,
+      3 -&gt; &quot;星期三&quot;
+    )
+
+    println(days(2))
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>使用 <code>Map</code> 保存键值对，然后通过 <code>days(2)</code> 获取键 <code>2</code> 对应的值。</p>
+<hr>
+<h4>练习 5：将 Map 转成数组并输出</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个 Map，保存 1 到 3 对应的星期名称。将它转换为数组，并使用 <code>foreach</code> 输出数组中的每个元素。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">Map、toArray、元组、foreach
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val days = Map(
+      1 -&gt; &quot;星期一&quot;,
+      2 -&gt; &quot;星期二&quot;,
+      3 -&gt; &quot;星期三&quot;
+    )
+
+    val arr = days.toArray
+
+    arr.foreach(item =&gt; println(item))
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>先定义 Map，再使用 <code>toArray</code> 得到数组。数组中每个元素是一个二元组，最后使用 <code>foreach</code> 遍历输出。</p>
+<hr>
+<h4>练习 6：用嵌套 List 输出单位矩阵</h4>
+<p><strong>题目：</strong></p>
+<p>使用 <code>List[List[Int]]</code> 定义一个 3×3 单位矩阵，并按行输出。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">嵌套 List、二维数据、foreach、mkString
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val matrix = List(
+      List(1, 0, 0),
+      List(0, 1, 0),
+      List(0, 0, 1)
+    )
+
+    matrix.foreach(row =&gt; println(row.mkString(&quot; &quot;)))
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>外层 List 表示矩阵的多行，内层 List 表示每一行。使用 <code>foreach</code> 逐行输出，并用 <code>mkString(&quot; &quot;)</code> 让结果更像矩阵。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 集合与循环基础
+├── 集合基础
+│   ├── List
+│   │   ├── 有顺序
+│   │   ├── 默认不可变
+│   │   ├── head
+│   │   └── tail
+│   ├── Array
+│   │   ├── 长度固定
+│   │   ├── 下标从 0 开始
+│   │   ├── 使用 arr(0) 访问元素
+│   │   └── 元素可以修改
+│   ├── Set
+│   │   ├── 不保存重复元素
+│   │   └── 适合去重
+│   └── Map
+│       ├── 键值对
+│       ├── 使用 -&gt; 表示对应关系
+│       ├── 根据键取值
+│       └── 可使用 toArray 转换
+├── 区间 Range
+│   ├── to
+│   │   └── 包含结束值
+│   ├── until
+│   │   └── 不包含结束值
+│   └── by
+│       └── 指定步长
+├── 遍历方式
+│   ├── for 循环
+│   │   ├── 遍历区间
+│   │   ├── 遍历数组
+│   │   └── 遍历列表
+│   └── foreach 方法
+│       ├── 遍历集合
+│       ├── 对每个元素执行操作
+│       └── 常与匿名函数配合
+├── 函数式表达
+│   ├── 匿名函数
+│   │   └── 参数 =&gt; 函数体
+│   └── foreach 中的临时参数
+├── 嵌套集合
+│   ├── List 中包含 List
+│   ├── 表示二维结构
+│   └── 可表示单位矩阵
+└── 常见考试题型
+    ├── 定义集合并输出
+    ├── 遍历区间输出偶数
+    ├── 按步长求和
+    ├── Map 转数组
+    └── foreach 遍历输出
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID：</strong> <code>scala-collections-map-foreach-basic</code></li>
+<li><strong>建议课程标题：</strong> 2026-03-26 Scala 编程基础要点及练习讲解</li>
+<li><strong>建议章节：</strong> Scala 数组与集合基础</li>
+<li><strong>建议标签：</strong><ul>
+<li>Scala 集合</li>
+<li>List</li>
+<li>Array</li>
+<li>Set</li>
+<li>Map</li>
+<li>Range</li>
+<li>for 循环</li>
+<li>foreach</li>
+<li>toArray</li>
+<li>匿名函数</li>
+<li>元组</li>
+</ul>
+</li>
+<li><strong>适合放入 summary 的内容：</strong><ul>
+<li>本节课讲解 Scala 集合基础，包括 List、Array、Set、Map 的基本概念和使用方式。</li>
+<li>本节课重点练习 Range、for 循环、foreach、Map 转数组等考试常见内容。</li>
+<li>课堂通过星期 Map 和单位矩阵案例帮助学生理解键值对与嵌套集合。</li>
+</ul>
+</li>
+<li><strong>适合放入 keyPoints 的内容：</strong><ul>
+<li><code>List</code> 默认不可变。</li>
+<li><code>Array</code> 使用圆括号访问元素。</li>
+<li><code>Map</code> 保存键值对。</li>
+<li><code>toArray</code> 返回新数组，不修改原集合。</li>
+<li><code>foreach</code> 用于遍历集合并执行操作。</li>
+<li><code>Range</code> 可以使用 <code>to</code>、<code>until</code>、<code>by</code> 表示不同范围和步长。</li>
+</ul>
+</li>
+<li><strong>适合放入 codeExamples 的内容：</strong><ul>
+<li>定义 List、Set、Map 并输出。</li>
+<li>使用 for 循环输出偶数。</li>
+<li>使用 Range 和步长求和。</li>
+<li>Map 转数组并用 foreach 输出。</li>
+<li>嵌套 List 表示单位矩阵。</li>
+</ul>
+</li>
+<li><strong>适合放入 quiz 的内容：</strong><ul>
+<li><code>List</code> 的不可变性。</li>
+<li><code>to</code> 与 <code>until</code> 的区别。</li>
+<li><code>Map.toArray</code> 的返回结果。</li>
+<li><code>foreach</code> 的作用。</li>
+<li>匿名函数 <code>=&gt;</code> 的含义。</li>
+</ul>
+</li>
+<li><strong>适合放入 dragMatch 的内容：</strong><ul>
+<li><code>List</code> —— 有顺序的列表集合</li>
+<li><code>Array</code> —— 长度固定的数组</li>
+<li><code>Map</code> —— 保存键值对的映射</li>
+<li><code>foreach</code> —— 遍历集合并执行操作</li>
+<li><code>toArray</code> —— 将集合转换为数组</li>
+<li><code>Range</code> —— 表示一段连续数字</li>
+</ul>
+</li>
+<li><strong>适合放入 flow 的内容：</strong><ul>
+<li>Map 定义 → 调用 <code>toArray</code> → 得到数组 → <code>foreach</code> 遍历 → 匿名函数处理元素 → 输出结果。</li>
+</ul>
+</li>
+<li><strong>适合放入 exercises 的内容：</strong><ul>
+<li>定义列表并遍历。</li>
+<li>输出区间中的偶数。</li>
+<li>按步长求和。</li>
+<li>定义星期 Map。</li>
+<li>Map 转数组输出。</li>
+<li>使用嵌套 List 表示矩阵。</li>
+</ul>
+</li>
+<li><strong>适合放入 conclusion 的内容：</strong><ul>
+<li>本节课是 Scala 集合学习的基础课，重点是会定义、会遍历、会转换、会输出。</li>
+<li>学生需要熟练掌握 <code>for</code> 和 <code>foreach</code> 两种遍历方式。</li>
+<li><code>Map.toArray</code> 和匿名函数是本节课的难点，课后应多写代码练习。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li>本节课的核心是 Scala 集合基础，重点掌握 <code>List</code>、<code>Array</code>、<code>Set</code>、<code>Map</code> 的基本作用和常见写法。</li>
+<li>学习 Scala 集合时要特别注意可变与不可变的区别，尤其不要把默认 <code>List</code> 当成可以直接修改的数组。</li>
+<li>通过本节课，学生应该能够使用 <code>Range</code> 和 <code>for</code> 循环完成输出偶数、倒序遍历、按步长求和等基础题。</li>
+<li><code>Map</code> 是本节课的重要内容，它用于表示键值对应关系，后续学习配置数据、查表逻辑和集合转换时都会继续使用。</li>
+<li><code>toArray</code> 和 <code>foreach</code> 是本节课需要重点复习的两个方法，一个负责转换集合，一个负责遍历集合。</li>
+<li>匿名函数 <code>num =&gt; println(num)</code> 是 Scala 函数式编程的入门形式，后面学习 <code>map</code>、<code>filter</code>、<code>reduce</code> 等集合高级方法时会继续使用。</li>
+<li>嵌套集合可以表示二维结构，例如矩阵、表格或多行数据，理解它有助于后续学习更复杂的数据处理。</li>
+<li>课后建议多练习考试常见题型：定义集合、遍历集合、筛选数字、求和、Map 转数组并输出。</li>
+<li>本节课暂不需要扩展到 Spark、Akka、Web 框架等内容，当前重点是把 Scala 基础集合和循环写熟。</li>
+<li>如果后续要转换成课程网站数据，本节内容非常适合拆分成知识卡片、代码示例、小测验、拖拽匹配和流程动画。</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-03-26-part-1.html"><span>上一篇</span><strong>Scala Map集合与数组复习</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-04-02-part-1.html"><span>下一篇</span><strong>Scala循环类与方法函数</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

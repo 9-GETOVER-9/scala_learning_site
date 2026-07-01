@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java变量小游戏</title>
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <main class="container game-shell">
+    <a class="btn small ghost" href="../index.html">返回首页</a>
+    <section class="panel section">
+      <p class="eyebrow">Java Practice</p>
+      <h1>Java变量小游戏</h1>
+      <p class="muted">选择正确答案，复习 Java 中变量、类型和赋值的基础概念。</p>
+    </section>
+
+    <section class="panel section game-board" id="gameBoard"></section>
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: "Java 中定义整数变量 age，初始值为 20，正确写法是？",
+        options: ["int age = 20;", "age int = 20;", "var age: Int = 20", "int = age 20;"],
+        answer: "int age = 20;",
+        exp: "Java 通常先写类型，再写变量名，最后赋值。"
+      },
+      {
+        q: "Java 中 final 修饰的变量表示什么？",
+        options: ["可以随便改变", "不可重新赋值", "一定是字符串", "一定是数组"],
+        answer: "不可重新赋值",
+        exp: "final 表示最终值，通常用于定义常量。"
+      },
+      {
+        q: "下面哪个是 Java 的 double 类型字面量？",
+        options: ["10", "true", "3.14", "'A'"],
+        answer: "3.14",
+        exp: "3.14 是小数，通常会被看作 double 类型。"
+      }
+    ];
+
+    const board = document.getElementById("gameBoard");
+    board.innerHTML = questions.map((item, i) => `
+      <article class="quiz-card" data-answer="${item.answer}">
+        <h3>${i + 1}. ${item.q}</h3>
+        <div class="quiz-options">
+          ${item.options.map(o => `<button class="option-btn" data-option="${o}">${o}</button>`).join("")}
+        </div>
+        <p class="feedback"></p>
+        <p class="answer-box">解析：${item.exp}</p>
+      </article>
+    `).join("");
+
+    document.querySelectorAll(".quiz-card").forEach(card => {
+      const answer = card.dataset.answer;
+      const feedback = card.querySelector(".feedback");
+      const explanation = card.querySelector(".answer-box");
+      card.querySelectorAll(".option-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          card.querySelectorAll(".option-btn").forEach(item => {
+            item.disabled = true;
+            if (item.dataset.option === answer) item.classList.add("correct");
+          });
+          if (btn.dataset.option === answer) {
+            feedback.textContent = "回答正确！";
+            feedback.className = "feedback ok";
+          } else {
+            btn.classList.add("wrong");
+            feedback.textContent = `回答错误。正确答案是：${answer}`;
+            feedback.className = "feedback bad";
+          }
+          explanation.classList.add("show");
+        });
+      });
+    });
+  </script>
+</body>
+</html>

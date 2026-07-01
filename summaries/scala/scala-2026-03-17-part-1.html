@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： scala 08 matrix func recursion 课程标题 ：Scala 转置矩阵、函数与递归基础 所属章节 ：Scala 函数与方法 / Scala 综合练习 上课日期 ：2026 03 17（10:05 开始） 知识点标签 ：转置矩" />
+  <title>Scala转置矩阵函数与递归基础 - 上 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-03-17-functions-procedures">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-03-17 · 上半节</p>
+      <h1>Scala转置矩阵函数与递归基础 - 上</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala转置矩阵函数与递归基础 - 上</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>scala-08-matrix-func-recursion</code></li>
+<li><strong>课程标题</strong>：Scala 转置矩阵、函数与递归基础</li>
+<li><strong>所属章节</strong>：Scala 函数与方法 / Scala 综合练习</li>
+<li><strong>上课日期</strong>：2026-03-17（10:05 开始）</li>
+<li><strong>知识点标签</strong>：转置矩阵、步长、函数、递归、变长参数、for 循环、二维采样</li>
+<li><strong>难度等级</strong>：初级偏中</li>
+<li><strong>适合对象</strong>：已经熟悉基础 for 循环和表达式的学生</li>
+<li><strong>本节课一句话概括</strong>：本节课围绕矩阵转置和步长采样展开，并系统讲解了 Scala 函数定义、递归以及函数参数和返回值的基本组成。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先回顾了上节课的运行环境和项目问题，提醒学生如果类或对象出错可以删除重建。</li>
+<li>课堂中重点讲解了转置矩阵的概念，并说明它在多种编程语言中都可以实现。</li>
+<li>老师通过步长（step）和采样的例子说明计算机常处理离散数据，数据采样在智能交通等领域很重要。</li>
+<li>本节课系统介绍了 Scala 函数：<code>def</code> 关键字、函数体、参数列表、返回值类型等组成部分。</li>
+<li>老师讲解了递归思想，认为适合“规则相同但参数不同”的问题，例如斐波那契数列。</li>
+<li>最后对 Scala 与 Java 的函数写法、变长参数、类的访问权限等问题做了对比说明。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解矩阵转置在编程中的基本意义。</li>
+<li>了解步长采样与离散数据处理的联系。</li>
+<li>写出带参数、带返回值的 Scala 函数。</li>
+<li>明白函数名、参数列表、返回类型和函数体各自的作用。</li>
+<li>初步理解递归的思想，并能看懂简单递归函数。</li>
+<li>知道 Scala 函数相对 Java 更简洁的原因。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：转置矩阵的概念</h4>
+<h5>这个知识点是什么？</h5>
+<p>转置矩阵就是把矩阵的行和列进行交换。例如原来第 i 行第 j 列的元素，转置后会移动到第 j 行第 i 列。</p>
+<h5>为什么要学它？</h5>
+<p>矩阵转置在数据处理、线性代数、图像处理、机器学习等场景中都很常见。老师用它作为“二维遍历”的进阶例子。</p>
+<h5>基本语法</h5>
+<p>没有固定语法，这是一个算法/思维问题。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师说：对于 3×3 矩阵，A11、A12、A13……这些元素在转置后会变成另一种位置。通过调换 i 和 j，就能实现转置。这个过程和二维数组的遍历密切相关。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不知道转置后是“行列互换”。</li>
+<li>把转置和倒序混淆。</li>
+<li>不会用循环写出转置逻辑。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object TransposeDemo {
+  def main(args: Array[String]): Unit = {
+    val a = Array(
+      Array(1, 2, 3),
+      Array(4, 5, 6),
+      Array(7, 8, 9)
+    )
+
+    for (j &lt;- 0 until 3) {
+      for (i &lt;- 0 until 3) {
+        print(a(i)(j) + &quot; &quot;)
+      }
+      println()
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>原矩阵 a 的行和列分别是 3×3。</li>
+<li>外层遍历列 j，内层遍历行 i。</li>
+<li><code>a(i)(j)</code> 被以转置方式输出。</li>
+</ul>
+<hr>
+<h4>知识点 2：步长采样——按间隔取值</h4>
+<h5>这个知识点是什么？</h5>
+<p>步长表示每次循环跳过多少个元素。Scala 中常用 <code>by</code> 指定步长，比如每 2 个取一个值、每 3 个取一个值。</p>
+<h5>为什么要学它？</h5>
+<p>老师把它和“采样”联系起来：在计算机科学和工程中，不一定需要每个数据点都看，只看间隔采样的点就足够。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">for (i &lt;- 1 to 10 by 3) {
+  println(i)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把步长类比成“走路一步跨多远”或者“物理里的频率/振幅概念”：你不是每次都走一步，而是按固定间隔跨步前进。比如 <code>1 to 10 by 3</code> 就是 1、4、7、10。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把步长理解成“循环次数”。</li>
+<li>不知道 <code>by</code> 是和范围配合使用的。</li>
+<li>认为步长只能是正数。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object StepSampling {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10 by 2) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>从 1 开始。</li>
+<li>每次加 2。</li>
+<li>输出的是奇数序列。</li>
+</ul>
+<hr>
+<h4>知识点 3：Scala 函数的完整结构</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 函数通常由 <code>def</code>、函数名、参数列表、返回类型和函数体组成。</p>
+<h5>为什么要学它？</h5>
+<p>函数是 Scala 编程最重要的基本单位之一。你写的业务逻辑几乎都要封装成函数。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">def 函数名(参数名: 类型, 参数名: 类型): 返回类型 = {
+  函数体
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把函数拆成几部分解释：</p>
+<ul>
+<li><code>def</code> 是定义函数的关键字；</li>
+<li>函数名是这个功能的名字；</li>
+<li>参数列表表示输入；</li>
+<li>返回类型表示输出；</li>
+<li>函数体表示怎么做。</li>
+</ul>
+<p>老师还提醒：Scala 的重点信息往前放，类型等信息往后放，这和 Java 的写法顺序正好相反。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>函数名和参数类型写反。</li>
+<li>忘记写返回类型。</li>
+<li>函数体最后一行和返回值关系不清楚。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">def add(x: Int, y: Int): Int = {
+  x + y
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>add</code> 是函数名。</li>
+<li><code>x: Int, y: Int</code> 是参数列表。</li>
+<li><code>: Int</code> 是返回值类型。</li>
+<li><code>x + y</code> 是函数体最后一行，也是返回值。</li>
+</ul>
+<hr>
+<h4>知识点 4：递归思想</h4>
+<h5>这个知识点是什么？</h5>
+<p>递归是指一个函数在内部调用自己，用来解决“结构相同、规模不同”的问题。</p>
+<h5>为什么要学它？</h5>
+<p>递归是很多算法的基础，如阶乘、斐波那契数列、树形结构遍历等。老师虽然没有完全展开，但已经把它列为本节课的重要内容。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">def factorial(n: Int): Int = {
+  if (n &lt;= 1) 1
+  else n * factorial(n - 1)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师说递归适合“规则相同但参数不同”的情况。也就是说，你只要会处理一个小问题，就能用相同规则去处理更大的问题。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不写递归出口，导致无限递归。</li>
+<li>不理解递归调用的“分解-回收”过程。</li>
+<li>以为递归就是“循环换了个名字”。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">def factorial(n: Int): Int = {
+  if (n &lt;= 1) 1
+  else n * factorial(n - 1)
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>当 n 小于等于 1 时，递归结束。</li>
+<li>否则不断调用自己处理更小规模的问题。</li>
+</ul>
+<hr>
+<h4>知识点 5：函数参数和返回值的意义</h4>
+<h5>这个知识点是什么？</h5>
+<p>函数参数是输入，返回值是输出。Scala 中函数的参数写在函数名后面，类型放在参数名后面；返回类型写在参数列表后面。</p>
+<h5>为什么要学它？</h5>
+<p>理解参数和返回值，才能写出真正可复用的函数。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">def distance(x1: Int, y1: Int, x2: Int, y2: Int): Double = {
+  math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 Java 的方法调用流程和 Scala 函数做了对比：</p>
+<ul>
+<li>Java 常常需要先定义对象，再调用方法，再传递参数；</li>
+<li>Scala 可以更直接地把输入和输出放到函数里。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不清楚参数和返回值的方向。</li>
+<li>把参数名和参数类型写反。</li>
+<li>不知道函数返回类型该写在哪里。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">def sum(a: Int, b: Int): Int = {
+  a + b
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>a</code>、<code>b</code> 是输入参数。</li>
+<li><code>Int</code> 是输入和输出类型中的一部分。</li>
+<li>函数最终返回一个 Int 值。</li>
+</ul>
+<hr>
+<h4>知识点 6：变长参数（简单了解）</h4>
+<h5>这个知识点是什么？</h5>
+<p>变长参数允许你在调用函数时传入不定数量的参数。Scala 使用 <code>*</code> 表示变长参数。</p>
+<h5>为什么要学它？</h5>
+<p>在处理大数据、批量输入、多个参数集合时非常方便。虽然课堂里没有深入展开，但它是 Scala 函数的重要特性之一。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">def printAll(nums: Int*): Unit = {
+  nums.foreach(println)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师说 Scala 在处理这类问题时比 Java 更简洁，大数据处理经常用到这种灵活参数形式。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不知道 <code>*</code> 表示变长参数。</li>
+<li>把变长参数和数组完全等同。</li>
+<li>不会在调用时传多个值。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">def show(names: String*): Unit = {
+  names.foreach(println)
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>String*</code> 表示可传入多个字符串。</li>
+<li><code>foreach</code> 遍历每个名字并输出。</li>
+</ul>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>转置</td>
+<td>反转</td>
+<td>转置是行列互换，反转是顺序颠倒</td>
+<td><code>a(i)(j)</code> → <code>a(j)(i)</code> vs <code>reverse</code></td>
+</tr>
+<tr>
+<td>步长 by</td>
+<td>区间 to/until</td>
+<td>by 控制间隔，to/until 控制边界</td>
+<td><code>1 to 10 by 3</code></td>
+</tr>
+<tr>
+<td>函数</td>
+<td>递归</td>
+<td>递归是函数自己调用自己</td>
+<td><code>factorial(n)</code></td>
+</tr>
+<tr>
+<td>参数</td>
+<td>返回值</td>
+<td>参数是输入，返回值是输出</td>
+<td><code>def add(a: Int, b: Int): Int</code></td>
+</tr>
+<tr>
+<td>固定参数</td>
+<td>变长参数</td>
+<td>固定参数个数固定，变长参数可传多个值</td>
+<td><code>String*</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：矩阵转置输出</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">转置矩阵、二维遍历
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object MatrixTranspose {
+  def main(args: Array[String]): Unit = {
+    val a = Array(
+      Array(1, 2, 3),
+      Array(4, 5, 6),
+      Array(7, 8, 9)
+    )
+
+    for (j &lt;- 0 until 3) {
+      for (i &lt;- 0 until 3) {
+        print(a(i)(j) + &quot; &quot;)
+      }
+      println()
+    }
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">1 4 7 
+2 5 8 
+3 6 9 
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li>原矩阵按行定义。</li>
+<li>输出时外层循环列，内层循环行。</li>
+<li>通过交换 i 和 j 完成转置输出。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">转置的关键是把“行优先”变成“列优先”。
+</code></pre>
+<hr>
+<h4>示例 2：步长采样</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">步长、采样、by
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object StepByDemo {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10 by 3) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">1
+4
+7
+10
+</code></pre>
+<p>代码解释：</p>
+<ul>
+<li>每次增加 3。</li>
+<li>这是典型的规律采样。</li>
+</ul>
+<p>初学者提示：</p>
+<pre><code class="language-text">by 是“步长”，不是“次数”。
+</code></pre>
+<hr>
+<h4>示例 3：递归阶乘</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">递归、条件分支、函数返回值
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">def factorial(n: Int): Int = {
+  if (n &lt;= 1) 1
+  else n * factorial(n - 1)
+}
+
+object RecursionDemo {
+  def main(args: Array[String]): Unit = {
+    println(factorial(5))
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">120
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li>当 n&lt;=1 时停止递归。</li>
+<li>否则继续调用自己。</li>
+<li>5! = 5×4×3×2×1 = 120。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">递归一定要有出口，否则会无限调用自己。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：转置矩阵</h4>
+<ul>
+<li><strong>案例名称</strong>：行列互换</li>
+<li><strong>对应知识点</strong>：二维遍历、转置矩阵</li>
+<li><strong>案例背景</strong>：老师用矩阵转置说明二维数据如何变换。</li>
+<li><strong>解决思路</strong>：输出时把原来的行列顺序换一下。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">for (j &lt;- 0 until 3) {
+  for (i &lt;- 0 until 3) {
+    print(a(i)(j) + &quot; &quot;)
+  }
+  println()
+}
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：理解行列交换的过程。</li>
+</ul>
+<h4>案例 2：斐波那契或阶乘</h4>
+<ul>
+<li><strong>案例名称</strong>：递归求值</li>
+<li><strong>对应知识点</strong>：递归、函数调用自己</li>
+<li><strong>案例背景</strong>：老师说递归适合“规则相同但参数不同”的问题。</li>
+<li><strong>解决思路</strong>：设定出口，让函数不断向更小规模的问题分解。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">def factorial(n: Int): Int = {
+  if (n &lt;= 1) 1 else n * factorial(n - 1)
+}
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：递归的“分解-回收”思路。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<p><strong>易错点 1：转置时不交换行列</strong></p>
+<pre><code class="language-text">错误示例：
+还是按原来的 a(i)(j) 顺序输出。
+
+正确写法：
+转置输出时要注意行列交换。
+
+解释：
+转置的核心就是 i/j 位置互换。
+</code></pre>
+<p><strong>易错点 2：步长当成次数</strong></p>
+<pre><code class="language-text">错误示例：
+1 to 10 by 3 只循环 3 次。
+
+正确理解：
+by 3 表示每次加 3，不是总共循环 3 次。
+</code></pre>
+<p><strong>易错点 3：函数没有出口</strong></p>
+<pre><code class="language-text">错误示例：
+def f(n: Int): Int = f(n - 1)
+
+正确写法：
+def f(n: Int): Int = if (n &lt;= 1) 1 else f(n - 1)
+
+解释：
+递归必须有结束条件。
+</code></pre>
+<p><strong>易错点 4：参数类型和参数名顺序写反</strong></p>
+<pre><code class="language-text">错误示例：
+def add(Int a, Int b): Int = a + b
+
+正确写法：
+def add(a: Int, b: Int): Int = a + b
+
+解释：
+Scala 参数名在前，类型在后。
+</code></pre>
+<p><strong>易错点 5：把变长参数当数组直接用</strong></p>
+<pre><code class="language-text">错误理解：
+String* 就等于 String[]。
+
+正确理解：
+变长参数是函数参数写法的一种，不是普通数组。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<p><strong>题目 1</strong>：转置矩阵的核心是？</p>
+<p>A. 反转顺序
+B. 行列互换
+C. 排序
+D. 去重</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：转置就是把行和列对调。</p>
+<hr>
+<p><strong>题目 2</strong>：下面哪个语法表示步长为 3？</p>
+<p>A. <code>1 to 10 by 3</code>
+B. <code>1 until 10</code>
+C. <code>1 reverse 10</code>
+D. <code>1 map 10</code></p>
+<p><strong>正确答案</strong>：A</p>
+<p><strong>解析</strong>：<code>by 3</code> 指定步长为 3。</p>
+<hr>
+<p><strong>题目 3</strong>：Scala 函数定义的关键字是？</p>
+<p>A. func
+B. def
+C. method
+D. function</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：<code>def</code> 用于定义函数。</p>
+<hr>
+<p><strong>题目 4</strong>：递归函数必须具备什么？</p>
+<p>A. 类名
+B. 循环变量
+C. 结束条件
+D. 输出语句</p>
+<p><strong>正确答案</strong>：C</p>
+<p><strong>解析</strong>：没有结束条件就会无限递归。</p>
+<hr>
+<p><strong>题目 5</strong>：下面哪个是变长参数的写法？</p>
+<p>A. <code>name: String*</code>
+B. <code>name: String[]</code>
+C. <code>name: *String</code>
+D. <code>name: String list</code></p>
+<p><strong>正确答案</strong>：A</p>
+<p><strong>解析</strong>：Scala 用 <code>*</code> 表示变长参数。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 转置 —— 把矩阵的行和列互换
+2. 步长 —— 每次循环跨越的间隔
+3. def —— 定义函数的关键字
+4. 递归 —— 函数自己调用自己
+5. 参数列表 —— 函数输入部分
+6. 返回类型 —— 函数输出类型
+7. 变长参数 —— 可以接收多个同类型参数
+8. reverse —— 把顺序倒过来
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">1. 程序进入 for 循环。
+2. 外层循环控制列，内层循环控制行。
+3. 通过 i/j 位置交换完成矩阵转置。
+4. 输出当前元素。
+5. 如果使用步长 by，则每次按固定间隔跳转。
+6. 如果使用递归，则函数不断调用自己，直到满足结束条件。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<p><strong>练习 1</strong>：写一个函数 <code>sum</code>，接收两个 Int 参数，返回它们的和。</p>
+<p><strong>考查知识点</strong>：def、参数列表、返回值</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">def sum(a: Int, b: Int): Int = {
+  a + b
+}
+</code></pre>
+<p><strong>解题思路</strong>：函数接收两个整数，最后一行返回相加结果。</p>
+<hr>
+<p><strong>练习 2</strong>：用步长 2 输出 1 到 10。</p>
+<p><strong>考查知识点</strong>：for、by、范围</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object StepTwo {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10 by 2) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：使用 <code>by 2</code> 控制步长。</p>
+<hr>
+<p><strong>练习 3</strong>：编写递归函数求 1 到 n 的累加和。</p>
+<p><strong>考查知识点</strong>：递归、结束条件</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">def sumToN(n: Int): Int = {
+  if (n &lt;= 1) 1
+  else n + sumToN(n - 1)
+}
+</code></pre>
+<p><strong>解题思路</strong>：递归的出口是 n&lt;=1，其他情况不断向下递归。</p>
+<hr>
+<p><strong>练习 4</strong>：写一个函数，接收多个字符串并依次输出。</p>
+<p><strong>考查知识点</strong>：变长参数、foreach</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">def show(names: String*): Unit = {
+  names.foreach(println)
+}
+</code></pre>
+<p><strong>解题思路</strong>：<code>String*</code> 表示可传多个字符串。</p>
+<hr>
+<p><strong>练习 5</strong>：用二维循环输出一个 2×2 矩阵的坐标名，如 C11、C12、C21、C22。</p>
+<p><strong>考查知识点</strong>：二维遍历、for</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object Matrix2x2 {
+  def main(args: Array[String]): Unit = {
+    for {
+      i &lt;- 1 to 2
+      j &lt;- 1 to 2
+    } {
+      println(&quot;C&quot; + i + j)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：外层控制行，内层控制列。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 第八课——矩阵转置与函数基础
+├── 矩阵转置
+│   ├── 行列互换
+│   ├── 二维遍历
+│   └── i/j 交换
+├── 步长采样
+│   ├── by
+│   ├── 固定间隔
+│   └── 规律取值
+├── 函数定义
+│   ├── def
+│   ├── 参数列表
+│   ├── 返回类型
+│   └── 函数体
+├── 递归
+│   ├── 自我调用
+│   └── 结束条件
+└── 变长参数
+    ├── *
+    └── 多个同类型输入
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>scala-08-matrix-func-recursion</code></li>
+<li><strong>建议课程标题</strong>：Scala 转置矩阵、函数与递归基础</li>
+<li><strong>建议章节</strong>：Scala 函数与方法</li>
+<li><strong>建议标签</strong>：转置矩阵、步长、函数、递归、变长参数、for循环</li>
+<li><strong>适合放入 summary 的内容</strong>：6 条课堂摘要</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：6 个知识点</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：5 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：8 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：6 步转置/递归流程</li>
+<li><strong>适合放入 exercises 的内容</strong>：5 道练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：5 条课后总结</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li><p>本节课的核心是把 <strong>矩阵转置、步长采样、函数定义、递归</strong> 这几个知识点串起来，让你看到 Scala 的表达式和算法是怎么结合的。</p>
+</li>
+<li><p>学习 Scala 时要特别注意函数的结构：<code>def</code>、参数列表、返回类型、函数体，这四部分缺一不可。</p>
+</li>
+<li><p>通过本节课，你应该能看懂简单的递归函数，也能把二维矩阵的行列交换逻辑写出来。</p>
+</li>
+<li><p>变长参数是 Scala 函数的一个灵活特性，后面写工具函数、批量处理多个参数时会很常见。</p>
+</li>
+<li><p>课后建议多练习：把矩阵转置和步长采样自己在代码里写一遍，再尝试把递归函数（阶乘、斐波那契）改写出来。重复写几遍，才能真正理解函数的结构。</p>
+</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-03-12.html"><span>上一篇</span><strong>Scala项目创建与基础语法练习</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-03-17-part-2.html"><span>下一篇</span><strong>代码示例讲解与作业布置</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

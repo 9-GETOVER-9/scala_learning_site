@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： scala 01 env var val 课程标题 ：Scala 入门——开发环境搭建、第一个程序、变量与常量 所属章节 ：Scala 开发环境与运行方式 上课日期 ：2026 03 03（第一节课 10:05 10:50） 知识点标签 ：环境搭建" />
+  <title>Scala入门 - 上 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-03-03-course-intro">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-03-03 · 上半节</p>
+      <h1>Scala入门 - 上</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala入门 - 上</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>scala-01-env-var-val</code></li>
+<li><strong>课程标题</strong>：Scala 入门——开发环境搭建、第一个程序、变量与常量</li>
+<li><strong>所属章节</strong>：Scala 开发环境与运行方式</li>
+<li><strong>上课日期</strong>：2026-03-03（第一节课 10:05-10:50）</li>
+<li><strong>知识点标签</strong>：环境搭建、Eclipse、var、val、object、def、main 方法</li>
+<li><strong>难度等级</strong>：初级</li>
+<li><strong>适合对象</strong>：有 Java 基础、初次接触 Scala 的学生</li>
+<li><strong>本节课一句话概括</strong>：安装 Scala 开发环境，在 Eclipse 中创建第一个 Scala 项目，编写并运行第一个 Scala 程序，理解 var（变量）和 val（常量）的核心区别。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先强调了本学期的学习要求，希望学生踏实学习，多动手敲代码，提高打字速度至每分钟 120-150 个字母。</li>
+<li>课堂中说明了 Java 和 Scala 的定位区别：Java 用于大数据存储（Hadoop 的母语），Scala 用于内存计算（Spark 平台的核心语言）。</li>
+<li>老师讲解了软件安装顺序：必须先安装 JDK，再安装 Scala IDE 或 Eclipse Scala 插件，顺序颠倒会导致注册表冲突。</li>
+<li>本节课在 Eclipse 中演示了创建 Scala 项目、包、类（Scala class）、特质（Scala trait）和单例对象（Scala object）的操作流程。</li>
+<li>老师通过 <code>var i = 10; val j = 11</code> 的例子，让学生直观感受 Scala 变量声明比 Java 更简洁（可以省略分号和类型）。</li>
+<li>最后老师通过一个简单的 Scala 程序——创建类、定义入口方法、new 对象并输出值——展示了 Scala 的基本程序结构。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解 Scala 与 Java 的关系，知道 Scala 在大数据领域（特别是 Spark）中的作用。</li>
+<li>在 Eclipse 中成功创建并运行一个 Scala 项目。</li>
+<li>能区分 Scala class、Scala trait、Scala object 三种结构。</li>
+<li>用 <code>var</code> 定义可以重新赋值的变量，用 <code>val</code> 定义不可重新赋值的常量。</li>
+<li>理解 Scala 中分号是可选的，类型声明可以省略（由编译器自动推断）。</li>
+<li>能写出包含 <code>def main(args: Array[String])</code> 入口方法的简单 Scala 程序。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：Scala 是什么？为什么学它？</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 是一门运行在 Java 虚拟机（JVM）上的编程语言，名字来源于 &quot;Scalable Language&quot;（可扩展的语言）。它同时支持面向对象编程和函数式编程两种范式。</p>
+<h5>为什么要学它？</h5>
+<p>Scala 是 Apache Spark（目前最流行的大数据内存计算框架）的核心语言。Spark 的底层就是用 Scala 写的。学 Scala 就等于掌握了大数据计算领域的&quot;母语&quot;。相比 Java，Scala 代码更精简——Java 需要十几行代码完成的功能，Scala 可能一两行就搞定。</p>
+<h5>基本语法</h5>
+<p>无特定语法——这是一个概念性知识点。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;碗、锅、稻田&quot;的比喻解释技术视野：只看碗里的（只学当前内容）、看着锅里的（预判下一步）、看着稻田（看清整个行业趋势）。Scala 就是让你从&quot;用 Java 写每一行代码&quot;升级到&quot;用更高级的语言思考数据&quot;。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 Scala 当成和 Java 完全不同的新语言，产生抵触心理。</li>
+<li>不理解 Scala 和 Java 的互补关系，认为学了 Scala 就不用学 Java 了。</li>
+<li>以为 Scala 只会用在&quot;大数据&quot;里，忽略它在其他领域的应用。</li>
+</ol>
+<h5>正确示例</h5>
+<p>无需代码示例——这是一个概念性知识点。</p>
+<h5>示例解释</h5>
+<p>无需解释。</p>
+<hr>
+<h4>知识点 2：Scala 开发环境——安装顺序和 Eclipse 使用</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 开发需要两个核心软件：JDK（Java Development Kit）和 Scala IDE（或 Eclipse + Scala 插件）。安装顺序很关键。</p>
+<h5>为什么要学它？</h5>
+<p>环境搭不好，后面什么都做不了。许多初学者因为环境报错而放弃，实际上往往是安装顺序或注册表冲突导致的。</p>
+<h5>基本语法</h5>
+<p>无代码语法——这是操作类知识点。</p>
+<p>安装顺序（课堂强调）：</p>
+<pre><code class="language-text">第 1 步：安装 JDK（如 JDK 1.8）
+第 2 步：安装 Scala IDE 或 Eclipse 的 Scala 插件
+</code></pre>
+<blockquote>
+<p>⚠️ 如果先装 Scala 插件，再装 JDK，会导致注册表冲突，两个都可能装不上。</p>
+</blockquote>
+<h5>课堂中的理解方式</h5>
+<p>老师建议台式机用户在虚拟机（如 VMware）中安装编程环境：编程软件放虚拟机里，不需要时关掉，不占内存、不写注册表。这种&quot;隔离&quot;思路可以有效避免环境冲突。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>安装顺序搞反：先装 Eclipse 的 Scala 插件，再装 JDK——会导致注册表冲突。</li>
+<li>装了多个 JDK 版本（如 JDK 8 和 JDK 11），环境变量混乱。</li>
+<li>不知道在哪里创建 Scala 项目：应该选 File → New → Scala Project。</li>
+</ol>
+<h5>正确示例</h5>
+<p>在 Eclipse 中创建 Scala 项目的步骤（课堂演示）：</p>
+<pre><code class="language-text">File → New → Scala Project → 输入项目名（如 First）→ Next → Finish
+</code></pre>
+<p>然后在 SRC 文件夹上右键 → New → Scala class → 输入类名 → Finish。</p>
+<h5>示例解释</h5>
+<p>这是 Eclipse 中创建 Scala 项目的标准操作流程，与创建 Java 项目流程几乎相同。</p>
+<hr>
+<h4>知识点 3：Scala class、Scala trait、Scala object 的区别</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Eclipse 中创建 Scala 文件时，有三种常见选项：Scala class（类）、Scala trait（特质）和 Scala object（单例对象）。</p>
+<h5>为什么要学它？</h5>
+<p>这三种结构是 Scala 程序的基础。理解它们的区别，才能知道什么时候该用哪个。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">// Scala class —— 像 Java 的类
+class Test {
+  // 属性和方法
+}
+
+// Scala trait —— 像 Java 的接口，但可以有具体实现
+trait MyTrait {
+  // 抽象方法或具体方法
+}
+
+// Scala object —— 单例对象，只有一个实例
+object Main {
+  def main(args: Array[String]): Unit = {
+    // 程序入口
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师对比 Java 解释：</p>
+<ul>
+<li><strong>class</strong>：和 Java 的 class 含义相同，用来定义类的模板。</li>
+<li><strong>trait</strong>：比 Java 的 interface 更强大，可以包含具体实现方法。老师提到&quot;Scala 没有接口&quot;就是这个意思——trait 代替了接口的角色。</li>
+<li><strong>object</strong>：单例对象。当 object 的名字和某个 class 名字相同时，它就称为那个 class 的&quot;伴生对象&quot;（companion object）。老师特别指出，这是本学期学习的重点内容。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不知道在哪里写 main 方法——main 方法应该写在 object 里，而不是 class 里。</li>
+<li>把 object 和 class 搞混——object 是单例的，不需要 new。</li>
+<li>把所有代码都写在一个 class 里，不区分 class 和 object 的职责。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">// 定义一个类
+class Test {
+  val k = 21
+}
+
+// 定义程序的入口对象
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Test()  // 创建 Test 类的对象
+    println(c.k)        // 访问对象的属性 k
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>class Test</code> 定义了一个简单的类，只有一个属性 <code>k</code>（值为 21）。</li>
+<li><code>object Main</code> 是程序的入口，<code>main</code> 方法是执行的起点。</li>
+<li><code>val c = new Test()</code> 用 <code>new</code> 关键字创建 Test 类的一个对象。</li>
+<li><code>println(c.k)</code> 输出对象 c 的属性 k 的值（21）。</li>
+<li>注意：在 Scala 中，程序的入口方法写在 <code>object</code> 中，而不是 <code>class</code> 中——这与 Java 不同。</li>
+</ul>
+<hr>
+<h4>知识点 4：var 和 val——变量与常量</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Scala 中，用 <code>var</code> 定义可以重新赋值的变量，用 <code>val</code> 定义不可重新赋值的常量。</p>
+<h5>为什么要学它？</h5>
+<p>这是 Scala 中最基础、最常用的两个关键字。Scala 推崇&quot;不可变性&quot;（immutability），鼓励尽量使用 <code>val</code>。理解 var 和 val 是写出正确 Scala 程序的第一步。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">var 变量名: 类型 = 初始值    // 可重新赋值
+val 常量名: 类型 = 初始值    // 不可重新赋值
+</code></pre>
+<p>其中 <code>: 类型</code> 可以省略，Scala 编译器会自动推断。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师在 Eclipse 中现场演示：</p>
+<pre><code class="language-scala">var i = 10   // 变量 i，可以被修改
+val j = 11   // 常量 j，不能被修改
+val k = i + j  // 常量 k = 21
+</code></pre>
+<ul>
+<li><code>var i = 10</code> 后面没有分号——Scala 允许省略分号。</li>
+<li>没有写类型（如 <code>Int</code>）——Scala 从值 <code>10</code> 自动推断出 i 是 Int 类型。</li>
+<li>老师强调 Scala 的设计哲学：<strong>尽可能减少程序员的手动操作</strong>——能省则省。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>val</code> 定义的常量当成可以被修改的变量。</li>
+<li>忘记给变量赋初始值——Scala 不允许只声明不赋值的变量。</li>
+<li>混淆 Scala 的 <code>val</code> 和 Java 的 <code>final</code>——语法不同但作用类似。</li>
+<li>所有变量都用 <code>var</code>，不习惯用 <code>val</code>。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">// 正确：val 定义不可变常量
+val pi = 3.14
+
+// 正确：var 定义可变变量
+var count = 0
+count = 1    // 可以修改
+count = 2    // 可以再次修改
+
+// 正确：显式声明类型
+val age: Int = 18
+var name: String = &quot;Tom&quot;
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>val pi = 3.14</code>：圆周率是不变的，应该用 <code>val</code>。</li>
+<li><code>var count = 0</code>：计数值需要不断增加，所以用 <code>var</code>。</li>
+<li><code>val age: Int = 18</code>：显式声明了类型 <code>Int</code>，更清晰。</li>
+<li>建议：能确定值不变的，一律用 <code>val</code>；确实需要修改的，才用 <code>var</code>。</li>
+</ul>
+<hr>
+<h4>知识点 5：Scala 的 main 方法和 def 关键字</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 程序的入口是一个名为 <code>main</code> 的方法，它定义在 <code>object</code> 中，使用 <code>def</code> 关键字声明。</p>
+<h5>为什么要学它？</h5>
+<p>任何一个可以运行的 Scala 程序都需要有一个 main 方法作为启动点。<code>def</code> 是 Scala 中定义方法/函数的关键字，后面几乎每节课都会用到。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">object 对象名 {
+  def main(args: Array[String]): Unit = {
+    // 程序代码
+  }
+}
+</code></pre>
+<ul>
+<li><code>def</code>：定义方法的关键字</li>
+<li><code>main</code>：方法名（固定的入口方法名称）</li>
+<li><code>args: Array[String]</code>：参数列表，args 是字符串数组</li>
+<li><code>: Unit</code>：返回值类型，Unit 相当于 Java 中的 void（表示没有返回值）</li>
+<li><code>=</code>：连接方法头和方法体</li>
+<li><code>{ ... }</code>：方法体，包含要执行的代码</li>
+</ul>
+<h5>课堂中的理解方式</h5>
+<p>老师在 Eclipse 中展示了如何写 main 方法。与 Java 对比：</p>
+<p>Java 写法：</p>
+<pre><code class="language-java">public static void main(String[] args) { ... }
+</code></pre>
+<p>Scala 写法：</p>
+<pre><code class="language-scala">def main(args: Array[String]): Unit = { ... }
+</code></pre>
+<ul>
+<li>Scala 中类型写在变量名后面（用 <code>:</code> 分隔）。</li>
+<li>没有 <code>public static</code> 修饰符（object 中的方法默认就是静态的、公有的）。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 main 方法写在 class 里而不是 object 里。</li>
+<li>忘记写 <code>=</code> 号（等于号连接方法头和体）。</li>
+<li>把 <code>Array[String]</code> 写成 Java 风格的 <code>String[]</code>。</li>
+<li>方法名写错——必须是 <code>main</code>，不能是 <code>Main</code> 或其他。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println(&quot;Hello, Scala!&quot;)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>object HelloWorld</code>：定义单例对象。</li>
+<li><code>def main(args: Array[String]): Unit</code>：定义入口方法。</li>
+<li><code>println(&quot;Hello, Scala!&quot;)</code>：输出一行文字。</li>
+<li>第 1 行和第 3 行后面都没有分号——Scala 中分号是可选的。</li>
+</ul>
+<hr>
+<h4>知识点 6：new 关键字——创建类的对象</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Scala 中，用 <code>new</code> 关键字加类名来创建类的实例（对象）。</p>
+<h5>为什么要学它？</h5>
+<p>面向对象编程的核心操作之一就是&quot;用类创建对象&quot;。只有创建了对象，才能访问类中定义的属性和方法。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val 对象名 = new 类名()
+// 或
+val 对象名: 类名 = new 类名()
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师在课堂中演示了：</p>
+<pre><code class="language-scala">val c = new Test
+// c 就是一个 Test 类型的对象
+</code></pre>
+<p>然后把鼠标悬停在变量 <code>c</code> 上，IDE 显示 <code>c: Test</code>——说明 Scala 编译器自动推断 <code>c</code> 的类型是 <code>Test</code>（类名即类型名）。</p>
+<blockquote>
+<p>课堂中还演示了 <code>c.k</code> 通过点号访问对象的属性。</p>
+</blockquote>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>忘记写 <code>new</code> 关键字，直接写 <code>val c = Test</code>（这是错误的，除非使用的是样例类）。</li>
+<li><code>new</code> 后面的类名写错。</li>
+<li>不理解&quot;对象&quot;和&quot;类&quot;的关系：类是模板，对象是用模板造出来的具体实例。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Student {
+  val name = &quot;Tom&quot;
+  val age = 20
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student       // 创建 Student 类的对象
+    println(s.name)           // 输出：Tom
+    println(s.age)            // 输出：20
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>class Student</code>：定义一个学生类，有两个属性。</li>
+<li><code>val s = new Student</code>：用 <code>new</code> 创建一个学生对象，赋值给 s。</li>
+<li><code>s.name</code> 和 <code>s.age</code>：通过对象访问属性。</li>
+<li>这和 Java 中的操作几乎一样。</li>
+</ul>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>var</td>
+<td>val</td>
+<td>var 定义可重新赋值的变量，val 定义不可重新赋值的常量</td>
+<td><code>var i = 10; i = 20</code> ✓；<code>val j = 10; j = 20</code> ✗</td>
+</tr>
+<tr>
+<td>class</td>
+<td>object</td>
+<td>class 是用来创建对象的模板（可创建多个实例），object 本身就是一个单例对象（全局唯一）</td>
+<td><code>class Test</code> vs <code>object Main</code></td>
+</tr>
+<tr>
+<td>def</td>
+<td>var/val</td>
+<td>def 定义方法（行为），var/val 定义变量/常量（数据）</td>
+<td><code>def greet() = ...</code> vs <code>val name = &quot;Tom&quot;</code></td>
+</tr>
+<tr>
+<td>Scala 的 main</td>
+<td>Java 的 main</td>
+<td>Scala 中方法名和参数用 <code>def main(args: Array[String])</code>，Java 中用 <code>public static void main(String[] args)</code></td>
+<td>语法结构不同，但功能相同</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>void</td>
+<td>Unit 是 Scala 中表示&quot;无返回值&quot;的类型，相当于 Java 的 void</td>
+<td><code>def foo(): Unit = { ... }</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：第一个 Scala 程序——输出计算结果</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">var、val、println、object、def main
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object FirstProgram {
+  def main(args: Array[String]): Unit = {
+    var i = 10
+    val j = 11
+    val k = i + j
+    println(k)
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">21
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li><code>object FirstProgram</code>：定义一个单例对象，作为程序入口。</li>
+<li><code>def main(args: Array[String]): Unit</code>：定义 main 方法。</li>
+<li><code>var i = 10</code>：定义一个可变的整数变量 i，赋值为 10。</li>
+<li><code>val j = 11</code>：定义一个不可变的整数常量 j，赋值为 11。</li>
+<li><code>val k = i + j</code>：定义常量 k，值为 i + j = 21。</li>
+<li><code>println(k)</code>：输出 k 的值，结果为 21。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">Scala 中不写分号也能正常运行。如果你在同一行写多条语句，中间才需要加分号。
+</code></pre>
+<hr>
+<h4>示例 2：创建类的对象并访问属性</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">class、new、object、点号访问属性
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">class Test {
+  val k = 21
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Test
+    println(c.k)
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">21
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li><code>class Test</code>：定义 Test 类，包含一个常量属性 k（值为 21）。</li>
+<li><code>val c = new Test</code>：使用 new 关键字创建 Test 类的对象 c。</li>
+<li><code>c.k</code>：通过点号访问对象的属性 k。</li>
+<li><code>println(c.k)</code>：输出属性值 21。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">class 中定义的 val k 是类的属性（字段）。创建对象后，通过&quot;对象名.属性名&quot;来访问它。
+</code></pre>
+<hr>
+<h4>示例 3：var 和 val 的区别演示</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">var、val、可变性
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object VarValDemo {
+  def main(args: Array[String]): Unit = {
+    var score = 90
+    println(&quot;初始成绩：&quot; + score)
+
+    score = 95
+    println(&quot;修改后的成绩：&quot; + score)
+
+    val maxScore = 100
+    println(&quot;满分：&quot; + maxScore)
+
+    // 下面这行如果取消注释会报错
+    // maxScore = 120  // 错误：val 不能被重新赋值
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">初始成绩：90
+修改后的成绩：95
+满分：100
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li><code>var score = 90</code>：用 var 定义可变变量 score。</li>
+<li><code>score = 95</code>：可以重新赋值（因为 score 是 var）。</li>
+<li><code>val maxScore = 100</code>：用 val 定义不可变常量。</li>
+<li><code>maxScore = 120</code> 会报错——val 定义的量一经赋值，不能再改。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">一个简单的记忆方法：val = value（值），赋值后固定；var = variable（变量），赋值后可以变化。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：用&quot;模具&quot;理解类和对象</h4>
+<ul>
+<li><strong>案例名称</strong>：模具和产品的类比</li>
+<li><strong>对应知识点</strong>：类（class）和对象（object）的关系</li>
+<li><strong>案例背景</strong>：老师用生活中的&quot;模具&quot;来类比。类就像做月饼的模具，对象就是用模具做出来的具体月饼。</li>
+<li><strong>解决思路</strong>：先设计好模具（定义 class），再用模具做出产品（new 出对象），然后使用产品（调用对象的属性和方法）。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">// 模具（类）
+class MoonCake {
+  val filling = &quot;莲蓉&quot;  // 属性：馅料
+  def eat(): Unit = println(&quot;吃掉了&quot; + filling + &quot;月饼&quot;)
+}
+
+// 用模具做产品（创建对象）
+val cake = new MoonCake
+cake.eat()  // 输出：吃掉了莲蓉月饼
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：帮助理解&quot;类是模板，对象是实例&quot;的面向对象核心思想。</li>
+</ul>
+<h4>案例 2：变量变与不变的&quot;身份证&quot;类比</h4>
+<ul>
+<li><strong>案例名称</strong>：变量是草稿纸，常量是身份证</li>
+<li><strong>对应知识点</strong>：var 和 val 的区别</li>
+<li><strong>案例背景</strong>：老师课堂上强调 var 和 val 是最基础的两个关键字。</li>
+<li><strong>解决思路</strong>：var 定义的值像草稿纸上的数字，可以擦了重写；val 定义的值像身份证号码，出生就固定了，不能改。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">var draft = 100    // 草稿，可以改
+draft = 200        // 没问题
+
+val idCard = &quot;1234567890&quot;  // 身份证号，不能改
+// idCard = &quot;9876543210&quot;  // ❌ 报错！
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：帮助初学者快速建立&quot;什么时候用 var，什么时候用 val&quot;的直觉。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<p><strong>易错点 1：把 val 当成 var 使用</strong></p>
+<pre><code class="language-text">错误示例：
+val age = 18
+age = 20  // 报错！
+
+正确写法：
+var age = 18
+age = 20
+
+解释：
+val 定义的变量不能被重新赋值；如果确实需要修改变量值，必须用 var。
+</code></pre>
+<p><strong>易错点 2：忘记安装 JDK 就装 Scala 插件</strong></p>
+<pre><code class="language-text">错误现象：
+Eclipse 中找不到 Scala Project 选项，或者创建后报错。
+
+正确做法：
+先安装 JDK（1.8 版本），确保 JAVA_HOME 环境变量配置正确，
+再安装 Scala IDE 或 Eclipse 的 Scala 插件。
+
+解释：
+Scala 运行在 JVM 上，需要 JDK 提供运行时环境。
+</code></pre>
+<p><strong>易错点 3：main 方法写在 class 里而不是 object 里</strong></p>
+<pre><code class="language-text">错误示例：
+class Main {
+  def main(args: Array[String]): Unit = { ... }
+}
+
+正确写法：
+object Main {
+  def main(args: Array[String]): Unit = { ... }
+}
+
+解释：
+Scala 中程序的入口（main 方法）必须写在 object 中。
+</code></pre>
+<p><strong>易错点 4：声明变量不赋初始值</strong></p>
+<pre><code class="language-text">错误示例：
+var x       // 报错！
+val y       // 报错！
+
+正确写法：
+var x = 0
+val y = &quot;hello&quot;
+
+解释：
+Scala 要求变量在声明时必须同时初始化（赋予初始值）。
+这和某些语言（如 C）可以先声明后赋值的规则不同。
+</code></pre>
+<p><strong>易错点 5：把 Java 的 <code>String[]</code> 写在 Scala 代码中</strong></p>
+<pre><code class="language-text">错误示例：
+def main(args: String[]): Unit = { ... }   // Java 风格！
+
+正确写法：
+def main(args: Array[String]): Unit = { ... }  // Scala 风格
+
+解释：
+Scala 的数组类型写作 Array[String]，不是 String[]。
+Scala 用方括号 [] 表示泛型参数，而不是 Java 的尖括号 &lt;&gt;。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<p><strong>题目 1</strong>：在 Scala 中，定义一个不可重新赋值的整数变量，正确的写法是？</p>
+<p>A. <code>val age = 18</code>
+B. <code>var age: 18</code>
+C. <code>int age = 18</code>
+D. <code>age val = 18</code></p>
+<p><strong>正确答案</strong>：A</p>
+<p><strong>解析</strong>：Scala 中 <code>val</code> 定义不可变变量，类型可以省略（由编译器从值 18 推断为 Int）。B 语法错误（类型和值写反了），C 是 Java 语法，D 完全错误。</p>
+<hr>
+<p><strong>题目 2</strong>：下面关于 Scala 程序入口方法的说法，正确的是？</p>
+<p>A. main 方法必须写在 class 中
+B. main 方法使用 <code>def</code> 关键字定义
+C. main 方法的参数类型写作 <code>String[]</code>
+D. main 方法前面必须有 <code>public static</code> 修饰符</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：Scala 的 main 方法用 <code>def</code> 定义，写在 <code>object</code> 中。参数类型是 <code>Array[String]</code>（不是 <code>String[]</code>），不需要 <code>public static</code> 修饰。</p>
+<hr>
+<p><strong>题目 3</strong>：下面的代码运行后会输出什么？</p>
+<pre><code class="language-scala">var x = 5
+x = 10
+println(x)
+</code></pre>
+<p>A. 5
+B. 10
+C. 编译错误
+D. 15</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：<code>var x = 5</code> 定义了可变变量，<code>x = 10</code> 将其重新赋值为 10，所以输出 10。</p>
+<hr>
+<p><strong>题目 4</strong>：下面的代码哪里会报错？</p>
+<pre><code class="language-scala">val name = &quot;Tom&quot;   // ①
+name = &quot;Jerry&quot;     // ②
+println(name)      // ③
+</code></pre>
+<p>A. ①
+B. ②
+C. ③
+D. 都不会报错</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：<code>val</code> 定义的常量不能被重新赋值，所以第 ② 行会报错。</p>
+<hr>
+<p><strong>题目 5</strong>：Scala 中，<code>Unit</code> 类型的作用最接近 Java 中的哪个关键字？</p>
+<p>A. int
+B. String
+C. void
+D. null</p>
+<p><strong>正确答案</strong>：C</p>
+<p><strong>解析</strong>：<code>Unit</code> 表示&quot;无返回值&quot;，是 Scala 中对应 Java <code>void</code> 的类型。<code>Unit</code> 只有一个实例，写作 <code>()</code>。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. var    —— 定义可重新赋值的变量
+2. val    —— 定义不可重新赋值的常量
+3. def    —— 定义方法或函数
+4. object —— 定义单例对象（程序入口的容器）
+5. class  —— 定义类（对象的模板）
+6. new    —— 创建类的实例（对象）
+7. println —— 输出一行内容并换行
+8. Unit   —— 表示&quot;无返回值&quot;的类型，类似 Java 的 void
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">1. 打开 Eclipse，点击 File → New → Scala Project，输入项目名称。
+2. 在项目 SRC 文件夹上右键 → New → Scala class，创建第一个类。
+3. 创建另一个文件，选择 Scala object，作为程序入口。
+4. 在 object 中定义 main 方法：def main(args: Array[String]): Unit。
+5. 在 main 方法中用 var/val 定义变量，编写代码逻辑。
+6. 右键点击代码 → Run As → Scala Application，运行程序。
+7. 在 Console 窗口中查看运行结果。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<p><strong>练习 1</strong>：编写一个 Scala 程序，定义两个整数变量 a 和 b（用 val），输出它们的和与差。</p>
+<p><strong>考查知识点</strong>：val、Int、加减运算、println</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object Calc {
+  def main(args: Array[String]): Unit = {
+    val a = 100
+    val b = 30
+    println(&quot;和：&quot; + (a + b))
+    println(&quot;差：&quot; + (a - b))
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：用 <code>val</code> 定义两个整数，用 <code>+</code> 和 <code>-</code> 做运算，用 <code>println</code> 输出结果。</p>
+<hr>
+<p><strong>练习 2</strong>：定义一个类 <code>Book</code>，包含书名和价格两个属性。在 main 方法中创建 Book 对象，输出它的属性。</p>
+<p><strong>考查知识点</strong>：class、属性、new、对象</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">class Book {
+  val title = &quot;Scala入门&quot;
+  val price = 59.9
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val book = new Book
+    println(book.title)
+    println(book.price)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：先定义 class 并声明属性，再用 <code>new</code> 创建对象，通过点号访问属性。</p>
+<hr>
+<p><strong>练习 3</strong>：用 var 定义一个计数器变量，输出初始值，然后加 1，输出新值。</p>
+<p><strong>考查知识点</strong>：var、变量修改</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object Counter {
+  def main(args: Array[String]): Unit = {
+    var count = 0
+    println(&quot;初始值：&quot; + count)
+    count = count + 1
+    println(&quot;加 1 后：&quot; + count)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：用 <code>var</code> 声明可变的计数器，初次赋值后用 <code>count = count + 1</code> 修改它。</p>
+<hr>
+<p><strong>练习 4</strong>：改正下面代码中的错误：</p>
+<pre><code class="language-scala">class Main {
+  def main(args: String[]): void = {
+    val x
+    x = 10
+    println(x)
+  }
+}
+</code></pre>
+<p><strong>考查知识点</strong>：object 入口、Array 语法、val 初始化</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    val x = 10
+    println(x)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：</p>
+<ol>
+<li>main 方法应定义在 object 中，不是 class。</li>
+<li><code>String[]</code> 应改为 <code>Array[String]</code>。</li>
+<li><code>void</code> 应改为 <code>Unit</code>。</li>
+<li><code>val x</code> 必须同时初始化，不能先声明后赋值。</li>
+</ol>
+<hr>
+<p><strong>练习 5</strong>：用 Scala 写一个程序，输出你的名字和所在班级。</p>
+<p><strong>考查知识点</strong>：val、println、字符串</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object StudentInfo {
+  def main(args: Array[String]): Unit = {
+    val name = &quot;张三&quot;
+    val className = &quot;软件工程2024级&quot;
+    println(&quot;姓名：&quot; + name)
+    println(&quot;班级：&quot; + className)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：用 <code>val</code> 定义字符串变量，用 <code>+</code> 拼接字符串，用 <code>println</code> 输出。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 第一课——环境搭建与入门程序
+├── 课程概述
+│   ├── Scala 是什么
+│   ├── Scala 与 Java 的关系
+│   └── Scala 在大数据领域的应用（Spark）
+├── 开发环境搭建
+│   ├── 安装 JDK（先装）
+│   ├── 安装 Scala IDE/Eclipse 插件（后装）
+│   ├── 安装顺序的重要性
+│   └── 虚拟机隔离建议
+├── Eclipse 中的 Scala 项目结构
+│   ├── Scala Project（项目）
+│   ├── Package（包）
+│   ├── Scala class（类）
+│   ├── Scala trait（特质）
+│   └── Scala object（单例对象）
+├── 变量与常量
+│   ├── var（可重新赋值）
+│   ├── val（不可重新赋值）
+│   ├── 类型推断（可省略类型声明）
+│   └── 分号可选
+├── 程序结构
+│   ├── def main(args: Array[String]): Unit（入口方法）
+│   ├── new（创建对象）
+│   └── 点号访问属性和方法
+└── 常见错误
+    ├── 把 val 当 var 用
+    ├── 安装顺序颠倒
+    ├── main 方法写在 class 里
+    └── 变量只声明不初始化
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>scala-01-env-var-val</code></li>
+<li><strong>建议课程标题</strong>：Scala 入门——开发环境搭建、第一个程序、变量与常量</li>
+<li><strong>建议章节</strong>：Scala 开发环境与运行方式</li>
+<li><strong>建议标签</strong>：环境搭建、Eclipse、var、val、object、def、main</li>
+<li><strong>适合放入 summary 的内容</strong>：课堂摘要（6 条）</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：6 个知识点的标题和简短解释</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：3 个代码示例（第一个程序、创建对象、var/val 对比）</li>
+<li><strong>适合放入 quiz 的内容</strong>：5 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：8 组概念-解释匹配</li>
+<li><strong>适合放入 flow 的内容</strong>：7 步创建和运行 Scala 程序的流程</li>
+<li><strong>适合放入 exercises 的内容</strong>：5 道课后练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：课后总结（5 条）</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li><p>本节课的核心是帮你在 Eclipse 中搭建好 Scala 开发环境，并写出第一个可以运行的 Scala 程序。<strong>先装 JDK，再装 Scala 插件</strong>这个顺序要记住。</p>
+</li>
+<li><p>学习 Scala 时要特别注意 <code>var</code> 和 <code>val</code> 的区别——这是每节课都会用到的基础。建议平时能用 <code>val</code> 就尽量用 <code>val</code>，培养不可变性思维。</p>
+</li>
+<li><p>通过本节课，你应该能够在 Eclipse 中创建 Scala 项目、编写包含 main 方法的 object、定义 var/val 变量，并用 println 输出结果。</p>
+</li>
+<li><p><code>class</code>、<code>object</code> 和 <code>trait</code> 这三个概念会在后面的课程（构造器、伴生对象、特质）中反复出现和深入讲解，现在先记住它们的名字和基本作用即可。</p>
+</li>
+<li><p>课后建议多练习：反复创建项目、写 main 方法、实验 var 和 val 的区别。编程是练出来的——同一个代码练两三遍还会出错很正常，坚持练习才能熟练。</p>
+</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><span class="article-pager-link disabled" aria-hidden="true"></span><a class="article-pager-link next" rel="next" href="scala-2026-03-03-part-2.html"><span>下一篇</span><strong>Scala基础-类型推导与函数</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

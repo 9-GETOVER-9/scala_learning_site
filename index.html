@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scala 课程交互式学习网站</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="top-nav">
+      <a class="brand" href="index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="#lessons">课程</a>
+        <a href="summaries.html">课程总结</a>
+        <a href="#games">Java练习</a>
+        <a href="#guide">使用说明</a>
+      </div>
+    </nav>
+
+    <section class="hero-content">
+      <p class="eyebrow">GitHub Pages 静态学习站</p>
+      <h1>Scala 课程交互式学习网站</h1>
+      <p class="hero-text">
+        通过课堂摘要、知识点拆解、代码示例、小测验、拖拽匹配和流程动画，帮助同学更轻松地复习 Scala 课程。
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#lessons">开始学习</a>
+        <a class="btn ghost" href="summaries.html">阅读课程总结</a>
+        <a class="btn ghost" href="#games">查看 Java 互动练习</a>
+      </div>
+    </section>
+  </header>
+
+  <main class="container">
+    <section class="panel stats-panel" aria-label="网站概览">
+      <div class="stat-card">
+        <strong id="lessonCount">0</strong>
+        <span>课程页面</span>
+      </div>
+      <div class="stat-card">
+        <strong id="chapterCount">0</strong>
+        <span>章节分类</span>
+      </div>
+      <div class="stat-card">
+        <strong id="tagCount">0</strong>
+        <span>知识点标签</span>
+      </div>
+      <div class="stat-card">
+        <strong id="gameCount">0</strong>
+        <span>互动练习</span>
+      </div>
+    </section>
+
+    <section class="section" id="lessons">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Course Index</p>
+          <h2>课程搜索与筛选</h2>
+        </div>
+        <button class="btn small" id="resetFilters">重置筛选</button>
+      </div>
+
+      <div class="filters panel">
+        <label class="filter-item">
+          <span>关键词搜索</span>
+          <input id="searchInput" type="search" placeholder="输入 var、def、元组、Java 对比……" />
+        </label>
+
+        <label class="filter-item">
+          <span>章节</span>
+          <select id="chapterFilter">
+            <option value="all">全部章节</option>
+          </select>
+        </label>
+
+        <label class="filter-item">
+          <span>上课日期</span>
+          <select id="dateFilter">
+            <option value="all">全部日期</option>
+          </select>
+        </label>
+
+        <label class="filter-item">
+          <span>知识点</span>
+          <select id="tagFilter">
+            <option value="all">全部知识点</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="result-info" id="resultInfo">正在加载课程……</p>
+      <div class="lesson-grid" id="lessonGrid"></div>
+    </section>
+
+    <section class="section summary-feature" id="summaries">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Summary Library</p>
+          <h2>课程总结资料馆</h2>
+          <p class="muted">从课堂内容中提炼出的完整复习资料，适合按课程顺序系统回顾。</p>
+        </div>
+        <a class="btn primary" href="summaries.html">浏览全部 40 篇</a>
+      </div>
+      <div class="summary-feature-grid">
+        <article class="summary-feature-card">
+          <span class="summary-count">21 篇</span>
+          <h3>Scala 课程总结</h3>
+          <p>覆盖基础语法、表达式、函数、数组、集合、类、继承、模式匹配与 Trait。</p>
+          <a href="summaries.html?language=Scala">查看 Scala 总结 →</a>
+        </article>
+        <article class="summary-feature-card">
+          <span class="summary-count">19 篇</span>
+          <h3>Java 课程总结</h3>
+          <p>覆盖基础语法、数组、流程控制、面向对象、继承、抽象类与接口。</p>
+          <a href="summaries.html?language=Java">查看 Java 总结 →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="games">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Practice Zone</p>
+          <h2>Java 互动练习专区</h2>
+        </div>
+      </div>
+      <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+    <section class="section panel guide" id="guide">
+      <p class="eyebrow">Guide</p>
+      <h2>使用说明</h2>
+      <div class="guide-grid">
+        <article>
+          <h3>1. 先筛选</h3>
+          <p>可以按照章节、日期、知识点或关键词查找课程。</p>
+        </article>
+        <article>
+          <h3>2. 再学习</h3>
+          <p>进入课程页面后，先看摘要，再看知识点和代码示例。</p>
+        </article>
+        <article>
+          <h3>3. 做互动</h3>
+          <p>完成小测验、拖拽匹配、流程动画和练习题，不保存成绩，仅用于自测。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scala 课程交互式学习网站 · 静态部署 · 可持续更新</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

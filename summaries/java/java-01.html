@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java intro course overview 课程标题 ：Java 编程课程介绍与基础入门 所属章节 ：Java 基础 上课日期 ：2025 08 25 知识点标签 ： Java概述 开发环境 项目创建 类与对象 main方法 输出语句 修" />
+  <title>Java编程课程介绍与基础入门 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-intro-course-overview">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 01 课</p>
+      <h1>Java编程课程介绍与基础入门</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Java编程课程介绍与基础入门</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-intro-course-overview</code></li>
+<li><strong>课程标题</strong>：Java 编程课程介绍与基础入门</li>
+<li><strong>所属章节</strong>：Java 基础</li>
+<li><strong>上课日期</strong>：2025-08-25</li>
+<li><strong>知识点标签</strong>：<code>Java概述</code> <code>开发环境</code> <code>项目创建</code> <code>类与对象</code> <code>main方法</code> <code>输出语句</code> <code>修饰符</code> <code>语法公式</code></li>
+<li><strong>难度等级</strong>：入门</li>
+<li><strong>适合对象</strong>：零基础、刚刚接触 Java 的大二学生</li>
+<li><strong>本节课一句话概括</strong>：本节课是 Java 课程的开学第一课，介绍课程总体要求、开发环境搭建、Java 项目创建流程，以及最基础的 Java 程序结构（类、main 方法、输出语句）。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先介绍了 Java 课程的整体安排、学习要求（记笔记、带教材、实验报告格式等）。
+2. 课堂中重点说明了 Java 开发环境的启动方式（通过批处理文件，无需手动配置环境变量）和项目创建流程。
+3. 老师通过&quot;水壶是公有的，水杯是私有的&quot;等生活类比，帮助理解 public、private、protected、default 四种访问修饰符。
+4. 本节课还强调了 main 方法的固定写法（public static void main(String[] args)），要求每个同学必须背下来。
+5. 最后通过 Hello World 程序讲解 Java 程序的基本结构：类、main 方法、输出语句，以及创建对象的基本语法公式 `类名 对象名 = new 类名()`。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 了解 Java 语言的特点（简单、跨平台、面向对象）和应用领域（企业应用开发）。
+2. 能够独立在 IDE 中创建 Java 项目（Java SE 项目），并正确创建 Java 类。
+3. 理解 public class 的含义，以及类作为 Java 程序基本单位的概念。
+4. 能够默写 main 方法的完整写法：public static void main(String[] args)。
+5. 能够使用 System.out.println() 输出内容到控制台。
+6. 理解类、对象、属性、方法等面向对象的基本概念。
+7. 了解四种访问修饰符（public、private、protected、default）的基本含义。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：Java 语言的特点与地位</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 是一门面向对象的编程语言，广泛应用于企业级应用、Android 开发、大数据处理等领域。它有三个最核心的特点：<strong>简单方便</strong>（相比 C++ 更易上手）、<strong>跨平台</strong>（编写一次，到处运行）、<strong>面向对象</strong>（以类和对象为基本单位）。</p>
+<h5>为什么要学它？</h5>
+<p>Java 是编程语言中&quot;基础中的基础&quot;。学好 Java 之后，无论是后续学习 Spark（大数据框架）、Scala（Spark 的基础语言），还是理解其他面向对象语言，都会事半功倍。在当前的就业市场上，Java 开发岗位仍占很大比例。</p>
+<h5>基本语法</h5>
+<p>（本节为概述，暂无具体语法）</p>
+<h5>课堂中的理解方式</h5>
+<p>老师强调 Java 的地位时说：&quot;开发企业应用 APP 的&quot;主要就是 Java。Java 的跨平台性意味着&quot;开发出来的一个 APP，在什么地方都可以使用&quot;。老师还将 Java 和 C++ 做了对比：C++ 更偏向游戏开发，难度更大；Java 相对简单，适合企业应用开发。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 误以为 Java 和 Python 的运行方式完全一样——Java 需要先编译后运行。
+2. 不理解&quot;跨平台&quot;的含义，以为是一套代码直接在任何设备运行。
+</code></pre>
+<h5>正确示例</h5>
+<p>暂时没有代码示例，本节为概念介绍。</p>
+<h5>示例解释</h5>
+<p>（本节为概述性内容，后续课程会展开。）</p>
+<hr>
+<h4>知识点 2：创建 Java 项目与类</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 IDE（集成开发环境）中创建一个 Java SE 项目，并在项目的 SRC 文件夹下创建 Java 类。Java 中所有的代码都必须写在类（class）里面。</p>
+<h5>为什么要学它？</h5>
+<p>这是学习 Java 第一个要掌握的实操技能。如果不学会创建项目和类，就无法编写和运行任何 Java 代码。</p>
+<h5>基本语法</h5>
+<p><strong>项目创建流程：</strong></p>
+<pre><code class="language-text">1. 打开 IDE → 点击 Create a Java Project
+2. 输入项目名称（不要有空格，可以用下划线代替）
+3. 运行环境选 Java SE 版本（课堂使用 JDK 11）
+4. 出现 &quot;module information&quot; 对话框时 → 点击 &quot;Don&#39;t Create&quot;
+5. 项目创建完成
+</code></pre>
+<p><strong>类创建流程：</strong></p>
+<pre><code class="language-text">1. 在 SRC 文件夹上右键 → New → Class
+2. 输入类名（如 Hello、Student）
+3. 勾选 &quot;public static void main(String[] args)&quot; 可自动生成 main 方法
+4. 点击完成
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师特别强调了几个关键点：</p>
+<ul>
+<li>项目名<strong>不能有空格</strong>，因为空格是&quot;可识别字符&quot;（分隔符），可以用<strong>下划线</strong>代替。</li>
+<li>SRC 文件夹是&quot;资源文件夹&quot;（Source Folder），所有 Java 源代码都放在这里。</li>
+<li>Java 中&quot;所有的内容都是以类为单位的&quot;，类是 Java 程序的最小组织单位。</li>
+<li>老师将类比喻为人的定义：&quot;一个人有 name、age、hair color 等属性，可以学习、唱歌、吃饭、跳舞等行为。这些属性加上行为就构成了一个 class。&quot;</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 项目名中包含空格，导致后续编译出问题。
+2. 创建项目时对 &quot;module information&quot; 对话框点了 &quot;Create&quot;，引入了不必要的模块配置。
+3. 不在 SRC 文件夹下创建类，而是在项目根目录直接创建，导致无法运行。
+4. 类名写成中文或包含特殊字符。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">// 在 SRC 文件夹下创建了一个名为 Hello 的类
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, World!&quot;);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. public class Hello —— 定义了一个公有的类，类名叫 Hello。类名必须和文件名完全一致（包括大小写）。
+2. public static void main(String[] args) —— main 方法，程序的入口。Java 程序从这里开始执行。
+3. System.out.println(&quot;Hello, World!&quot;); —— 在控制台输出一行文字。
+</code></pre>
+<hr>
+<h4>知识点 3：四种访问修饰符</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中，类、方法、变量前面都可以加访问修饰符来控制谁能访问它们。共有四种：<strong>public</strong>（公有）、<strong>private</strong>（私有）、<strong>protected</strong>（受保护）、<strong>default</strong>（默认，不写任何修饰符）。</p>
+<h5>为什么要学它？</h5>
+<p>访问修饰符是面向对象编程中&quot;封装&quot;的基础。控制访问权限可以保护数据安全，让代码更规范。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">public class MyClass { }        // 公有类
+private int age;                 // 私有变量
+protected void method() { }     // 受保护方法
+int count;                      // 默认（不写修饰符）
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用了非常生动的生活类比来解释：</p>
+<ul>
+<li><strong>public（公有）</strong>：就像寝室里的<strong>水壶或拖把</strong>，&quot;每一个人都可以使用的&quot;，谁都能用。</li>
+<li><strong>private（私有）</strong>：就像每个人的<strong>水杯</strong>，&quot;只有你个人可以使用的东西&quot;。</li>
+<li><strong>protected（受保护）</strong>：就像兄弟姐妹之间的财产，&quot;具有血缘关系的兄弟、姐妹共同使用的东西&quot;。你兄弟拿了你的钱不算偷，但室友拿就不行。</li>
+<li><strong>default（默认）</strong>：与 protected 类似但有区别（后期深入讲解），目前理解成&quot;什么都不写&quot;即可。</li>
+</ul>
+<p>老师的核心总结：&quot;编程是需要来源于实际的，解决生活问题&quot;。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 初期阶段不知道选哪个修饰符——课堂建议：目前所有类都写成 public 即可。
+2. 混淆 protected 和 private 的使用场景。
+3. 以为不写修饰符就是 private——实际上不写是 default（默认权限）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class Student {
+    public String name;      // 公有的，谁都能访问
+    private int age;         // 私有的，只有本类能访问
+    protected String grade;  // 受保护的，子类和同包能访问
+
+    public void study() {
+        System.out.println(name + &quot;正在学习&quot;);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. name 是 public 的，任何地方都可以直接访问和修改。
+2. age 是 private 的，只有 Student 类内部的方法才能访问 age。
+3. grade 是 protected 的，Student 的子类可以访问。
+4. study() 是 public 方法，外部可以调用。
+</code></pre>
+<hr>
+<h4>知识点 4：main 方法（主函数）</h4>
+<h5>这个知识点是什么？</h5>
+<p>main 方法是 Java 程序的<strong>入口</strong>。当运行一个 Java 程序时，JVM（Java 虚拟机）会首先找到 main 方法，然后从它的第一行开始执行。</p>
+<h5>为什么要学它？</h5>
+<p>没有 main 方法，Java 程序就无法启动运行。它是每个 Java 可执行程序必不可少的组成部分，必须牢牢记住。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">public static void main(String[] args) {
+    // 在这里写要执行的代码
+}
+</code></pre>
+<p><strong>main 方法的组成部分：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>内容</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修饰符</td>
+<td>public</td>
+<td>公有，JVM 必须能访问到</td>
+</tr>
+<tr>
+<td>静态</td>
+<td>static</td>
+<td>静态方法，无需创建对象就能调用</td>
+</tr>
+<tr>
+<td>返回值</td>
+<td>void</td>
+<td>没有返回值（返回空）</td>
+</tr>
+<tr>
+<td>方法名</td>
+<td>main</td>
+<td>固定名称，JVM 只认这个名字</td>
+</tr>
+<tr>
+<td>参数列表</td>
+<td>String[] args</td>
+<td>接收命令行参数，args 是 arguments 的缩写</td>
+</tr>
+</tbody></table>
+<h5>课堂中的理解方式</h5>
+<p>老师将 main 方法比喻为<strong>一扇门</strong>：&quot;你必须走这个门里面，它才能去做。我们有众多的 method，main 是入口——运行起来后，一定先找到 main 方法，然后才能去跑。&quot;</p>
+<p>老师还特别强调：&quot;这一行是需要大家默写下来的，一个字母都不能错。入口是写死的，就像公式一样。不管哪个 class，无论在什么地方，public static void main(String[] args) 是一定要有的。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把 main 写成 Main——Java 严格区分大小写，main 必须全小写。
+2. 把 String 写成 string（首字母没大写）。
+3. 把 args 写成 arg 或其他名字（虽然可以改名，但建议写 args）。
+4. 把方括号放在 args 后面写成 String args[]——虽然语法上可行，但 String[] args 更规范。
+5. 漏掉 static——少了 static，JVM 无法在不创建对象的情况下调用 main。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class Main {
+    public static void main(String[] args) {
+        System.out.println(&quot;程序开始运行&quot;);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 当运行 Main 类时，JVM 找到 public static void main(String[] args) 方法。
+2. 执行方法体中的 System.out.println(&quot;程序开始运行&quot;);。
+3. 控制台输出 &quot;程序开始运行&quot;。
+</code></pre>
+<hr>
+<h4>知识点 5：System.out.println 输出语句</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>System.out.println()</code> 是 Java 中最常用的<strong>输出语句</strong>，作用是在控制台打印指定的内容，并在末尾自动换行。</p>
+<h5>为什么要学它？</h5>
+<p>输出语句是程序和用户交互的最基本方式。在学习阶段，几乎所有代码的运行结果都通过它来查看。也是调试程序的重要手段。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">System.out.println(要输出的内容);
+System.out.print(要输出的内容);   // 不换行版本
+</code></pre>
+<p><strong>语法结构拆解：</strong></p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>System</td>
+<td>系统类，首字母 S 必须大写</td>
+</tr>
+<tr>
+<td>out</td>
+<td>System 类中的一个输出流对象</td>
+</tr>
+<tr>
+<td>println</td>
+<td>方法名，print line 的缩写，&quot;输出并换行&quot;</td>
+</tr>
+<tr>
+<td>() 中的内容</td>
+<td>要输出的参数</td>
+</tr>
+</tbody></table>
+<h5>课堂中的理解方式</h5>
+<p>老师特别强调了 <code>System</code> 中 <strong>S 必须大写</strong>：&quot;第一个字母首字母大写，后面是小写的。system 的 S 是大写。你们在写的时候，一定要写大写，不要写小写。有很多同学就写错了。&quot;</p>
+<p>对于 println 这个名字，老师拆解为：<strong>print（打印）+ ln（line，换行）</strong>。ln 代表 line，意思是输出完这一行后自动回车换行。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把 System 写成 system（首字母 S 没有大写）。
+2. 把 println 写成 printline 或 printLn（大小写或拼写错误）。
+3. 忘记写后面的括号 ()。
+4. 分号忘记写。
+5. 整个 System.out.println 太长，容易拼错——建议多敲几遍形成肌肉记忆。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, World!&quot;);   // 输出后换行
+        System.out.print(&quot;你好，&quot;);             // 输出后不换行
+        System.out.print(&quot;很高兴认识你。&quot;);      // 紧接上一行输出
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 第一行 println 输出 &quot;Hello, World!&quot; 并自动换行。
+2. 第二行 print 输出 &quot;你好，&quot; 但不换行，光标停留在同一行末尾。
+3. 第三行 print 紧接上行的光标位置输出 &quot;很高兴认识你。&quot;。
+4. 最终控制台显示两行：
+   Hello, World!
+   你好，很高兴认识你。
+</code></pre>
+<hr>
+<h4>知识点 6：类与对象的基本概念</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 是一门<strong>面向对象</strong>的语言。<strong>类（class）</strong> 是一个模板/图纸，描述某一类事物的共同特征。<strong>对象（object）</strong> 是根据类这个模板&quot;造&quot;出来的具体实例。</p>
+<h5>为什么要学它？</h5>
+<p>Java 的一切代码都写在类里面，一切数据都是对象。不理解类和对象，就无法理解 Java 的核心思想。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 定义类的语法
+public class 类名 {
+    // 属性（变量）：描述这个类&quot;有什么&quot;
+    // 方法（函数）：描述这个类&quot;能做什么&quot;
+}
+
+// 创建对象的语法
+类名 对象名 = new 类名();
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;人&quot;来比喻：</p>
+<ul>
+<li><strong>类</strong>：就像&quot;人&quot;的定义。所有人都有头发、眼睛、鼻子、嘴这些<strong>属性</strong>，也都会说话、走路、吃饭这些<strong>行为</strong>（方法）。类就是描述&quot;人应该有什么和能做什么&quot;的模板。</li>
+<li><strong>对象</strong>：具体到某一个真实的人（比如你、我、他），就是根据这个模板&quot;构造&quot;出来的对象。</li>
+</ul>
+<p>老师进一步解释了语法公式 <code>Student stu = new Student();</code>：</p>
+<ul>
+<li><code>Student</code> 是<strong>类名</strong>（类型）——就像 int 是整形的类型名</li>
+<li><code>stu</code> 是<strong>对象名</strong>——是你给这个对象起的名字（变量名）</li>
+<li><code>new</code> 是<strong>声明/创建</strong>的关键字——向内存申请空间来存放这个对象</li>
+<li><code>Student()</code> 是<strong>构造方法</strong>——负责初始化这个对象，决定对象&quot;带着什么东西来&quot;</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把类（class）和对象（object）混为一谈——类是模板，对象是具体实例。
+2. 创建对象时忘记写 new 关键字。
+3. 构造方法后面的括号 () 忘记写。
+4. 对象名和类名写成一样的——虽然语法上可能不报错，但会非常混乱。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">// 定义类（模板）
+public class Student {
+    String name;      // 属性：姓名
+    int age;          // 属性：年龄
+
+    public void study() {    // 方法：学习
+        System.out.println(name + &quot;正在学习&quot;);
+    }
+}
+
+// 在 main 方法中使用
+public class Main {
+    public static void main(String[] args) {
+        Student stu = new Student();   // 根据 Student 模板创建一个具体的对象
+        stu.name = &quot;张三&quot;;              // 给对象的属性赋值
+        stu.age = 18;
+        stu.study();                    // 调用对象的方法
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. class Student 定义了一个学生类，有 name 和 age 两个属性，以及 study 一个方法。
+2. new Student() 创建了一个具体的 Student 对象。
+3. stu.name = &quot;张三&quot; 给这个对象的 name 属性赋值为 &quot;张三&quot;。
+4. stu.study() 调用了这个对象的 study 方法。
+5. 注意：类定义和 main 方法写在两个不同的类中，这是常见做法。
+</code></pre>
+<hr>
+<h4>知识点 7：注释（单行注释和多行注释）</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>注释</strong>是写在代码中对程序员可见、但不会被 JVM 执行的说明文字。Java 有两种注释：<strong>单行注释</strong>（<code>//</code>）和<strong>多行注释</strong>（<code>/* */</code>）。</p>
+<h5>为什么要学它？</h5>
+<p>注释帮助自己和他人读懂代码。在团队协作中，清晰的注释是代码规范的重要组成部分。老师特别强调：&quot;你写的东西跟别人不一样，别人看不懂你的，说明有问题。&quot;</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 这是单行注释，从 // 到本行结束都是注释
+
+/*
+   这是多行注释
+   可以跨越多行
+   适合写较长的说明
+*/
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师简明扼要地指出：&quot;双斜线就是单行的，斜线星号就是多行的，大家了解一下就可以了。&quot;</p>
+<p>虽然没有展开讲，但老师从头到尾都在强调<strong>代码可读性</strong>的重要性——注释是实现可读性的关键工具之一。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 注释嵌套：多行注释里面不能嵌套另一个多行注释。
+2. 注释太多或太少——应该注释&quot;为什么这样做&quot;，而不是&quot;做了什么&quot;。
+3. 把代码注释掉后忘记删除，导致代码越来越乱。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class CommentDemo {
+    public static void main(String[] args) {
+        // 这是单行注释：输出一句话
+        System.out.println(&quot;Hello&quot;);
+
+        /*
+         * 这是多行注释
+         * 下面输出学生的名字和年龄
+         */
+        System.out.println(&quot;姓名：张三&quot;);
+        System.out.println(&quot;年龄：18&quot;);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 双斜线 // 后的文字在运行时被忽略，只给程序员看。
+2. /* 和 */ 之间的所有内容（包括多行）都会被忽略。
+3. 注释不影响程序的运行结果，控制台只输出三行文字。
+</code></pre>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>private</td>
+<td>public 是公有的，谁都能访问；private 是私有的，只有本类能访问</td>
+<td><code>public String name;</code> / <code>private int age;</code></td>
+</tr>
+<tr>
+<td>类（class）</td>
+<td>对象（object）</td>
+<td>类是模板/图纸；对象是根据模板造出来的具体实例</td>
+<td><code>Student</code> 是类，<code>new Student()</code> 创建的是对象</td>
+</tr>
+<tr>
+<td>方法头（header）</td>
+<td>方法体（body）</td>
+<td>方法头声明方法的名字和参数；方法体用 {} 包裹，写具体执行的代码</td>
+<td>方法头: <code>public static void main(String[] args)</code> / 方法体: <code>{ ... }</code></td>
+</tr>
+<tr>
+<td>System.out.println</td>
+<td>System.out.print</td>
+<td>println 输出后自动换行；print 不换行</td>
+<td>参见知识点 5 的代码示例</td>
+</tr>
+<tr>
+<td>//</td>
+<td>/* */</td>
+<td>// 是单行注释；/* */ 是多行注释</td>
+<td><code>// 单行</code> / <code>/* 多行 */</code></td>
+</tr>
+<tr>
+<td>属性</td>
+<td>方法</td>
+<td>属性描述对象&quot;有什么&quot;（名词）；方法描述对象&quot;能做什么&quot;（动词）</td>
+<td><code>String name;</code> 是属性 / <code>void study()</code> 是方法</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：第一个 Java 程序——Hello World</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">类定义、main 方法、输出语句
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class Hello {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, World!&quot;);
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">Hello, World!
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. public class Hello —— 定义了一个公有的类，类名叫 Hello。文件名必须是 Hello.java。
+2. public static void main(String[] args) —— Java 程序的入口方法，固定写法，必须牢牢记住。
+3. System.out.println(&quot;Hello, World!&quot;); —— 向控制台输出一行文字，括号里的内容就是要输出的内容。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- Hello 类的文件名必须是 Hello.java，类名和文件名必须完全一致（包括大小写）。
+- System 的 S 必须大写，println 全部用小写。
+- 每一句 Java 代码以分号 ; 结尾。
+</code></pre>
+<hr>
+<h4>示例 2：创建并使用一个简单的类</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">类与对象、属性、方法、创建对象
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">// 定义一个学生类
+public class Student {
+    String name;
+    int age;
+
+    public void introduce() {
+        System.out.println(&quot;我叫&quot; + name + &quot;，今年&quot; + age + &quot;岁。&quot;);
+    }
+}
+
+// 主程序
+public class Main {
+    public static void main(String[] args) {
+        // 根据 Student 模板创建一个具体的对象
+        Student stu = new Student();
+
+        // 给对象的属性赋值
+        stu.name = &quot;小明&quot;;
+        stu.age = 20;
+
+        // 调用对象的方法
+        stu.introduce();
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">我叫小明，今年20岁。
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. class Student 定义了一个学生模板——每个学生都有 name（姓名）和 age（年龄）。
+2. introduce() 是一个方法，负责自我介绍。
+3. Student stu = new Student(); 中 new 是关键，意思是向内存申请空间来存放这个学生对象。
+4. stu.name = &quot;小明&quot; 给这个学生的姓名赋值为 &quot;小明&quot;。
+5. stu.introduce() 调用了自我介绍的方法。
+6. 字符串用 + 号可以连接：&quot;我叫&quot; + name + &quot;，今年&quot; + age + &quot;岁。&quot; 拼接成一句话。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- new Student() 后面的括号 () 千万不要忘记。
+- 点号 . 表示&quot;的&quot;——stu.name 即&quot;stu 的 name&quot;。
+- 字符串拼接用 + 号。
+</code></pre>
+<hr>
+<h4>示例 3：使用不同访问修饰符</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">访问修饰符（public、private）
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class Person {
+    public String name;    // 公有的，外部可以直接访问
+    private int age;       // 私有的，外部不能直接访问
+
+    // 通过 public 方法访问 private 属性
+    public void setAge(int a) {
+        age = a;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void show() {
+        System.out.println(&quot;姓名：&quot; + name + &quot;，年龄：&quot; + age);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p = new Person();
+        p.name = &quot;小红&quot;;         // ✅ public 属性可以直接赋值
+        // p.age = 18;           // ❌ private 属性不能直接访问
+        p.setAge(18);            // ✅ 通过 public 方法间接设置年龄
+
+        p.show();                // 输出：姓名：小红，年龄：18
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">姓名：小红，年龄：18
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. name 是 public 的，所以可以在 main 方法中直接 p.name = &quot;小红&quot; 赋值。
+2. age 是 private 的，如果直接写 p.age = 18 会报错。
+3. 为了访问 private 的 age，提供了 public 的 setAge() 和 getAge() 方法——这是 Java 中标准的封装做法。
+4. p.show() 可以正常访问 age，因为 show() 是 Person 类自己的方法。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 刚开始学的时候，所有属性可以先写成 public，让代码跑通再说。
+- 封装（把属性设为 private + 提供 public 方法）是后面会深入讲的内容，现在先了解概念即可。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：寝室用品——理解访问修饰符</h4>
+<ul>
+<li><strong>案例名称</strong>：寝室物品的访问权限</li>
+<li><strong>对应知识点</strong>：public、private、protected 访问修饰符</li>
+<li><strong>案例背景</strong>：老师用寝室场景帮助理解不同的访问权限。</li>
+<li><strong>解决思路</strong>：<ul>
+<li><strong>public（公有）</strong>= 寝室的水壶/拖把 → 谁都可以用。</li>
+<li><strong>private（私有）</strong>= 自己的水杯 → 只有自己能用。</li>
+<li><strong>protected（受保护）</strong>= 兄弟姐妹的财产 → 有&quot;血缘关系&quot;（继承关系）的人可以用。</li>
+<li><strong>default（默认）</strong>= 和 protected 类似但有细微区别 → 以后详讲。</li>
+</ul>
+</li>
+<li><strong>Java 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-java">public class Dorm {
+    public String kettle = &quot;水壶&quot;;    // 公用的
+    private String cup = &quot;水杯&quot;;      // 私人的
+    protected String money = &quot;零花钱&quot;; // 兄弟姐妹可以拿
+
+    public void useKettle() {
+        System.out.println(&quot;谁都可以用&quot; + kettle);
+    }
+
+    private void useCup() {
+        System.out.println(&quot;只有自己能用&quot; + cup);
+    }
+}
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：帮助初学者用生活场景理解抽象的程序设计概念。核心思想是&quot;编程来源于实际，解决生活问题&quot;。</li>
+</ul>
+<h4>案例 2：点名册——理解库（Library）的作用</h4>
+<ul>
+<li><strong>案例名称</strong>：老师手中的点名册</li>
+<li><strong>对应知识点</strong>：Java 类库、识别机制</li>
+<li><strong>案例背景</strong>：老师解释为什么我们写的代码能被 Java 识别和执行。</li>
+<li><strong>解决思路</strong>：老师手中有&quot;点名册&quot;（library），就能认识每一位同学（识别我们写的代码）。如果没有点名册，老师站在教室里谁也不认识。同样，Java 的类库中已经定义了 System、String、Integer 等常用类，所以当我们写 System.out.println 时 Java 能识别并执行。</li>
+<li><strong>这个案例帮助理解什么</strong>：帮助理解 Java 类库（library/JAR 包）的作用——它就像一本&quot;花名册&quot;，包含了所有预定义好的类的信息。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：System 的 S 没有大写
+错误示例：
+system.out.println(&quot;Hello&quot;);
+
+正确写法：
+System.out.println(&quot;Hello&quot;);
+
+解释：
+System 是 Java 中的一个类名，类名首字母惯例大写。写成小写 system 会导致编译报错。
+
+
+易错点 2：项目名中包含空格
+错误示例：
+项目名: Hello World
+
+正确写法：
+项目名: Hello_World 或 HelloWorld
+
+解释：
+Java 项目名中不能包含空格。可以用下划线 _ 连接，或者直接用驼峰命名法（如 HelloWorld）。
+
+
+易错点 3：忘记 main 方法中的 static
+错误示例：
+public void main(String[] args) { }
+
+正确写法：
+public static void main(String[] args) { }
+
+解释：
+static 表示 main 方法是静态方法，JVM 不需要创建对象就能直接调用它。少了 static，程序会找不到入口。
+
+
+易错点 4：创建对象时忘记写 new
+错误示例：
+Student stu = Student();
+
+正确写法：
+Student stu = new Student();
+
+解释：
+new 关键字用来向内存申请空间。没有 new，JVM 不会为新对象分配内存。
+
+
+易错点 5：把 println 写成 printline
+错误示例：
+System.out.printline(&quot;Hello&quot;);
+
+正确写法：
+System.out.println(&quot;Hello&quot;);
+
+解释：
+println 是 print + line 的缩写，但不是 printline。ln 代表 line（换行），正确拼写是 println。
+
+
+易错点 6：类名和文件名不一致
+错误示例：
+文件名为 Hello.java，但类名写的是 public class hello { }
+
+正确写法：
+文件名为 Hello.java，类名写 public class Hello { }
+
+解释：
+Java 严格区分大小写。public 类的类名必须和文件名完全一致（包括大小写）。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：以下哪一个是 Java 中正确的 main 方法写法？
+
+A. public void main(String[] args) { }
+B. public static void main(String[] args) { }
+C. public static void Main(String[] args) { }
+D. public static void main(string args) { }
+
+正确答案：B
+
+解析：
+A 缺少了 static，JVM 无法直接调用。
+C 中 Main 首字母大写，Java 严格区分大小写，main 必须小写。
+D 中 String 首字母没有大写，且参数类型应该是 String[] 而不是 string。
+
+
+题目 2：以下输出语句中，写法正确的是？
+
+A. system.out.println(&quot;Hello&quot;);
+B. System.out.Print(&quot;Hello&quot;);
+C. System.out.println(&quot;Hello&quot;);
+D. system.Out.println(&quot;Hello&quot;);
+
+正确答案：C
+
+解析：
+A 中 System 的 S 没有大写；B 中 Print 的 P 没有小写（应该是 print 或 println）；D 中 Out 的 O 大写错误。
+
+
+题目 3：关于类（class）和对象（object），以下说法正确的是？
+
+A. 类和对象是同一个概念
+B. 类是模板，对象是根据模板创建的具体实例
+C. 对象是模板，类是根据模板创建的具体实例
+D. 类可以没有对象，对象也可以没有类
+
+正确答案：B
+
+解析：
+类是抽象的模板/图纸，对象是具体的实例。比如&quot;学生&quot;是一个类，&quot;张三&quot;是一个对象。必须通过类来创建对象（new）。
+
+
+题目 4：创建 Java 项目时，项目名称的命名规范是什么？
+
+A. 可以有空格
+B. 不能有空格，可以用下划线代替
+C. 必须包含中文
+D. 必须以数字开头
+
+正确答案：B
+
+解析：
+项目名中间不能有空格（空格会被当作分隔符），可以用下划线 _ 来间隔单词，或者使用驼峰命名法（如 HelloWorld）。
+
+
+题目 5：以下关于 private 修饰符的描述，正确的是？
+
+A. 被 private 修饰的内容，任何地方都可以访问
+B. 被 private 修饰的内容，只有本类内部可以访问
+C. 被 private 修饰的内容，子类可以访问
+D. Java 中没有 private 修饰符
+
+正确答案：B
+
+解析：
+private 是&quot;私有的&quot;，只有本类内部的方法才能访问。外部类（包括子类）不能直接访问 private 成员。
+
+
+题目 6：以下创建对象的代码，哪一个是正确的？
+
+A. Student stu = Student();
+B. Student stu = new Student();
+C. new Student stu = Student();
+D. Student stu = new Student;
+
+正确答案：B
+
+解析：
+正确的语法是：类名 对象名 = new 类名();  其中 new 关键字和后面的括号 () 都不可缺少。
+
+
+题目 7：main 方法中的参数 String[] args 的作用是什么？
+
+A. 没有实际作用，只是语法要求
+B. 用来接收命令行参数
+C. 用来定义输出的内容
+D. 用来设置程序的运行环境
+
+正确答案：B
+
+解析：
+String[] args（arguments 的缩写）用于接收运行程序时在命令行中传入的参数。虽然课堂上没深入讲，但这个参数是有实际用途的。初期记住它是固定写法即可。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. Java —— 面向对象的编程语言，应用广泛的企业级开发语言
+2. class —— 类，Java 程序的基本单位，所有代码都写在类里面
+3. public —— 公有的，表示所有人都可以访问
+4. private —— 私有的，表示只有本类内部可以访问
+5. main 方法 —— Java 程序的入口方法，程序从这里开始执行
+6. System.out.println —— 向控制台输出一行内容并自动换行
+7. String[] args —— main 方法的参数，用于接收命令行参数
+8. new —— 关键字，用来创建对象并分配内存空间
+9. SRC —— 资源文件夹，存放 Java 源代码
+10. void —— 表示方法没有返回值
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">Java 程序从编写到运行的流程：
+
+1. 在 IDE 中创建 Java 项目（选择 Java SE，项目名不含空格）。
+2. 在 SRC 文件夹下创建一个 Java 类（类名和文件名保持一致）。
+3. 在类中编写 main 方法（public static void main(String[] args)），这是程序的入口。
+4. 在 main 方法的方法体 { } 中编写要执行的代码。
+5. 点击运行按钮（或右键 Run As → Java Application）。
+6. JVM 找到 main 方法，从第一行代码开始逐行执行。
+7. 如果代码中有 System.out.println 语句，就在控制台输出对应的内容。
+8. 程序执行完毕后自动结束。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习 1：编写一个 Java 程序，在控制台输出你的名字和年龄。
+
+考查知识点：
+类定义、main 方法、输出语句
+
+参考答案：
+
+public class MyInfo {
+    public static void main(String[] args) {
+        System.out.println(&quot;姓名：张三&quot;);
+        System.out.println(&quot;年龄：20&quot;);
+    }
+}
+
+解题思路：
+1. 定义一个类，类名自定（如 MyInfo），文件名要和类名一致。
+2. 在类中写 main 方法（固定格式）。
+3. 使用 System.out.println 输出两行信息。
+
+
+练习 2：找出以下代码中的 3 处错误。
+
+public class test {
+    public static void main(String[] args) {
+        system.out.println(&quot;Hello&quot;)
+    }
+}
+
+考查知识点：
+类名规范、System 大小写、分号
+
+参考答案：
+错误1：文件名应该是 test.java（如果类名是 test），但建议类名首字母大写为 Test。
+错误2：system 应该是 System（S 必须大写）。
+错误3：println(&quot;Hello&quot;) 后面缺少分号 ;。
+
+解题思路：
+- Java 严格区分大小写，System 的 S 必须大写。
+- 每条语句以分号结尾。
+- 类名建议首字母大写（虽然小写也能运行，但不规范）。
+
+
+练习 3：创建一个名为 Dog 的类，包含一个叫 name 的属性（public）和一个叫 bark 的方法（输出 &quot;汪汪&quot;）。然后在 main 方法中创建一个 Dog 对象并调用 bark 方法。
+
+考查知识点：
+类定义、属性、方法、创建对象、方法调用
+
+参考答案：
+
+public class Dog {
+    public String name;
+
+    public void bark() {
+        System.out.println(name + &quot;说：汪汪！&quot;);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Dog myDog = new Dog();   // 创建 Dog 对象
+        myDog.name = &quot;旺财&quot;;      // 给属性赋值
+        myDog.bark();             // 调用方法
+    }
+}
+
+解题思路：
+1. 先定义 Dog 类，包含属性和方法。
+2. 在 Main 类的 main 方法中用 new 创建 Dog 对象。
+3. 通过 对象名.属性名 给 name 赋值。
+4. 通过 对象名.方法名() 调用 bark 方法。
+
+
+练习 4：编写程序，分别使用 println 和 print 输出内容，观察它们的区别。
+
+考查知识点：
+println 和 print 的区别
+
+参考答案：
+
+public class PrintTest {
+    public static void main(String[] args) {
+        System.out.print(&quot;第一句，&quot;);
+        System.out.print(&quot;不换行。&quot;);
+        System.out.println(&quot;第二句，会换行。&quot;);
+        System.out.println(&quot;第三句，也会换行。&quot;);
+    }
+}
+
+运行结果：
+第一句，不换行。第二句，会换行。
+第三句，也会换行。
+
+解题思路：
+print 输出后光标还在同一行，下一次输出会紧接着当前位置继续。
+println 输出后会自动换行，下一次输出从下一行开始。
+
+
+练习 5：请将以下信息用自己的话整理成笔记：Java 程序的基本结构包含哪些组成部分？
+
+考查知识点：
+对 Java 程序整体结构的理解
+
+参考答案：
+Java 程序的基本结构包括：
+1. 项目（Project）—— 一个项目可以包含多个类。
+2. 包/文件夹（SRC）—— 存放源代码的地方。
+3. 类（class）—— Java 程序的基本单位，所有代码必须写在类里面。使用 public class 类名 { } 定义。
+4. main 方法 —— 程序的入口，固定格式：public static void main(String[] args) { }。
+5. 语句 —— main 方法中的每一行执行代码，以分号结尾。
+6. 注释 —— 用 // 或 /* */ 写的说明文字，不会被执行。
+
+解题思路：
+用自己的话总结课堂内容，这样更容易理解和记忆。这也是老师倡导的学习方法。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Java 编程课程介绍与基础入门
+├── 课程介绍
+│   ├── 课程要求（带教材、记笔记、手写代码）
+│   ├── 实验课要求（A4 纸、代码手写、盲敲 100 字母/分钟）
+│   └── 学习工具（IDE 环境、JDK 11、批处理启动）
+├── Java 语言概述
+│   ├── Java 特点（简单、跨平台、面向对象）
+│   ├── Java 地位（企业应用开发主流语言）
+│   └── Java 平台（Java SE / EE / ME）
+├── 项目创建与类
+│   ├── 创建项目（项目名不能有空格）
+│   ├── SRC 文件夹（存放源代码）
+│   └── 创建类（New → Class）
+├── Java 程序基本结构
+│   ├── 类定义（public class 类名）
+│   ├── main 方法（程序入口，固定写法）
+│   │   ├── public（公有）
+│   │   ├── static（静态）
+│   │   ├── void（无返回值）
+│   │   ├── main（方法名）
+│   │   └── String[] args（参数）
+│   ├── 方法头（header）+ 方法体（body）
+│   └── 输出语句（System.out.println）
+├── 访问修饰符
+│   ├── public（公有）
+│   ├── private（私有）
+│   ├── protected（受保护）
+│   └── default（默认）
+├── 类与对象基础
+│   ├── 类 = 模板（属性 + 方法）
+│   ├── 对象 = 具体实例
+│   ├── 创建对象语法：类名 对象名 = new 类名()
+│   └── 构造方法
+├── 注释
+│   ├── 单行注释 //
+│   └── 多行注释 /* */
+└── 学习方法建议
+    ├── 记笔记（看目录回忆笔记）
+    ├── 盲敲键盘（目标 100+ 字母/分钟）
+    ├── 读懂别人的代码
+    └── 多写多练（输入是编程的基础）
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>java-intro-course-overview</code></li>
+<li><strong>建议课程标题</strong>：Java 编程课程介绍与基础入门</li>
+<li><strong>建议章节</strong>：Java 基础</li>
+<li><strong>建议标签</strong>：<code>Java概述</code> <code>开发环境</code> <code>项目创建</code> <code>类</code> <code>main方法</code> <code>输出</code> <code>修饰符</code></li>
+<li><strong>适合放入 summary 的内容</strong>：课堂摘要 5 条（见第 2 节）</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：知识点 1-7 中&quot;这个知识点是什么？&quot;和&quot;为什么要学它？&quot;部分</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：第 6 节的 3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：第 9 节的 7 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：第 10 节的 10 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：第 11 节的&quot;Java 程序从编写到运行的流程&quot;</li>
+<li><strong>适合放入 exercises 的内容</strong>：第 12 节的 5 道练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：第 15 节课后总结</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是认识 Java 以及理解 Java 程序的最基本结构——类、main 方法和输出语句。这是后续所有 Java 学习的基础。
+2. 学习 Java 时要特别注意大小写（System 不是 system，main 不是 Main）和分号结尾，这两个是初学者最容易出错的地方。
+3. 通过本节课，应该能够独立创建 Java 项目、编写一个简单的 Hello World 程序，并理解 public class、main 方法和 System.out.println 的作用。
+4. 类与对象的概念会在后续课程中反复出现和深入讲解。本节课只是初步了解，后面会详细学习属性、方法、构造方法、继承等面向对象的核心内容。
+5. 课后建议多练习两个基本功：一是盲敲键盘（目标每分钟 100 个字母以上），二是把 main 方法和 System.out.println 反复默写，形成肌肉记忆。这些基本功是后续编程学习的保障。
+</code></pre>
+<hr>
+<h3>学习方法建议</h3>
+<p>（以下内容整理自课堂中老师的经验分享，不属于 Java 技术知识，但对学习有帮助）</p>
+<ol>
+<li><strong>记笔记，看目录回忆</strong>：每天记笔记，复习时对着教材目录回忆笔记内容。老师建议&quot;躺下睡不着时用两分钟回忆笔记&quot;。</li>
+<li><strong>多去图书馆</strong>：环境会改变习惯。哪怕开始在图书馆只是坐着，慢慢也会受到影响开始学习。</li>
+<li><strong>盲敲键盘</strong>：编程效率的基础是打字速度。一个月从每分钟 20 个字母练到 100 个字母是完全可能的。</li>
+<li><strong>坚持付出</strong>：学习编程是一个需要时间积累的过程，&quot;当你快坚持不住的时候，再坚持一点点，回报就回来了&quot;。</li>
+<li><strong>学会利用 AI 辅助</strong>：遇到不会的可以问 AI 助手，但一定要读懂 AI 给的解释，然后自己重新敲一遍，不要直接复制粘贴。</li>
+<li><strong>培养代码规范意识</strong>：变量名、类名都要有语义（能看出含义），不要用 a、b、c 这样无意义的命名。</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><span class="article-pager-link disabled" aria-hidden="true"></span><a class="article-pager-link next" rel="next" href="java-02.html"><span>下一篇</span><strong>Java编程基础及面向对象入门</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>课程详情 - Scala 课程交互式学习网站</title>
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="lesson-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="index.html">Scala Learn</a>
+      <a class="btn small ghost" href="index.html">返回首页</a>
+    </nav>
+    <div class="container lesson-title-wrap">
+      <p class="eyebrow" id="lessonMeta">课程详情</p>
+      <h1 id="lessonTitle">正在加载课程……</h1>
+      <p class="hero-text" id="lessonAdvice"></p>
+      <div class="tag-row" id="lessonTags"></div>
+    </div>
+  </header>
+
+  <main class="container lesson-layout">
+    <aside class="toc panel" aria-label="课程目录">
+      <h2>本节导航</h2>
+      <a href="#summary">课堂摘要</a>
+      <a href="#keypoints">知识点拆解</a>
+      <a href="#code">代码示例</a>
+      <a href="#quiz">小测验</a>
+      <a href="#drag">拖拽匹配</a>
+      <a href="#flow">流程动画</a>
+      <a href="#exercises">练习题</a>
+      <a href="#full-summary" id="summaryTocLink" hidden>完整课程总结</a>
+      <a href="#conclusion">课后总结</a>
+    </aside>
+
+    <div class="lesson-content">
+      <section class="section panel" id="summary">
+        <p class="eyebrow">Summary</p>
+        <h2>课堂摘要</h2>
+        <ul class="summary-list" id="summaryList"></ul>
+      </section>
+
+      <section class="section panel" id="keypoints">
+        <p class="eyebrow">Key Points</p>
+        <h2>知识点拆解</h2>
+        <div class="accordion" id="keyPointList"></div>
+      </section>
+
+      <section class="section panel" id="code">
+        <p class="eyebrow">Code</p>
+        <h2>代码示例</h2>
+        <div id="codeExamples"></div>
+      </section>
+
+      <section class="section panel" id="quiz">
+        <p class="eyebrow">Quiz</p>
+        <h2>小测验</h2>
+        <p class="muted">选择答案后会立即显示反馈。本网站不保存成绩。</p>
+        <div id="quizList"></div>
+      </section>
+
+      <section class="section panel" id="drag">
+        <p class="eyebrow">Drag Match</p>
+        <h2>拖拽匹配</h2>
+        <p class="muted">把左侧概念拖到右侧正确解释上。</p>
+        <div class="drag-area">
+          <div>
+            <h3>概念</h3>
+            <div class="drag-items" id="dragItems"></div>
+          </div>
+          <div>
+            <h3>解释</h3>
+            <div class="drop-zones" id="dropZones"></div>
+          </div>
+        </div>
+        <div class="inline-actions">
+          <button class="btn small" id="checkDrag">检查匹配</button>
+          <button class="btn small ghost" id="resetDrag">重置</button>
+        </div>
+        <p class="feedback" id="dragFeedback"></p>
+      </section>
+
+      <section class="section panel" id="flow">
+        <p class="eyebrow">Flow Animation</p>
+        <h2 id="flowTitle">流程动画</h2>
+        <p class="muted" id="flowDesc"></p>
+        <div class="flow-box" id="flowBox"></div>
+        <div class="inline-actions">
+          <button class="btn small primary" id="nextStep">下一步</button>
+          <button class="btn small ghost" id="resetFlow">重新播放</button>
+        </div>
+      </section>
+
+      <section class="section panel" id="exercises">
+        <p class="eyebrow">Exercises</p>
+        <h2>练习题</h2>
+        <div id="exerciseList"></div>
+      </section>
+
+      <section class="section panel" id="conclusion">
+        <p class="eyebrow">Conclusion</p>
+        <h2>课后总结</h2>
+        <ul class="summary-list" id="conclusionList"></ul>
+      </section>
+
+      <section class="section panel lesson-summary-links" id="full-summary" hidden>
+        <p class="eyebrow">Full Course Summary</p>
+        <h2>完整课程总结</h2>
+        <p class="muted">继续阅读从课堂内容中整理出的完整复习资料。</p>
+        <div class="summary-link-list" id="fullSummaryLinks"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>学习建议：看完解释后，一定要自己敲一遍代码。</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/summaries-data.js"></script>
+  <script src="js/summary-helpers.js"></script>
+  <script src="js/lesson.js"></script>
+</body>
+</html>

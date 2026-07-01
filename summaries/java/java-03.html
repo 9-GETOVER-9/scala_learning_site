@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java data types array 课程标题 ：Java 基本数据类型与数组入门 所属章节 ：Java 变量与数据类型 上课日期 ：2025 08 28 知识点标签 ： 标识符 关键字 基本数据类型 类型转换 boolean int cha" />
+  <title>Java基本数据类型与数组入门 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-data-types-array">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 03 课</p>
+      <h1>Java基本数据类型与数组入门</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Java基本数据类型与数组入门</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-data-types-array</code></li>
+<li><strong>课程标题</strong>：Java 基本数据类型与数组入门</li>
+<li><strong>所属章节</strong>：Java 变量与数据类型</li>
+<li><strong>上课日期</strong>：2025-08-28</li>
+<li><strong>知识点标签</strong>：<code>标识符</code> <code>关键字</code> <code>基本数据类型</code> <code>类型转换</code> <code>boolean</code> <code>int</code> <code>char</code> <code>float</code> <code>double</code> <code>数组</code> <code>二维数组</code></li>
+<li><strong>难度等级</strong>：入门</li>
+<li><strong>适合对象</strong>：已了解 Java 程序结构、正在学习数据类型和数组的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课系统讲解了 Java 的 8 种基本数据类型（分为四大类），自动与强制两种类型转换机制，以及一维/二维数组的定义与使用，是 Java 语法学习的关键一课。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先复习了标识符的定义规则（四大类组成元素，首字符不能是数字）和关键字的概念（不能用作标识符）。
+2. 课堂中重点讲解了 Java 的 8 种基本数据类型，分为四大类——逻辑类型（boolean）、整数类型（byte/short/int/long）、字符类型（char）、浮点类型（float/double）。
+3. 老师通过&quot;胖人坐瘦椅子&quot;的形象比喻，帮助理解自动类型转换（低精度→高精度）和强制类型转换（高精度→低精度）的区别。
+4. 本节课的核心内容是数组，老师用矩阵的行列概念解释了一维数组和二维数组的结构，以及通过下标（行、列）访问元素的方法。
+5. 最后通过打印语句的对比，区分了 print（不换行）和 println（自动换行），以及字符串拼接（用 + 号）的用法。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能说出标识符的完整定义规则，并判断给定名称是否为合法标识符。
+2. 能列出 Java 的 8 种基本数据类型，并按四大类型分类（逻辑、整数、字符、浮点）。
+3. 理解每种数据类型占用的字节数和取值范围的意义。
+4. 能够区分自动类型转换（低精度→高精度）和强制类型转换（高精度→低精度）的使用场景和写法。
+5. 能正确声明和初始化一维数组和二维数组，并通过下标访问数组元素。
+6. 能区分 print（不换行输出）和 println（自动换行输出）的用法。
+7. 能说出字符 char 和字符串 String 的区别。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：标识符的完整规则</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>标识符</strong>是 Java 中用来标识类名、变量名、方法名、类型名、数组名、文件名的有效字符序列的统称。简单说，所有你可以<strong>自己命名</strong>的东西都叫标识符。</p>
+<h5>为什么要学它？</h5>
+<p>Java 中到处都是标识符——每定义一个变量、一个类、一个方法，都在使用标识符。如果不了解标识符规则，写出来的名字可能是非法的，导致编译错误。</p>
+<h5>基本语法</h5>
+<p><strong>标识符的四条规则（需要记住）：</strong></p>
+<pre><code class="language-text">规则 1：由字母、下划线 _、美元符号 $、数字 这四类字符组成。
+规则 2：第一个字符不能是数字。
+规则 3：长度没有限制。
+规则 4：不能是 Java 的关键字（如 int、class、public 等）。
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个选择题来帮助学生理解：&quot;下列哪个满足标识符的定义？&quot;关键是三个判断：</p>
+<ul>
+<li><code>int 1a;</code> → ❌ 首字符是数字</li>
+<li><code>int a1;</code> → ✅ 首字符是字母</li>
+<li><code>int 中;</code> → Java 中不推荐用中文，虽然技术上可能不报错，但极易出问题</li>
+</ul>
+<p>老师总结：&quot;标识符就是一个名称。类名、变量名、方法名、类型名、数组名、文件名——这些都是你可以自定义的，都用标识符来框起来。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 首字符用了数字（如 int 1score;）。
+2. 标识符中包含了空格（如 int my score;）。
+3. 用了关键字做标识符（如 int class;）。
+4. 用了特殊符号（如 int my-name; 中 - 不是合法字符）。
+5. 用中文做标识符（虽然某些情况下不报错，但强烈不推荐）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class IdentifierDemo {
+    public static void main(String[] args) {
+        // ✅ 合法的标识符
+        int age = 18;             // 纯字母
+        int student_age = 20;     // 字母 + 下划线
+        int $price = 100;         // 美元符号开头
+        int score2 = 90;          // 字母 + 数字
+        int _temp = 0;            // 下划线开头
+
+        // ❌ 不合法的标识符（注释掉了，无法编译）
+        // int 1score = 90;       // 数字开头
+        // int my score = 90;     // 有空格
+        // int class = 10;        // class 是关键字
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. age、student_age、$price、score2、_temp 都满足标识符规则，编译通过。
+2. 1score 违反规则 2（首字符不能是数字）。
+3. my score 违反规则 1（空格不属于四大类组成元素）。
+4. class 违反规则 4（class 是关键字）。
+</code></pre>
+<hr>
+<h4>知识点 2：Java 的 8 种基本数据类型</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 提供 <strong>8 种基本数据类型（primitive types）</strong>，可以分为<strong>四大类</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>类型</th>
+<th>占用字节</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>逻辑类型</td>
+<td><code>boolean</code></td>
+<td>1 字节</td>
+<td>只有 true 和 false 两个值</td>
+</tr>
+<tr>
+<td>整数类型</td>
+<td><code>byte</code></td>
+<td>1 字节（8 位）</td>
+<td>最小整数类型</td>
+</tr>
+<tr>
+<td>整数类型</td>
+<td><code>short</code></td>
+<td>2 字节（16 位）</td>
+<td>短整型</td>
+</tr>
+<tr>
+<td>整数类型</td>
+<td><code>int</code></td>
+<td>4 字节（32 位）</td>
+<td>最常用的整数类型</td>
+</tr>
+<tr>
+<td>整数类型</td>
+<td><code>long</code></td>
+<td>8 字节（64 位）</td>
+<td>长整型（值后面加 L）</td>
+</tr>
+<tr>
+<td>字符类型</td>
+<td><code>char</code></td>
+<td>2 字节（16 位）</td>
+<td>单个字符，用单引号</td>
+</tr>
+<tr>
+<td>浮点类型</td>
+<td><code>float</code></td>
+<td>4 字节（32 位）</td>
+<td>单精度浮点（值后面加 f）</td>
+</tr>
+<tr>
+<td>浮点类型</td>
+<td><code>double</code></td>
+<td>8 字节（64 位）</td>
+<td>双精度浮点（小数默认类型）</td>
+</tr>
+</tbody></table>
+<h5>为什么要学它？</h5>
+<p>声明每个变量时都必须指定数据类型。不同数据类型占用的内存空间不同，取值范围不同，适用的场景也不同。选错了数据类型可能导致数据溢出、精度丢失或内存浪费。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 整数类型
+byte  b = 127;          // byte：-128 ~ 127
+short s = 32767;        // short：约 ±3 万
+int   i = 100;          // int：约 ±21 亿（最常用）
+long  l = 100000L;      // long：后面必须加 L
+
+// 浮点类型
+float  f = 3.14f;       // float：后面必须加 f
+double d = 3.1415926;   // double：小数默认类型
+
+// 字符类型
+char c = &#39;A&#39;;           // char：单引号，只能放一个字符
+
+// 逻辑类型
+boolean flag = true;    // boolean：只有 true 或 false
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;内存空间&quot;的概念来解释为什么不同的类型占不同字节：<strong>&quot;我们在申请内存的时候，要让 CPU 知道我要多大的空间。你告诉操作系统，它就会在内存中给你找一块地方放你的变量。&quot;</strong></p>
+<p>老师还用一个生动比喻来说明为什么 int 是 32 位：&quot;一个字节是 8 位，四个字节就是 32 位。在内存里存储的都是 0 和 1。就像电影《黑客帝国》里那个场景——除了 0 就是 1，但这两个数字可以解释所有的东西。&quot;</p>
+<p>对于类型级别，老师总结了一个从低到高的顺序：<strong>byte → short → char → int → long → float → double</strong>（从小到大）。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把 byte 和 short 与 int 搞混——不知道什么时候用哪个（初学时大部分情况用 int 即可）。
+2. float 的值后面忘记加 f——小数默认是 double 类型。
+3. long 的值后面忘记加 L——大整数默认是 int 类型。
+4. char 用双引号而不是单引号——&#39;A&#39; 是 char，&quot;A&quot; 是 String。
+5. 以为 String 是基本数据类型——String 是引用类型（一个类）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class DataTypeDemo {
+    public static void main(String[] args) {
+        // 整数类型
+        byte age = 25;                        // byte：年龄一般不会超过 127
+        short year = 2025;                    // short：年份
+        int population = 1400000000;          // int：中国人口（约 14 亿，没超过 21 亿）
+        long worldPop = 8000000000L;          // long：世界人口（80 亿，用 long）
+
+        // 浮点类型
+        float price = 9.99f;                  // float：价格（后面必须有 f）
+        double pi = 3.14159265358979;         // double：圆周率（高精度）
+
+        // 字符类型
+        char grade = &#39;A&#39;;                     // char：成绩等级（单引号）
+        char chinese = &#39;中&#39;;                  // char：一个汉字占 2 字节，可以放在 char 中
+
+        // 逻辑类型
+        boolean isStudent = true;             // boolean：是学生
+
+        // 输出验证
+        System.out.println(&quot;年龄(byte)：&quot; + age);
+        System.out.println(&quot;价格(float)：&quot; + price);
+        System.out.println(&quot;圆周率(double)：&quot; + pi);
+        System.out.println(&quot;等级(char)：&quot; + grade);
+        System.out.println(&quot;是学生吗(boolean)：&quot; + isStudent);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 声明不同类型变量时必须写出对应的类型关键字。
+2. float 类型的 9.99f 中的 f 告诉 Java &quot;这是 float，不是 double&quot;。
+3. long 类型的 8000000000L 中的 L 告诉 Java &quot;这是 long 整数&quot;（不加 L 会报错，因为数字太大超过 int 范围）。
+4. char 可以存一个英文字母，也可以存一个中文汉字（一个汉字占 2 字节 = 16 位，char 恰好是 16 位）。
+5. boolean 只能赋 true 或 false。
+</code></pre>
+<hr>
+<h4>知识点 3：类型转换——自动转换与强制转换</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中不同类型之间进行赋值时，有时可以自动完成转换，有时需要程序员<strong>手动指定</strong>。这就是类型转换（Type Casting），分为两种：</p>
+<ul>
+<li><strong>自动类型转换</strong>：低精度类型 → 高精度类型，自动发生，不需要特殊操作。</li>
+<li><strong>强制类型转换</strong>：高精度类型 → 低精度类型，需要程序员手动写 <code>(目标类型)</code>，且可能丢失数据。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>实际编程中经常需要在不同类型之间转换数据。比如从用户输入读取的可能是 String，需要转成 int 来计算；或者 double 运算结果只需要保留整数部分。不理解类型转换规则，代码就会编译失败或产生意料之外的结果。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 自动类型转换（低 → 高）
+int i = 100;
+double d = i;           // int 自动转为 double，OK
+
+// 强制类型转换（高 → 低）
+double pi = 3.14;
+int n = (int) pi;       // 手动强制转换，n 的值为 3（小数部分被截断，不是四舍五入）
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用了**&quot;胖人坐瘦椅子&quot;**的经典比喻来解释两种转换：</p>
+<ul>
+<li><strong>自动类型转换（低→高）</strong>：就像一个瘦小的人（低精度）坐在大学教室的大座位上（高精度）——&quot;他自己就坐上去了，没有问题，反正这个位置空的，可以坐下&quot;。</li>
+<li><strong>强制类型转换（高→低）</strong>：就像一个胖人（高精度）要坐在一个小的座位上（低精度）——&quot;坐不下怎么办？就得想办法，减减肥（瘦身）。&quot;对应到代码中，就是需要手动写 <code>(目标类型)</code> 来强制转换，而且<strong>小数部分直接舍去</strong>（不是四舍五入）。</li>
+</ul>
+<p>老师特别强调：&quot;1.999 强制转成 int 也是 1，小数点后边一刀切，都不要了，因为你放不下了。&quot;</p>
+<p><strong>精度从低到高的顺序</strong>（老师板书修正后）：</p>
+<pre><code class="language-text">byte → short → char → int → long → float → double
+（低精度）                              （高精度）
+</code></pre>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 以为 float 转 int 是四舍五入——实际上是直接截断（1.9 → 1，不是 2）。
+2. 高精度转低精度忘记写强制转换语法（比如 double 直接赋给 int 会编译错误）。
+3. 混淆精度顺序，以为 float 比 long 精度低——实际上 float 的&quot;级别&quot;比 long 高（因为 float 能表示小数）。
+4. 强制转换可能造成数据溢出——比如把一个很大的 long 值强转为 int。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class TypeCastDemo {
+    public static void main(String[] args) {
+        // ====== 自动类型转换（低 → 高） ======
+        int score = 95;              // int：32 位
+        double dScore = score;       // ✅ 自动转换：int → double
+        System.out.println(&quot;自动转换 int→double：&quot; + dScore);  // 95.0
+
+        char letter = &#39;A&#39;;           // char：16 位
+        int code = letter;           // ✅ 自动转换：char → int（A 的 ASCII 码是 65）
+        System.out.println(&quot;A 的 ASCII 码：&quot; + code);          // 65
+
+        // ====== 强制类型转换（高 → 低） ======
+        double pi = 3.14159;
+        int intPi = (int) pi;        // 强制转换：小数部分直接截断
+        System.out.println(&quot;pi 强转 int：&quot; + intPi);           // 3
+
+        double price = 1.999;
+        int intPrice = (int) price;  // 1.999 → 1（不是四舍五入！）
+        System.out.println(&quot;1.999 强转 int：&quot; + intPrice);     // 1
+
+        // ====== float 和 double 的区别 ======
+        float f = 3.14f;             // 有 f → float 类型
+        double d = 3.14;             // 无 f → double 类型
+        System.out.println(&quot;float：&quot; + f);
+        System.out.println(&quot;double：&quot; + d);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. int score = 95; double dScore = score; —— int 是 32 位，double 是 64 位，小空间→大空间，自动完成。
+2. char letter = &#39;A&#39;; int code = letter; —— char 转到 int 得到的是字符对应的 ASCII/Unicode 码（A=65）。
+3. double pi = 3.14159; int intPi = (int) pi; —— (int) 强制将 double 转为 int，截断小数，得到 3。
+4. 1.999 强转后是 1，不是 2——这是&quot;截断&quot;（truncate），不是&quot;四舍五入&quot;（round）。
+5. float 后面必须加 f 或 F，不加的话 Java 默认当作 double 处理，赋值给 float 会报错。
+</code></pre>
+<hr>
+<h4>知识点 4：字符类型（char）详解</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>char</code> 是 Java 中表示<strong>单个字符</strong>的数据类型。它占用 2 个字节（16 位），使用<strong>单引号</strong>来表示。一个 char 变量只能存放一个字符，可以是一个英文字母、一个数字字符或一个中文汉字。</p>
+<h5>为什么要学它？</h5>
+<p>处理文字信息是程序最常见的工作。char 是字符串 String 的基础组成单位——String 本质上就是多个 char 的序列。char 和 int 之间可以进行转换（通过 ASCII/Unicode 码），这在处理字符编码时非常有用。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">char 变量名 = &#39;单个字符&#39;;    // 必须用单引号
+</code></pre>
+<p><strong>char 的关键特性：</strong></p>
+<ul>
+<li>用<strong>单引号</strong> <code>&#39;&#39;</code> 包裹（String 用双引号 <code>&quot;&quot;</code>）</li>
+<li>只能放<strong>一个</strong>字符</li>
+<li>占用 <strong>2 字节（16 位）</strong></li>
+<li>可以存英文（1 字节）或中文（2 字节）</li>
+<li>可以赋值为 Unicode 编码：<code>char c = &#39;A&#39;;</code>（等同于 &#39;A&#39;）</li>
+</ul>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个重要的区分帮助学生理解：</p>
+<ul>
+<li><strong>char</strong>：单引号，一个字母 = 一个字符（如 &#39;A&#39;、&#39;中&#39;）</li>
+<li><strong>String</strong>：双引号，是一个字符串（如 &quot;Hello&quot;、&quot;I like Java&quot;）</li>
+</ul>
+<p><strong>关键考点</strong>：一个汉字占 2 个字节（16 位），char 恰好也是 2 个字节（16 位），所以<strong>一个汉字可以放在一个 char 变量中</strong>。这是二级考试常见的考点。</p>
+<p>老师还提到 char 和 int 之间的关系——&quot;A 在 ASCII 码里好像是 96？哦，我忘了，你们可以去查一下&quot;。实际上，标准 ASCII 码中，&#39;A&#39; = 65，&#39;a&#39; = 97。（这是课堂上老师记忆模糊的地方，在此修正。）</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. char 用了双引号：char c = &quot;A&quot;;（应该是 &#39;A&#39;）。
+2. 在 char 中放了多个字符：char c = &#39;AB&#39;;（char 只能是一个字符）。
+3. 空 char 写法错误：char c = &#39;&#39;;（至少要有一个字符，可以写 char c = &#39; &#39;; 表示空格）。
+4. 混淆 char 和 String 的字节占用——char 2 字节，String 取决于长度和编码。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class CharDemo {
+    public static void main(String[] args) {
+        char letter = &#39;A&#39;;             // 英文字母
+        char digit = &#39;7&#39;;              // 数字字符（注意不是 int 7，是字符&#39;7&#39;）
+        char chinese = &#39;中&#39;;           // 中文汉字（一个汉字占 2 字节，char 也是 2 字节）
+        char symbol = &#39;@&#39;;             // 特殊符号
+        char space = &#39; &#39;;              // 空格也是一个字符
+
+        // 输出
+        System.out.println(&quot;字母：&quot; + letter);
+        System.out.println(&quot;数字字符：&quot; + digit);
+        System.out.println(&quot;汉字：&quot; + chinese);
+        System.out.println(&quot;符号：&quot; + symbol);
+
+        // char 和 int 的转换
+        int ascii = letter;            // 自动转换：char → int，得到 ASCII 码
+        System.out.println(&quot;A 的 ASCII 码是：&quot; + ascii);   // 65
+
+        char nextLetter = (char) (letter + 1);  // 强制转换：int → char
+        System.out.println(&quot;A 后面的字母是：&quot; + nextLetter);  // B
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. char 类型必须使用单引号 &#39;&#39;。
+2. 字符 &#39;7&#39; 和数字 7 是不同的——&#39;7&#39; 是字符，ASCII 码是 55；7 是整数。
+3. 一个中文汉字是 2 字节，char 也是 2 字节，所以 char 可以存一个汉字。
+4. char 和 int 可以互相转换：char→int 得到编码值，int→char 得到对应字符（需强制转换）。
+5. &#39;A&#39; + 1 → 65 + 1 = 66 → (char) 66 = &#39;B&#39;。
+</code></pre>
+<hr>
+<h4>知识点 5：print 与 println 的区别</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>System.out.print()</code> 和 <code>System.out.println()</code> 都是 Java 的输出语句，区别在于：</p>
+<ul>
+<li><strong>print</strong>：输出内容后<strong>不换行</strong>，光标停留在同行末尾。</li>
+<li><strong>println</strong>：输出内容后<strong>自动换行</strong>，光标移到下一行开头。</li>
+</ul>
+<p>其中 <code>ln</code> 是 <strong>line</strong> 的缩写。</p>
+<h5>为什么要学它？</h5>
+<p>控制输出格式是程序的基本需求。有时候需要把多段内容输出在同一行（用 print），有时候需要分行显示（用 println）。如果用错了，输出结果会乱成一片。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">System.out.print(内容);     // 输出后不换行
+System.out.println(内容);   // 输出后换行
+System.out.println();       // 只换行，不输出内容
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个非常直观的方式解释：</p>
+<ul>
+<li><strong>print</strong>：输出完了，&quot;光标还在这闪烁&quot;，下一次输出<strong>紧接着</strong>当前位置继续。</li>
+<li><strong>println</strong>：输出完了，光标自动移到<strong>下一行开头</strong>，下一次输出从新行开始。</li>
+</ul>
+<p>老师画了一个演示效果：</p>
+<pre><code class="language-text">print &quot;Hello&quot; → 输出 Hello，光标在 o 后面 →
+print &quot;World&quot; → World 紧接着 Hello 输出，变成 HelloWorld
+
+println &quot;Hello&quot; → 输出 Hello，光标跳到下一行 →
+println &quot;World&quot; → 在新行输出 World
+</code></pre>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 搞混 print 和 println，该换行的时候用 print，该同行的时候用 println。
+2. 写错方法名：printline（错误）、Println（错误）——正确是 println（全小写）。
+3. 以为 println 的 ln 是 In（大写 i）——其实是小写 L + n（line 的缩写）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class PrintDemo {
+    public static void main(String[] args) {
+        // print 不换行
+        System.out.print(&quot;你好，&quot;);
+        System.out.print(&quot;我是&quot;);
+        System.out.print(&quot;Java。&quot;);
+        System.out.println();   // 换个行
+
+        // println 自动换行
+        System.out.println(&quot;第一行&quot;);
+        System.out.println(&quot;第二行&quot;);
+        System.out.println(&quot;第三行&quot;);
+
+        // 对比效果
+        System.out.print(&quot;A&quot;);
+        System.out.print(&quot;B&quot;);
+        System.out.print(&quot;C&quot;);   // 输出：ABC（在同一行）
+
+        System.out.println();    // 换行
+
+        System.out.println(&quot;D&quot;); // 输出 D 并换行
+        System.out.println(&quot;E&quot;); // 输出 E 并换行
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 前三个 print 输出的内容全部连在一起：&quot;你好，我是Java。&quot;——因为 print 不换行。
+2. System.out.println(); 括号里什么也没有，表示只输出一个空行（换行）。
+3. 接下来的三个 println 各自独占一行。
+4. &quot;ABC&quot; 是三个 print 的结果在同一行；&quot;D&quot; 和 &quot;E&quot; 各占一行。
+</code></pre>
+<hr>
+<h4>知识点 6：数组——一维数组与二维数组</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>数组</strong>是用来存储<strong>多个相同类型数据</strong>的容器。数组中的每个数据称为<strong>元素</strong>，通过**下标（索引）**来访问。Java 中的数组下标从 <strong>0</strong> 开始。</p>
+<ul>
+<li><strong>一维数组</strong>：像一排格子，每个格子存一个数据。</li>
+<li><strong>二维数组</strong>：像一个表格/矩阵，有<strong>行</strong>和<strong>列</strong>两个维度。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>当需要处理大量同类型数据时（如全班 50 个学生的成绩、一张表格的数据），不可能给每个数据单独声明一个变量。数组让我们可以用一个变量名统一管理一组数据，通过下标灵活访问任意元素。数组也是后续学习集合（ArrayList、HashMap）和数据结构的基础。</p>
+<h5>基本语法</h5>
+<p><strong>一维数组：</strong></p>
+<pre><code class="language-java">// 声明方式一：先声明后赋值
+数据类型[] 数组名 = new 数据类型[长度];
+数组名[下标] = 值;
+
+// 声明方式二：声明并初始化
+数据类型[] 数组名 = {值1, 值2, 值3, ...};
+</code></pre>
+<p><strong>二维数组：</strong></p>
+<pre><code class="language-java">// 声明方式
+数据类型[][] 数组名 = new 数据类型[行数][列数];
+
+// 访问元素
+数组名[行下标][列下标];
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用<strong>数学中的矩阵</strong>来类比二维数组：</p>
+<pre><code class="language-text">矩阵：          二维数组：
+A11 A12 A13    arr[0][0] arr[0][1] arr[0][2]
+A21 A22 A23    arr[1][0] arr[1][1] arr[1][2]
+A31 A32 A33    arr[2][0] arr[2][1] arr[2][2]
+</code></pre>
+<ul>
+<li><strong>前面的数字</strong> = <strong>行</strong>（row）</li>
+<li><strong>后面的数字</strong> = <strong>列</strong>（column）</li>
+<li>第一个位置是 <code>[0][0]</code>，不是 <code>[1][1]</code>（下标从 0 开始）</li>
+<li><code>arr[1][2]</code> 表示第 2 行第 3 列的元素</li>
+</ul>
+<p>老师还解释了二维数组的本质：<strong>&quot;二维数组其实是在一维数组里面，每一个单元分出来的小单元。&quot;</strong> 即一个一维数组的每个元素本身又是一个数组（小数组）。</p>
+<p>老师还将数组与大数据联系起来：<strong>&quot;转置一下就立起来了——一个人的信息我们称之为样本，这就是大数据取数据的方式。&quot;</strong> 将横着的数据（行）转置变成竖着的（列），每一列就是一个样本的所有信息。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 数组下标从 0 开始，初学者容易从 1 开始算（数组越界错误）。
+2. 忘记用 new 分配空间就直接使用，导致空指针异常。
+3. 数组声明和初始化语法混淆（如 int[] arr = new int[3]{1,2,3}; 是错的——带 new 不能同时写具体值）。
+4. 二维数组的行和列搞反（arr[行][列] 不是 arr[列][行]）。
+5. 数组长度一旦声明就不能改变（要动态大小需要用 ArrayList）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class ArrayDemo {
+    public static void main(String[] args) {
+        // ====== 一维数组 ======
+        // 方式一：先声明，再赋值
+        int[] scores = new int[5];           // 声明一个长度为 5 的整数数组
+        scores[0] = 90;                      // 第 1 个元素（下标 0）
+        scores[1] = 85;                      // 第 2 个元素（下标 1）
+        scores[2] = 78;
+        scores[3] = 92;
+        scores[4] = 88;
+
+        System.out.println(&quot;第3个学生的成绩：&quot; + scores[2]);  // 78
+
+        // 方式二：声明的同时初始化
+        String[] names = {&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;};  // 自动推断长度为 3
+        System.out.println(&quot;第一个名字：&quot; + names[0]);    // 张三
+
+        // ====== 二维数组 ======
+        int[][] matrix = new int[2][3];      // 2 行 3 列的矩阵
+        matrix[0][0] = 1;  matrix[0][1] = 2;  matrix[0][2] = 3;   // 第 1 行
+        matrix[1][0] = 4;  matrix[1][1] = 5;  matrix[1][2] = 6;   // 第 2 行
+
+        // 访问第 2 行第 3 列的元素
+        System.out.println(&quot;第2行第3列：&quot; + matrix[1][2]);  // 6
+
+        // 方式二：声明同时初始化二维数组
+        int[][] grid = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        System.out.println(&quot;grid[1][1] = &quot; + grid[1][1]);  // 5（第2行第2列）
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. int[] scores = new int[5]; 创建一个能放 5 个 int 的数组，下标范围是 0~4。
+2. scores[2] 访问第 3 个元素（因为下标从 0 开始），值为 78。
+3. String[] names = {&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;}; 是声明加初始化的快捷方式。
+4. int[][] matrix = new int[2][3]; 创建 2 行 3 列的矩阵（共 6 个元素）。
+5. matrix[1][2] 表示第 2 行（下标 1）第 3 列（下标 2），值为 6。
+6. 二维数组也可以用花括号嵌套初始化：{{1,2,3}, {4,5,6}}。
+</code></pre>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动类型转换</td>
+<td>强制类型转换</td>
+<td>低精度→高精度自动完成；高精度→低精度需手动写 (类型)</td>
+<td><code>double d = 100;</code>（自动） / <code>int i = (int)3.14;</code>（强制）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>double</td>
+<td>int 是整数（4 字节、32 位）；double 是小数（8 字节、64 位）</td>
+<td><code>int a = 10;</code> / <code>double b = 3.14;</code></td>
+</tr>
+<tr>
+<td>float</td>
+<td>double</td>
+<td>float 单精度（4 字节，值要加 f）；double 双精度（8 字节，小数默认类型）</td>
+<td><code>float f = 3.14f;</code> / <code>double d = 3.14;</code></td>
+</tr>
+<tr>
+<td>char</td>
+<td>String</td>
+<td>char 单字符（单引号，2 字节）；String 字符串（双引号，是一个类）</td>
+<td><code>char c = &#39;A&#39;;</code> / <code>String s = &quot;Hello&quot;;</code></td>
+</tr>
+<tr>
+<td>print</td>
+<td>println</td>
+<td>print 不换行；println 自动换行（ln = line）</td>
+<td><code>System.out.print(&quot;A&quot;);</code> / <code>System.out.println(&quot;A&quot;);</code></td>
+</tr>
+<tr>
+<td>一维数组</td>
+<td>二维数组</td>
+<td>一维数组就像一排格子；二维数组像一个有行和列的表格</td>
+<td><code>int[] arr = {1,2,3};</code> / <code>int[][] mat = {{1,2},{3,4}};</code></td>
+</tr>
+<tr>
+<td>标识符</td>
+<td>关键字</td>
+<td>标识符是我们自己起的名字；关键字是 Java 预留的，不能用做标识符</td>
+<td><code>age</code> 是标识符；<code>int</code> 是关键字</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：8 种基本数据类型综合演示</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">基本数据类型、变量声明、输出语句
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class AllTypesDemo {
+    public static void main(String[] args) {
+        // 逻辑类型
+        boolean isJavaFun = true;
+
+        // 整数类型（4 种）
+        byte  b = 100;                // 1 字节
+        short s = 30000;              // 2 字节
+        int   i = 2000000000;         // 4 字节（最常用）
+        long  l = 9000000000000L;     // 8 字节（加 L）
+
+        // 字符类型
+        char c = &#39;J&#39;;
+
+        // 浮点类型（2 种）
+        float  f = 3.14f;             // 4 字节（加 f）
+        double d = 3.14159265358979;  // 8 字节
+
+        // 输出所有类型
+        System.out.println(&quot;boolean: &quot; + isJavaFun);
+        System.out.println(&quot;byte: &quot; + b);
+        System.out.println(&quot;short: &quot; + s);
+        System.out.println(&quot;int: &quot; + i);
+        System.out.println(&quot;long: &quot; + l);
+        System.out.println(&quot;char: &quot; + c);
+        System.out.println(&quot;float: &quot; + f);
+        System.out.println(&quot;double: &quot; + d);
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">boolean: true
+byte: 100
+short: 30000
+int: 2000000000
+long: 9000000000000
+char: J
+float: 3.14
+double: 3.14159265358979
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. 本程序展示了 Java 的 8 种基本数据类型的声明和初始化。
+2. 每个类型的声明格式都是：类型 变量名 = 值;
+3. 注意 float 的值 3.14 后面必须加 f。
+4. 注意 long 的值 9000000000000 后面必须加 L（这个数超过了 int 的范围）。
+5. 用 + 号可以实现字符串和变量的拼接输出。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 初学时，整数就用 int，小数就用 double，基本能满足大部分需求。
+- float 和 long 的后缀（f 和 L）最容易忘记，要特别注意。
+- byte 和 short 用得比较少，但考试可能会考取值范围。
+</code></pre>
+<hr>
+<h4>示例 2：类型转换的完整演示</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">自动类型转换、强制类型转换、精度顺序
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class TypeConversionDemo {
+    public static void main(String[] args) {
+        // ====== 案例 1：自动类型转换 ======
+        int num = 100;
+        double dNum = num;                       // int → double（自动）
+        System.out.println(&quot;int→double：&quot; + dNum);     // 100.0
+
+        char letter = &#39;B&#39;;
+        int ascii = letter;                      // char → int（自动）
+        System.out.println(&quot;B 的 ASCII 码：&quot; + ascii); // 66
+
+        // ====== 案例 2：强制类型转换 ======
+        double pi = 3.14159;
+        int intPi = (int) pi;                    // double → int（强制）
+        System.out.println(&quot;pi 强转 int：&quot; + intPi);   // 3（截断，不是四舍五入）
+
+        double x = 1.999;
+        int y = (int) x;                         // 1.999 → 1
+        System.out.println(&quot;1.999 强转 int：&quot; + y);    // 1
+
+        // ====== 案例 3：运算中的自动提升 ======
+        int a = 10;
+        double b = 3.5;
+        double result = a + b;                   // int 自动提升为 double 再运算
+        System.out.println(&quot;10 + 3.5 = &quot; + result);   // 13.5
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">int→double：100.0
+B 的 ASCII 码：66
+pi 强转 int：3
+1.999 强转 int：1
+10 + 3.5 = 13.5
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. int num = 100; double dNum = num; — int 是 32 位，double 是 64 位，小→大，自动完成，结果为 100.0。
+2. char letter = &#39;B&#39;; int ascii = letter; — char 可以自动转 int，得到的是字符对应的 ASCII 码（B=66）。
+3. (int) pi 将 3.14159 强转为 3——小数部分直接被丢弃，不是四舍五入。
+4. 1.999 强转也是 1——无论小数部分多大，都直接砍掉。
+5. int + double 运算时，int 先自动转为 double，然后运算，结果是 double 类型。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 自动转换：小→大（安全，不丢数据）——不需要任何额外操作。
+- 强制转换：大→小（可能丢数据）——需要写 (目标类型)。
+- 强制转换截断小数，不是四舍五入！这一点考试常考。
+</code></pre>
+<hr>
+<h4>示例 3：二维数组——学生成绩表</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">二维数组、下标访问、数组遍历概念
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class ScoreTable {
+    public static void main(String[] args) {
+        // 3 个学生，每人 4 门课的成绩
+        // 行 = 学生，列 = 课程
+        int[][] scores = {
+            {90, 85, 78, 92},   // 学生 0：语文、数学、英语、Java
+            {88, 76, 95, 85},   // 学生 1
+            {70, 92, 88, 90}    // 学生 2
+        };
+
+        String[] subjects = {&quot;语文&quot;, &quot;数学&quot;, &quot;英语&quot;, &quot;Java&quot;};
+
+        // 输出第 2 个学生（下标 1）的所有成绩
+        System.out.println(&quot;===== 学生 2 的成绩 =====&quot;);
+        for (int j = 0; j &lt; 4; j++) {
+            System.out.println(subjects[j] + &quot;：&quot; + scores[1][j]);
+        }
+
+        // 输出所有学生的 Java（第 4 列，下标 3）成绩
+        System.out.println(&quot;\n===== Java 成绩 =====&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            System.out.println(&quot;学生&quot; + (i + 1) + &quot;：&quot; + scores[i][3]);
+        }
+
+        // 输出整个表格
+        System.out.println(&quot;\n===== 完整成绩表 =====&quot;);
+        System.out.println(&quot;学生\t语文\t数学\t英语\tJava&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            System.out.print(&quot;学生&quot; + (i + 1) + &quot;\t&quot;);
+            for (int j = 0; j &lt; 4; j++) {
+                System.out.print(scores[i][j] + &quot;\t&quot;);
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">===== 学生 2 的成绩 =====
+语文：88
+数学：76
+英语：95
+Java：85
+
+===== Java 成绩 =====
+学生1：92
+学生2：85
+学生3：90
+
+===== 完整成绩表 =====
+学生	语文	数学	英语	Java
+学生1	90	85	78	92	
+学生2	88	76	95	85	
+学生3	70	92	88	90	
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. int[][] scores = {{...}, {...}, {...}}; 是一个 3 行 4 列的二维数组。
+2. scores[1][j] 表示第 2 个学生（下标 1）的各科成绩。
+3. 行的下标范围是 0~2，列的下标范围是 0~3。
+4. scores[i][3] 中 3 是固定值（第 4 列 = Java 成绩），i 从 0 到 2 遍历所有学生。
+5. \t 是制表符（Tab），用于对齐输出。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 二维数组 = 行 × 列，arr[行][列]。
+- 下标始终从 0 开始——第 1 行是 [0]，第 1 列也是 [0]。
+- 二维数组的长度一旦声明就固定了，不能动态增减行或列。
+- for 循环遍历数组是最常用的操作（虽然本节课未系统讲 for 循环，但后续会深入）。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：胖人坐瘦椅子——理解类型转换</h4>
+<ul>
+<li><strong>案例名称</strong>：胖瘦与椅子的故事</li>
+<li><strong>对应知识点</strong>：自动类型转换与强制类型转换</li>
+<li><strong>案例背景</strong>：老师用一个生活场景让类型转换这个概念变得直观易懂。</li>
+<li><strong>解决思路</strong>：<ul>
+<li><strong>自动类型转换</strong>：瘦小的人（byte/char/int）坐在大学教室的大座位（double）上 → 很宽敞，自动就能坐下。</li>
+<li><strong>强制类型转换</strong>：胖人（double，64 位）想坐在小座位上（int，32 位）→ 坐不下！只能&quot;减肥&quot;（截断小数部分）才能勉强坐下。这就是强制类型转换要做的事情。</li>
+</ul>
+</li>
+<li><strong>Java 代码或伪代码</strong>：见第 6 节示例 2。</li>
+<li><strong>这个案例帮助理解什么</strong>：直观理解为什么低精度→高精度是&quot;自动&quot;的（安全），而高精度→低精度需要&quot;强制&quot;且可能丢失数据。</li>
+</ul>
+<h4>案例 2：矩阵与二维数组——结合线性代数</h4>
+<ul>
+<li><strong>案例名称</strong>：从矩阵到二维数组再到大数据</li>
+<li><strong>对应知识点</strong>：二维数组、行列下标、转置</li>
+<li><strong>案例背景</strong>：老师结合学生正在学习的线性代数课程，用矩阵概念解释二维数组并延伸到大数据的应用。</li>
+<li><strong>解决思路</strong>：<ol>
+<li>一个矩阵的行（row）和列（column）对应二维数组的两个维度。</li>
+<li>通过行列下标可以精确定位任意一个元素。</li>
+<li>将二维数组&quot;转置&quot;（行变列、列变行）后，每一列就变成了一个独立的信息单元（样本）。</li>
+<li>这种竖着排列的样本数据就是大数据分析中常见的数据格式——每一行是一个样本（一个人/一件事），每一列是一个特征（属性）。</li>
+</ol>
+</li>
+<li><strong>这个案例帮助理解什么</strong>：帮助学生将编程中的抽象概念（数组、下标、转置）与数学中学过的知识（矩阵、转置）以及专业方向（大数据）联系起来，理解数组为何重要。</li>
+</ul>
+<h4>案例 3：Scanner——键盘输入的秘密</h4>
+<ul>
+<li><strong>案例名称</strong>：为什么按下键盘、屏幕上就出现字？</li>
+<li><strong>对应知识点</strong>：输入输出概念、Scanner 类（课外拓展）</li>
+<li><strong>案例背景</strong>：老师引导学生思考&quot;为什么键盘按一个东西，屏幕上就出现一个东西？为什么鼠标单击、双击、右键的效果不同？&quot;</li>
+<li><strong>解决思路</strong>：这是因为有人提前将这些指令写到了程序里——每次按键触发对应的事件/方法。Scanner 类就是 Java 中用于&quot;扫描&quot;输入的工具，它可以扫描键盘输入或文件内容，然后逐一读取。</li>
+<li><strong>这个案例帮助理解什么</strong>：帮助学生建立&quot;一切交互背后都有代码支撑&quot;的思维。老师鼓励学生课后自学 Scanner 类（使用 AI 助手或百度），&quot;把它怎么写的搞清楚&quot;。</li>
+<li><strong>注意</strong>：本案例课堂上只是简单提及，未深入讲解代码。老师要求课后自学，下次实验课可能会检查。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：float 类型忘记加 f
+错误示例：
+float price = 9.99;        // 编译错误！
+
+正确写法：
+float price = 9.99f;
+
+解释：
+Java 中，小数默认是 double 类型（8 字节）。把 double 直接赋给 float（4 字节）是高精度→低精度，需要强制转换。如果不加 f，必须写：float price = (float) 9.99; 加上 f 是最简便的方式。
+
+
+易错点 2：数组下标从 0 开始，但初学者习惯从 1 开始
+错误示例：
+int[] arr = {10, 20, 30};
+System.out.println(arr[3]);   // 错误！下标最大是 2
+
+正确写法：
+System.out.println(arr[2]);   // 输出 30
+
+解释：
+长度为 3 的数组，下标范围是 0、1、2。arr[3] 访问的是第 4 个元素，不存在，会抛出 ArrayIndexOutOfBoundsException（数组下标越界异常）。
+
+
+易错点 3：强制类型转换时，以为会四舍五入
+错误示例：
+double price = 19.99;
+int p = (int) price;
+// 误以为 p = 20
+
+实际情况：
+p = 19（小数被直接截断，不是四舍五入）
+
+解释：
+Java 的强制类型转换是&quot;截断&quot;（truncate），不管小数部分多大，都直接去掉。要想四舍五入，需要使用 Math.round() 方法。
+
+
+易错点 4：char 用双引号，String 用单引号
+错误示例：
+char grade = &quot;A&quot;;       // char 不能用双引号
+String name = &#39;张三&#39;;   // String 不能用单引号
+
+正确写法：
+char grade = &#39;A&#39;;
+String name = &quot;张三&quot;;
+
+解释：
+单引号 &#39;&#39; 用于单个字符（char），双引号 &quot;&quot; 用于字符串（String）。这是 Java 的硬性语法规定。
+
+
+易错点 5：System.out 大小写错误
+错误示例：
+system.out.println(&quot;Hello&quot;);
+
+正确写法：
+System.out.println(&quot;Hello&quot;);
+
+解释：
+System 是一个类名，类名首字母必须大写。out 是一个对象名，全小写。println 是方法名，全小写。
+
+
+易错点 6：二维数组的行列搞反
+错误示例：
+int[][] arr = new int[3][4];
+arr[0][3] = 100;   // 本来想访问&quot;第 3 行第 0 列&quot;
+
+实际：
+arr[0][3] 是第 1 行第 4 列
+arr[3][0] 才是第 4 行第 1 列（但上例会越界，因为行只有 0~2）
+
+解释：
+二维数组的格式是 arr[行][列]，前面的下标是行，后面的下标是列。记住这个口诀：先写行，后写列。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：Java 中 boolean 类型有几个取值？
+
+A. 1 个
+B. 2 个
+C. 3 个
+D. 无限个
+
+正确答案：B
+
+解析：
+boolean 类型只有 true 和 false 两个取值。不能赋 null、0、1 等其他值。
+
+
+题目 2：以下类型转换中，哪个需要强制类型转换？
+
+A. int → double
+B. char → int
+C. double → int
+D. byte → short
+
+正确答案：C
+
+解析：
+double（64 位）→ int（32 位）是高精度向低精度转换，需要强制写 (int)。其余三项都是低→高，属于自动类型转换。
+
+
+题目 3：以下关于 float 类型的说法，正确的是？
+
+A. float 和 double 没有区别
+B. float 类型变量的值后面必须加字母 f 或 F
+C. float 比 double 占用的字节数更多
+D. Java 中 float 是默认的小数类型
+
+正确答案：B
+
+解析：
+float 占 4 字节，double 占 8 字节（排除 A、C）。Java 中小数默认是 double（排除 D）。float 的值后面必须加 f（如 3.14f）。
+
+
+题目 4：以下代码的输出结果是什么？
+
+double d = 1.999;
+int i = (int) d;
+System.out.println(i);
+
+A. 2
+B. 1
+C. 1.999
+D. 编译错误
+
+正确答案：B
+
+解析：
+强制类型转换 (int) 直接截断小数部分，不是四舍五入。所以 1.999 → 1。
+
+
+题目 5：一个长度为 5 的一维数组，最后一个元素的下标是？
+
+A. 5
+B. 4
+C. 3
+D. 0
+
+正确答案：B
+
+解析：
+数组下标从 0 开始。长度为 5 的数组，下标范围是 0、1、2、3、4。所以最后一个元素下标是 4（即第 5 个元素）。
+
+
+题目 6：在一维数组 int[] arr = {10, 20, 30, 40, 50}; 中，arr[1] 的值是多少？
+
+A. 10
+B. 20
+C. 30
+D. 编译错误
+
+正确答案：B
+
+解析：
+arr[0] = 10, arr[1] = 20, arr[2] = 30, arr[3] = 40, arr[4] = 50。下标从 0 开始，arr[1] 是第 2 个元素，值为 20。
+
+
+题目 7：以下哪个关于 char 和 String 的描述是正确的？
+
+A. char 用双引号，String 用单引号
+B. char 用单引号，String 用双引号
+C. char 和 String 都用双引号
+D. char 和 String 都用单引号
+
+正确答案：B
+
+解析：
+char（单字符）用单引号：&#39;A&#39;。
+String（字符串）用双引号：&quot;Hello&quot;。
+
+
+题目 8：以下哪个不是合法的 Java 标识符？
+
+A. _test
+B. $value
+C. 2name
+D. studentName
+
+正确答案：C
+
+解析：
+2name 以数字 2 开头，违反标识符&quot;首字符不能是数字&quot;的规则。其他三个都符合标识符规则。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. boolean —— 逻辑类型，只有 true 和 false 两个取值
+2. int —— 最常用的整数类型，占 4 字节（32 位）
+3. double —— 双精度浮点类型，小数默认类型，占 8 字节（64 位）
+4. float —— 单精度浮点类型，值后面必须加 f，占 4 字节
+5. char —— 字符类型，单引号，占 2 字节（16 位）
+6. 自动类型转换 —— 低精度类型转高精度类型时自动发生，无需特殊操作
+7. 强制类型转换 —— 高精度转低精度需手动写 (目标类型)，可能丢失数据
+8. 一维数组 —— 存储多个同类型数据的容器，通过下标访问，下标从 0 开始
+9. 二维数组 —— 类似表格/矩阵，有行和列两个维度，通过 arr[行][列] 访问
+10. println —— 输出内容后自动换行，ln 是 line 的缩写
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">类型转换的决策流程：
+
+1. 程序执行到赋值语句，右边有一个值要赋给左边的变量。
+2. 检查左边变量的类型和右边值的类型是否相同。
+3. 如果类型完全相同 → 直接赋值，无需转换。
+4. 如果类型不同 → 判断精度级别（byte &lt; short &lt; char &lt; int &lt; long &lt; float &lt; double）。
+5. 如果右边的精度 ≤ 左边的精度 → 自动类型转换（低→高，安全，自动完成）。
+6. 如果右边的精度 &gt; 左边的精度 → 不能自动转换，需要程序员手动写强制类型转换：(目标类型) 值。
+7. 强制转换时，如果涉及浮点转整数 → 小数部分直接截断（丢弃），不是四舍五入。
+8. 如果强制转换导致数据溢出 → 结果会出错（但编译器不报错，运行时可能产生意外值）。
+9. 转换完成后，程序继续执行后面的语句。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习 1：声明以下类型的变量并合理赋值，然后输出。
+
+(1) 一个 boolean 变量表示&quot;是否毕业&quot;
+(2) 一个 int 变量表示年龄
+(3) 一个 double 变量表示工资
+(4) 一个 char 变量表示性别（&#39;M&#39;/&#39;F&#39;）
+(5) 一个 float 变量表示身高（米）
+
+考查知识点：
+8 种基本数据类型、变量声明、输出语句
+
+参考答案：
+
+public class VariablePractice {
+    public static void main(String[] args) {
+        boolean isGraduated = false;
+        int age = 22;
+        double salary = 8500.50;
+        char gender = &#39;M&#39;;
+        float height = 1.75f;
+
+        System.out.println(&quot;是否毕业：&quot; + isGraduated);
+        System.out.println(&quot;年龄：&quot; + age);
+        System.out.println(&quot;工资：&quot; + salary);
+        System.out.println(&quot;性别：&quot; + gender);
+        System.out.println(&quot;身高：&quot; + height);
+    }
+}
+
+解题思路：
+每个变量按&quot;类型 变量名 = 值;&quot;的格式声明。特别注意 float 后面必须加 f。
+
+
+练习 2：写出以下每个强制类型转换的结果。
+
+(1) (int) 3.14
+(2) (int) 9.99
+(3) (int) -2.8
+(4) (double) 5
+
+考查知识点：
+强制类型转换、截断规则
+
+参考答案：
+(1) 3        （截断 .14）
+(2) 9        （截断 .99，不是 10）
+(3) -2       （截断 .8，向零取整）
+(4) 5.0      （int→double 是自动转换，变为 5.0）
+
+解题思路：
+浮点转整数 = 直接丢弃小数部分（向零取整）。整数转浮点 = 补充 .0。
+
+
+练习 3：声明一个一维数组，存放 5 个同学的名字，然后输出第 1 个和最后一个同学的名字。
+
+考查知识点：
+一维数组的声明、初始化、下标访问
+
+参考答案：
+
+public class NameArray {
+    public static void main(String[] args) {
+        String[] names = {&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;, &quot;赵六&quot;, &quot;钱七&quot;};
+
+        System.out.println(&quot;第 1 个同学：&quot; + names[0]);
+        System.out.println(&quot;最后一个同学：&quot; + names[4]);  // 下标 4 = 第 5 个
+    }
+}
+
+解题思路：
+1. 用花括号直接初始化数组。
+2. 第 1 个元素下标是 0。
+3. 第 5 个（最后一个）元素下标是 4（长度 5，下标范围 0~4）。
+
+
+练习 4：创建一个 3 行 2 列的二维数组，存入以下数据并按照表格格式输出：
+
+第 1 行：商品A，25.5
+第 2 行：商品B，30.0
+第 3 行：商品C，18.9
+
+考查知识点：
+二维数组、行列下标
+
+参考答案：
+
+public class ProductTable {
+    public static void main(String[] args) {
+        // 第 0 列存商品名，第 1 列存价格
+        String[][] products = {
+            {&quot;商品A&quot;, &quot;25.5&quot;},
+            {&quot;商品B&quot;, &quot;30.0&quot;},
+            {&quot;商品C&quot;, &quot;18.9&quot;}
+        };
+
+        System.out.println(&quot;商品名\t价格&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            System.out.println(products[i][0] + &quot;\t&quot; + products[i][1]);
+        }
+    }
+}
+
+解题思路：
+1. 二维数组 = 3 行 × 2 列。
+2. 每行的第 0 列是商品名，第 1 列是价格。
+3. 使用 for 循环遍历每一行，输出两列数据。
+
+
+练习 5：找出以下代码中的 5 处错误并修正。
+
+public class test {
+    public static void main(string[] args) {
+        float price = 9.99;
+        int 1score = 100;
+        char grade = &quot;A&quot;;
+        int[] arr = new int[3];
+        arr[3] = 10;
+        system.out.println(&quot;price: &quot; + price);
+    }
+}
+
+考查知识点：
+综合——类名规范、String 大小写、float 后缀、标识符规则、char 引号、数组下标、System 大小写
+
+参考答案：
+错误1：类名 test → Test（类名首字母大写）
+错误2：string[] args → String[] args（String 的 S 大写）
+错误3：float price = 9.99; → float price = 9.99f;（float 必须加 f）
+错误4：int 1score = 100; → int score1 = 100;（标识符不能以数字开头）
+错误5：char grade = &quot;A&quot;; → char grade = &#39;A&#39;;（char 用单引号）
+错误6：arr[3] = 10; → arr[2] = 10;（长度 3 的数组下标范围 0~2）
+错误7：system.out.println → System.out.println（System 的 S 大写）
+
+解题思路：
+逐行按 Java 语法规则检查，重点关注：大小写、后缀（f/L）、引号、标识符、数组下标边界。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Java 基本数据类型与数组入门
+├── 标识符
+│   ├── 定义规则：字母/下划线/$/数字组成
+│   ├── 首字符不能是数字
+│   └── 不能是关键字
+├── 关键字
+│   ├── 概念：Java 预定义的具有特殊含义的单词
+│   ├── 不能用作标识符
+│   └── 常见关键字：int、double、char、if、for、class、public...
+├── 基本数据类型（8 种 / 四大类）
+│   ├── 逻辑类型
+│   │   └── boolean（true / false）
+│   ├── 整数类型
+│   │   ├── byte（1 字节，8 位）
+│   │   ├── short（2 字节，16 位）
+│   │   ├── int（4 字节，32 位，最常用）
+│   │   └── long（8 字节，64 位，加 L）
+│   ├── 字符类型
+│   │   └── char（2 字节，16 位，单引号）
+│   └── 浮点类型
+│       ├── float（4 字节，32 位，加 f）
+│       └── double（8 字节，64 位，小数默认）
+├── 类型转换
+│   ├── 自动类型转换（低精度 → 高精度）
+│   │   └── 顺序：byte→short→char→int→long→float→double
+│   └── 强制类型转换（高精度 → 低精度）
+│       ├── 语法：(目标类型) 值
+│       └── 浮点→整数：截断，不是四舍五入
+├── 输出语句
+│   ├── System.out.print() —— 不换行
+│   ├── System.out.println() —— 自动换行（ln=line）
+│   └── 字符串拼接：用 + 号连接
+├── 数组
+│   ├── 一维数组
+│   │   ├── 声明：int[] arr = new int[长度];
+│   │   ├── 初始化：int[] arr = {值1, 值2, ...};
+│   │   └── 访问：arr[下标]（下标从 0 开始）
+│   └── 二维数组
+│       ├── 声明：int[][] arr = new int[行数][列数];
+│       ├── 初始化：int[][] arr = {{...}, {...}};
+│       ├── 访问：arr[行][列]
+│       └── 本质：一维数组的每个元素又是一个数组
+└── 学习方法
+    ├── 多敲代码（输入速度是基础）
+    ├── 遇到错误看红色叉叉的提示
+    ├── 不会的单词和错误提示用 AI 翻译理解
+    └── 先读别人的代码，再自己写
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>java-data-types-array</code></li>
+<li><strong>建议课程标题</strong>：Java 基本数据类型与数组入门</li>
+<li><strong>建议章节</strong>：Java 变量与数据类型</li>
+<li><strong>建议标签</strong>：<code>基本数据类型</code> <code>类型转换</code> <code>boolean</code> <code>int</code> <code>char</code> <code>float</code> <code>double</code> <code>数组</code> <code>二维数组</code></li>
+<li><strong>适合放入 summary 的内容</strong>：第 2 节课堂摘要 5 条</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：知识点 1-6 的核心概念和语法</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：第 6 节的 3 个代码示例（8 种类型演示、类型转换、二维数组成绩表）</li>
+<li><strong>适合放入 quiz 的内容</strong>：第 9 节的 8 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：第 10 节的 10 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：第 11 节的&quot;类型转换的决策流程&quot;</li>
+<li><strong>适合放入 exercises 的内容</strong>：第 12 节的 5 道练习题（含综合查错题）</li>
+<li><strong>适合放入 conclusion 的内容</strong>：第 15 节课后总结</li>
+<li><strong>额外建议</strong>：&quot;胖人坐瘦椅子&quot;的比喻适合做成插图，二维数组→矩阵→大数据的链路适合做成一页关系图</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是掌握 Java 的 8 种基本数据类型（按四大类记忆）以及两种类型转换方式（自动和强制）。这些是 Java 语法中最基础也最常用的内容。
+2. 学习 Java 时要特别注意几个细节：float 的值后面必须加 f、数组下标从 0 开始、强制类型转换是截断而不是四舍五入——这些是初学者最容易出错的地方，也是考试的重点。
+3. 通过本节课，应该能够熟练声明各种基本类型的变量、在类型之间进行合理转换、使用一维数组和二维数组存取数据。
+4. 类型转换的知识在后面学习方法的参数传递、面向对象的多态时都会用到。数组是后续学习 for 循环遍历、集合框架（ArrayList、HashMap）以及数据结构的基础。
+5. 课后建议多练习：(1) 把 8 种基本类型全部声明一遍并输出；(2) 做几个强制类型转换的练习（特别是浮点转整数）；(3) 创建一个二维数组存入真实数据（如课表、成绩表）并输出；(4) 自学 Scanner 类，尝试从键盘读取输入。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-02.html"><span>上一篇</span><strong>Java编程基础及面向对象入门</strong></a><a class="article-pager-link next" rel="next" href="java-04.html"><span>下一篇</span><strong>数组维度与引用类型详解</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

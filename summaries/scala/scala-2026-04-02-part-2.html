@@ -1,0 +1,1736 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结：2026 04 02 Scala 与 Java 的编程知识讲解 1. 课程基本信息 课程 ID 建议： scala class object field constructor java compare 课程标题： 2026 04 02 Scala 与 Java 的编程知识讲解 所属章节：" />
+  <title>Scala与Java编程知识对比 - 下 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-04-02-fields-constructors">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-04-02 · 下半节</p>
+      <h1>Scala与Java编程知识对比 - 下</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala与Java编程知识对比 - 下</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结：2026-04-02 Scala 与 Java 的编程知识讲解</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议：</strong> <code>scala-class-object-field-constructor-java-compare</code></li>
+<li><strong>课程标题：</strong> 2026-04-02 Scala 与 Java 的编程知识讲解</li>
+<li><strong>所属章节：</strong> Scala 类与对象、Scala 构造器</li>
+<li><strong>上课日期：</strong> 2026-04-02</li>
+<li><strong>知识点标签：</strong> Scala 类、Scala 对象、Java 对比、无参方法、访问器、修改器、字段、主构造器、辅助构造器、this、val、var、private</li>
+<li><strong>难度等级：</strong> 入门到初级</li>
+<li><strong>适合对象：</strong> 已学过 Java 类与对象基础，正在学习 Scala 面向对象语法的初学者</li>
+<li><strong>本节课一句话概括：</strong> 本节课通过和 Java 对比，讲解 Scala 中类、对象、字段、方法调用、访问器、修改器、主构造器和辅助构造器的写法与思想。</li>
+</ul>
+<blockquote>
+<p>说明：原始转写中存在若干识别错误，例如“辅路由器”“主路由器”根据上下文应为“辅助构造器”“主构造器”；“防器”根据上下文应理解为 Java 中的 getter/setter，Scala 中可整理为“访问器/修改器”。本总结已按 Scala 正确术语修正。</p>
+</blockquote>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先对比了 Java 和 Scala 中类与对象的组织方式，说明 Scala 中 <code>object</code> 常用作程序入口，而 <code>class</code> 更专注于描述对象的属性和行为。</li>
+<li>课堂中重点说明了 Scala 文件中可以定义多个类和多个对象，类与对象在概念上更加分离，不应把所有代码都堆在同一个类中。</li>
+<li>老师通过 Java 测试类和 Scala <code>object Main</code> 的对比，帮助学生理解程序入口 <code>main</code> 方法在两种语言中的使用差异。</li>
+<li>本节课讲解了 Scala 无参方法的写法和调用规则，并强调无参方法是否加括号应根据是否改变对象状态来判断。</li>
+<li>课堂中说明了 Scala 没有 Java 风格的 <code>++</code> 和 <code>--</code> 自增自减运算符，通常使用 <code>+= 1</code> 或自定义方法实现增加和减少。</li>
+<li>本节课重点讲解了 Scala 字段的特点：普通字段会自动生成访问器和修改器，<code>val</code> 字段只有访问器，<code>var</code> 字段既有访问器也有修改器。</li>
+<li>老师通过 Java 中手写 getter/setter 的例子，对比说明 Scala 可以用更少的代码表达相同含义。</li>
+<li>本节课最后讲解了主构造器和辅助构造器，说明 Scala 的主构造器直接写在类名之后，而辅助构造器必须通过 <code>this(...)</code> 调用已有构造器。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解 Scala 中 <code>class</code> 和 <code>object</code> 的区别，知道它们分别适合表示什么。</li>
+<li>能说明 Scala 程序入口通常写在 <code>object</code> 中，而不是像 Java 一样必须放在某个测试类里。</li>
+<li>能定义一个简单 Scala 类，并在对象中创建该类的实例。</li>
+<li>能理解 Scala 中方法默认是公有的，并知道方法有参和无参时调用方式的差异。</li>
+<li>能解释为什么 Scala 中没有 <code>++</code> 和 <code>--</code>，并能用 <code>+= 1</code> 或方法实现自增效果。</li>
+<li>能理解访问器和修改器的概念，知道它们分别对应 Java 中的 getter 和 setter。</li>
+<li>能区分 <code>val</code> 字段、<code>var</code> 字段和 <code>private</code> 字段在访问器/修改器上的差异。</li>
+<li>能使用 <code>class Person(val name: String, var age: Int)</code> 这样的主构造器写法定义类。</li>
+<li>能编写一个简单的辅助构造器，并知道辅助构造器第一行必须调用其他构造器。</li>
+<li>能从 Java 写法迁移到 Scala 写法，减少样板代码，写出更简洁的面向对象程序。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：Scala 中 class 和 object 的区别</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Scala 中：</p>
+<ul>
+<li><code>class</code> 用来定义类，是创建对象的模板。</li>
+<li><code>object</code> 用来定义单例对象，一个 <code>object</code> 在程序中只有一个实例。</li>
+<li>程序入口 <code>main</code> 方法通常写在 <code>object</code> 中。</li>
+<li>一个 Scala 源文件中可以同时定义多个 <code>class</code> 和多个 <code>object</code>。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>如果学过 Java，很容易把所有代码都写进一个类里。但 Scala 更强调“类是类，对象是对象”。理解 <code>class</code> 和 <code>object</code> 的区别，是学习 Scala 面向对象编程的基础。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Point {
+  var x: Int = 0
+  var y: Int = 0
+
+  def move(dx: Int, dy: Int): Unit = {
+    x = x + dx
+    y = y + dy
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Point()
+    p.move(2, 3)
+    println(p.x)
+    println(p.y)
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师强调：在 Scala 中，<code>Point</code> 类可以只负责坐标和移动方法，不需要把程序入口也放进去；程序入口可以单独放到一个 <code>object</code> 中。这样类的职责更干净，对象用于执行程序或组织工具方法。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 Java 的写法完全搬到 Scala 中，把所有内容都写到一个类里。</li>
+<li>不理解 <code>object Main</code> 是单例对象，以为它和 <code>class Main</code> 完全一样。</li>
+<li>忘记程序入口 <code>main</code> 方法通常写在 <code>object</code> 中。</li>
+<li>把 <code>class</code> 当作程序运行入口，而没有创建对象或定义 <code>main</code>。</li>
+<li>不知道一个 Scala 文件可以包含多个类和对象。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Student {
+  var name: String = &quot;未命名&quot;
+
+  def sayHello(): Unit = {
+    println(&quot;你好，我是 &quot; + name)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val stu = new Student()
+    stu.name = &quot;Tom&quot;
+    stu.sayHello()
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>class Student</code> 定义一个学生类。</li>
+<li><code>var name</code> 是学生对象的字段。</li>
+<li><code>sayHello()</code> 是学生对象的方法。</li>
+<li><code>object Main</code> 是程序入口所在的单例对象。</li>
+<li><code>new Student()</code> 创建一个学生对象。</li>
+<li><code>stu.sayHello()</code> 调用对象的方法。</li>
+</ol>
+<hr>
+<h4>知识点 2：Scala 程序入口与 Java 程序入口的对比</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中程序入口通常写成：</p>
+<pre><code class="language-java">public static void main(String[] args) {
+    // 程序入口
+}
+</code></pre>
+<p>Scala 中常见写法是：</p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    // 程序入口
+  }
+}
+</code></pre>
+<p>Scala 没有 Java 完全相同的 <code>static</code> 关键字，通常用 <code>object</code> 来放置程序入口或工具方法。</p>
+<h5>为什么要学它？</h5>
+<p>很多同学从 Java 转到 Scala 时，会想找 <code>static main</code>。实际上 Scala 的 <code>object</code> 承担了类似“静态入口”的角色。理解这一点可以帮助学生顺利运行 Scala 程序。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    println(&quot;Hello Scala&quot;)
+  }
+}
+</code></pre>
+<p>Scala 3 还支持更简洁的顶层入口写法，例如：</p>
+<pre><code class="language-scala">@main def run(): Unit = {
+  println(&quot;Hello Scala 3&quot;)
+}
+</code></pre>
+<blockquote>
+<p>如果课堂未明确 Scala 版本，建议先掌握通用写法：<code>object Main { def main(...) }</code>。</p>
+</blockquote>
+<h5>课堂中的理解方式</h5>
+<p>老师通过 Java 测试类和 Scala 对象对比说明：Java 中常把 <code>main</code> 放在测试类里运行；Scala 中可以把执行入口放在 <code>object</code> 里，而普通类只保留自己的属性和方法。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>在 Scala 中写 <code>public static void main</code>。</li>
+<li>忘记把 <code>main</code> 放进 <code>object</code> 中。</li>
+<li>把 <code>Array[String]</code> 写成 Java 风格 <code>String[]</code>。</li>
+<li>不理解 <code>Unit</code> 类似 Java 中的 <code>void</code>。</li>
+<li>只写了类，没有写入口对象，导致不知道如何运行程序。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object AppMain {
+  def main(args: Array[String]): Unit = {
+    println(&quot;程序开始运行&quot;)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>object AppMain</code> 定义程序入口对象。</li>
+<li><code>def main(args: Array[String]): Unit</code> 定义入口方法。</li>
+<li><code>Array[String]</code> 表示字符串数组参数。</li>
+<li><code>Unit</code> 表示该方法不返回有意义的值。</li>
+<li><code>println</code> 输出运行提示。</li>
+</ol>
+<hr>
+<h4>知识点 3：Scala 类中的字段必须初始化</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 中定义类字段时，通常需要给字段一个初始值，或者通过构造器参数传入。</p>
+<p>例如：</p>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+  var name: String = &quot;&quot;
+}
+</code></pre>
+<p>也可以写成：</p>
+<pre><code class="language-scala">class Person(var name: String, var age: Int)
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>字段表示对象的状态。例如学生有姓名，账户有余额，坐标点有 x 和 y。如果字段没有合理初始化，对象创建出来后就可能处于不完整状态。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 类名 {
+  var 字段名: 类型 = 初始值
+  val 常量字段名: 类型 = 初始值
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-scala">class Counter {
+  private var value: Int = 0
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师提到“声明属性时必须初始化字段”。也就是说，类里面的变量不能只写一个名字就结束，通常要么给初始值，要么通过构造器参数提供值。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>只声明字段，不初始化。</li>
+<li>忘记给字符串字段初始值。</li>
+<li>不知道可以通过主构造器参数初始化字段。</li>
+<li>把 <code>val</code> 字段当成后续可以修改的变量。</li>
+<li>以为 <code>private var value = 0</code> 外部可以直接访问。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Student {
+  var name: String = &quot;未命名&quot;
+  var score: Int = 0
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student()
+    println(s.name)
+    println(s.score)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>name</code> 字段初始化为 <code>&quot;未命名&quot;</code>。</li>
+<li><code>score</code> 字段初始化为 <code>0</code>。</li>
+<li><code>new Student()</code> 创建学生对象。</li>
+<li>输出字段时对象已经有默认状态。</li>
+</ol>
+<hr>
+<h4>知识点 4：无参方法与调用规则</h4>
+<h5>这个知识点是什么？</h5>
+<p>无参方法是没有参数的方法。Scala 中有两种常见写法：</p>
+<pre><code class="language-scala">def current: Int = value
+</code></pre>
+<p>或者：</p>
+<pre><code class="language-scala">def current(): Int = value
+</code></pre>
+<p>通常约定：</p>
+<ul>
+<li>不改变对象状态、只是取值的方法，推荐不写括号。</li>
+<li>会产生副作用或改变对象状态的方法，推荐写括号。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>Scala 的方法调用比 Java 灵活。如果不了解无参方法规则，容易在写代码时纠结“到底要不要写括号”。理解规则后，就能写出更符合 Scala 风格的代码。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def current: Int = value
+
+  def increment(): Unit = {
+    value = value + 1
+  }
+}
+</code></pre>
+<p>调用：</p>
+<pre><code class="language-scala">val c = new Counter()
+c.increment()
+println(c.current)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用“取值器”和“改值器”的思想解释括号：如果一个方法只是取当前值，不改变对象状态，可以不加括号；如果一个方法会改变对象状态，通常加括号，因为它更像一个动作。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把所有无参方法都强行加括号或都不加括号。</li>
+<li>定义 <code>def current: Int</code> 后调用时写成 <code>current()</code>。</li>
+<li>定义 <code>def increment(): Unit</code> 后忘记调用括号，导致风格不清晰。</li>
+<li>不理解“是否改变对象状态”是判断括号风格的重要依据。</li>
+<li>从 Java 迁移时误以为方法后面必须有括号。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def current: Int = value
+
+  def increment(): Unit = {
+    value = value + 1
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val counter = new Counter()
+
+    counter.increment()
+    println(counter.current)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>value</code> 是私有字段，外部不能直接访问。</li>
+<li><code>current</code> 只是读取当前值，所以定义为无括号方法。</li>
+<li><code>increment()</code> 会改变 <code>value</code>，所以保留括号。</li>
+<li><code>counter.increment()</code> 让计数器加一。</li>
+<li><code>counter.current</code> 读取当前值。</li>
+</ol>
+<hr>
+<h4>知识点 5：Scala 没有 Java 风格的 <code>++</code> 和 <code>--</code></h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中常见自增自减写法：</p>
+<pre><code class="language-java">i++;
+i--;
+</code></pre>
+<p>Scala 中没有内置的 <code>++</code> 和 <code>--</code> 自增自减运算符。通常可以写成：</p>
+<pre><code class="language-scala">i += 1
+i -= 1
+</code></pre>
+<p>前提是 <code>i</code> 必须是 <code>var</code>。</p>
+<h5>为什么要学它？</h5>
+<p>很多 Java 初学者会习惯写 <code>i++</code>，但这在 Scala 中不能这样使用。掌握 Scala 的写法可以避免编译错误。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">var i = 0
+
+i += 1
+i -= 1
+</code></pre>
+<p>也可以在类中自定义方法：</p>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def increment(): Unit = {
+    value += 1
+  }
+
+  def decrement(): Unit = {
+    value -= 1
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师提到 Scala 中没有“加加减减”，如果要实现加一或减一，可以自己定义 <code>increment</code> 或 <code>decrement</code> 方法。这也是面向对象中“把行为封装到方法里”的体现。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>在 Scala 中写 <code>i++</code>。</li>
+<li>对 <code>val</code> 使用 <code>+= 1</code>。</li>
+<li>忘记 <code>+=</code> 本质上需要重新赋值，因此变量要用 <code>var</code>。</li>
+<li>把 <code>++</code> 和集合拼接操作混淆。</li>
+<li>不会把自增逻辑封装进类的方法。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    var count = 0
+
+    count += 1
+    count += 1
+
+    println(count)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>var count = 0</code> 定义一个可变变量。</li>
+<li><code>count += 1</code> 表示让 <code>count</code> 增加 1。</li>
+<li>第二次 <code>count += 1</code> 后，值变成 2。</li>
+<li><code>println(count)</code> 输出最终结果。</li>
+</ol>
+<hr>
+<h4>知识点 6：访问器 Getter 与修改器 Setter</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Java 中，通常使用 getter 和 setter 访问或修改私有字段：</p>
+<pre><code class="language-java">getAge()
+setAge(int age)
+</code></pre>
+<p>在 Scala 中，字段会自动生成访问器和修改器：</p>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+}
+</code></pre>
+<p>外部可以写：</p>
+<pre><code class="language-scala">val p = new Person()
+p.age = 20
+println(p.age)
+</code></pre>
+<p>这看起来像直接访问字段，但底层思想上可以理解为通过访问器和修改器完成。</p>
+<h5>为什么要学它？</h5>
+<p>Scala 语法比 Java 简洁很多。理解自动访问器和修改器，可以避免写大量重复的 getter/setter，也能理解 <code>val</code>、<code>var</code>、<code>private</code> 的区别。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+}
+
+val p = new Person()
+p.age = 18      // 调用修改器
+println(p.age)  // 调用访问器
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 Java 中的 get/set 和 Scala 中的访问器/修改器进行对比：取值器不改变对象状态，类似 get；改值器改变对象状态，类似 set。Scala 会自动生成这些方法，所以代码更短。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>认为 <code>p.age</code> 一定是直接访问字段，忽略了 Scala 自动访问器机制。</li>
+<li>对 <code>val</code> 字段进行赋值。</li>
+<li>不理解 <code>var</code> 字段既有访问器也有修改器。</li>
+<li>把 Java 的 <code>getAge()</code> 和 <code>setAge()</code> 原样照搬到 Scala 中。</li>
+<li>不知道可以自定义访问器和修改器来控制赋值规则。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val person = new Person()
+
+    person.age = 20
+    println(person.age)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>var age</code> 定义一个可变字段。</li>
+<li><code>person.age = 20</code> 修改年龄。</li>
+<li><code>println(person.age)</code> 获取年龄。</li>
+<li>Scala 自动处理访问和修改，不需要手写 <code>getAge</code> 和 <code>setAge</code>。</li>
+</ol>
+<hr>
+<h4>知识点 7：val 字段、var 字段和 private 字段</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 字段的访问方式和 <code>val</code>、<code>var</code>、<code>private</code> 有关：</p>
+<ul>
+<li><code>var</code> 公有字段：有公有访问器和公有修改器。</li>
+<li><code>val</code> 公有字段：只有公有访问器，没有修改器。</li>
+<li><code>private var</code> 字段：只能在类内部访问和修改，外部不能直接访问。</li>
+<li><code>private val</code> 字段：只能在类内部读取，外部不能直接访问。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>字段控制了对象的数据状态。哪些数据允许外部读？哪些允许外部改？这些都和封装有关。理解字段修饰方式，是后续学习封装、继承和面向对象设计的基础。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+  val birthYear: Int = 2000
+  private var secret: String = &quot;hidden&quot;
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师通过 Java 的 <code>private int age</code>、<code>getAge</code>、<code>setAge</code> 和 Scala 字段进行对比，说明 Scala 中字段虽然看起来简单，但编译后会自动生成相应方法。特别是 <code>val</code> 类似常量，不能修改，因此只有取值器，没有改值器。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>对 <code>val</code> 字段重新赋值。</li>
+<li>以为没有写 <code>public</code> 就不是公有的；Scala 中成员默认通常是公有的。</li>
+<li>认为 <code>private var</code> 外部也可以用 <code>对象.字段</code> 访问。</li>
+<li>不理解 <code>private</code> 的作用是限制访问范围。</li>
+<li>不知道 <code>var</code> 自动生成修改器，<code>val</code> 不生成修改器。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+  val species: String = &quot;Human&quot;
+  private var password: String = &quot;123456&quot;
+
+  def changePassword(newPassword: String): Unit = {
+    password = newPassword
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person()
+
+    p.age = 18
+    println(p.age)
+    println(p.species)
+
+    p.changePassword(&quot;abc888&quot;)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>age</code> 是 <code>var</code>，外部可以读写。</li>
+<li><code>species</code> 是 <code>val</code>，外部可以读取但不能重新赋值。</li>
+<li><code>password</code> 是私有字段，外部不能直接访问。</li>
+<li><code>changePassword</code> 提供了受控修改私有字段的方式。</li>
+</ol>
+<hr>
+<h4>知识点 8：自定义访问器和修改器</h4>
+<h5>这个知识点是什么？</h5>
+<p>有时候我们不希望外部随便修改字段。例如年龄不能变小，也不能是负数。这时可以把真实字段设为 <code>private</code>，再自定义访问器和修改器。</p>
+<p>Scala 中修改器的标准形式通常是：</p>
+<pre><code class="language-scala">def age_=(newValue: Int): Unit = {
+  // 修改逻辑
+}
+</code></pre>
+<p>访问器是：</p>
+<pre><code class="language-scala">def age: Int = privateAge
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>这可以帮助我们保护对象状态，避免不合理数据进入对象。例如年龄不能从 20 改成 10，分数不能超过 100，余额不能随便变成负数。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Person {
+  private var privateAge = 0
+
+  def age: Int = privateAge
+
+  def age_=(newValue: Int): Unit = {
+    if (newValue &gt;= privateAge) {
+      privateAge = newValue
+    }
+  }
+}
+</code></pre>
+<p>调用：</p>
+<pre><code class="language-scala">val p = new Person()
+p.age = 20
+println(p.age)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师举了年龄的例子：如果当前年龄是 20，下一年可以变成 21 或 22，但不应该突然变成 19。通过自定义修改器，可以在赋值时加入判断逻辑。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不知道 <code>age_=</code> 是 Scala 修改器的命名形式。</li>
+<li>忘记把真实字段设为 <code>private</code>。</li>
+<li>在自定义修改器中没有做任何判断，失去封装意义。</li>
+<li>把 <code>def age_=(...)</code> 写成普通方法后不会调用。</li>
+<li>误以为 <code>p.age = 20</code> 一定是直接修改字段，其实可能调用的是自定义修改器。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person {
+  private var privateAge = 0
+
+  def age: Int = privateAge
+
+  def age_=(newAge: Int): Unit = {
+    if (newAge &gt;= privateAge) {
+      privateAge = newAge
+    }
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person()
+
+    p.age = 20
+    println(p.age)
+
+    p.age = 18
+    println(p.age)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>privateAge</code> 是真实保存年龄的私有字段。</li>
+<li><code>def age</code> 是访问器，用来读取年龄。</li>
+<li><code>def age_=</code> 是修改器，用来控制年龄赋值。</li>
+<li>第一次 <code>p.age = 20</code> 可以成功。</li>
+<li>第二次 <code>p.age = 18</code> 不满足“新年龄不小于当前年龄”，所以不会修改。</li>
+<li>最后输出仍然是 <code>20</code>。</li>
+</ol>
+<hr>
+<h4>知识点 9：主构造器</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 的主构造器写在类名后面。类名后面的参数列表就是主构造器参数。</p>
+<p>例如：</p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int)
+</code></pre>
+<p>这行代码同时完成了：</p>
+<ol>
+<li>定义类 <code>Person</code>。</li>
+<li>定义主构造器参数 <code>name</code> 和 <code>age</code>。</li>
+<li>把 <code>name</code> 定义为只读字段。</li>
+<li>把 <code>age</code> 定义为可读可写字段。</li>
+</ol>
+<h5>为什么要学它？</h5>
+<p>Java 中需要写字段、构造方法、getter、setter；Scala 可以用主构造器把很多样板代码合并到一行。掌握主构造器，可以明显提高 Scala 代码的简洁性。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 类名(val 字段1: 类型, var 字段2: 类型)
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int)
+</code></pre>
+<p>使用：</p>
+<pre><code class="language-scala">val p = new Person(&quot;Tom&quot;, 18)
+println(p.name)
+p.age = 19
+println(p.age)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师强调：Scala 的类本身就可以看成主构造器，参数直接放在类名之后。和 Java 相比，Scala 不需要写一大堆字段、构造方法、get/set 方法，一行代码可以完成很多工作。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不知道类名后面的参数就是主构造器参数。</li>
+<li>忘记在参数前写 <code>val</code> 或 <code>var</code>，导致参数不一定成为可从外部访问的字段。</li>
+<li>对 <code>val name</code> 重新赋值。</li>
+<li>忘记创建对象时要传入主构造器要求的参数。</li>
+<li>把 Java 构造方法写法照搬到 Scala 中。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person(val name: String, var age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person(&quot;Tom&quot;, 18)
+
+    println(p.name)
+    println(p.age)
+
+    p.age = 19
+    println(p.age)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>class Person(val name: String, var age: Int)</code> 定义类和主构造器。</li>
+<li><code>val name</code> 生成只读字段。</li>
+<li><code>var age</code> 生成可读可写字段。</li>
+<li><code>new Person(&quot;Tom&quot;, 18)</code> 调用主构造器创建对象。</li>
+<li><code>p.age = 19</code> 修改可变字段。</li>
+</ol>
+<hr>
+<h4>知识点 10：辅助构造器</h4>
+<h5>这个知识点是什么？</h5>
+<p>辅助构造器是类中额外定义的构造器，用来提供更多创建对象的方式。Scala 中辅助构造器使用 <code>def this(...)</code> 定义。</p>
+<p>重要规则：</p>
+<pre><code class="language-text">辅助构造器的第一行必须调用同一个类中的其他构造器。
+</code></pre>
+<p>通常是调用主构造器：</p>
+<pre><code class="language-scala">def this() = {
+  this(&quot;未知&quot;, 0)
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>有时创建对象时参数不一定完整。例如有的人只知道姓名，不知道年龄；或者完全没有初始数据。辅助构造器可以提供多个构造对象的入口。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Person(val name: String, var age: Int) {
+  def this(name: String) = {
+    this(name, 0)
+  }
+
+  def this() = {
+    this(&quot;未知&quot;, 0)
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把辅助构造器和 Java 中多个构造方法进行类比。Scala 的主构造器在类名后面，辅助构造器放在类体里，用 <code>this</code> 表示调用当前类已有构造器。它和 Java 中构造器重载思想类似，但写法不同。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>辅助构造器第一行没有调用 <code>this(...)</code>。</li>
+<li>把辅助构造器写成 <code>def Person(...)</code>。</li>
+<li>忘记主构造器需要的参数。</li>
+<li>在调用其他构造器之前先写普通语句。</li>
+<li>不理解 <code>this(...)</code> 在辅助构造器中表示调用当前类的构造器。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person(val name: String, var age: Int) {
+  def this(name: String) = {
+    this(name, 0)
+  }
+
+  def this() = {
+    this(&quot;未命名&quot;, 0)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = new Person(&quot;Tom&quot;, 18)
+    val p2 = new Person(&quot;Jerry&quot;)
+    val p3 = new Person()
+
+    println(p1.name + &quot; &quot; + p1.age)
+    println(p2.name + &quot; &quot; + p2.age)
+    println(p3.name + &quot; &quot; + p3.age)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li>主构造器需要 <code>name</code> 和 <code>age</code>。</li>
+<li><code>def this(name: String)</code> 是一个只接收姓名的辅助构造器。</li>
+<li><code>this(name, 0)</code> 调用主构造器，并把年龄默认设为 <code>0</code>。</li>
+<li><code>def this()</code> 是无参辅助构造器。</li>
+<li><code>this(&quot;未命名&quot;, 0)</code> 调用主构造器设置默认姓名和年龄。</li>
+</ol>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>class</code></td>
+<td><code>object</code></td>
+<td><code>class</code> 是创建对象的模板；<code>object</code> 是单例对象，常用于程序入口</td>
+<td><code>class Person</code>；<code>object Main</code></td>
+</tr>
+<tr>
+<td>Java <code>static main</code></td>
+<td>Scala <code>object main</code></td>
+<td>Java 用 <code>static</code> 定义入口；Scala 常把入口放在 <code>object</code> 中</td>
+<td><code>public static void main</code>；<code>def main(args: Array[String])</code></td>
+</tr>
+<tr>
+<td>字段</td>
+<td>方法</td>
+<td>字段表示对象状态；方法表示对象行为</td>
+<td><code>var age = 0</code>；<code>def grow(): Unit = ...</code></td>
+</tr>
+<tr>
+<td>有参方法</td>
+<td>无参方法</td>
+<td>有参方法调用时需要传参数；无参方法不需要参数</td>
+<td><code>move(1, 2)</code>；<code>current</code></td>
+</tr>
+<tr>
+<td>取值器</td>
+<td>改值器</td>
+<td>取值器读取数据，不改变状态；改值器修改对象状态</td>
+<td><code>p.age</code>；<code>p.age = 20</code></td>
+</tr>
+<tr>
+<td><code>val</code> 字段</td>
+<td><code>var</code> 字段</td>
+<td><code>val</code> 只能读取，不能重新赋值；<code>var</code> 可以读取也可以修改</td>
+<td><code>val name</code>；<code>var age</code></td>
+</tr>
+<tr>
+<td>公有字段</td>
+<td>私有字段</td>
+<td>公有字段外部可访问；私有字段只能在类内部访问</td>
+<td><code>var age</code>；<code>private var password</code></td>
+</tr>
+<tr>
+<td><code>to</code></td>
+<td><code>this(...)</code></td>
+<td><code>to</code> 是区间方法；<code>this(...)</code> 在构造器中表示调用当前类构造器</td>
+<td><code>1 to 10</code>；<code>this(&quot;Tom&quot;, 18)</code></td>
+</tr>
+<tr>
+<td>主构造器</td>
+<td>辅助构造器</td>
+<td>主构造器写在类名后；辅助构造器写在类体中</td>
+<td><code>class Person(val name: String)</code>；<code>def this() = this(&quot;未知&quot;)</code></td>
+</tr>
+<tr>
+<td>Java getter/setter</td>
+<td>Scala 自动访问器/修改器</td>
+<td>Java 通常手写 get/set；Scala 字段可自动生成访问器和修改器</td>
+<td><code>getAge()</code>；<code>p.age</code></td>
+</tr>
+<tr>
+<td><code>++</code>/<code>--</code></td>
+<td><code>+= 1</code>/<code>-= 1</code></td>
+<td>Scala 没有 Java 风格自增自减运算符；通常使用复合赋值</td>
+<td>Java: <code>i++</code>；Scala: <code>i += 1</code></td>
+</tr>
+<tr>
+<td><code>Unit</code></td>
+<td><code>void</code></td>
+<td>Scala 的 <code>Unit</code> 类似 Java 的 <code>void</code>，表示没有有意义的返回值</td>
+<td><code>def f(): Unit</code>；<code>void f()</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：class 与 object 分开使用</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">class、object、程序入口、创建对象、调用方法
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Point {
+  var x: Int = 0
+  var y: Int = 0
+
+  def move(dx: Int, dy: Int): Unit = {
+    x = x + dx
+    y = y + dy
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val point = new Point()
+
+    point.move(3, 4)
+
+    println(point.x)
+    println(point.y)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">3
+4
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>class Point</code> 定义点类。</li>
+<li><code>x</code> 和 <code>y</code> 表示点的坐标。</li>
+<li><code>move(dx, dy)</code> 用来移动点的位置。</li>
+<li><code>object Main</code> 是程序入口。</li>
+<li><code>new Point()</code> 创建一个点对象。</li>
+<li><code>point.move(3, 4)</code> 调用移动方法。</li>
+<li>最后输出移动后的坐标。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 中普通类不一定要包含 main 方法；程序入口通常放到 object 中。
+</code></pre>
+<hr>
+<h4>示例 2：无参方法和有副作用方法的括号风格</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">无参方法、取值器思想、改值器思想、方法调用规则
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Counter {
+  private var value: Int = 0
+
+  def current: Int = value
+
+  def increment(): Unit = {
+    value += 1
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val counter = new Counter()
+
+    counter.increment()
+    counter.increment()
+
+    println(counter.current)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">2
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>value</code> 是私有字段，外部不能直接修改。</li>
+<li><code>current</code> 只是返回当前值，不改变状态，所以不写括号。</li>
+<li><code>increment()</code> 会让 <code>value</code> 加一，改变对象状态，所以保留括号。</li>
+<li>调用两次 <code>increment()</code> 后，当前值变成 <code>2</code>。</li>
+<li><code>println(counter.current)</code> 输出当前值。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 代码中，是否写括号不仅是语法问题，也体现方法是否像“动作”。
+</code></pre>
+<hr>
+<h4>示例 3：字段自动生成访问器和修改器</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">var 字段、访问器、修改器、Java getter/setter 对比
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Person {
+  var age: Int = 0
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val person = new Person()
+
+    person.age = 18
+    println(person.age)
+
+    person.age = 19
+    println(person.age)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">18
+19
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>var age: Int = 0</code> 定义可变字段。</li>
+<li>Scala 会自动提供读取和修改该字段的能力。</li>
+<li><code>person.age = 18</code> 修改字段值。</li>
+<li><code>println(person.age)</code> 读取字段值。</li>
+<li>再次赋值为 <code>19</code> 后，输出新的值。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 中不一定需要像 Java 那样手写 getAge 和 setAge，普通 var 字段会自动提供类似功能。
+</code></pre>
+<hr>
+<h4>示例 4：自定义年龄修改规则</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">private 字段、自定义访问器、自定义修改器、封装
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Person {
+  private var privateAge = 0
+
+  def age: Int = privateAge
+
+  def age_=(newAge: Int): Unit = {
+    if (newAge &gt;= privateAge) {
+      privateAge = newAge
+    }
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val person = new Person()
+
+    person.age = 20
+    println(person.age)
+
+    person.age = 18
+    println(person.age)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">20
+20
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>privateAge</code> 是私有字段，只能在类内部访问。</li>
+<li><code>def age</code> 提供读取年龄的方式。</li>
+<li><code>def age_=</code> 提供修改年龄的方式。</li>
+<li>只有新年龄不小于当前年龄时才允许修改。</li>
+<li>第一次设置为 <code>20</code> 成功。</li>
+<li>第二次设置为 <code>18</code> 被忽略，所以仍输出 <code>20</code>。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">自定义修改器可以用来检查数据是否合法，这就是封装思想的一种体现。
+</code></pre>
+<hr>
+<h4>示例 5：主构造器定义 Person 类</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">主构造器、val 字段、var 字段、对象创建
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val person = new Person(&quot;Tom&quot;, 18)
+
+    println(person.name)
+    println(person.age)
+
+    person.age = 19
+    println(person.age)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">Tom
+18
+19
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>class Person(val name: String, var age: Int)</code> 定义类和主构造器。</li>
+<li><code>val name</code> 表示姓名只能读取，不能重新赋值。</li>
+<li><code>var age</code> 表示年龄可以读取和修改。</li>
+<li><code>new Person(&quot;Tom&quot;, 18)</code> 创建对象时传入姓名和年龄。</li>
+<li>修改 <code>age</code> 后输出新年龄。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">主构造器参数前写 val 或 var，会让该参数成为对象字段。
+</code></pre>
+<hr>
+<h4>示例 6：辅助构造器提供多种创建对象方式</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">辅助构造器、this、构造器重载、默认值
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Student(val name: String, var score: Int) {
+  def this(name: String) = {
+    this(name, 0)
+  }
+
+  def this() = {
+    this(&quot;未命名&quot;, 0)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s1 = new Student(&quot;Alice&quot;, 95)
+    val s2 = new Student(&quot;Bob&quot;)
+    val s3 = new Student()
+
+    println(s1.name + &quot;: &quot; + s1.score)
+    println(s2.name + &quot;: &quot; + s2.score)
+    println(s3.name + &quot;: &quot; + s3.score)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">Alice: 95
+Bob: 0
+未命名: 0
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li>主构造器接收姓名和分数。</li>
+<li>第一个辅助构造器只接收姓名，分数默认为 <code>0</code>。</li>
+<li>第二个辅助构造器不接收参数，姓名默认为“未命名”，分数默认为 <code>0</code>。</li>
+<li>每个辅助构造器第一行都调用了 <code>this(...)</code>。</li>
+<li>三种方式都可以创建 <code>Student</code> 对象。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 辅助构造器的第一行必须调用当前类的其他构造器，这是考试和编程中都很容易错的点。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：用 Point 类表示坐标点</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">class、字段、方法、object 程序入口
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到 <code>Point</code> 类可以只保留坐标和移动方法，类本身保持“干净”，程序入口放在另外的对象中。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义 <code>Point</code> 类。</li>
+<li>在类中定义 <code>x</code>、<code>y</code> 两个坐标字段。</li>
+<li>定义 <code>move</code> 方法修改坐标。</li>
+<li>在 <code>object Main</code> 中创建对象并调用方法。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Point {
+  var x = 0
+  var y = 0
+
+  def move(dx: Int, dy: Int): Unit = {
+    x += dx
+    y += dy
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Point()
+    p.move(5, 2)
+    println(&quot;x = &quot; + p.x)
+    println(&quot;y = &quot; + p.y)
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解类负责描述对象的属性和行为，<code>object Main</code> 负责运行程序，两者职责可以分开。</p>
+<hr>
+<h4>案例 2：计数器 Counter</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">private 字段、无参方法、increment、无 ++ 运算符
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中讲到 Scala 没有 <code>++</code> 和 <code>--</code>，如果要让某个值增加或减少，可以定义方法实现。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义 <code>Counter</code> 类。</li>
+<li>使用私有字段保存当前计数。</li>
+<li>定义 <code>increment()</code> 方法让计数加一。</li>
+<li>定义 <code>current</code> 方法读取当前计数。</li>
+<li>在程序入口中创建计数器并测试。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def increment(): Unit = {
+    value += 1
+  }
+
+  def decrement(): Unit = {
+    value -= 1
+  }
+
+  def current: Int = value
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Counter()
+
+    c.increment()
+    c.increment()
+    c.decrement()
+
+    println(c.current)
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解 Scala 中用方法封装对象行为，而不是依赖 Java 风格的 <code>++</code> 或 <code>--</code>。</p>
+<hr>
+<h4>案例 3：年龄只能增加的 Person 类</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">封装、private 字段、自定义访问器、自定义修改器
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到年龄一般不能变小，例如一个人 20 岁之后不应该突然变成 18 岁。可以通过自定义修改器控制赋值。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>使用私有字段保存真实年龄。</li>
+<li>提供访问器读取年龄。</li>
+<li>提供修改器设置年龄。</li>
+<li>在修改器中判断新年龄是否合理。</li>
+<li>不合理的年龄不允许更新。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Person {
+  private var privateAge = 0
+
+  def age: Int = privateAge
+
+  def age_=(newAge: Int): Unit = {
+    if (newAge &gt;= privateAge) {
+      privateAge = newAge
+    }
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解 getter/setter 不只是形式，也可以加入数据校验，保护对象内部状态。</p>
+<hr>
+<h4>课堂补充说明：AI 编程工具与学习边界</h4>
+<p>原始课堂中有较长一段关于 AI 编程工具、插件、自动生成代码和权限风险的讨论。该内容不是本节 Scala 主线知识，但可以作为课堂补充说明保留。</p>
+<ul>
+<li><strong>学习建议：</strong> AI 可以提高编程效率，但前提是学生需要先理解基础语法和编程思想，否则即使生成了代码也看不懂、改不动。</li>
+<li><strong>风险提醒：</strong> 使用自动化工具或插件时，要注意权限边界，尤其不要随意授权与金钱、账户、隐私数据相关的操作。</li>
+<li><strong>与本课关系：</strong> 本节课仍应以掌握 Scala 的类、对象、字段和构造器为主，AI 工具只适合作为辅助，不应替代基础学习。</li>
+<li><strong>适合后续展示位置：</strong> 可在课程网站中作为“课堂补充”或“学习提醒”，不放入 Scala 核心知识点。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<h4>易错点 1：在 Scala 中写 Java 风格的 main 方法</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Main {
+  public static void main(String[] args) {
+    println(&quot;Hello&quot;)
+  }
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    println(&quot;Hello&quot;)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 中常把程序入口写在 <code>object</code> 中，参数类型写成 <code>Array[String]</code>，返回类型通常是 <code>Unit</code>。</p>
+<hr>
+<h4>易错点 2：把 class 当成 object 使用</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Main {
+  def main(args: Array[String]): Unit = {
+    println(&quot;Hello&quot;)
+  }
+}
+</code></pre>
+<p>然后直接运行 <code>Main</code>，可能无法作为预期入口运行。</p>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">object Main {
+  def main(args: Array[String]): Unit = {
+    println(&quot;Hello&quot;)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>class</code> 是模板，需要创建对象；<code>object</code> 是单例对象，适合作为程序入口。</p>
+<hr>
+<h4>易错点 3：在 Scala 中使用 <code>i++</code></h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">var i = 0
+i++
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">var i = 0
+i += 1
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 没有 Java 风格的 <code>++</code> 自增运算符。需要增加变量值时，可以使用 <code>+= 1</code>。</p>
+<hr>
+<h4>易错点 4：对 val 字段重新赋值</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+val p = new Person(&quot;Tom&quot;)
+p.name = &quot;Jerry&quot;
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person(var name: String)
+
+val p = new Person(&quot;Tom&quot;)
+p.name = &quot;Jerry&quot;
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>val</code> 字段只读，不能重新赋值。如果确实需要修改，应使用 <code>var</code>。</p>
+<hr>
+<h4>易错点 5：辅助构造器第一行没有调用 this</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int) {
+  def this() = {
+    println(&quot;创建对象&quot;)
+    this(&quot;未命名&quot;, 0)
+  }
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int) {
+  def this() = {
+    this(&quot;未命名&quot;, 0)
+    println(&quot;创建对象&quot;)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 辅助构造器的第一行必须调用同一个类中的其他构造器，通常是 <code>this(...)</code>。</p>
+<hr>
+<h4>易错点 6：忘记主构造器参数前的 val 或 var</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person(name: String, age: Int)
+
+val p = new Person(&quot;Tom&quot;, 18)
+println(p.name)
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int)
+
+val p = new Person(&quot;Tom&quot;, 18)
+println(p.name)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>主构造器参数前没有 <code>val</code> 或 <code>var</code> 时，它通常只是构造器参数，不一定成为外部可访问字段。要让外部能访问，应写 <code>val</code> 或 <code>var</code>。</p>
+<hr>
+<h4>易错点 7：误以为 private 字段外部可以直接访问</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person {
+  private var age = 0
+}
+
+val p = new Person()
+println(p.age)
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person {
+  private var privateAge = 0
+
+  def age: Int = privateAge
+}
+
+val p = new Person()
+println(p.age)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>private</code> 字段只能在类内部访问。如果外部需要读取，可以提供访问器方法。</p>
+<hr>
+<h4>易错点 8：把取值方法写成会修改状态的方法</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def current: Int = {
+    value += 1
+    value
+  }
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def current: Int = value
+
+  def increment(): Unit = {
+    value += 1
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>current</code> 听起来是取当前值，不应该偷偷修改对象状态。改变状态的行为应放在类似 <code>increment()</code> 的方法中。</p>
+<hr>
+<h3>9. 小测验题目</h3>
+<h4>题目 1：Scala 中通常把程序入口 <code>main</code> 方法放在哪里？</h4>
+<p>A. <code>trait</code> 中<br>B. <code>object</code> 中<br>C. <code>package</code> 后面直接写 Java main<br>D. 只能放在抽象类中</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中常用 <code>object Main</code> 作为程序入口所在的单例对象，然后在其中定义 <code>def main(args: Array[String]): Unit</code>。</p>
+<hr>
+<h4>题目 2：下面哪个说法正确？</h4>
+<p>A. Scala 的 <code>class</code> 和 <code>object</code> 完全一样<br>B. <code>class</code> 是类模板，<code>object</code> 是单例对象<br>C. <code>object</code> 必须使用 <code>new</code> 创建<br>D. Scala 中不能定义多个类</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>class</code> 用于定义创建对象的模板，<code>object</code> 定义单例对象，不需要使用 <code>new</code> 创建。</p>
+<hr>
+<h4>题目 3：下面哪个是 Scala 中正确的自增写法？</h4>
+<p>A. <code>i++</code><br>B. <code>++i</code><br>C. <code>i += 1</code><br>D. <code>i =+ 1</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 没有 Java 风格的 <code>++</code>，可以使用 <code>i += 1</code>，但 <code>i</code> 必须是 <code>var</code>。</p>
+<hr>
+<h4>题目 4：<code>class Person(val name: String, var age: Int)</code> 中，哪个字段可以重新赋值？</h4>
+<p>A. <code>name</code><br>B. <code>age</code><br>C. 两个都不能<br>D. 两个都必须用 <code>private</code> 才能访问</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>val name</code> 是只读字段，不能重新赋值；<code>var age</code> 是可变字段，可以修改。</p>
+<hr>
+<h4>题目 5：关于辅助构造器，下面说法正确的是？</h4>
+<p>A. 辅助构造器必须命名为类名<br>B. 辅助构造器使用 <code>def this(...)</code> 定义<br>C. 辅助构造器可以完全不调用其他构造器<br>D. 辅助构造器只能有一个</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 辅助构造器使用 <code>def this(...)</code> 定义，并且第一行必须调用当前类的其他构造器。</p>
+<hr>
+<h4>题目 6：下面哪个方法更适合不写括号？</h4>
+<p>A. 会修改余额的 <code>deposit()</code><br>B. 会打印日志的 <code>save()</code><br>C. 只读取当前值的 <code>current</code><br>D. 会删除文件的 <code>delete()</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中不改变对象状态、只是取值的方法通常可以不写括号；会产生副作用的方法通常写括号。</p>
+<hr>
+<h4>题目 7：<code>private var age = 0</code> 的主要作用是什么？</h4>
+<p>A. 让字段只能在类内部访问<br>B. 让字段变成常量<br>C. 让字段自动变成字符串<br>D. 让字段必须在 object 中访问</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>private</code> 用来限制访问范围，使字段不能被外部对象直接访问。</p>
+<hr>
+<h4>题目 8：关于 <code>val</code> 字段，下面说法正确的是？</h4>
+<p>A. 既有访问器也有修改器<br>B. 只有访问器，没有修改器<br>C. 只能定义在 object 中<br>D. 必须手动写 getter</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>val</code> 字段是只读的，因此外部只能读取，不能重新赋值，所以没有修改器。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<ol>
+<li><code>class</code> —— 定义创建对象的模板</li>
+<li><code>object</code> —— 定义单例对象</li>
+<li><code>main</code> —— 程序入口方法</li>
+<li><code>Unit</code> —— 表示没有有意义的返回值</li>
+<li><code>var</code> —— 定义可重新赋值的字段</li>
+<li><code>val</code> —— 定义不可重新赋值的字段</li>
+<li><code>private</code> —— 限制成员只能在内部访问</li>
+<li>访问器 —— 用来读取字段值</li>
+<li>修改器 —— 用来修改字段值</li>
+<li><code>this</code> —— 表示当前对象或调用当前类构造器</li>
+<li>主构造器 —— 写在类名后面的构造器</li>
+<li>辅助构造器 —— 使用 <code>def this(...)</code> 定义的构造器</li>
+<li><code>+= 1</code> —— Scala 中常见的加一写法</li>
+<li><code>age_=</code> —— Scala 修改器的底层命名形式</li>
+<li><code>new</code> —— 创建类的实例对象</li>
+</ol>
+<hr>
+<h3>11. 流程动画素材</h3>
+<h4>流程主题：使用辅助构造器创建对象</h4>
+<pre><code class="language-text">1. 程序执行到 new Person()。
+2. Scala 发现调用的是无参辅助构造器 def this()。
+3. 程序进入辅助构造器。
+4. 辅助构造器第一行调用 this(&quot;未命名&quot;, 0)。
+5. this(&quot;未命名&quot;, 0) 调用主构造器。
+6. 主构造器为 name 字段赋值为 &quot;未命名&quot;。
+7. 主构造器为 age 字段赋值为 0。
+8. 主构造器执行完成后，回到辅助构造器。
+9. 辅助构造器剩余代码继续执行。
+10. 对象创建完成，程序得到一个 Person 实例。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<h4>练习 1：定义一个 Student 类并创建对象</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个 <code>Student</code> 类，包含可变字段 <code>name</code> 和 <code>score</code>，然后在 <code>object Main</code> 中创建对象，修改字段并输出。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">class、object、var 字段、创建对象、字段访问
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Student {
+  var name: String = &quot;未命名&quot;
+  var score: Int = 0
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student()
+
+    s.name = &quot;Tom&quot;
+    s.score = 90
+
+    println(s.name)
+    println(s.score)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>先定义类和字段，再在入口对象中使用 <code>new</code> 创建对象，最后通过对象名访问和修改字段。</p>
+<hr>
+<h4>练习 2：实现一个计数器 Counter</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个 <code>Counter</code> 类，包含私有字段 <code>value</code>，提供 <code>increment()</code> 方法加一，提供 <code>current</code> 方法读取当前值。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">private 字段、无参方法、increment、访问器思想
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Counter {
+  private var value = 0
+
+  def increment(): Unit = {
+    value += 1
+  }
+
+  def current: Int = value
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Counter()
+
+    c.increment()
+    c.increment()
+
+    println(c.current)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>使用私有字段保存内部状态，用方法控制状态变化，用无括号方法读取当前状态。</p>
+<hr>
+<h4>练习 3：使用主构造器定义 Person</h4>
+<p><strong>题目：</strong></p>
+<p>使用主构造器定义 <code>Person</code> 类，姓名为只读字段，年龄为可变字段。创建一个对象，输出姓名和年龄，然后修改年龄再输出。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">主构造器、val、var、字段访问与修改
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person(&quot;Alice&quot;, 18)
+
+    println(p.name)
+    println(p.age)
+
+    p.age = 19
+    println(p.age)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>主构造器参数前写 <code>val</code> 表示只读字段，写 <code>var</code> 表示可变字段。创建对象时传入对应参数。</p>
+<hr>
+<h4>练习 4：为 Person 添加辅助构造器</h4>
+<p><strong>题目：</strong></p>
+<p>定义 <code>Person</code> 类，主构造器接收 <code>name</code> 和 <code>age</code>。添加一个只接收 <code>name</code> 的辅助构造器，默认年龄为 <code>0</code>。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">辅助构造器、this、构造器重载
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Person(val name: String, var age: Int) {
+  def this(name: String) = {
+    this(name, 0)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p1 = new Person(&quot;Tom&quot;, 18)
+    val p2 = new Person(&quot;Jerry&quot;)
+
+    println(p1.name + &quot; &quot; + p1.age)
+    println(p2.name + &quot; &quot; + p2.age)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>辅助构造器用 <code>def this(name: String)</code> 定义，并在第一行调用主构造器 <code>this(name, 0)</code>。</p>
+<hr>
+<h4>练习 5：限制年龄不能变小</h4>
+<p><strong>题目：</strong></p>
+<p>定义一个 <code>Person</code> 类，年龄字段为私有。提供访问器读取年龄，提供修改器设置年龄，但只有新年龄大于等于当前年龄时才允许修改。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">private 字段、自定义访问器、自定义修改器、if 判断
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Person {
+  private var privateAge = 0
+
+  def age: Int = privateAge
+
+  def age_=(newAge: Int): Unit = {
+    if (newAge &gt;= privateAge) {
+      privateAge = newAge
+    }
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person()
+
+    p.age = 20
+    println(p.age)
+
+    p.age = 15
+    println(p.age)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>真实年龄用私有字段保存，对外暴露 <code>age</code> 和 <code>age_=</code>。在修改器中加入判断，保护对象状态。</p>
+<hr>
+<h4>练习 6：对比 Java getter/setter 与 Scala 字段写法</h4>
+<p><strong>题目：</strong></p>
+<p>用 Scala 定义一个 <code>Book</code> 类，包含可变字段 <code>price</code> 和只读字段 <code>title</code>，并说明它相当于 Java 中哪些 getter/setter 行为。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">val、var、访问器、修改器、Java 对比
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Book(val title: String, var price: Double)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val book = new Book(&quot;Scala 入门&quot;, 59.9)
+
+    println(book.title)
+    println(book.price)
+
+    book.price = 49.9
+    println(book.price)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p><code>val title</code> 表示只有读取能力，类似只有 getter；<code>var price</code> 表示可以读取和修改，类似既有 getter 又有 setter。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 与 Java 的类和对象对比
+├── class 与 object
+│   ├── class
+│   │   ├── 创建对象的模板
+│   │   ├── 保存字段
+│   │   └── 定义方法
+│   └── object
+│       ├── 单例对象
+│       ├── 常作程序入口
+│       └── 可放 main 方法
+├── 程序入口
+│   ├── Java
+│   │   └── public static void main
+│   └── Scala
+│       ├── object Main
+│       └── def main(args: Array[String]): Unit
+├── 方法
+│   ├── 有参方法
+│   │   └── 调用时传入参数
+│   ├── 无参方法
+│   │   ├── 可写无括号形式
+│   │   └── 常用于取值
+│   └── 改变状态的方法
+│       └── 通常保留括号
+├── 自增自减
+│   ├── Java
+│   │   ├── i++
+│   │   └── i--
+│   └── Scala
+│       ├── i += 1
+│       ├── i -= 1
+│       └── 自定义 increment/decrement 方法
+├── 字段与封装
+│   ├── var 字段
+│   │   ├── 有访问器
+│   │   └── 有修改器
+│   ├── val 字段
+│   │   ├── 有访问器
+│   │   └── 无修改器
+│   ├── private 字段
+│   │   └── 外部不能直接访问
+│   └── 自定义访问器/修改器
+│       ├── def age
+│       └── def age_=
+├── 构造器
+│   ├── 主构造器
+│   │   ├── 写在类名后
+│   │   ├── 参数可用 val/var 修饰
+│   │   └── 可自动生成字段访问能力
+│   └── 辅助构造器
+│       ├── def this(...)
+│       ├── 第一行必须调用其他构造器
+│       └── 可提供多种创建对象方式
+└── Java 与 Scala 写法差异
+    ├── Scala 更简洁
+    ├── 自动生成访问器和修改器
+    ├── 类和程序入口职责更分离
+    └── 需要遵守 Scala 的括号和构造器规则
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID：</strong> <code>scala-class-object-field-constructor-java-compare</code></li>
+<li><strong>建议课程标题：</strong> 2026-04-02 Scala 与 Java 的编程知识讲解</li>
+<li><strong>建议章节：</strong> Scala 类与对象、Scala 构造器</li>
+<li><strong>建议标签：</strong><ul>
+<li>Scala class</li>
+<li>Scala object</li>
+<li>Java 对比</li>
+<li>main 方法</li>
+<li>字段</li>
+<li>Getter</li>
+<li>Setter</li>
+<li>访问器</li>
+<li>修改器</li>
+<li>主构造器</li>
+<li>辅助构造器</li>
+<li>this</li>
+<li>val</li>
+<li>var</li>
+<li>private</li>
+</ul>
+</li>
+<li><strong>适合放入 summary 的内容：</strong><ul>
+<li>本节课通过 Java 与 Scala 对比，讲解 Scala 类、对象、字段和构造器的核心写法。</li>
+<li>Scala 中 <code>object</code> 常作为程序入口，<code>class</code> 专注描述对象属性和行为。</li>
+<li>Scala 字段会自动生成访问器和修改器，使代码比 Java getter/setter 更简洁。</li>
+<li>主构造器写在类名后，辅助构造器用 <code>def this(...)</code> 定义。</li>
+</ul>
+</li>
+<li><strong>适合放入 keyPoints 的内容：</strong><ul>
+<li><code>class</code> 是模板，<code>object</code> 是单例对象。</li>
+<li>Scala 程序入口通常写在 <code>object Main</code> 中。</li>
+<li>Scala 没有 Java 风格的 <code>++</code> 和 <code>--</code>。</li>
+<li><code>var</code> 字段有访问器和修改器。</li>
+<li><code>val</code> 字段只有访问器。</li>
+<li>辅助构造器第一行必须调用其他构造器。</li>
+<li>主构造器参数写在类名之后。</li>
+</ul>
+</li>
+<li><strong>适合放入 codeExamples 的内容：</strong><ul>
+<li><code>class Point</code> 与 <code>object Main</code> 分离。</li>
+<li><code>Counter</code> 计数器示例。</li>
+<li><code>Person</code> 字段访问器和修改器示例。</li>
+<li>自定义年龄修改规则示例。</li>
+<li>主构造器和辅助构造器示例。</li>
+</ul>
+</li>
+<li><strong>适合放入 quiz 的内容：</strong><ul>
+<li><code>class</code> 与 <code>object</code> 区别。</li>
+<li>Scala 程序入口写法。</li>
+<li><code>val</code> 和 <code>var</code> 字段差异。</li>
+<li>辅助构造器规则。</li>
+<li>Scala 自增写法。</li>
+<li>访问器和修改器概念。</li>
+</ul>
+</li>
+<li><strong>适合放入 dragMatch 的内容：</strong><ul>
+<li><code>class</code> —— 定义对象模板</li>
+<li><code>object</code> —— 定义单例对象</li>
+<li><code>var</code> —— 可变字段</li>
+<li><code>val</code> —— 只读字段</li>
+<li><code>private</code> —— 私有访问控制</li>
+<li><code>this</code> —— 当前对象或当前类构造器</li>
+<li>主构造器 —— 类名后的参数列表</li>
+<li>辅助构造器 —— <code>def this(...)</code></li>
+</ul>
+</li>
+<li><strong>适合放入 flow 的内容：</strong><ul>
+<li>创建对象时调用辅助构造器的执行流程。</li>
+<li>字段赋值时调用修改器的执行流程。</li>
+<li>程序从 <code>object Main</code> 的 <code>main</code> 方法启动的流程。</li>
+</ul>
+</li>
+<li><strong>适合放入 exercises 的内容：</strong><ul>
+<li>定义类并创建对象。</li>
+<li>编写计数器类。</li>
+<li>使用主构造器定义字段。</li>
+<li>添加辅助构造器。</li>
+<li>自定义字段修改规则。</li>
+</ul>
+</li>
+<li><strong>适合放入 conclusion 的内容：</strong><ul>
+<li>本节课是 Scala 面向对象编程的重要基础。</li>
+<li>学生应重点掌握 Scala 比 Java 简洁的原因。</li>
+<li>字段、访问器、修改器和构造器会在后续封装、继承、多态、特质学习中继续使用。</li>
+<li>课后建议多对比 Java 写法和 Scala 写法，理解简洁语法背后的规则。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li>本节课的核心是理解 Scala 中类、对象、字段和构造器的基本写法，并能和 Java 面向对象语法进行对比。</li>
+<li>学习 Scala 时要特别注意 <code>class</code> 和 <code>object</code> 的区别：类用于创建对象，单例对象常用于程序入口。</li>
+<li>Scala 的方法调用比 Java 更灵活，无参方法是否加括号要结合方法是否改变对象状态来理解。</li>
+<li>Scala 没有 Java 风格的 <code>++</code> 和 <code>--</code>，需要使用 <code>+= 1</code>、<code>-= 1</code> 或自定义方法完成自增自减。</li>
+<li><code>var</code> 字段、<code>val</code> 字段和 <code>private</code> 字段是本节课必须掌握的重点，它们直接影响对象字段能否读取和修改。</li>
+<li>Scala 自动生成访问器和修改器，让代码比 Java 中手写 getter/setter 更简洁，但学生仍要理解背后的封装思想。</li>
+<li>主构造器是 Scala 类的重要特点，参数直接写在类名后，配合 <code>val</code> 和 <code>var</code> 可以快速定义字段。</li>
+<li>辅助构造器使用 <code>def this(...)</code> 定义，第一行必须调用已有构造器，这是本节课最容易出错的规则之一。</li>
+<li>本节课中的知识会在后续学习封装、继承、多态、特质和伴生对象时继续使用，因此课后应多写类和对象的练习。</li>
+<li>AI 编程工具可以提高效率，但不能替代对基础语法和程序结构的理解；现阶段应先把 Scala 的类、对象和构造器写熟。</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-04-02-part-1.html"><span>上一篇</span><strong>Scala循环类与方法函数</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-04-09-part-1.html"><span>下一篇</span><strong>Scala伴生类私有成员与apply</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

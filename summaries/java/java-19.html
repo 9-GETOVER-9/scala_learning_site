@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java interface callback 课程标题 ：接口回调详解与课程收尾 所属章节 ：Java 类与对象 → 接口 → 接口回调 上课日期 ：2025 10 30 知识点标签 ： 接口回调 回调机制 引用 接口实例化 上转型 多态 考试安" />
+  <title>接口回调详解与课程收尾 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-interface-callback">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 19 课</p>
+      <h1>接口回调详解与课程收尾</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">接口回调详解与课程收尾</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-interface-callback</code></li>
+<li><strong>课程标题</strong>：接口回调详解与课程收尾</li>
+<li><strong>所属章节</strong>：Java 类与对象 → 接口 → 接口回调</li>
+<li><strong>上课日期</strong>：2025-10-30</li>
+<li><strong>知识点标签</strong>：<code>接口回调</code> <code>回调机制</code> <code>引用</code> <code>接口实例化</code> <code>上转型</code> <code>多态</code> <code>考试安排</code> <code>作业安排</code></li>
+<li><strong>难度等级</strong>：进阶</li>
+<li><strong>适合对象</strong>：已学完接口语法、需要理解接口回调机制的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课重点讲解了接口回调（Callback）的概念和原理——可以把实现某一接口的类创建的对象的引用赋值给该接口变量的声明，接口通过这种方式调用被类重写的接口方法。同时用&quot;孩子给父亲花钱&quot;&quot;老师布置任务学生汇报&quot;等生活类比帮助理解，并安排了结课前的作业和考试事项。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 课堂核心知识点是接口回调（Interface Callback）——实现接口的类创建的对象引用，可以赋值给接口类型的变量，接口变量通过这种方式调用实现类重写后的方法。
+2. 老师用&quot;孩子给父亲花钱&quot;的类比解释回调——孩子（子类/实现类）可以给父亲（父类/接口）实例化，让父亲来做事情，&quot;虽然是父亲在做事，但用的是孩子的能力&quot;。
+3. 解释了为什么接口不能实例化——接口只有方法头没有方法体，无法确定具体行为，所以不能用 new 创建接口对象。但可以通过实现类的对象赋值给接口变量来使用。
+4. 用&quot;老师布置任务，学生完成并汇报&quot;的案例解释回调机制——老师（接口/调用方）布置任务（定义方法头），学生（实现类）完成任务（实现方法体），老师调用学生的成果（回调）。
+5. 老师强调接口回调虽然考试不考，但编程时&quot;100% 会用&quot;——它是多学科交叉的关键技术，在多线程、事件监听、网络编程中无处不在。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能用自己的话解释接口回调的概念——接口类型变量引用实现类对象，通过接口变量调用实现类重写的方法。
+2. 能说出为什么接口和抽象类不能直接用 new 实例化——因为它们是不完整的（缺少方法体），无法确定具体行为。
+3. 能写出一个简单的接口回调示例代码——定义接口 → 实现类实现接口 → 接口变量指向实现类对象 → 回调调用。
+4. 能用&quot;老师布置任务学生汇报&quot;的案例解释回调机制在实际项目中的应用。
+5. 能说出接口回调在实际开发中的典型应用场景——事件监听、多线程回调、网络请求回调。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：什么是接口回调（Interface Callback）</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>接口回调（Callback）<strong>是指：可以把实现某一接口的类创建的对象的</strong>引用</strong>赋值给该接口类型的<strong>变量声明</strong>，然后通过接口变量调用该对象重写后的接口方法。</p>
+<p>简单来说就是——<strong>接口变量引用实现类对象，通过接口调用实现类的方法</strong>。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 1. 定义接口
+public interface Callback {
+    void onComplete(String result);
+}
+
+// 2. 实现类——实现接口
+public class MyTask implements Callback {
+    @Override
+    public void onComplete(String result) {
+        System.out.println(&quot;任务完成！结果：&quot; + result);
+    }
+}
+
+// 3. 接口回调——接口变量引用实现类对象
+Callback cb = new MyTask();     // 将实现类对象的引用赋值给接口变量
+cb.onComplete(&quot;数据处理完毕&quot;);   // 通过接口变量调用实现类的方法
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<blockquote>
+<p>&quot;可以把实现某一接口的类创建的对象的引用，赋值给该接口变量的声明。接口通过这种方式调用被类重写的接口方法。&quot;</p>
+</blockquote>
+<p>这就是接口回调的本质：<strong>声明是接口类型，实际执行的是实现类的方法</strong>。</p>
+<h5>&quot;引用&quot;的概念</h5>
+<blockquote>
+<p>&quot;将一个对象赋值给另一个对象时，后者就是前者的引用，二者指向同一地址。就像一个人有大名、小名、外号——不同的称呼指向同一个人。&quot;</p>
+</blockquote>
+<pre><code class="language-java">Student s = new Student(&quot;小明&quot;);
+People p = s;  // p 是 s 的引用——两者指向同一个对象
+// s 和 p 指向同一个 Student 对象
+</code></pre>
+<hr>
+<h4>知识点 2：为什么接口和抽象类不能直接 new</h4>
+<h5>这个知识点是什么？</h5>
+<p>接口和抽象类都<strong>不能使用 new 关键字直接创建对象</strong>。原因是它们都是<strong>不完整</strong>的——只有方法声明（方法头），没有方法实现（方法体）。</p>
+<h5>为什么不能 new？</h5>
+<blockquote>
+<p>&quot;接口只有方法头，没有方法体——它无法确定具体行为。就像你只知道&#39;吃饭&#39;这个概念，但不知道具体吃什么、怎么吃。只有具体的人（实现类）才知道怎么吃饭。&quot;</p>
+</blockquote>
+<h5>抽象类同理</h5>
+<blockquote>
+<p>&quot;抽象类同理——它定义规则但缺少实现。用子类给父类实例化，就像接口靠实现它的子类来实例化。&quot;</p>
+</blockquote>
+<h5>正确的使用方式</h5>
+<table>
+<thead>
+<tr>
+<th>不能用</th>
+<th>替代方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>new 接口名()</code> ❌</td>
+<td><code>接口名 变量 = new 实现类名()</code> ✅</td>
+</tr>
+<tr>
+<td><code>new 抽象类名()</code> ❌</td>
+<td><code>抽象类名 变量 = new 子类名()</code> ✅</td>
+</tr>
+</tbody></table>
+<h5>口诀</h5>
+<blockquote>
+<p>&quot;接口不能 new，但可以指向实现了它的类的对象。&quot;</p>
+</blockquote>
+<hr>
+<h4>知识点 3：接口回调的两个经典生活类比</h4>
+<h5>类比 1：孩子给父亲花钱（上转型与回调）</h5>
+<p>这是从上转型对象延伸来的经典类比：</p>
+<blockquote>
+<p>&quot;你长大了，在外面工作了，兜里揣着钱。回家过年——你爸伸手把钱掏出来。虽然是你爸在花这个钱、拿这个钱，但是钱是你挣的！&quot;</p>
+</blockquote>
+<p><strong>映射到代码</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>生活场景</th>
+<th>Java 代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>父亲（花儿子的钱）</td>
+<td><code>FatherInterface f = new Child();</code></td>
+</tr>
+<tr>
+<td>父亲伸手拿钱</td>
+<td><code>f.spendMoney();</code></td>
+</tr>
+<tr>
+<td>实际花的是儿子的钱</td>
+<td>执行的是 Child 重写后的方法</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>&quot;孩子（子类/实现类）可以给父亲（父类/接口）实例化，让父亲来做事情——虽然是父亲在做，但用的是孩子的能力。&quot;</p>
+</blockquote>
+<h5>类比 2：老师布置任务，学生完成并汇报</h5>
+<blockquote>
+<p>&quot;老师布置一个任务——&#39;去做一个关于环保的 PPT&#39;。每个学生领到任务后用自己的方式去做。做完后，老师让学生上台汇报。老师调用了学生的成果——这就是回调。&quot;</p>
+</blockquote>
+<p><strong>映射到代码</strong>：</p>
+<ul>
+<li><strong>老师（接口）</strong>：定义了&quot;汇报&quot;的方法标准（方法头）</li>
+<li><strong>学生（实现类）</strong>：各自用自己的方式完成并汇报（方法体实现）</li>
+<li><strong>老师调用学生汇报</strong>：接口回调——接口变量调用实现类的方法</li>
+</ul>
+<pre><code class="language-java">// 接口——定义&quot;汇报&quot;的规则
+public interface Reporter {
+    void report();  // 汇报方法
+}
+
+// 学生A——用自己的方式汇报
+public class StudentA implements Reporter {
+    @Override
+    public void report() {
+        System.out.println(&quot;学生A：我用 PPT 做了一份详细的环保报告！&quot;);
+    }
+}
+
+// 学生B——用不同的方式汇报
+public class StudentB implements Reporter {
+    @Override
+    public void report() {
+        System.out.println(&quot;学生B：我拍了一个环保主题的短视频！&quot;);
+    }
+}
+
+// 老师——调用学生汇报（回调）
+public class Teacher {
+    public void askToReport(Reporter student) {
+        System.out.println(&quot;老师：请开始你的汇报——&quot;);
+        student.report();  // 回调！调用的是具体学生的 report()
+    }
+}
+
+// 测试
+public class Test {
+    public static void main(String[] args) {
+        Teacher teacher = new Teacher();
+        teacher.askToReport(new StudentA());  // 学生A：我用 PPT 做了一份详细的环保报告！
+        teacher.askToReport(new StudentB());  // 学生B：我拍了一个环保主题的短视频！
+    }
+}
+</code></pre>
+<hr>
+<h4>知识点 4：接口回调的实际应用场景</h4>
+<h5>接口回调在真实开发中的重要性</h5>
+<blockquote>
+<p>&quot;编程时接口间常传输数据，这是多学科交叉的关键。虽然考试不考，但编程的时候 100% 会用。&quot;</p>
+</blockquote>
+<h5>典型应用场景</h5>
+<table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>事件监听</strong></td>
+<td>按钮点击、键盘输入等事件的处理</td>
+<td><code>button.setOnClickListener(listener)</code></td>
+</tr>
+<tr>
+<td><strong>多线程回调</strong></td>
+<td>线程执行完成后通知主线程</td>
+<td><code>FutureTask</code> 的 <code>done()</code> 回调</td>
+</tr>
+<tr>
+<td><strong>网络请求回调</strong></td>
+<td>网络请求完成后处理返回数据</td>
+<td>OkHttp 的 <code>onResponse()</code></td>
+</tr>
+<tr>
+<td><strong>数据库查询回调</strong></td>
+<td>异步查询完成后处理结果</td>
+<td>Room 数据库的异步查询</td>
+</tr>
+<tr>
+<td><strong>自定义回调</strong></td>
+<td>组件间的通信</td>
+<td>自定义监听器接口</td>
+</tr>
+</tbody></table>
+<h5>简单的事件监听示例</h5>
+<pre><code class="language-java">// 接口——定义&quot;点击&quot;的回调规则
+public interface OnClickListener {
+    void onClick();  // 点击时被回调的方法
+}
+
+// 按钮——被点击时回调监听器
+public class Button {
+    private OnClickListener listener;  // 接口类型变量
+
+    // 设置监听器（谁想监听按钮点击）
+    public void setOnClickListener(OnClickListener l) {
+        this.listener = l;
+    }
+
+    // 模拟按钮被点击
+    public void click() {
+        if (listener != null) {
+            listener.onClick();  // 回调！
+        }
+    }
+}
+
+// 使用
+public class App {
+    public static void main(String[] args) {
+        Button btn = new Button();
+
+        // 设置回调——当按钮被点击时，执行这段逻辑
+        btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick() {
+                System.out.println(&quot;按钮被点击了！执行提交操作...&quot;);
+            }
+        });
+
+        btn.click();  // 输出：按钮被点击了！执行提交操作...
+    }
+}
+</code></pre>
+<p><strong>初学者提示</strong>：接口回调是 Java 事件驱动编程的核心机制。&quot;回调&quot;的本质是——A 告诉 B&quot;如果 XX 事情发生了，就调用我的这个方法&quot;。A 不用一直盯着 B，B 在合适的时候自动通知 A。</p>
+<hr>
+<h4>知识点 5：接口回调与上转型对象的关系</h4>
+<h5>这个知识点是什么？</h5>
+<p>接口回调本质上是<strong>上转型对象在接口场景下的应用</strong>——接口变量引用实现类对象，通过接口变量调用实现类的方法。</p>
+<h5>从类继承到接口回调的演进</h5>
+<pre><code>上转型对象（类继承）：
+  父类引用 = 子类对象      → Animal a = new Dog()
+
+接口回调（接口实现）：
+  接口引用 = 实现类对象     → Callback cb = new MyTask()
+</code></pre>
+<p>两者本质相同——都是<strong>父类型引用指向子类型对象，调用子类型重写的方法</strong>。</p>
+<h5>课堂总结</h5>
+<blockquote>
+<p>&quot;子类给父类实例化叫上转型，实现类给接口实例化叫回调——本质一样，都是多态。区别只在于：上转型用的是 extends，回调用的是 implements。&quot;</p>
+</blockquote>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接口回调</td>
+<td>上转型对象</td>
+<td>接口变量引用实现类对象（implements） vs 父类变量引用子类对象（extends）</td>
+</tr>
+<tr>
+<td>接口变量</td>
+<td>接口对象</td>
+<td>可以声明、可以指向实现类对象 vs 不能 new（接口不能有对象）</td>
+</tr>
+<tr>
+<td>回调（Callback）</td>
+<td>直接调用</td>
+<td>A 等 B 完成后被 B 通知调用 vs A 主动调用 B</td>
+</tr>
+<tr>
+<td>引用</td>
+<td>对象</td>
+<td>指向对象的&quot;指针&quot;/别名 vs 实际存在于内存中的实例</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：接口回调的基本模式</h4>
+<p><strong>适用知识点</strong>：接口回调概念、接口变量引用实现类对象</p>
+<pre><code class="language-java">// 接口——定义回调规则
+public interface Callback {
+    void onSuccess(String message);   // 成功时的回调
+    void onFailure(String error);     // 失败时的回调
+}
+
+// 实现类——具体处理回调
+public class MyHandler implements Callback {
+    @Override
+    public void onSuccess(String message) {
+        System.out.println(&quot;✅ 成功：&quot; + message);
+    }
+
+    @Override
+    public void onFailure(String error) {
+        System.out.println(&quot;❌ 失败：&quot; + error);
+    }
+}
+
+// 任务执行器——执行任务并通过回调通知结果
+public class TaskRunner {
+    public void execute(int input, Callback callback) {
+        if (input &gt; 0) {
+            // 处理成功 → 回调 onSuccess
+            callback.onSuccess(&quot;处理结果：&quot; + (input * 100));
+        } else {
+            // 处理失败 → 回调 onFailure
+            callback.onFailure(&quot;输入必须大于 0！&quot;);
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 测试
+public class Test {
+    public static void main(String[] args) {
+        TaskRunner runner = new TaskRunner();
+        MyHandler handler = new MyHandler();
+
+        // 接口回调——TaskRunner 在适当的时候调用 handler 的方法
+        runner.execute(5, handler);   // ✅ 成功：处理结果：500
+        runner.execute(-1, handler);  // ❌ 失败：输入必须大于 0！
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>✅ 成功：处理结果：500
+❌ 失败：输入必须大于 0！
+</code></pre>
+<p><strong>解释</strong>：<code>TaskRunner.execute()</code> 方法的第二个参数 <code>Callback callback</code> 是一个接口类型。传入 <code>MyHandler</code> 对象后，TaskRunner 内部通过 <code>callback.onSuccess()</code> 或 <code>callback.onFailure()</code> 来回调通知结果。TaskRunner 不关心谁在处理结果——只要它实现了 Callback 接口就行。</p>
+<p><strong>初学者提示</strong>：这就是&quot;回调&quot;的字面含义——TaskRunner 执行完后，<strong>反过来</strong>调用你传入的对象的某个方法。不是你去问 TaskRunner&quot;做完了吗&quot;，而是 TaskRunner 做好了<strong>主动通知你</strong>。</p>
+<hr>
+<h4>示例 2：模拟事件监听——按钮点击回调</h4>
+<p><strong>适用知识点</strong>：接口回调的应用、事件驱动编程入门</p>
+<pre><code class="language-java">// 步骤 1：定义监听器接口
+public interface OnClickListener {
+    void onClick(String buttonName);
+}
+
+// 步骤 2：按钮——被点击时回调监听器
+public class Button {
+    private String name;
+    private OnClickListener listener;  // 接口类型——保存回调对象
+
+    public Button(String name) {
+        this.name = name;
+    }
+
+    // 注册监听器（告诉按钮&quot;被点击时通知谁&quot;）
+    public void setOnClickListener(OnClickListener l) {
+        this.listener = l;
+    }
+
+    // 模拟点击事件——点击时触发回调
+    public void performClick() {
+        System.out.println(&quot;[&quot; + name + &quot;] 按钮被按下...&quot;);
+        if (listener != null) {
+            listener.onClick(name);  // ★ 回调！
+        }
+    }
+}
+
+// 步骤 3：界面——实现监听器接口，处理点击逻辑
+public class LoginPage implements OnClickListener {
+    private Button loginBtn;
+    private Button cancelBtn;
+
+    public LoginPage() {
+        loginBtn = new Button(&quot;登录&quot;);
+        cancelBtn = new Button(&quot;取消&quot;);
+
+        // 注册回调——告诉按钮&quot;我来监听你的点击&quot;
+        loginBtn.setOnClickListener(this);
+        cancelBtn.setOnClickListener(this);
+    }
+
+    // 实现回调方法——所有按钮的点击都汇聚到这里
+    @Override
+    public void onClick(String buttonName) {
+        switch (buttonName) {
+            case &quot;登录&quot;:
+                System.out.println(&quot;→ 执行登录逻辑：验证用户名和密码...&quot;);
+                break;
+            case &quot;取消&quot;:
+                System.out.println(&quot;→ 执行取消逻辑：清空表单并返回...&quot;);
+                break;
+        }
+    }
+
+    public void simulate() {
+        loginBtn.performClick();
+        cancelBtn.performClick();
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 测试
+public class Test {
+    public static void main(String[] args) {
+        LoginPage page = new LoginPage();
+        page.simulate();
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>[登录] 按钮被按下...
+→ 执行登录逻辑：验证用户名和密码...
+[取消] 按钮被按下...
+→ 执行取消逻辑：清空表单并返回...
+</code></pre>
+<p><strong>解释</strong>：</p>
+<ul>
+<li>Button 不关心&quot;被点击后要做什么&quot;——这是调用方的事</li>
+<li>LoginPage 注册自己作为监听器（<code>setOnClickListener(this)</code>）</li>
+<li>当按钮被点击时，自动回调 <code>onClick()</code> 方法</li>
+<li>这就是 Android、Swing、JavaFX 等 GUI 框架的核心机制</li>
+</ul>
+<p><strong>初学者提示</strong>：真正的 Android 开发中，你写的 <code>button.setOnClickListener(...)</code> 就是接口回调！这个例子几乎和真实代码一模一样。</p>
+<hr>
+<h4>示例 3：多线程任务完成后的回调</h4>
+<p><strong>适用知识点</strong>：接口回调的实际应用、异步编程入门</p>
+<pre><code class="language-java">// 回调接口——任务完成后的通知
+public interface TaskCallback {
+    void onTaskCompleted(String taskName, long timeUsed);
+}
+
+// 耗时任务——执行完回调
+public class LongTask {
+    public void run(String taskName, TaskCallback callback) {
+        System.out.println(&quot;开始执行：&quot; + taskName + &quot;...&quot;);
+
+        // 模拟耗时操作
+        long start = System.currentTimeMillis();
+        try {
+            Thread.sleep(2000);  // 模拟耗时 2 秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long end = System.currentTimeMillis();
+
+        // 任务完成 → 回调通知
+        callback.onTaskCompleted(taskName, end - start);
+    }
+}
+
+// 主程序——实现回调接口
+public class MainApp implements TaskCallback {
+    // 收到回调通知后执行的逻辑
+    @Override
+    public void onTaskCompleted(String taskName, long timeUsed) {
+        System.out.println(&quot;【回调】&quot; + taskName + &quot; 完成！耗时：&quot; + timeUsed + &quot;ms&quot;);
+        System.out.println(&quot;【回调】可以更新 UI 或继续下一步操作了&quot;);
+    }
+
+    public static void main(String[] args) {
+        MainApp app = new MainApp();
+        LongTask task = new LongTask();
+
+        System.out.println(&quot;主线程：启动任务...&quot;);
+        task.run(&quot;下载文件&quot;, app);  // 传入 this 作为回调对象
+        System.out.println(&quot;主线程：任务已启动，继续做其他事情...&quot;);
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>主线程：启动任务...
+开始执行：下载文件...
+（等待 2 秒...）
+【回调】下载文件 完成！耗时：2001ms
+【回调】可以更新 UI 或继续下一步操作了
+主线程：任务已启动，继续做其他事情...
+</code></pre>
+<p><strong>解释</strong>：实际项目中，耗时任务（下载文件、网络请求）通常异步执行。主程序不需要一直等着——它传入一个回调对象，任务完成后自动通知。这就是异步回调的基本模式。</p>
+<p><strong>初学者提示</strong>：你以后学 OkHttp、Retrofit 等网络库时，会大量使用这种模式——<code>onResponse()</code>、<code>onFailure()</code> 就是回调方法。</p>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：孩子给父亲花钱——接口回调的终极类比</h4>
+<p><strong>课堂场景</strong>：这个案例在本节课中反复被用来解释接口回调。</p>
+<blockquote>
+<p>&quot;你长大了，在外面工作了，兜里揣着钱。回家过年还没等你表示呢，你爸就把你赚的钱拿走了。虽然是父亲在花这个钱、拿这个钱，但是钱是你挣的！&quot;</p>
+</blockquote>
+<p><strong>从类继承的回调到接口回调</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类继承版</td>
+<td><code>People p = new Student();</code> p 调用的是 Student 的方法</td>
+</tr>
+<tr>
+<td>接口回调版</td>
+<td><code>Callback cb = new StudentHandler();</code> cb 调用的是 StudentHandler 的方法</td>
+</tr>
+</tbody></table>
+<p>两者本质相同——都是父亲（父类/接口引用）花儿子（子类/实现类对象）的钱（方法实现）。</p>
+<hr>
+<h4>案例 2：老师布置任务，学生汇报——回调机制的教学案例</h4>
+<p><strong>课堂场景</strong>：老师用&quot;布置任务→完成→汇报&quot;的流程来解释回调。</p>
+<blockquote>
+<p>&quot;老师：&#39;大家回去做一份环保相关的报告，下节课上台汇报。&#39; 学生 A 做了 PPT，学生 B 拍了视频。上课时老师说：&#39;请开始汇报&#39;——老师调用了学生的成果。老师只负责说&#39;开始汇报&#39;（定义方法头），具体汇报什么内容，是每个学生自己决定的（方法体实现）。这就是回调。&quot;</p>
+</blockquote>
+<p><strong>教学要点</strong>：</p>
+<ul>
+<li>老师 = 接口的调用方（只需要知道&quot;汇报&quot;这个方法）</li>
+<li>学生 = 接口的实现方（各自用自己的方式完成）</li>
+<li>&quot;开始汇报&quot; = 接口回调（调用的是学生自己实现的方法）</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：试图 new 一个接口——这是 Java 初学者最常见的错误之一。Runnable r = new Runnable(); ❌ 正确做法：Runnable r = new MyRunnable(); ✅。
+
+易错点 2：把接口回调与普通方法调用混淆——普通调用是&quot;A 主动调用 B 的方法&quot;；回调是&quot;A 把引用传给 B，B 在合适的时候反过来调用 A 的方法&quot;。方向是相反的。
+
+易错点 3：接口变量为 null 时直接调用方法——编译不报错，但运行时会抛 NullPointerException。使用前要判断 if (callback != null)。
+
+易错点 4：忘记接口回调本质也是多态——接口回调就是多态在接口场景下的表现。接口变量声明看接口类型，实际执行看实现类类型。
+
+易错点 5：以为接口回调需要特殊关键字——回调不需要特殊语法，就是普通的接口方法调用。关键在于&quot;谁调用谁&quot;的时机和方向。&quot;回调&quot;是一个设计模式的概念，不是 Java 语法概念。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：关于接口回调，以下说法正确的是？
+A. 接口回调需要特殊关键字  B. 接口变量可以指向实现类对象并调用其方法  C. 接口回调只能用在 GUI 编程中  D. 接口可以直接 new
+正确答案：B
+解析：接口回调本质就是接口变量指向实现类对象，通过接口调用实现类的方法。不需要特殊关键字，应用场景远不止 GUI。
+
+题目 2：以下代码的输出结果是什么？
+interface A { void show(); }
+class B implements A { public void show() { System.out.println(&quot;B&quot;); } }
+public class Test { public static void main(String[] args) { A a = new B(); a.show(); } }
+A. 编译错误  B. 运行错误  C. 输出 &quot;B&quot;  D. 无输出
+正确答案：C
+解析：A a = new B() 是接口回调——接口变量 a 指向实现类 B 的对象，a.show() 调用的是 B 重写的 show()，输出 &quot;B&quot;。
+
+题目 3：接口和抽象类都不能用 new 创建对象，根本原因是？
+A. 它们都是父类型  B. 它们的方法都是 private  C. 它们是不完整的（缺少方法实现） D. 它们没有构造方法
+正确答案：C
+解析：接口和抽象类都有未实现的方法（抽象方法），对象必须是&quot;完整的&quot;才能创建。C 选项是根本原因。
+
+题目 4：以下哪个场景最适合用接口回调实现？
+A. 计算两个数的和  B. 按钮被点击后执行一段逻辑  C. 打印一行文字  D. 声明一个常量
+正确答案：B
+解析：按钮点击是典型的&quot;事件驱动&quot;场景——不知道用户什么时候点击，但点击后要自动执行一段逻辑。这正是回调的用武之地。
+
+题目 5：关于接口回调中的&quot;引用&quot;，以下说法正确的是？
+A. 引用就是 new 一个对象  B. 引用指向对象的同一个内存地址  C. 一个对象只能有一个引用  D. 接口类型不能作为引用类型
+正确答案：B
+解析：引用指向对象的同一个内存地址——就像一个人可以有大名、小名、外号，不同称呼指向同一个人。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 接口回调 —— 接口变量引用实现类对象，通过接口调用实现类的方法
+2. 引用 —— 指向同一对象的&quot;别名&quot;，不同变量名指向同一块内存
+3. 接口不能 new —— 接口只有方法头，没有方法体，无法确定具体行为
+4. 实现类实例化接口 —— 用实现类的对象赋值给接口变量，间接使用接口
+5. 孩子给父亲花钱 —— 接口回调的生活类比——父亲花的是儿子挣的钱
+6. 老师布置任务学生汇报 —— 接口回调的教学类比——老师调用学生的汇报成果
+7. 事件监听 —— 接口回调最经典的应用——按钮点击、键盘输入等
+8. 异步回调 —— 耗时任务完成后自动通知调用方——不在等待中阻塞主线程
+9. 多态 —— 接口回调的本质——声明类型和实际类型不同，执行实际类型的方法
+10. NullPointerException —— 接口变量为 null 时调用方法抛出的异常
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">【接口回调的完整流程——以&quot;老师布置任务&quot;为例】
+
+步骤 1：老师定义&quot;汇报&quot;接口 Reporter——声明 void report() 方法（规则）
+步骤 2：学生 A 实现 Reporter——重写 report()：&quot;我用 PPT 汇报&quot;
+步骤 3：学生 B 实现 Reporter——重写 report()：&quot;我拍视频汇报&quot;
+步骤 4：老师类中有一个方法 callForReport(Reporter r)——参数是接口类型
+步骤 5：老师调用——callForReport(new StudentA()) → 回调 StudentA 的 report()
+步骤 6：老师调用——callForReport(new StudentB()) → 回调 StudentB 的 report()
+步骤 7：老师不需要知道学生做了什么——只要学生实现了 Reporter 接口就能&quot;汇报&quot;
+
+关键点：步骤 5-6 中，老师（调用方）调用了学生（实现方）的方法——这就是&quot;回调&quot;
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习题 1：用一句话解释&quot;接口回调&quot;是什么。
+知识点：接口回调的概念
+参考答案：接口回调就是把实现类对象的引用赋值给接口类型变量，通过接口变量调用实现类重写后的方法。
+解题思路：三个关键词——接口变量、实现类引用、调用重写方法。
+
+练习题 2：定义一个 DownloadListener 接口（onSuccess 和 onFailed 两个方法），写一个 FileDownloader 类，模拟下载完成后通过接口回调通知结果。
+知识点：接口回调的实际应用
+参考答案：
+interface DownloadListener { void onSuccess(String file); void onFailed(String error); }
+class FileDownloader {
+    public void download(String url, DownloadListener listener) {
+        if (url != null &amp;&amp; url.startsWith(&quot;http&quot;)) {
+            listener.onSuccess(&quot;文件下载完成：&quot; + url);
+        } else {
+            listener.onFailed(&quot;URL 格式错误：&quot; + url);
+        }
+    }
+}
+解题思路：接口定义回调规则 → 下载器接收回调对象 → 根据结果调用 onSuccess 或 onFailed。
+
+练习题 3：解释为什么接口不能 new，但可以通过实现类&quot;间接实例化&quot;。
+知识点：接口不能实例化的原因
+参考答案：接口只定义了方法头（规则），没有方法体（实现）。如果允许 new 接口，创建出来的对象调用方法时不知道执行什么逻辑。通过实现类&quot;间接实例化&quot;时，接口变量指向的是实现类的完整对象（包含方法体），所以可以正常调用。本质是利用了多态机制——接口类型的变量引用实现类对象。
+解题思路：不完整（不能 new） → 通过实现类补全 → 接口引用实现类对象。
+
+练习题 4：编写一个完整的例子——Lifecycle 接口定义 onStart() 和 onStop() 两个方法，Service 类实现该接口，Application 类通过接口回调管理 Service 的生命周期。
+知识点：接口回调的综合应用
+参考答案：
+interface Lifecycle { void onStart(); void onStop(); }
+class MyService implements Lifecycle {
+    public void onStart() { System.out.println(&quot;Service 启动——加载资源&quot;); }
+    public void onStop() { System.out.println(&quot;Service 停止——释放资源&quot;); }
+}
+class Application {
+    public void launch(Lifecycle l) { l.onStart(); }  // 启动
+    public void shutdown(Lifecycle l) { l.onStop(); } // 停止
+}
+// 使用：
+Application app = new Application();
+MyService service = new MyService();
+app.launch(service);   // Service 启动——加载资源
+app.shutdown(service); // Service 停止——释放资源
+解题思路：Application 通过 Lifecycle 接口管理 Service，不需要知道 Service 的具体类型。
+
+练习题 5：接口回调在 Android 开发中无处不在。假设你要实现一个按钮的点击功能，用接口回调的方式写出伪代码（不需要真实 Android API）。
+知识点：接口回调的现实应用
+参考答案：
+interface OnClickListener { void onClick(); }
+class Button {
+    private OnClickListener listener;
+    public void setOnClickListener(OnClickListener l) { this.listener = l; }
+    public void performClick() { if (listener != null) listener.onClick(); }
+}
+// 使用：
+Button btn = new Button();
+btn.setOnClickListener(new OnClickListener() {
+    public void onClick() { System.out.println(&quot;跳转到下一页&quot;); }
+});
+btn.performClick();  // 跳转到下一页
+解题思路：三步走——① 定义接口 ② 按钮持有接口引用 ③ 点击时回调。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code>接口回调详解与课程收尾
+├── 接口回调（Callback）
+│   ├── 概念：接口变量引用实现类对象，调用实现类重写的方法
+│   ├── 公式：接口类型 变量 = new 实现类(); 变量.方法();
+│   ├── 本质：接口版本的上转型对象（多态）
+│   ├── 为什么接口不能 new：不完整（无方法体）
+│   └── 生活类比：
+│       ├── 孩子给父亲花钱（父亲花儿子的钱）
+│       └── 老师布置任务学生汇报（老师调用学生的成果）
+│
+├── 接口回调的应用场景
+│   ├── 事件监听（按钮点击、键盘输入）
+│   ├── 多线程回调（任务完成通知）
+│   ├── 网络请求回调（请求成功/失败处理）
+│   └── 生命周期管理（启动/停止通知）
+│
+├── 接口回调的设计价值
+│   ├── 解耦：调用方不依赖具体实现类
+│   ├── 灵活：不同实现类产生不同行为
+│   └── 异步：支持&quot;做完再通知&quot;的模式
+│
+└── 课程收尾
+    ├── 考试安排
+    │   ├── 第 11 周：讲完最后一章
+    │   ├── 第 12 周：周一或周四考试
+    │   └── 题型：选择、判断、简答、编程（占比高）
+    ├── 作业安排
+    │   ├── 实验报告 + 作业交给学委
+    │   └── 笔记检查送成绩
+    └── 学习方法
+        └── 用一个综合项目串联所有知识点
+</code></pre>
+<hr>
+<h3>14. 课后总结</h3>
+<pre><code class="language-text">1. 接口回调是 Java 面向对象编程中的&quot;最后一公里&quot;——它让多态真正发挥威力。接口回调不是新语法，而是&quot;接口多态&quot;的另一种说法——接口变量引用实现类对象，调用实现类的方法。
+2. 接口回调在真实开发中无处不在——Android 的按钮点击、网络请求的成功/失败处理、数据库的异步查询、第三方 SDK 的回调通知，全都是接口回调。考试不考但编程必用。
+3. 理解接口回调最好的方式是记住&quot;孩子给父亲花钱&quot;这个类比——父亲（接口引用）花的是儿子（实现类对象）挣的钱（方法实现）。接口只是一个&quot;壳&quot;，真正的逻辑在实现类里。
+4. 接口不能 new 的根本原因是它&quot;不完整&quot;——只有方法头没有方法体。就像你不能吃&quot;蔬菜&quot;这个概念，只能吃具体的番茄和白菜。但可以通过实现类间接使用接口——这叫面向接口编程。
+5. 这门 Java 基础课到此全部结束。后续需要靠自学和实践来巩固——建议用一个综合项目把类、继承、多态、抽象类、接口、接口回调全部用上，这样才能真正融会贯通。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-18.html"><span>上一篇</span><strong>Java接口详解与基础课程总结</strong></a><span class="article-pager-link disabled" aria-hidden="true"></span></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

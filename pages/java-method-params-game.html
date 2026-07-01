@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Java方法参数小游戏</title>
+  <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <main class="container game-shell">
+    <a class="btn small ghost" href="../index.html">返回首页</a>
+    <section class="panel section">
+      <p class="eyebrow">Java Practice</p>
+      <h1>Java方法参数小游戏</h1>
+      <p class="muted">把左侧概念拖到右侧解释上，复习方法、形参、实参和返回值。</p>
+    </section>
+
+    <section class="panel section">
+      <div class="drag-area">
+        <div>
+          <h2>概念</h2>
+          <div class="drag-items" id="items"></div>
+        </div>
+        <div>
+          <h2>解释</h2>
+          <div class="drop-zones" id="zones"></div>
+        </div>
+      </div>
+      <div class="inline-actions">
+        <button class="btn small primary" id="check">检查答案</button>
+        <button class="btn small ghost" id="reset">重置</button>
+      </div>
+      <p class="feedback" id="feedback"></p>
+    </section>
+  </main>
+
+  <script>
+    const pairs = [
+      { left: "方法名", right: "用来标识一个方法的名称" },
+      { left: "形参", right: "定义方法时写在括号里的参数" },
+      { left: "实参", right: "调用方法时真正传入的值" },
+      { left: "返回值", right: "方法执行后交回给调用者的结果" }
+    ];
+
+    function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+    function render() {
+      document.getElementById("items").innerHTML = shuffle(pairs).map(p =>
+        `<div class="drag-item" draggable="true" data-value="${p.left}">${p.left}</div>`
+      ).join("");
+      document.getElementById("zones").innerHTML = shuffle(pairs).map(p =>
+        `<div class="drop-zone" data-answer="${p.left}"><span>${p.right}</span><strong class="dropped"></strong></div>`
+      ).join("");
+      document.getElementById("feedback").textContent = "";
+
+      document.querySelectorAll(".drag-item").forEach(item => {
+        item.addEventListener("dragstart", e => e.dataTransfer.setData("text/plain", item.dataset.value));
+      });
+      document.querySelectorAll(".drop-zone").forEach(zone => {
+        zone.classList.remove("correct", "wrong");
+        zone.addEventListener("dragover", e => { e.preventDefault(); zone.classList.add("over"); });
+        zone.addEventListener("dragleave", () => zone.classList.remove("over"));
+        zone.addEventListener("drop", e => {
+          e.preventDefault();
+          zone.classList.remove("over", "correct", "wrong");
+          const value = e.dataTransfer.getData("text/plain");
+          zone.querySelector(".dropped").textContent = value;
+          zone.dataset.choice = value;
+        });
+      });
+    }
+
+    document.getElementById("check").addEventListener("click", () => {
+      let correct = 0;
+      const zones = document.querySelectorAll(".drop-zone");
+      zones.forEach(zone => {
+        zone.classList.remove("correct", "wrong");
+        if (zone.dataset.choice === zone.dataset.answer) {
+          zone.classList.add("correct");
+          correct++;
+        } else {
+          zone.classList.add("wrong");
+        }
+      });
+      const feedback = document.getElementById("feedback");
+      feedback.textContent = `你匹配对了 ${correct} / ${zones.length} 个。`;
+      feedback.className = correct === zones.length ? "feedback ok" : "feedback bad";
+    });
+    document.getElementById("reset").addEventListener("click", render);
+    render();
+  </script>
+</body>
+</html>

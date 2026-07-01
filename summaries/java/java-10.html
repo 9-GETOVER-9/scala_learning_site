@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java class structure accessor 课程标题 ：类的定义、结构与访问器详解 所属章节 ：Java 类与对象 上课日期 ：2025 09 18 知识点标签 ： 类定义 属性 方法 成员变量 局部变量 访问器 getset th" />
+  <title>类的定义结构与访问器详解 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-class-structure-accessor">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 10 课</p>
+      <h1>类的定义结构与访问器详解</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">类的定义结构与访问器详解</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-class-structure-accessor</code></li>
+<li><strong>课程标题</strong>：类的定义、结构与访问器详解</li>
+<li><strong>所属章节</strong>：Java 类与对象</li>
+<li><strong>上课日期</strong>：2025-09-18</li>
+<li><strong>知识点标签</strong>：<code>类定义</code> <code>属性</code> <code>方法</code> <code>成员变量</code> <code>局部变量</code> <code>访问器</code> <code>getset</code> <code>this关键字</code> <code>构造方法</code> <code>参数传递</code></li>
+<li><strong>难度等级</strong>：基础-进阶</li>
+<li><strong>适合对象</strong>：已学完流程控制和数组、正在学习面向对象的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课正式进入面向对象核心——详细讲解了类的定义（class）、类体的四部分结构（属性→构造方法→访问器→普通方法）、成员变量与局部变量的区别、访问器（get/set）的安全机制以及 this 关键字的使用。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先明确了类的定义——&quot;类是用来描述一类事物共有的属性（property）和功能（method）的模板&quot;。
+2. 课堂中重点讲解了类体的标准结构：属性在上、方法在下，方法又细分为构造方法、访问器（get/set）、常用方法和特殊方法四类。
+3. 老师通过&quot;银行账户&quot;的类比，深入解释了访问器（set/get）的作用——不直接暴露属性，通过方法控制访问，提高程序安全性和健壮性。
+4. 本节课的核心概念是成员变量（全局变量）与局部变量的区别——成员变量在整个类体中可见，局部变量只在定义它的方法内可见，同名时局部变量会隐藏全局变量。
+5. 最后通过参数传递（实参传给形参）和 this 关键字（代表当前对象），完整演示了对象如何调用方法来访问和修改属性。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能使用 class 关键字声明一个类，并正确写出类的属性（property）和方法（method）。
+2. 理解类体的标准结构——属性在上、方法在下（构造方法→访问器→常用方法→特殊方法）。
+3. 能区分成员变量（全局变量）和局部变量，理解它们的可见范围（scope）。
+4. 理解 this 关键字的作用——在方法中引用&quot;当前对象&quot;，解决局部变量与全局变量同名的问题。
+5. 能写出标准的访问器——set 方法（赋值）和 get 方法（取值），理解通过访问器间接操作属性的安全机制。
+6. 能区分实际参数（实参）和形式参数（形参），理解参数传递的基本过程。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：类的基本概念</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>类（class）</strong> 是 Java 面向对象编程的核心。类用来描述<strong>一类事物共有的属性（property）和功能（method）</strong>。</p>
+<ul>
+<li><strong>属性</strong>（成员变量）：描述这个类&quot;有什么&quot;（如 name、age）</li>
+<li><strong>方法</strong>（成员方法）：描述这个类&quot;能做什么&quot;（如 speak、study）</li>
+</ul>
+<p>类就像一个<strong>模板（template）</strong>，对象是根据这个模板创建出来的<strong>具体实例（instance）</strong>。</p>
+<h5>为什么要学它？</h5>
+<p>Java 的一切代码都写在类里面。不理解类的结构，就无法编写任何有意义的 Java 程序。类是 Java 程序的基本组织单位。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">public class 类名 {
+    // 属性（property）：在上面
+    数据类型 属性名;
+
+    // 方法（method）：在下面
+    public void 方法名() {
+        // 方法体
+    }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个非常形象的类比——&quot;大数据 24 级就是一个类，而每一位同学就是一个对象。类 = 模板（template），对象 = 实例（instance）。类是对对象的抽象，对象是类的实例。&quot;</p>
+<p>老师还特别强调了两条规则：</p>
+<ol>
+<li><strong>类名遵循标识符规则</strong>——不能使用汉语、不能以数字开头、不能是关键字。</li>
+<li><strong>类体结构固定</strong>——&quot;属性在上面，方法在下面。这是一个约定俗成的规则，虽然不按这个写也没错，但看着不舒服。我要求大家按这个规则去写。&quot;</li>
+</ol>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 类名用了中文——Java 标识符不能包含中文（虽然编译可能不报错，但极不推荐）。
+2. 属性和方法的位置写反——方法写在了属性上面（虽然语法不报错，但不规范）。
+3. 把 main 方法写在类外面——所有代码必须在类体 { } 内部。
+</code></pre>
+<hr>
+<h4>知识点 2：成员变量（全局变量）与局部变量</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中的变量按照<strong>声明位置和作用范围</strong>分为两大类：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>声明位置</th>
+<th>可见范围</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>成员变量</strong>（全局变量）</td>
+<td>类体中、方法外</td>
+<td>整个类体都可见</td>
+<td>系统自动赋默认值（0/null/false）</td>
+</tr>
+<tr>
+<td><strong>局部变量</strong></td>
+<td>方法体或代码块内</td>
+<td>从声明处到方法结束</td>
+<td><strong>无默认值，必须手动初始化</strong></td>
+</tr>
+</tbody></table>
+<p><strong>同名规则</strong>：当局部变量与成员变量同名时，局部变量会<strong>隐藏</strong>（hide）成员变量。要访问被隐藏的成员变量，必须用 <code>this.变量名</code>。</p>
+<h5>为什么要学它？</h5>
+<p>理解变量的作用范围是编程的基础。搞不清局部和全局，会出现&quot;明明赋值了却读不到&quot;或者&quot;值莫名其妙被改了&quot;的问题。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用两个生动的比喻来解释：</p>
+<p><strong>比喻一：全局变量 vs 局部变量的可见性</strong></p>
+<ul>
+<li>成员变量 = &quot;整个班的人都能看见他&quot;——在任何位置都能访问。</li>
+<li>局部变量 = &quot;只在某个房间（方法）里能看见他&quot;——出了这个房间就找不到了。</li>
+<li>&quot;可见即可访问&quot;——你只有能看到它，你才能使用它。</li>
+</ul>
+<p><strong>比喻二：同名时的隐藏</strong></p>
+<ul>
+<li>&quot;在一个文件里面，如果两个变量同名，局部变量就将全局变量隐藏。&quot;</li>
+<li>&quot;虽然两个 name 名字一样，但是是两个不同的 name——就像扬州有两个张三，一个叫大张三，一个叫小张三。&quot;</li>
+<li>要访问全局的那个 name，必须用 <code>this.name</code>。this 就是&quot;当前对象&quot;的引用。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 局部变量忘记初始化就直接使用——编译错误！局部变量不像成员变量有默认值。
+2. 两个同名变量搞混——在方法里直接写 name 访问的是局部变量，不是成员变量。
+3. 在方法外部访问局部变量——&quot;出了函数就看不到了&quot;。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class Person {
+    // ====== 成员变量（全局变量） ======
+    String name;      // 默认值 null
+    int age;          // 默认值 0
+
+    public void speak(String name) {   // 这个 name 是局部变量（形参）
+        // 局部变量 name 隐藏了成员变量 name
+        System.out.println(name + &quot;在说话&quot;);          // 访问的是局部变量 name
+        System.out.println(this.name + &quot;在说话&quot;);     // 访问的是成员变量 name（用 this）
+    }
+
+    public void test() {
+        int x = 10;   // 局部变量——必须初始化！
+        // ↑ 出了 test() 方法，x 就不可见了
+        System.out.println(x);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. name 和 age 是成员变量，在 Person 类中的任何方法里都能直接访问。
+2. speak 方法的参数 name 是局部变量——它和成员变量 name 同名，所以在 speak 方法里直接写 name 访问的是参数（局部变量）。
+3. 要访问被隐藏的成员变量 name，必须使用 this.name。
+4. test() 中的 x 是局部变量，出了 test() 方法就不可见了。
+5. 成员变量有默认值（name=null, age=0），但局部变量没有——x 必须手动初始化。
+</code></pre>
+<hr>
+<h4>知识点 3：访问器——set 方法与 get 方法</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>访问器（Accessor）</strong> 是一组成对的方法——<strong>set 方法</strong>（设置器/赋值）和 <strong>get 方法</strong>（获取器/取值）。它们的作用是<strong>间接地</strong>访问类的属性，而不是直接暴露属性给外部。</p>
+<h5>为什么要学它？</h5>
+<p>直接暴露属性（如 <code>public String name</code>）是不安全的——任何代码都可以随意修改它。通过访问器可以：</p>
+<ol>
+<li><strong>控制访问</strong>——只给某些代码赋值的权限。</li>
+<li><strong>验证数据</strong>——比如年龄不能设为负数。</li>
+<li><strong>提高程序的健壮性、安全性和稳定性</strong>。</li>
+</ol>
+<h5>基本语法</h5>
+<pre><code class="language-java">// set 方法：给属性赋值
+public void set属性名(数据类型 参数名) {
+    this.属性名 = 参数名;
+}
+
+// get 方法：返回属性值
+public 数据类型 get属性名() {
+    return 属性名;
+}
+</code></pre>
+<p><strong>命名规范</strong>：set/get + 属性名（首字母大写），如 <code>setName</code> / <code>getName</code>。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用<strong>银行账户</strong>做了精彩的类比：</p>
+<ul>
+<li>账户余额就是一个属性——如果可以直接访问（<code>account.balance = 0</code>），那&quot;钱还没花呢就没有了&quot;，极不安全。</li>
+<li>通过 set/get 方法（访问器）来控制——&quot;通过函数来控制它。你给某一个人权限来访问，只有你能访问你的账户信息，别人访问不了。&quot;</li>
+<li>&quot;一般情况下，我们的属性是不直接赋值的。通过方法间接操作，提高了安全性。&quot;</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 只写 set 方法忘写 get 方法——只能赋值不能读取，或者反过来。
+2. set 方法中忘记写 this——导致自己赋值给自己（局部变量 = 局部变量），成员变量没被修改。
+3. get 方法忘记写 return——这是取值的方法，必须有返回值。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class BankAccount {
+    // 属性（private——不直接暴露）
+    private String owner;
+    private double balance;
+
+    // ====== 访问器 ======
+    // set 方法：设置账户名
+    public void setOwner(String owner) {
+        this.owner = owner;    // this.owner = 成员变量, owner = 参数
+    }
+
+    // get 方法：获取账户名
+    public String getOwner() {
+        return owner;
+    }
+
+    // set 方法：存钱（带验证）
+    public void setBalance(double balance) {
+        if (balance &gt;= 0) {
+            this.balance = balance;
+        } else {
+            System.out.println(&quot;余额不能为负数！&quot;);
+        }
+    }
+
+    // get 方法：查余额
+    public double getBalance() {
+        return balance;
+    }
+}
+
+// 使用
+public class Main {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount();
+        acc.setOwner(&quot;张三&quot;);         // 通过 set 方法赋值
+        acc.setBalance(1000.0);
+        System.out.println(acc.getOwner() + &quot; 余额：&quot; + acc.getBalance());
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. owner 和 balance 都声明为 private——外部不能直接访问。
+2. setOwner(String owner) 中，参数 owner 和成员变量 owner 同名，用 this.owner 来区分——this.owner 是成员变量，等号右边的 owner 是参数。
+3. getOwner() 返回成员变量 owner 的值——这是&quot;读取&quot;操作。
+4. setBalance 中加入了验证——如果余额设为负数就拒绝。这就是&quot;通过方法控制属性&quot;的直接体现。
+</code></pre>
+<hr>
+<h4>知识点 4：this 关键字</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>this</code> 是一个关键字，代表**当前对象（current object）**的引用。谁在调用方法，this 就指向谁。</p>
+<h5>为什么要学它？</h5>
+<p>当局部变量（方法参数）和成员变量同名时，必须用 <code>this</code> 来区分。<code>this.name</code> 表示&quot;当前对象的 name 属性&quot;，单独的 <code>name</code> 表示局部变量。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用了一个非常接地气的比喻：</p>
+<ul>
+<li>&quot;当前对象是谁？比如我说&#39;班长，你去干什么&#39;，那班长就是当前对象。&quot;</li>
+<li>&quot;我说&#39;学委，你去干什么&#39;，那学委就是当前对象。&quot;</li>
+<li><strong>this 就是&quot;不管谁是当前对象，我都用 this 来代替它&quot;</strong>。</li>
+<li>&quot;谁在当前的、谁在做什么事情，就叫当前的。用 this 来引用它。&quot;</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 忘记用 this——导致 set 方法中自己赋值给自己，成员变量没变。
+2. 误以为 this 是一个对象——this 是引用，不是对象本身。
+3. 在静态方法（static）中使用 this——静态方法没有&quot;当前对象&quot;的概念，不能使用 this。
+</code></pre>
+<hr>
+<h4>知识点 5：参数传递——实参与形参</h4>
+<h5>这个知识点是什么？</h5>
+<p>方法定义时括号里写的参数叫<strong>形式参数（形参）</strong>——它只是一个&quot;占位符&quot;，没有实际值，等待被赋值。方法调用时传入的具体值叫<strong>实际参数（实参）</strong>——如 &quot;Tom&quot;、20、3.14 等具体数据。</p>
+<p>将实参的值传给形参的过程叫做<strong>参数传递（pass by value / pass by reference）</strong>。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师解释：&quot;形参是在这等着、等着赋值，谁赋给我我就用谁。实参是实际存在的值——Tom、Peter、Alice、1、1.1、1.11。把实参传给形参，叫做参数传递。&quot;</p>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类（class）</td>
+<td>对象（object）</td>
+<td>类是模板/抽象；对象是具体实例</td>
+<td><code>Student</code> 是类；<code>new Student()</code> 创建对象</td>
+</tr>
+<tr>
+<td>属性（property）</td>
+<td>方法（method）</td>
+<td>属性是&quot;有什么&quot;（名词）；方法是&quot;能做什么&quot;（动词）</td>
+<td><code>String name;</code> / <code>void speak()</code></td>
+</tr>
+<tr>
+<td>成员变量（全局）</td>
+<td>局部变量</td>
+<td>全局在类体中处处可见，有默认值；局部只在方法内可见，必须初始化</td>
+<td>类体中声明 vs 方法内声明</td>
+</tr>
+<tr>
+<td>形参</td>
+<td>实参</td>
+<td>形参是方法定义时的占位符；实参是调用时传的具体值</td>
+<td><code>void setName(String name)</code> 中 name 是形参 / <code>p.setName(&quot;Tom&quot;)</code> 中 &quot;Tom&quot; 是实参</td>
+</tr>
+<tr>
+<td>set 方法</td>
+<td>get 方法</td>
+<td>set 是赋值（写入）；get 是取值（读取）</td>
+<td><code>setName(&quot;Tom&quot;)</code> / <code>getName()</code></td>
+</tr>
+<tr>
+<td><code>this.name</code></td>
+<td><code>name</code></td>
+<td>this.name 访问成员变量；name 访问局部变量（同名时）</td>
+<td>在 set 方法中必须用 this</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：完整的类定义——从属性到访问器</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">类定义、属性、方法、构造方法、访问器
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class Student {
+    // 第1部分：属性
+    private String name;
+    private int age;
+
+    // 第2部分：构造方法
+    public Student() {
+        name = &quot;未命名&quot;;
+        age = 0;
+    }
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // 第3部分：访问器（get/set）
+    public void setName(String name) { this.name = name; }
+    public String getName() { return name; }
+    public void setAge(int age) { this.age = age; }
+    public int getAge() { return age; }
+
+    // 第4部分：普通方法
+    public void introduce() {
+        System.out.println(&quot;我叫&quot; + name + &quot;，今年&quot; + age + &quot;岁。&quot;);
+    }
+}
+
+// 测试类
+public class Main {
+    public static void main(String[] args) {
+        Student s1 = new Student();              // 用无参构造
+        s1.setName(&quot;小明&quot;);
+        s1.setAge(18);
+        s1.introduce();                          // 我叫小明，今年18岁。
+
+        Student s2 = new Student(&quot;小红&quot;, 20);    // 用带参构造
+        s2.introduce();                          // 我叫小红，今年20岁。
+    }
+}
+</code></pre>
+<h4>示例 2：成员变量与局部变量同名时的区分</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">成员变量、局部变量、this 关键字、隐藏
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class Person {
+    String name = &quot;张三&quot;;    // 成员变量
+
+    public void test(String name) {   // 局部变量（参数）——与成员变量同名
+        System.out.println(&quot;name = &quot; + name);           // 访问局部变量
+        System.out.println(&quot;this.name = &quot; + this.name); // 访问成员变量
+    }
+
+    public static void main(String[] args) {
+        Person p = new Person();
+        p.test(&quot;李四&quot;);
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">name = 李四
+this.name = 张三
+</code></pre>
+<hr>
+<h4>示例 3：方法返回值类型由 return 决定</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">方法返回值、返回类型、void
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class ReturnDemo {
+    // ✅ 返回值类型 double，由 return 的 1.0 决定
+    public double getValue() {
+        return 1.0;          // 1.0 是 double，所以方法类型是 double
+    }
+
+    // ✅ 返回值类型 int
+    public int getSum(int a, int b) {
+        return a + b;        // a+b 是 int，所以方法类型是 int
+    }
+
+    // ✅ void 表示没有返回值
+    public void sayHello() {
+        System.out.println(&quot;Hello&quot;);
+        // 没有 return（或者说 return 后面没有值）
+    }
+}
+</code></pre>
+<hr>
+<h3>7. 课堂案例：银行账户——理解访问器</h3>
+<p><strong>案例名称</strong>：为什么银行卡余额不能被直接修改？</p>
+<p><strong>案例背景</strong>：老师用银行账户余额来帮助理解访问器——&quot;你的银行账户，那个钱是属性。如果直接能赋值和取值，那钱就被划没了。&quot;</p>
+<p><strong>解决思路</strong>：把属性设为 private（私有），外部代码不能直接访问。提供 set/get 访问器来间接操作——set 方法可以加验证逻辑（如&quot;不能设为负数&quot;），get 方法只返回余额。</p>
+<p><strong>这个案例帮助理解什么</strong>：理解&quot;封装&quot;的核心思想——把数据保护起来，通过受控的方法访问。</p>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：局部变量忘记初始化
+错误示例：
+public void test() {
+    int x;
+    System.out.println(x);   // 编译错误！
+}
+
+正确写法：
+public void test() {
+    int x = 0;
+    System.out.println(x);   // 输出 0
+}
+
+解释：成员变量有默认值，但局部变量没有。局部变量使用前必须手动初始化。
+
+
+易错点 2：set 方法中忘记 this，自己赋值给自己
+错误示例：
+public void setName(String name) {
+    name = name;    // 两个 name 都是参数！成员变量没变！
+}
+
+正确写法：
+public void setName(String name) {
+    this.name = name;   // this.name = 成员变量, name = 参数
+}
+
+解释：不加 this 的话，等号左右两边都是局部变量（参数），成员变量纹丝不动。
+
+
+易错点 3：get 方法忘记 return
+错误示例：
+public String getName() {
+    name;    // 编译错误！没有 return
+}
+
+正确写法：
+public String getName() {
+    return name;
+}
+
+解释：get 方法必须有 return 语句返回要取的值。
+
+
+易错点 4：void 方法里写 return 带值
+错误示例：
+public void test() {
+    return 10;   // 编译错误！void 方法不能返回值
+}
+
+正确写法：
+public void test() {
+    // 不返回，或者只写 return;（不带值）
+}
+
+解释：void 表示&quot;无返回值&quot;，return 后面不能跟任何值。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：关于成员变量和局部变量，以下说法正确的是？
+
+A. 成员变量和局部变量都有默认值
+B. 局部变量有默认值，成员变量没有
+C. 成员变量有默认值（如0、null），局部变量必须手动初始化
+D. 两者都没有默认值
+
+正确答案：C
+
+
+题目 2：以下代码中，setName 方法执行后，成员变量 name 的值是什么？
+
+public void setName(String name) {
+    name = name;
+}
+
+A. 等于传入的参数值
+B. 还是原来的值（没变）
+C. null
+D. 编译错误
+
+正确答案：B
+
+解析：两个 name 都是参数（局部变量）。参数赋值给参数，成员变量没有任何变化。应写 this.name = name;
+
+
+题目 3：this 关键字的作用是什么？
+
+A. 表示当前类的名称
+B. 表示当前对象的引用
+C. 表示父类的引用
+D. 表示方法名
+
+正确答案：B
+
+
+题目 4：访问器由哪两个方法组成？
+
+A. add 和 remove
+B. start 和 stop
+C. set 和 get
+D. open 和 close
+
+正确答案：C
+
+
+题目 5：关于 void 方法，以下说法正确的是？
+
+A. void 方法必须有 return 语句
+B. void 方法可以 return 一个 int 值
+C. void 方法表示没有返回值
+D. void 是方法名的一部分
+
+正确答案：C
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. class —— Java 关键字，用来声明一个类
+2. 属性（property） —— 类的成员变量，描述类&quot;有什么&quot;
+3. 方法（method） —— 类的成员函数，描述类&quot;能做什么&quot;
+4. 成员变量 —— 在类体中、方法外声明的变量，整个类体可见
+5. 局部变量 —— 在方法体内声明的变量，只在方法内可见
+6. this —— 代表当前对象的引用
+7. set 方法 —— 访问器中的赋值方法，用于给属性设值
+8. get 方法 —— 访问器中的取值方法，用于获取属性值
+9. 形参 —— 方法定义时声明的参数，等待实参赋值
+10. 实参 —— 方法调用时传入的具体值
+</code></pre>
+<hr>
+<h3>11. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是理解类的标准结构——属性在上、方法在下，方法是构造方法→访问器（get/set）→普通方法的顺序。
+2. 学习面向对象时要特别注意成员变量和局部变量的区别——全局有默认值，局部必须初始化；同名时局部隐藏全局，需用 this 区分。
+3. 访问器（get/set）是封装的核心机制——不要直接暴露属性，通过方法来安全地访问。
+4. 这些概念会在后续的继承、多态、封装中反复使用——现在打好基础，后面才不会乱。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-09.html"><span>上一篇</span><strong>数组与for循环综合复习</strong></a><a class="article-pager-link next" rel="next" href="java-11.html"><span>下一篇</span><strong>方法分类与构造方法重载</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

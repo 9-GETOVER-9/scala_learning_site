@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java array reference 课程标题 ：数组维度、初始化与引用类型详解 所属章节 ：Java 数组 上课日期 ：2025 08 28 知识点标签 ： 一维数组 二维数组 数组初始化 引用类型 length属性 内存地址 默认值 难度等" />
+  <title>数组维度与引用类型详解 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-array-reference">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 04 课</p>
+      <h1>数组维度与引用类型详解</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">数组维度与引用类型详解</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-array-reference</code></li>
+<li><strong>课程标题</strong>：数组维度、初始化与引用类型详解</li>
+<li><strong>所属章节</strong>：Java 数组</li>
+<li><strong>上课日期</strong>：2025-08-28</li>
+<li><strong>知识点标签</strong>：<code>一维数组</code> <code>二维数组</code> <code>数组初始化</code> <code>引用类型</code> <code>length属性</code> <code>内存地址</code> <code>默认值</code></li>
+<li><strong>难度等级</strong>：入门-进阶</li>
+<li><strong>适合对象</strong>：已了解基本数据类型、正在学习数组的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课深入讲解一维/二维数组的结构与访问方式、数组初始化的两种写法、以及 Java 中引用类型变量的核心概念——数组是引用类型，两个引用指向同一地址时&quot;一处变，处处变&quot;。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先用&quot;射线、X轴Y轴&quot;的几何类比，清晰区分了一维数组（一个方向）、二维数组（有行有列）和三维数组（立体空间）的维度概念。
+2. 课堂中重点讲解了数组的 length 属性——它可以获取一维数组的元素个数，也可以获取二维数组每一行的列数。
+3. 老师通过&quot;数组初始化&quot;部分强调了两种赋值方式：逐个元素赋值、以及花括号一次性初始化的写法（如 float arr[] = {值1, 值2, ...}）。
+4. 本节课的核心难点是数组的引用类型特性——老师用&quot;班长/高梦涵&quot;的双重称呼作比喻，深入讲解了引用型变量指向同一地址，&quot;一处变，处处变&quot;。
+5. 最后对比了普通变量（值传递，互不影响）和引用型变量（地址传递，相互影响）的区别，为后续学习局部变量和方法参数传递打下基础。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能区分一维数组、二维数组、三维数组的维度概念（一个方向 / 两个方向 / 立体）。
+2. 能使用 length 属性获取数组的元素个数（一维）和每行的列数（二维）。
+3. 掌握数组的两种初始化方式：先 new 再赋值、声明时花括号直接初始化。
+4. 理解数组创建后系统会给元素赋默认值（int 默认 0，double 默认 0.0）。
+5. 理解引用类型的核心概念：引用变量指向内存地址，多个引用指向同一地址时相互影响。
+6. 能区分普通变量（值传递）和引用型变量（地址传递）的行为差异。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：数组的维度概念（一维、二维、三维）</h4>
+<h5>这个知识点是什么？</h5>
+<p>数组的<strong>维度</strong>（dimension）描述了一个数组有几个&quot;方向&quot;。维度越多，数据结构越复杂：</p>
+<ul>
+<li><strong>一维数组</strong>：只有一个方向，就像一条线（射线），通过一个下标就能访问元素。</li>
+<li><strong>二维数组</strong>：有两个方向（X 轴和 Y 轴），就像一张表格/矩阵，有<strong>行</strong>和<strong>列</strong>，需要两个下标来定位。</li>
+<li><strong>三维数组</strong>：有三个方向，就像一个立体空间（立方体），需要三个下标来定位。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>不同维度对应不同的数据组织方式。成绩单是二维的（学生 × 科目），RGB 图像是三维的（宽 × 高 × 颜色通道）。理解维度概念是掌握复杂数据结构的基础。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 一维数组
+int[] arr1 = new int[5];           // 像一个有 5 个格子的横排
+
+// 二维数组
+int[][] arr2 = new int[3][4];      // 3 行 × 4 列，像一个表格
+
+// 三维数组
+int[][][] arr3 = new int[2][3][4]; // 2 层 × 3 行 × 4 列
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用几何概念来类比：</p>
+<ul>
+<li><strong>一维</strong>：&quot;一个方向，就像射线。只有一个下标——boy0、boy1、boy2、boy3。&quot;</li>
+<li><strong>二维</strong>：&quot;不仅有 X 轴，还有 Y 轴。有两个值了——前面这个叫<strong>行</strong>，后面这个叫<strong>列</strong>。A1 就是第一行第一列。&quot;</li>
+<li><strong>三维</strong>：&quot;再有一个就是三维了。&quot;（课堂上老师用立体空间的概念简单带过）。</li>
+</ul>
+<p>老师特别强调：一维数组用<strong>一个下标</strong>访问（如 arr[0]），二维数组用<strong>两个下标</strong>（如 arr[行][列]），前面的下标是行，后面的是列。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 二维数组的行和列搞反——arr[行][列]，不是 arr[列][行]。
+2. 访问二维数组时只写了一个下标——二维数组必须用两个下标。
+3. 分不清什么场景该用几维数组——能用一个维度解决的不要用两个维度。
+4. 下标从 0 开始但习惯从 1 开始数——长度为 4 的数组，下标范围是 0~3。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class ArrayDimensionDemo {
+    public static void main(String[] args) {
+        // 一维数组：就像一个列表
+        String[] boys = {&quot;boy0&quot;, &quot;boy1&quot;, &quot;boy2&quot;, &quot;boy3&quot;};
+        System.out.println(&quot;第1个：&quot; + boys[0]);  // boy0
+        System.out.println(&quot;第3个：&quot; + boys[2]);  // boy2
+
+        // 二维数组：就像一张表格（3行 × 3列）
+        int[][] matrix = {
+            {1, 2, 3},    // 第 1 行
+            {4, 5, 6},    // 第 2 行
+            {7, 8, 9}     // 第 3 行
+        };
+        System.out.println(&quot;第1行第1列：&quot; + matrix[0][0]);  // 1
+        System.out.println(&quot;第2行第3列：&quot; + matrix[1][2]);  // 6
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. boys 是一维数组，只需要一个下标就能定位到元素。
+2. matrix 是二维数组，需要两个下标——第一个定位行，第二个定位列。
+3. matrix[1][2] 表示第 2 行（下标 1）第 3 列（下标 2）。
+4. 二维数组可以理解为&quot;数组的数组&quot;——每一行本身是一个一维数组。
+</code></pre>
+<hr>
+<h4>知识点 2：数组的 length 属性</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>length</code> 是数组的一个<strong>属性</strong>（不是方法），表示数组中<strong>元素的个数</strong>。对于一维数组，length 就是元素的总数；对于二维数组，<code>数组名.length</code> 表示<strong>行数</strong>，<code>数组名[行下标].length</code> 表示该行的<strong>列数</strong>。</p>
+<h5>为什么要学它？</h5>
+<p>在遍历数组时，必须知道数组有多长才能避免下标越界。length 属性是访问数组时最常用的工具之一。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">数组名.length           // 一维：元素总个数；二维：行数
+数组名[行下标].length   // 二维：该行的列数
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个关键例子帮助理解：</p>
+<ul>
+<li>&quot;A1.length 是不是 3？A2.length 是不是也是 3？A3.length 是不是也是 3？&quot;</li>
+<li>为什么是 3？因为每一行有 3 个元素（3 列）。</li>
+<li>A1 是第一行，A1.length 得到的是这一行的列数。</li>
+<li>所以二维数组中：<code>数组名.length</code> = 行数，<code>数组名[i].length</code> = 第 i 行的列数。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把 length 当成方法用，写了括号：arr.length() —— 正确是 arr.length（没有括号）。
+2. 在二维数组中，把 arr.length 理解成总元素个数——实际上 arr.length 是行数。
+3. 访问不存在的行的 length：如果只有 3 行，访问 arr[3].length 会下标越界。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class LengthDemo {
+    public static void main(String[] args) {
+        int[] arr1 = {10, 20, 30, 40, 50};
+        System.out.println(&quot;一维数组长度：&quot; + arr1.length);   // 5
+
+        int[][] arr2 = {
+            {1, 2, 3},      // 第 1 行，3 列
+            {4, 5, 6, 7},   // 第 2 行，4 列
+            {8, 9}           // 第 3 行，2 列
+        };
+        System.out.println(&quot;二维数组行数：&quot; + arr2.length);       // 3
+        System.out.println(&quot;第1行列数：&quot; + arr2[0].length);      // 3
+        System.out.println(&quot;第2行列数：&quot; + arr2[1].length);      // 4
+        System.out.println(&quot;第3行列数：&quot; + arr2[2].length);      // 2
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. arr1.length 返回 5——这个一维数组有 5 个元素。
+2. arr2.length 返回 3——这个二维数组有 3 行。
+3. arr2[0].length 返回 3——第 1 行有 3 列。
+4. 注意：Java 的二维数组每行的列数可以不同（不规则数组），arr2[1].length = 4，arr2[2].length = 2。
+</code></pre>
+<hr>
+<h4>知识点 3：数组的初始化方式</h4>
+<h5>这个知识点是什么？</h5>
+<p>数组在声明后，需要<strong>初始化</strong>才能使用。初始化有两种方式：</p>
+<ul>
+<li><strong>方式一（先声明，再赋值）</strong>：用 <code>new</code> 分配空间，系统自动给每个元素赋默认值，然后再逐个赋值。</li>
+<li><strong>方式二（声明时直接初始化）</strong>：用花括号 <code>{}</code> 把初始值一次性列出，简洁方便。</li>
+</ul>
+<p>此外，创建数组后系统会给出<strong>默认值</strong>：int 默认 0，double 默认 0.0，boolean 默认 false，引用类型默认 null。</p>
+<h5>为什么要学它？</h5>
+<p>初始化数组是最基本的操作。两种方式各有适用场景——方式一适合&quot;先占位，后填值&quot;，方式二适合&quot;一开始就知道所有值&quot;。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 方式一：先 new，再逐个赋值
+类型[] 数组名 = new 类型[长度];
+数组名[0] = 值1;
+数组名[1] = 值2;
+...
+
+// 方式二：声明时花括号初始化
+类型[] 数组名 = {值1, 值2, 值3, ...};
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师特别强调了方式二中<strong>方括号里不能写数字</strong>：&quot;float B[]，方括号里面没有数值。你不能写个 4——你怎么知道后面是第几个呀？有很多同学犯错误，搁这直接就给我写个数，那就不对了。&quot;</p>
+<p>换句话说，如果写成 <code>float B[4] = {1, 2, 3, 4}</code>，方括号里的 4 是多余的。应该写成 <code>float[] B = {1, 2, 3, 4}</code>，让 Java 自动根据花括号里的数量推断长度。</p>
+<p>老师还指出：&quot;按照这个顺序，一个一个地写到我们的 B 的数组里边。第一个就是 B[0]，第二个是 B[1]……&quot;</p>
+<p><strong>默认值</strong>：老师说明&quot;创建数组后，系统会给数组当中的每一个元素默认一个值。整型就是 0，float 就是 0.0。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 在花括号初始化的方括号中写数字：int[5] arr = {1,2,3,4,5};（错误——方括号里不能写数字）。
+2. 忘记 new 关键字：int[] arr = int[5];（错误——应该用 new int[5]）。
+3. 数组创建后没有赋值就直接使用——值为默认值（0），可能不是想要的。
+4. 花括号初始化时多写了分号：int[] arr = {1,2,3,};（最后一个逗号在某些 Java 版本中允许，但不规范）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class ArrayInitDemo {
+    public static void main(String[] args) {
+        // 方式一：先 new 再逐个赋值
+        int[] scores = new int[5];   // 创建长度为 5 的数组，默认值全是 0
+        scores[0] = 90;
+        scores[1] = 85;
+        scores[2] = 78;
+        scores[3] = 92;
+        scores[4] = 88;
+
+        // 方式二：花括号直接初始化（方括号里不写数字）
+        float[] prices = {9.9f, 19.9f, 29.9f, 39.9f};
+        // 等价于：
+        // float[] prices = new float[4];
+        // prices[0] = 9.9f; prices[1] = 19.9f; ...
+
+        // 验证默认值
+        int[] empty = new int[3];
+        System.out.println(&quot;默认值：&quot; + empty[0]);  // 0
+
+        // 输出结果
+        System.out.println(&quot;scores[0] = &quot; + scores[0]);   // 90
+        System.out.println(&quot;prices[2] = &quot; + prices[2]);   // 29.9
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. scores 使用方式一：先 new int[5] 分配 5 个位置（默认全是 0），再逐个赋值为具体分数。
+2. prices 使用方式二：花括号 {} 一次性初始化，方括号里不需要写长度。
+3. empty 数组创建后没有赋值，输出 0——这是 int 类型的默认值。
+4. 方式一适合&quot;后面才知道具体值&quot;的场景；方式二适合&quot;一开始就知道所有值&quot;的场景。
+</code></pre>
+<hr>
+<h4>知识点 4：数组是引用类型——&quot;一处变，处处变&quot;</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中，数组属于<strong>引用类型</strong>（Reference Type）。数组变量存储的不是数据本身，而是数据在内存中的<strong>地址</strong>。当两个数组变量指向同一块地址时，通过任意一个变量修改数据，另一个变量看到的也会跟着改变。这就是——<strong>一处变，处处变</strong>。</p>
+<h5>为什么要学它？</h5>
+<p>不理解引用类型，就会出现&quot;明明只改了 A，为什么 B 也跟着变了&quot;的困惑。引用类型是理解 Java 内存模型、方法参数传递的关键。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">int[] a = {1, 2, 3};
+int[] b = a;          // b 指向 a 的同一块地址（不是复制）
+b[0] = 100;           // 修改 b 的元素
+// 此时 a[0] 也是 100！因为 a 和 b 指向同一地址
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用了两个非常精彩的比喻：</p>
+<p><strong>比喻一：班长 = 高梦涵</strong></p>
+<ul>
+<li>&quot;高梦涵&quot;是她的全名，&quot;班长&quot;是她的身份/引用。两个称呼指向的是<strong>同一个人</strong>。</li>
+<li>当座位上的人从高梦涵换成了杜涵蕊，&quot;一班班长&quot;这个称呼指向的人也跟着变了。</li>
+<li>&quot;引用型变量与原变量指向同一块地址。当地址里的数值变了，那这两个值都变了。&quot;</li>
+</ul>
+<p><strong>比喻二：小名（昵称）</strong></p>
+<ul>
+<li>一个人有大名（张三）和小名（小小），两个名字指的都是同一个人。</li>
+<li>&quot;你一个另一个称呼，都是一个人。&quot;</li>
+<li>&quot;引用，换句话说，就是他的小名。&quot;</li>
+</ul>
+<p><strong>核心结论</strong>（老师让学生记住的口诀）：<strong>&quot;一处变，处处变。&quot;</strong></p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 以为 int[] b = a; 是复制了一份新数组——实际上是让 b 指向和 a 同样的地址。
+2. 修改 b 的元素后，惊讶地发现 a 的元素也变了。
+3. 把普通变量的赋值逻辑（a=1; b=a; b=2; 此时 a 还是 1）套用到数组上。
+4. 想要复制数组却用 = 赋值——应该用循环逐个复制，或用 clone() / System.arraycopy()。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class ReferenceDemo {
+    public static void main(String[] args) {
+        // ====== 对比 1：普通变量（值传递） ======
+        int x = 10;
+        int y = x;        // y 复制了 x 的值（10），但它们是独立的
+        y = 20;           // 修改 y
+        System.out.println(&quot;x = &quot; + x);  // x 还是 10（不受影响）
+        System.out.println(&quot;y = &quot; + y);  // y 是 20
+
+        // ====== 对比 2：数组（引用传递） ======
+        int[] arrA = {1, 2, 3};
+        int[] arrB = arrA;      // arrB 指向 arrA 的同一块地址！
+        arrB[0] = 100;          // 通过 arrB 修改
+
+        System.out.println(&quot;arrA[0] = &quot; + arrA[0]);  // 100！（也跟着变了）
+        System.out.println(&quot;arrB[0] = &quot; + arrB[0]);  // 100
+
+        // ====== 正确复制数组的方法 ======
+        int[] source = {10, 20, 30};
+        int[] copy = new int[source.length];
+        for (int i = 0; i &lt; source.length; i++) {
+            copy[i] = source[i];   // 逐个复制元素
+        }
+        copy[0] = 999;  // 修改 copy 不影响 source
+        System.out.println(&quot;source[0] = &quot; + source[0]);  // 10（没变）
+        System.out.println(&quot;copy[0] = &quot; + copy[0]);      // 999
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. int y = x; 是值传递——y 获得了 x 的值（10），之后 x 和 y 各自独立。修改 y 不影响 x。
+2. int[] arrB = arrA; 是引用传递——arrB 获得了 arrA 存储的地址，两个变量指向同一块内存。
+3. arrB[0] = 100; 修改了该地址的第一个元素，arrA[0] 自然也变了（因为它们看的是同一块地方）。
+4. 要真正复制一个数组，需要创建一个新数组，然后用循环逐个复制元素。
+</code></pre>
+<hr>
+<h4>知识点 5：普通变量 vs 引用型变量</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中的变量分为两类：</p>
+<ul>
+<li><strong>普通变量（基本类型）</strong>：直接存储数据值本身（如 int、double、boolean）。赋值时复制的是值，两个变量互不影响。</li>
+<li><strong>引用型变量（引用类型）</strong>：存储的是数据在内存中的地址（如数组、String、自定义类的对象）。赋值时复制的是地址，两个变量指向同一个数据。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>这是 Java 中最容易被忽视但影响深远的概念。不理解这个区别，后面学方法参数传递（值传递 vs 引用传递）、对象比较（== vs equals）都会经常出错。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 普通变量：值传递
+int a = 1;
+int b = a;   // b 复制 a 的值
+a = 2;       // a 变了，b 不变
+
+// 引用变量：地址传递
+int[] arr1 = {1, 2};
+int[] arr2 = arr1;   // arr2 复制 arr1 的地址
+arr1[0] = 100;       // arr1 和 arr2 都看到变化
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个清晰的对比来解释：</p>
+<ul>
+<li><strong>普通变量</strong>：&quot;A 变 B 不变，你愿意怎么变就怎么变，跟我没有关系。A 怎么变 B 也不管，B 怎么变 A 也不管。这是两个不同的东西。&quot;</li>
+<li><strong>引用变量</strong>：&quot;B 变 A 就变，A 变 B 就变。这两个东西都指向同一块地址，就是一个东西。&quot;</li>
+</ul>
+<p>老师还打了一个数学的比方：&quot;就像 e 的 a 次方和 e 的 b 次方一样，在某一时刻它俩都等于 1。过一段时间 a 变成 2 了，但 b 还是一。这就是两个不同的变量。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把数组赋值当成&quot;复制内容&quot;——实际上复制的是地址。
+2. 在写方法时，把数组作为参数传入，在方法内部修改数组，结果方法外面的数组也变了。
+3. 对 String 类型的引用行为产生误解——String 虽然是引用类型，但它是不可变的（后面会学）。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class ValueVsReference {
+    public static void main(String[] args) {
+        // ====== 普通变量（值传递）======
+        int num1 = 10;
+        int num2 = num1;      // 复制值
+        num1 = 999;
+        System.out.println(&quot;普通变量：&quot;);
+        System.out.println(&quot;num1 = &quot; + num1);  // 999（num1 自己变了）
+        System.out.println(&quot;num2 = &quot; + num2);  // 10（num2 不受影响）
+
+        // ====== 引用变量（地址传递）======
+        int[] arr1 = {10, 20};
+        int[] arr2 = arr1;    // 复制地址（不是复制内容）
+        arr1[0] = 999;
+        System.out.println(&quot;\n引用变量：&quot;);
+        System.out.println(&quot;arr1[0] = &quot; + arr1[0]);  // 999
+        System.out.println(&quot;arr2[0] = &quot; + arr2[0]);  // 999（也跟着变了！）
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. num1 和 num2 各存各的值。num1 改成 999 完全不关 num2 的事。
+2. arr1 和 arr2 存的是同一个地址。arr1[0] 改成 999，arr2 看到的也是改过的数据——因为它们&quot;看的是同一块地方&quot;。
+3. 这就像一个班级的花名册有两份复印件——在一份上改了一个名字，另一份不会变（值传递）；但如果两个都是指向同一本花名册的&quot;快捷方式&quot;，那么修改花名册本身，两个快捷方式看到的内容都变了（引用传递）。
+</code></pre>
+<hr>
+<h4>知识点 6：数组默认值与逐个赋值</h4>
+<h5>这个知识点是什么？</h5>
+<p>当用 <code>new 类型[长度]</code> 创建数组后，在没有手动赋值之前，Java 会自动给每个元素一个<strong>默认值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>数组类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int[]</td>
+<td>0</td>
+</tr>
+<tr>
+<td>double[]</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>float[]</td>
+<td>0.0f</td>
+</tr>
+<tr>
+<td>boolean[]</td>
+<td>false</td>
+</tr>
+<tr>
+<td>char[]</td>
+<td>&#39; &#39;（空字符）</td>
+</tr>
+<tr>
+<td>引用类型[]（如 String[]）</td>
+<td>null</td>
+</tr>
+</tbody></table>
+<h5>为什么要学它？</h5>
+<p>如果不了解默认值机制，就可能误以为未赋值的数组元素是&quot;空的&quot;或&quot;随机的&quot;，导致逻辑 bug。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">int[] arr = new int[5];     // 5 个元素默认全是 0
+arr[0] = 10;                // 只给第 1 个赋值
+// arr[1] ~ arr[4] 仍然是 0
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用一句话总结：&quot;创建数组后，系统会给数组当中的每一个元素默认一个值。整型就是 0。&quot;</p>
+<p>然后说明了赋值的两种途径：</p>
+<ol>
+<li><strong>逐个赋值</strong>：&quot;要 1 给他，2 给他，他他他一个一个给。&quot;</li>
+<li><strong>初始化列表</strong>：&quot;按照这个顺序，一个一个地写到数组里边。第一个就是 B[0]，第二个 B[1]……&quot;</li>
+</ol>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 以为 new int[5] 后元素的值是&quot;空&quot;或&quot;未定义&quot;——实际全是 0。
+2. 以为 new String[5] 后元素是空字符串 &quot;&quot;——实际是 null（null 和 &quot;&quot; 完全不同）。
+3. 期望默认值是随机数——Java 会明确赋默认值，不会有&quot;垃圾数据&quot;。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class DefaultValueDemo {
+    public static void main(String[] args) {
+        int[] intArr = new int[3];
+        double[] doubleArr = new double[3];
+        boolean[] boolArr = new boolean[3];
+        String[] strArr = new String[3];
+
+        System.out.println(&quot;int 默认值：&quot; + intArr[0]);       // 0
+        System.out.println(&quot;double 默认值：&quot; + doubleArr[0]); // 0.0
+        System.out.println(&quot;boolean 默认值：&quot; + boolArr[0]);  // false
+        System.out.println(&quot;String 默认值：&quot; + strArr[0]);    // null
+
+        // 注意区分 null 和 &quot;&quot;
+        // strArr[0].length();  ← 这会报错（NullPointerException），因为 strArr[0] 是 null
+        // &quot;&quot;.length();         ← 这没问题，返回 0（空字符串不是 null）
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 每种类型的数组创建后都有默认值，不是&quot;随机&quot;的。
+2. int 默认 0，double 默认 0.0，boolean 默认 false。
+3. String 是引用类型，默认值是 null（啥也没有），不是空字符串 &quot;&quot;。
+4. null 表示&quot;没有指向任何对象&quot;，对 null 调用方法会抛出 NullPointerException。
+</code></pre>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一维数组</td>
+<td>二维数组</td>
+<td>一维只需一个下标；二维需要两个下标（行、列）</td>
+<td><code>arr[0]</code> / <code>arr[0][1]</code></td>
+</tr>
+<tr>
+<td><code>arr.length</code>（二维）</td>
+<td><code>arr[i].length</code>（二维）</td>
+<td>前者是行数；后者是第 i 行的列数</td>
+<td><code>arr.length</code>=3 行 / <code>arr[0].length</code>=4 列</td>
+</tr>
+<tr>
+<td>普通变量（基本类型）</td>
+<td>引用型变量</td>
+<td>普通变量存值，赋值后互相独立；引用变量存地址，指向同一数据的引用互影响</td>
+<td><code>int a=1; int b=a; a=2;</code> b 还是 1 / <code>int[] c={1}; int[] d=c; c[0]=2;</code> d[0] 也变成 2</td>
+</tr>
+<tr>
+<td>数组赋值 <code>b = a</code></td>
+<td>数组复制</td>
+<td><code>b = a</code> 复制的是地址（引用），修改 b 会影响 a；真正复制需要 new + 逐个赋值</td>
+<td>见知识点 4 的代码示例</td>
+</tr>
+<tr>
+<td>花括号初始化</td>
+<td>new + 逐个赋值</td>
+<td>花括号一次性给出所有值；new 先分配空间再逐个赋值</td>
+<td><code>int[] a = {1,2,3};</code> / <code>int[] a = new int[3]; a[0]=1; ...</code></td>
+</tr>
+<tr>
+<td>null</td>
+<td>&quot;&quot;（空字符串）</td>
+<td>null 是没有指向任何对象；&quot;&quot; 是一个长度为 0 的字符串对象</td>
+<td><code>String s = null;</code> 不能调方法 / <code>String s = &quot;&quot;;</code> 可以调方法</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：一维数组与二维数组的 length 属性</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">length 属性、一维数组、二维数组、行数列数
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class LengthDemo {
+    public static void main(String[] args) {
+        // 一维数组
+        double[] grades = {85.5, 92.0, 78.5, 88.0};
+        System.out.println(&quot;成绩数组长度：&quot; + grades.length);       // 4
+
+        // 二维数组（不规则：每行列数可以不同）
+        int[][] table = {
+            {1, 2, 3},          // 第 1 行：3 列
+            {4, 5},             // 第 2 行：2 列
+            {6, 7, 8, 9}        // 第 3 行：4 列
+        };
+
+        System.out.println(&quot;table 行数：&quot; + table.length);          // 3
+        for (int i = 0; i &lt; table.length; i++) {
+            System.out.println(&quot;第&quot; + (i+1) + &quot;行列数：&quot; + table[i].length);
+        }
+        // 输出：
+        // 第1行列数：3
+        // 第2行列数：2
+        // 第3行列数：4
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">成绩数组长度：4
+table 行数：3
+第1行列数：3
+第2行列数：2
+第3行列数：4
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. grades.length 返回 4，因为一维数组有 4 个元素。
+2. table.length 返回 3，因为二维数组有 3 行。
+3. table[i].length 返回第 i 行的列数——每行的列数可以不同（不规则数组）。
+4. 第 1 行有 {1,2,3} 3 个元素，第 2 行有 {4,5} 2 个元素。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- length 是属性，没有括号——写 arr.length() 会报错！
+- 二维数组每一行的列数不一定要相同，这叫&quot;不规则数组&quot;（Jagged Array）。
+</code></pre>
+<hr>
+<h4>示例 2：普通变量 vs 引用型变量的区别</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">值传递、引用传递、数组引用
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class ValueVsReference {
+    public static void main(String[] args) {
+        // ====== 场景 1：普通变量 ======
+        System.out.println(&quot;===== 普通变量 =====&quot;);
+        int a = 10;
+        int b = a;          // b 复制了 a 的值
+        System.out.println(&quot;赋值后：a=&quot; + a + &quot;, b=&quot; + b);  // a=10, b=10
+
+        a = 999;            // 修改 a
+        System.out.println(&quot;修改 a 后：a=&quot; + a + &quot;, b=&quot; + b);  // a=999, b=10（b 不变！）
+
+        // ====== 场景 2：数组（引用类型） ======
+        System.out.println(&quot;\n===== 数组（引用类型） =====&quot;);
+        int[] arr1 = {10, 20, 30};
+        int[] arr2 = arr1;  // arr2 指向 arr1 的同一块地址
+        System.out.println(&quot;赋值后：arr1[0]=&quot; + arr1[0] + &quot;, arr2[0]=&quot; + arr2[0]);
+
+        arr1[0] = 999;      // 通过 arr1 修改
+        System.out.println(&quot;修改 arr1[0] 后：arr1[0]=&quot; + arr1[0] + &quot;, arr2[0]=&quot; + arr2[0]);
+        // arr1[0]=999, arr2[0]=999（arr2 也跟着变了！）
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">===== 普通变量 =====
+赋值后：a=10, b=10
+修改 a 后：a=999, b=10
+
+===== 数组（引用类型） =====
+赋值后：arr1[0]=10, arr2[0]=10
+修改 arr1[0] 后：arr1[0]=999, arr2[0]=999
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. 普通变量 a=10, b=a 后：a 和 b 各存各的。改 a 不影响 b。
+2. 数组 arr2 = arr1 后：arr2 拿到的是 arr1 的地址，它们指着同一块内存。
+3. 所以改 arr1[0] = 999 后，arr2[0] 也变成了 999——&quot;一处变，处处变&quot;。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 口诀：基本类型赋值是&quot;复印&quot;（各拿一份）；引用类型赋值是&quot;发定位&quot;（指向同一个地方）。
+- 想要真的复制数组内容，必须 new 一个新数组，然后循环逐个复制。
+</code></pre>
+<hr>
+<h4>示例 3：数组初始化的正确与错误写法</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">数组初始化、默认值、花括号语法
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class ArrayInitDemo {
+    public static void main(String[] args) {
+        // ✅ 正确写法 1：先 new，再逐个赋值
+        int[] scores = new int[3];
+        scores[0] = 90;
+        scores[1] = 85;
+        scores[2] = 78;
+
+        // ✅ 正确写法 2：花括号直接初始化（方括号里不写数字）
+        float[] prices = {9.9f, 19.9f, 29.9f};
+
+        // ✅ 正确写法 3：声明和初始化分开
+        String[] names;
+        names = new String[]{&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;};  // 分开写时前面要加 new String[]
+
+        // ❌ 错误写法 1：花括号初始化时方括号里写了数字
+        // int[3] arr = {1, 2, 3};   // 编译错误！
+
+        // ❌ 错误写法 2：分开声明时忘记 new String[]
+        // String[] names;
+        // names = {&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;};  // 编译错误！
+
+        // 验证结果
+        System.out.println(&quot;scores[0] = &quot; + scores[0]);    // 90
+        System.out.println(&quot;prices[1] = &quot; + prices[1]);    // 19.9
+        System.out.println(&quot;names[2] = &quot; + names[2]);      // 王五
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">scores[0] = 90
+prices[1] = 19.9
+names[2] = 王五
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. 方式一（new + 逐个赋值）：适合先占位后填值的场景。
+2. 方式二（花括号）：适合一开始就知道所有值的场景，方括号里不能写数字。
+3. 方式三（声明与初始化分开）：分开时，赋值的右边必须写 new String[]{...}，不能只写 {...}。
+4. 错误写法 1：int[3] arr = {1,2,3}; 方括号里写了 3——Java 会根据花括号里的数量自动推断。
+5. 错误写法 2：分开声明时直接写 {...}——Java 不允许，必须加 new String[]。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 记住口诀：花括号初始化，方括号里不写数。
+- 声明和初始化写在同一行 → 可以用 {...}。
+- 声明和初始化分开写 → 必须用 new 类型[]{...}。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：班长与高梦涵——理解引用类型</h4>
+<ul>
+<li><strong>案例名称</strong>：为什么&quot;一班班长&quot;换了？</li>
+<li><strong>对应知识点</strong>：引用类型、地址传递</li>
+<li><strong>案例背景</strong>：老师为了解释引用类型的概念，让班长高梦涵站起来，用她的真实姓名和&quot;班长&quot;这个职务称呼做对比。</li>
+<li><strong>解决思路</strong>：<ol>
+<li>&quot;高梦涵&quot;是她的全名——相当于数据的实际内容。</li>
+<li>&quot;一班班长&quot;是一个<strong>引用</strong>——指向坐在那个座位上的人。</li>
+<li>当座位上的人从高梦涵换成了杜涵蕊，&quot;班长&quot;这个引用指向的人也自动变了。</li>
+<li>两个称呼（高梦涵和一班班长）指向的是<strong>同一块地址（同一个座位）</strong>。</li>
+</ol>
+</li>
+<li><strong>Java 代码或伪代码</strong>：见第 6 节示例 2。</li>
+<li><strong>这个案例帮助理解什么</strong>：直观地说明了&quot;引用不是数据本身，而是指向数据的一个地址。当数据变了，通过任何一个引用看到的结果都会变。&quot;</li>
+</ul>
+<h4>案例 2：小名（昵称）——另一个引用型变量的类比</h4>
+<ul>
+<li><strong>案例名称</strong>：张三和小小都是同一个人</li>
+<li><strong>对应知识点</strong>：引用型变量、一处变处处变</li>
+<li><strong>案例背景</strong>：老师用&quot;小名&quot;来做第二个比喻，帮助学生进一步理解引用。</li>
+<li><strong>解决思路</strong>：一个人有大名（张三）和小名（小小），但指的都是同一个人。数组的两个引用变量（arr1 和 arr2）就像大名和小名——通过哪个名字来改，改的都是同一个人。</li>
+<li><strong>这个案例帮助理解什么</strong>：强化&quot;引用型变量 = 指向同一块数据的别名&quot;这个概念。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：把 length 当方法，写成了 arr.length()
+错误示例：
+int len = arr.length();    // 编译错误！
+
+正确写法：
+int len = arr.length;      // length 是属性，没有括号
+
+解释：
+数组的 length 是一个属性（property），不是方法（method）。只有 String 的 length 才是方法（str.length()），不要混淆。
+
+
+易错点 2：以为 int[] b = a; 是复制了新数组
+错误示例：
+int[] a = {1, 2, 3};
+int[] b = a;
+b[0] = 100;     // 以为只改了 b，实际上 a[0] 也变成了 100
+
+正确做法（要真正复制）：
+int[] b = new int[a.length];
+for (int i = 0; i &lt; a.length; i++) {
+    b[i] = a[i];
+}
+
+解释：
+int[] b = a; 只是让 b 也指向 a 的那块内存，两个变量共享同一份数据。要复制内容必须 new 新数组 + 循环复制。
+
+
+易错点 3：花括号初始化时在方括号里写数字
+错误示例：
+int[5] arr = {1, 2, 3, 4, 5};   // 编译错误
+
+正确写法：
+int[] arr = {1, 2, 3, 4, 5};     // 方括号里不写数字
+
+解释：
+花括号里的值已经说明了数组的元素个数，Java 会自动推断长度。在方括号里再写数字是多余的，语法不允许。
+
+
+易错点 4：二维数组行列下标搞反
+错误示例：
+int[][] arr = new int[3][4];
+arr[0][2]   // 以为这是第 2 行第 0 列
+
+正确理解：
+arr[0][2]   // 第 1 行（下标 0）第 3 列（下标 2）
+// 格式固定为：arr[行][列]，前面的永远是行，后面的永远是列
+
+解释：
+二维数组的下标格式是 [行][列]，不能反过来写。行在前，列在后。
+
+
+易错点 5：未赋值的数组元素以为是&quot;空&quot;，实际是默认值
+错误示例：
+int[] arr = new int[5];
+if (arr[0] == null) { ... }    // null 不能和 int 比较，编译错误
+
+正确理解：
+int[] arr = new int[5];
+// arr[0] 的值是 0（不是 null，不是未定义）
+
+解释：
+Java 中数组创建后，每个元素都有默认值。int 是 0，String[] 才是 null。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：以下获取数组长度的代码，哪个是正确的？
+
+A. int len = arr.size();
+B. int len = arr.length();
+C. int len = arr.length;
+D. int len = arr.getLength();
+
+正确答案：C
+
+解析：
+数组的 length 是属性，不需要括号。A 是集合（ArrayList）的方法，B 是 String 的方法，D 不存在。
+
+
+题目 2：以下代码的输出结果是什么？
+
+int[] a = {1, 2, 3};
+int[] b = a;
+b[0] = 100;
+System.out.println(a[0]);
+
+A. 1
+B. 100
+C. 编译错误
+D. 3
+
+正确答案：B
+
+解析：
+b = a 让 b 和 a 指向同一块地址。b[0] = 100 修改了这块地址的第一个元素，所以 a[0] 也是 100。
+
+
+题目 3：二维数组 int[][] arr = new int[3][4]; 中，arr.length 的值是多少？
+
+A. 12
+B. 3
+C. 4
+D. 7
+
+正确答案：B
+
+解析：
+对于二维数组，arr.length 返回的是行数（即 3）。总元素个数是 3×4=12，但 arr.length 只给出行数。
+
+
+题目 4：以下数组初始化的写法中，哪个是错误的？
+
+A. int[] arr = {1, 2, 3};
+B. int[] arr = new int[]{1, 2, 3};
+C. int[] arr = new int[3];
+D. int[3] arr = {1, 2, 3};
+
+正确答案：D
+
+解析：
+花括号初始化时，方括号里不能写数字。Java 会根据花括号内的数量自动推断长度。
+
+
+题目 5：关于数组默认值，以下说法正确的是？
+
+A. int[] 的默认值是 null
+B. boolean[] 的默认值是 true
+C. String[] 的默认值是 &quot;&quot;
+D. double[] 的默认值是 0.0
+
+正确答案：D
+
+解析：
+int[] 默认 0（不是 null），boolean[] 默认 false（不是 true），String[] 默认 null（不是 &quot;&quot;），double[] 默认 0.0。
+
+
+题目 6：以下代码能否编译通过？
+
+int[] arr = new int[5];
+System.out.println(arr[5]);
+
+A. 能，输出 0
+B. 编译错误
+C. 运行时错误（ArrayIndexOutOfBoundsException）
+D. 输出 null
+
+正确答案：C（实际上能编译，但运行时会报错）
+
+解析：
+代码本身没有语法错误，能编译通过。但运行时 arr[5] 会抛 ArrayIndexOutOfBoundsException，因为长度为 5 的数组下标范围是 0~4，arr[5] 访问的是第 6 个元素（不存在）。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 一维数组 —— 只有一个方向，通过一个下标访问元素，就像一条射线
+2. 二维数组 —— 有两个方向（行和列），通过 arr[行][列] 访问，就像一张表格
+3. length 属性 —— 获取数组元素个数，一维是总个数，二维是行数
+4. 数组默认值 —— 创建数组后系统自动赋予的初始值，int 为 0，double 为 0.0
+5. 引用类型 —— 变量存储的是内存地址而非数据本身，数组属于引用类型
+6. 值传递 —— 普通变量赋值时复制数值，两个变量互不影响
+7. 地址传递 —— 引用变量赋值时复制地址，指向同一块数据的变量相互影响
+8. 花括号初始化 —— 声明数组时直接用 {} 给出所有值，方括号里不写数字
+9. null —— 引用类型的默认值，表示&quot;没有指向任何对象&quot;
+10. 一处变处处变 —— 引用型变量的核心特征：通过任一引用修改数据，所有引用都能看到变化
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">引用类型变量的工作原理：
+
+1. 程序执行 int[] a = {1, 2, 3}; —— JVM 在内存中分配一块空间，存入 {1, 2, 3}，变量 a 中存储的是这块空间的地址。
+2. 程序执行 int[] b = a; —— 变量 b 获得了 a 中存储的地址，现在 a 和 b 指向同一块内存空间。
+3. 程序执行 b[0] = 100; —— JVM 根据 b 中的地址找到内存空间，将第一个元素改为 100。
+4. 此时通过 a 查看 —— a 也指向同一块空间，所以 a[0] 也是 100。
+5. 这就是&quot;一处变，处处变&quot;——改的是内存中的数据本身，所有指向这块内存的引用都能看到变化。
+6. 如果这是普通变量 int x = 10; int y = x; y = 20; —— y 变 20 不影响 x，因为它们是各自独立的内存空间。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习 1：创建一个长度为 6 的一维数组，存入一周的课程名称（周一到周六），然后分别输出第 1 天和最后一天的课程。
+
+考查知识点：
+一维数组、下标访问、length 属性
+
+参考答案：
+
+public class WeekCourses {
+    public static void main(String[] args) {
+        String[] courses = {&quot;高数&quot;, &quot;英语&quot;, &quot;Java&quot;, &quot;体育&quot;, &quot;思政&quot;, &quot;线性代数&quot;};
+        System.out.println(&quot;第1天：&quot; + courses[0]);
+        System.out.println(&quot;最后一天：&quot; + courses[courses.length - 1]);
+    }
+}
+
+解题思路：
+第 1 天用下标 0，最后一天用 length-1（6-1=5），这样即使数组长度变化代码也不会错。
+
+
+练习 2：创建一个 2 行 3 列的二维数组，存入以下数据，然后按表格格式输出：
+
+第 1 行：学号 001，数学 90，英语 85
+第 2 行：学号 002，数学 78，英语 92
+
+考查知识点：
+二维数组、行列访问
+
+参考答案：
+
+public class ScoreTable {
+    public static void main(String[] args) {
+        String[][] table = {
+            {&quot;001&quot;, &quot;90&quot;, &quot;85&quot;},
+            {&quot;002&quot;, &quot;78&quot;, &quot;92&quot;}
+        };
+
+        System.out.println(&quot;学号\t数学\t英语&quot;);
+        System.out.println(table[0][0] + &quot;\t&quot; + table[0][1] + &quot;\t&quot; + table[0][2]);
+        System.out.println(table[1][0] + &quot;\t&quot; + table[1][1] + &quot;\t&quot; + table[1][2]);
+    }
+}
+
+解题思路：
+二维数组的每一行用花括号包裹，每个元素用逗号分隔。输出时按行遍历，每行输出每列的值。
+
+
+练习 3：阅读以下代码，说明为什么 arr1[0] 的值变了。
+
+int[] arr1 = {5, 10, 15};
+int[] arr2 = arr1;
+arr2[0] = 50;
+System.out.println(arr1[0]);
+
+考查知识点：
+引用类型、地址传递
+
+参考答案：
+输出 50。因为 arr2 = arr1 是将 arr1 的地址赋给了 arr2，它们指向同一块内存空间。arr2[0] = 50 修改了这块空间的数据，所以 arr1[0] 也变成了 50。
+
+解题思路：
+数组是引用类型。= 赋值复制的是地址，不是内容。两个变量指向同一块数据，改任意一个另一个都会受影响。
+
+
+练习 4：写一个程序，先创建一个包含 {10, 20, 30, 40, 50} 的数组 a，然后创建一个新数组 b，将 a 的内容真正复制到 b 中（不是引用复制），然后修改 b[0] = 999，验证 a[0] 是否还是 10。
+
+考查知识点：
+数组复制（非引用）、值传递概念
+
+参考答案：
+
+public class ArrayCopy {
+    public static void main(String[] args) {
+        int[] a = {10, 20, 30, 40, 50};
+
+        // 真正复制：new 新数组 + 逐个元素复制
+        int[] b = new int[a.length];
+        for (int i = 0; i &lt; a.length; i++) {
+            b[i] = a[i];
+        }
+
+        b[0] = 999;    // 修改 b
+
+        System.out.println(&quot;a[0] = &quot; + a[0]);  // 10（没变！）
+        System.out.println(&quot;b[0] = &quot; + b[0]);  // 999
+    }
+}
+
+解题思路：
+想要真正的复制（两个独立的数组），必须 new 一个新数组，然后循环复制每个元素。直接用 = 赋值只是引用传递，不是复制。
+
+
+练习 5：找出以下代码中的 4 处错误。
+
+public class Test {
+    public static void main(String[] args) {
+        int[3] arr = {1, 2, 3};            // 错误1
+        int len = arr.length();             // 错误2
+        int[][] matrix = new int[2][2];
+        matrix[1][1] = 10;
+        System.out.println(matrix[2][0]);   // 错误3
+    }
+}
+
+考查知识点：
+数组初始化语法、length 属性、下标边界
+
+参考答案：
+错误1：int[3] arr → int[] arr（花括号初始化时方括号不能写数字）
+错误2：arr.length() → arr.length（length 是属性，没有括号）
+错误3：matrix[2][0] → 行下标越界，matrix 只有 2 行（下标 0 和 1），[2] 访问的是第 3 行
+
+解题思路：
+逐行检查语法：花括号初始化规则 → length 属性无括号 → 下标不能 ≥ 数组长度。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">数组维度、初始化与引用类型
+├── 数组维度
+│   ├── 一维数组：一个方向，一个下标（arr[i]）
+│   ├── 二维数组：两个方向，行+列（arr[i][j]）
+│   └── 三维数组：三个方向，立体
+├── length 属性
+│   ├── 一维：arr.length = 元素总个数
+│   └── 二维：arr.length = 行数 / arr[i].length = 第 i 行列数
+├── 数组初始化
+│   ├── 方式一：new + 逐个赋值
+│   │   └── int[] arr = new int[5]; arr[0]=1; ...
+│   ├── 方式二：花括号直接初始化
+│   │   └── int[] arr = {1, 2, 3};（方括号不写数字）
+│   └── 默认值
+│       ├── int → 0
+│       ├── double/float → 0.0
+│       ├── boolean → false
+│       └── 引用类型 → null
+├── 引用类型（核心难点）
+│   ├── 概念：变量存储的是地址，不是数据本身
+│   ├── &quot;一处变，处处变&quot;
+│   ├── 类比：大名和小名指向同一个人
+│   └── 正确复制数组：new + 循环复制
+├── 普通变量 vs 引用变量
+│   ├── 普通变量：存值，赋值后互不影响
+│   └── 引用变量：存地址，赋值后指向同一数据
+└── 学习方法
+    └── 多敲代码、照着书敲、遇到错误自己改
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>java-array-reference</code></li>
+<li><strong>建议课程标题</strong>：数组维度、初始化与引用类型详解</li>
+<li><strong>建议章节</strong>：Java 数组</li>
+<li><strong>建议标签</strong>：<code>一维数组</code> <code>二维数组</code> <code>length</code> <code>数组初始化</code> <code>引用类型</code> <code>默认值</code></li>
+<li><strong>适合放入 summary 的内容</strong>：第 2 节课堂摘要 5 条</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：知识点 1-6 的核心概念</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：第 6 节 3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：第 9 节 6 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：第 10 节 10 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：第 11 节&quot;引用类型变量的工作原理&quot;</li>
+<li><strong>适合放入 exercises 的内容</strong>：第 12 节 5 道练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：第 15 节课后总结</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是掌握数组的维度概念（一维/二维/三维）、length 属性的用法，以及区分数组初始化的两种方式（new + 逐个赋值 vs 花括号一次性初始化）。
+2. 学习数组时要特别注意两个容易出错的点：花括号初始化时方括号里不能写数字，length 是属性不是方法（没有括号）。
+3. 本节课最重要的概念是引用类型——数组是引用类型变量，int[] b = a; 复制的是地址而不是内容。记住口诀：&quot;一处变，处处变。&quot;
+4. 引用类型的概念在后续的方法参数传递、对象赋值、集合操作中会反复出现，是 Java 内存模型的核心，一定要理解透彻。
+5. 课后建议多练习：(1) 用两种方式初始化数组并输出；(2) 创建一个二维数组并用双重循环输出表格；(3) 验证引用类型的行为——写代码对比普通变量赋值和数组赋值的结果差异；(4) 实现数组的&quot;真正复制&quot;。
+</code></pre>
+<hr>
+<h3>学习方法建议</h3>
+<pre><code class="language-text">1. 照着书敲代码——老师说&quot;你照着书敲第一遍都敲错。你敲错不怕，然后你自己去改。当你调通了，你会觉得这调成了。&quot;
+2. 笔记写完后一定要用——&quot;有很多同学笔记写得相当漂亮，做完一眼都不看，就白费了。&quot;
+3. 课程只有 10 周，抓紧时间——&quot;第一周、第二周……第十周结课了。很快就过去了。&quot;
+4. 自己往前看——&quot;这个书在这一课，你们可以自己往上学一学。&quot;不需要等老师讲到才学，预习和自学很重要。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-03.html"><span>上一篇</span><strong>Java基本数据类型与数组入门</strong></a><a class="article-pager-link next" rel="next" href="java-05.html"><span>下一篇</span><strong>Java运算符与表达式详解</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

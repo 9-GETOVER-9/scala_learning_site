@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： scala 04 block expression if loop 课程标题 ：Scala 语句、表达式、Block 与循环入门 所属章节 ：Scala 运算符与表达式 / Scala 流程控制 上课日期 ：2026 03 05（第二节课 16:0" />
+  <title>Scala语句表达式与循环入门 - 下 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-03-05-expressions-loops">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-03-05 · 下半节</p>
+      <h1>Scala语句表达式与循环入门 - 下</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala语句表达式与循环入门 - 下</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>scala-04-block-expression-if-loop</code></li>
+<li><strong>课程标题</strong>：Scala 语句、表达式、Block 与循环入门</li>
+<li><strong>所属章节</strong>：Scala 运算符与表达式 / Scala 流程控制</li>
+<li><strong>上课日期</strong>：2026-03-05（第二节课 16:05-17:00）</li>
+<li><strong>知识点标签</strong>：语句、表达式、Block、if 表达式、print、println、for、while、区间</li>
+<li><strong>难度等级</strong>：初级</li>
+<li><strong>适合对象</strong>：已经理解 var/val、函数、元组的 Scala 初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课围绕“语句和表达式的区别”展开，重点讲解 Block 的返回值、if 表达式、打印输出以及 for/while 循环的基础规则。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先解释了“语句”和“表达式”的区别，强调 Scala 中很多结构都不是单纯的语句，而是有值的表达式。</li>
+<li>课堂中重点讲解了 Block 表达式：大括号包裹的一段代码序列也会有值，并且它的值等于最后一行。</li>
+<li>老师通过 <code>print</code> 和 <code>println</code> 的区别说明了输出语句的基本用法，以及换行符的作用。</li>
+<li>本节课进一步对比了 Java/C++ 和 Scala 的分号规则，说明 Scala 大多数情况下可以省略分号。</li>
+<li>老师讲解了 if/else 在 Scala 中不仅能做判断，还能作为表达式直接返回结果。</li>
+<li>最后介绍了 for 循环、while 循环以及 <code>to</code> / <code>until</code> 区间的区别，并提醒学生后面要反复练习。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>分清 Scala 中“语句”和“表达式”的区别，知道表达式是有值的。</li>
+<li>理解 Block 表达式的返回值规则，知道最后一行就是整个 Block 的值。</li>
+<li>正确使用 <code>print</code> 和 <code>println</code> 输出内容，并知道两者的区别。</li>
+<li>理解 if/else 在 Scala 中不仅是控制流程，也可以返回结果。</li>
+<li>写出基本的 for 循环和 while 循环。</li>
+<li>区分 <code>to</code> 和 <code>until</code> 的范围差异，避免循环边界错误。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：语句与表达式的区别</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Scala 中，很多代码结构都可以看成“表达式”，表达式是有值的。与之相对的是“语句”，语句更像执行动作，但不一定直接产生值。Scala 比 Java 更强调“表达式思维”。</p>
+<h5>为什么要学它？</h5>
+<p>理解表达式是 Scala 语言的核心。后面你会发现 if、Block、函数体、for 推导式等都可能返回值。如果一开始把它们都当成“只是执行动作”，后面会很难理解 Scala 的简洁写法。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val x = if (1 &gt; 0) 1 else -1
+</code></pre>
+<p>这里 <code>if</code> 整体就是一个表达式，结果可以赋值给变量。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师举了一个判断例子：如果 <code>X &gt; 0</code>，结果可能是 <code>1</code>；否则结果是 <code>-1</code>。也就是说，这个判断本身不是“只做判断”，而是会产生一个结果值。老师借此说明 Scala 中“判断也是表达式”。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 Scala 中的 if 当成 Java 风格的纯语句。</li>
+<li>以为只有 <code>return</code> 才能拿到值。</li>
+<li>不知道表达式可以直接赋给变量。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object ExpressionDemo {
+  def main(args: Array[String]): Unit = {
+    val x = 10
+    val result = if (x &gt; 0) 1 else -1
+    println(result)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>if (x &gt; 0) 1 else -1</code> 会根据条件返回不同的数值。</li>
+<li>这个表达式的结果被赋给 <code>result</code>。</li>
+<li>最后输出 <code>1</code>。</li>
+</ul>
+<hr>
+<h4>知识点 2：Block 表达式——最后一行就是结果</h4>
+<h5>这个知识点是什么？</h5>
+<p>Block 是用大括号 <code>{}</code> 包起来的一段代码。Scala 中 Block 也是表达式，所以它有返回值，返回值就是 Block 里的最后一行。</p>
+<h5>为什么要学它？</h5>
+<p>Block 是 Scala 代码组织的重要方式。你可以在一个表达式里完成多步计算，再把最后结果返回给外部变量。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val result = {
+  val a = 10
+  val b = 20
+  a + b   // 最后一行就是返回值
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 Block 解释成“语句序列”，也说它像“缺少函数名的函数”。意思是：你没有显式写 <code>def</code>，但大括号里面依然是一个完整的、会返回值的计算过程。</p>
+<p>老师特别强调：<strong>如果 Block 最后一行是一个赋值或 println，那么返回值就会变成 Unit。</strong></p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为大括号只是“代码块”，没有返回值。</li>
+<li>在 Block 最后一行写了 <code>println</code>，却以为返回的是打印的内容。</li>
+<li>不理解最后一行才是 Block 的值。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object BlockDemo {
+  def main(args: Array[String]): Unit = {
+    val sum = {
+      val x = 3
+      val y = 4
+      x + y
+    }
+    println(sum)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>x + y</code> 是最后一行，所以整个 Block 的值是 7。</li>
+<li>这个值被赋给 <code>sum</code>。</li>
+<li><code>println(sum)</code> 输出 7。</li>
+</ul>
+<hr>
+<h4>知识点 3：print 和 println 的区别</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>print</code> 和 <code>println</code> 都用于输出内容，区别是 <code>println</code> 会在输出后自动换行，<code>print</code> 不会换行。</p>
+<h5>为什么要学它？</h5>
+<p>这是最基础的输入输出操作。写程序时，经常需要控制输出格式，尤其是循环中打印列表、表格、乘法表时，换行非常重要。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">print(&quot;Hello&quot;)
+println(&quot;World&quot;)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师明确指出：<code>println</code> 比 <code>print</code> 多了一个换行符。也就是说，<code>println</code> 会把光标带到下一行，<code>print</code> 则继续在当前行输出。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>循环打印时全部用 <code>println</code>，导致每个字符都换行。</li>
+<li>以为 <code>print</code> 和 <code>println</code> 没区别。</li>
+<li>在需要整齐格式输出时没有控制换行。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object PrintDemo {
+  def main(args: Array[String]): Unit = {
+    print(&quot;A&quot;)
+    print(&quot;B&quot;)
+    println(&quot;C&quot;)
+    println(&quot;D&quot;)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>print(&quot;A&quot;)</code> 输出 A，不换行。</li>
+<li><code>print(&quot;B&quot;)</code> 接着在同一行输出 B。</li>
+<li><code>println(&quot;C&quot;)</code> 输出 C 后换行。</li>
+<li><code>println(&quot;D&quot;)</code> 在下一行输出 D。</li>
+</ul>
+<hr>
+<h4>知识点 4：Scala 中分号可省略</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 的大多数语句结尾不需要写分号 <code>;</code>。只有在同一行写多个语句时，才可能用分号分隔。</p>
+<h5>为什么要学它？</h5>
+<p>这是 Scala 语法简洁性的体现。少写分号可以让代码更清爽，但也要求你理解“换行是否结束语句”的规则。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val a = 10
+val b = 20
+val c = a + b
+</code></pre>
+<p>同一行多个语句时：</p>
+<pre><code class="language-scala">val a = 10; val b = 20; val c = a + b
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 Scala 和 Java/C++ 做了对比：</p>
+<ul>
+<li>Java/C++ 的语句通常以分号结束。</li>
+<li>Scala 通常不需要分号。</li>
+<li>如果同一行写多个语句，可以用分号分隔。</li>
+</ul>
+<p>老师还提醒：如果一行没有写完（例如后面还有加号），编译器会把它视作下一行继续，不会轻易断开。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为 Scala 必须每行都写分号。</li>
+<li>误把换行当成语句结束，但前一行其实还没写完。</li>
+<li>在一行多个语句时忘记加分号，导致解析错误。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object SemicolonDemo {
+  def main(args: Array[String]): Unit = {
+    val a = 10; val b = 20; val c = a + b
+    println(c)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>同一行写了 3 个语句，用分号隔开。</li>
+<li>Scala 允许这样写，但平时更推荐每个语句独占一行。</li>
+</ul>
+<hr>
+<h4>知识点 5：if 表达式——判断也能返回值</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 中的 <code>if ... else ...</code> 不仅可以做条件判断，还可以作为表达式返回结果，并被赋值给变量。</p>
+<h5>为什么要学它？</h5>
+<p>这是 Scala 与 Java 很不一样的地方。Java 中 if 常常只是控制流程；Scala 中 if 还能像函数一样“产出一个值”。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val result = if (x &gt; 0) 1 else -1
+</code></pre>
+<p>或者：</p>
+<pre><code class="language-scala">val message = if (score &gt;= 60) &quot;及格&quot; else &quot;不及格&quot;
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用“缺勤判断”举例：</p>
+<ul>
+<li>如果人到了，就返回某个结果；</li>
+<li>如果人没到，就返回另一个结果。</li>
+</ul>
+<p>老师强调：这就是“if 表达式有值”的意思。你不是单纯做判断，而是在“判断之后产出一个结果”。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为 <code>if</code> 必须配合 <code>println</code> 才有意义。</li>
+<li>只写 <code>if</code> 不写 <code>else</code>，导致表达式值不完整。</li>
+<li>以为 if 表达式不能赋值给变量。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object IfExpressionDemo {
+  def main(args: Array[String]): Unit = {
+    val x = -3
+    val result = if (x &gt; 0) 1 else -1
+    println(result)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>当 <code>x &gt; 0</code> 为真时，结果是 1。</li>
+<li>否则结果是 -1。</li>
+<li>整个 if 表达式被赋值给 <code>result</code>。</li>
+</ul>
+<hr>
+<h4>知识点 6：for 循环和 while 循环的基础形式</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 提供 <code>for</code> 和 <code>while</code> 两种循环结构。</p>
+<ul>
+<li><code>for</code> 常用于遍历范围或集合。</li>
+<li><code>while</code> 常用于“条件满足时重复执行”。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>循环是程序中处理重复任务的基础。后面学习集合、数组、推导式时，for 循环会非常常见。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">// for 循环
+for (i &lt;- 1 to 5) {
+  println(i)
+}
+
+// while 循环
+var i = 1
+while (i &lt;= 5) {
+  println(i)
+  i += 1
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 while 解释为：只要条件成立，就继续执行。for 则更像“按照给定范围去取值”。</p>
+<p>老师还提醒：Scala 的 for 后面会越来越复杂，后面会加守卫（if 筛选）、多生成器、yield 等，因此这节课只先掌握最基础的循环骨架。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>while 循环里忘记修改循环变量，导致死循环。</li>
+<li>for 循环写成 Java 风格三段式。</li>
+<li>不理解 while 和 for 的适用场景。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object LoopDemo {
+  def main(args: Array[String]): Unit = {
+    println(&quot;for 循环：&quot;)
+    for (i &lt;- 1 to 3) {
+      println(i)
+    }
+
+    println(&quot;while 循环：&quot;)
+    var j = 1
+    while (j &lt;= 3) {
+      println(j)
+      j += 1
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>for (i &lt;- 1 to 3)</code>：循环输出 1、2、3。</li>
+<li><code>while (j &lt;= 3)</code>：条件成立时输出并让 j 自增。</li>
+<li>while 循环一定要让条件最终变成 false，否则会一直执行。</li>
+</ul>
+<hr>
+<h4>知识点 7：区间——to 与 until</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 中常用 <code>to</code> 和 <code>until</code> 表示区间。</p>
+<ul>
+<li><code>to</code>：闭区间，包含终点。</li>
+<li><code>until</code>：左闭右开，不包含终点。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>循环边界经常出错，<code>to</code> 和 <code>until</code> 是考试和实战中最常见的细节之一。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">1 to 5     // 1,2,3,4,5
+1 until 5  // 1,2,3,4
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用数学区间来解释：</p>
+<ul>
+<li><code>to</code> 对应闭区间 <code>[1, 5]</code></li>
+<li><code>until</code> 对应半开半闭区间 <code>[1, 5)</code></li>
+</ul>
+<p>老师特别提醒：这个区别会直接影响循环次数。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>until</code> 当成包含终点。</li>
+<li>写范围时忘记终点是否被包含。</li>
+<li>只看代码不看输出次数。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object RangeDemo {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 5) println(i)     // 1 2 3 4 5
+    for (i &lt;- 1 until 5) println(i)  // 1 2 3 4
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>to</code> 包含 5。</li>
+<li><code>until</code> 不包含 5。</li>
+<li>两者只差一个终点，但输出结果不同。</li>
+</ul>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>语句</td>
+<td>表达式</td>
+<td>表达式有值，语句更偏执行动作</td>
+<td><code>if (...) 1 else -1</code> 是表达式</td>
+</tr>
+<tr>
+<td>print</td>
+<td>println</td>
+<td>println 会换行，print 不换行</td>
+<td><code>print(&quot;A&quot;)</code> vs <code>println(&quot;A&quot;)</code></td>
+</tr>
+<tr>
+<td>to</td>
+<td>until</td>
+<td>to 包含终点，until 不包含终点</td>
+<td><code>1 to 5</code> vs <code>1 until 5</code></td>
+</tr>
+<tr>
+<td>for</td>
+<td>while</td>
+<td>for 适合遍历范围/集合，while 适合条件重复执行</td>
+<td><code>for (i &lt;- 1 to 3)</code> vs <code>while (i &lt;= 3)</code></td>
+</tr>
+<tr>
+<td>Java if</td>
+<td>Scala if 表达式</td>
+<td>Java if 常是流程控制；Scala if 可直接返回值</td>
+<td><code>val r = if (...) 1 else 0</code></td>
+</tr>
+<tr>
+<td>Java 分号</td>
+<td>Scala 分号</td>
+<td>Java 分号通常必须写；Scala 通常可省略</td>
+<td><code>val a = 1</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：if 表达式返回值</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">if 表达式、变量赋值、条件判断
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object IfValueDemo {
+  def main(args: Array[String]): Unit = {
+    val score = 78
+    val result = if (score &gt;= 60) &quot;及格&quot; else &quot;不及格&quot;
+    println(result)
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">及格
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li><code>score</code> 是 78。</li>
+<li><code>if (score &gt;= 60)</code> 条件为真。</li>
+<li>所以表达式返回 <code>&quot;及格&quot;</code>。</li>
+<li><code>result</code> 接收这个值并输出。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">Scala 中 if 不是“只判断不返回”，它本身就可以是一个值。
+</code></pre>
+<hr>
+<h4>示例 2：Block 表达式计算距离</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">Block、最后一行返回值、math.sqrt
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object BlockDistance {
+  def main(args: Array[String]): Unit = {
+    val distance = {
+      val dx = 6
+      val dy = 8
+      math.sqrt(dx * dx + dy * dy)
+    }
+    println(distance)
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">10.0
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li>Block 里面先定义 <code>dx</code> 和 <code>dy</code>。</li>
+<li>最后一行计算平方和开根号。</li>
+<li>结果 10.0 作为整个 Block 的值返回。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">Block 不只是“代码圈起来”，它是真的会返回一个结果。
+</code></pre>
+<hr>
+<h4>示例 3：for 和 while 输出 1 到 5</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">for、while、to、print/println
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object LoopCompare {
+  def main(args: Array[String]): Unit = {
+    println(&quot;for 循环：&quot;)
+    for (i &lt;- 1 to 5) {
+      print(i + &quot; &quot;)
+    }
+    println()
+
+    println(&quot;while 循环：&quot;)
+    var i = 1
+    while (i &lt;= 5) {
+      print(i + &quot; &quot;)
+      i += 1
+    }
+    println()
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">for 循环：1 2 3 4 5 
+while 循环：1 2 3 4 5 
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li><code>for (i &lt;- 1 to 5)</code> 遍历范围。</li>
+<li><code>while (i &lt;= 5)</code> 通过条件重复执行。</li>
+<li><code>print</code> 不换行，所以数字会连在同一行。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">while 一定要记得让循环变量变化，否则会死循环。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：签到判断</h4>
+<ul>
+<li><strong>案例名称</strong>：来没来上课的判断</li>
+<li><strong>对应知识点</strong>：if 表达式、Block 返回值</li>
+<li><strong>案例背景</strong>：老师用“是否到场签到”来比喻 if 判断：如果来了，返回一个结果；如果没来，返回另一个结果。</li>
+<li><strong>解决思路</strong>：用 if 表达式直接返回“签到成功 / 未签到”这类结果。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">val status = if (arrived) &quot;已签到&quot; else &quot;未签到&quot;
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：理解 if 不只是“执行”，还会“返回结果”。</li>
+</ul>
+<h4>案例 2：输出乘法表</h4>
+<ul>
+<li><strong>案例名称</strong>：用循环输出 3 的乘法表</li>
+<li><strong>对应知识点</strong>：for 循环、print/println</li>
+<li><strong>案例背景</strong>：老师提到循环最重要的用途之一就是处理重复动作，乘法表就是典型例子。</li>
+<li><strong>解决思路</strong>：用 for 循环从 1 到 9，逐行输出乘法结果。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">for (i &lt;- 1 to 9) {
+  println(&quot;3 × &quot; + i + &quot; = &quot; + (3 * i))
+}
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：理解循环是“重复执行同一逻辑”的工具。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<p><strong>易错点 1：把 if 当成纯语句</strong></p>
+<pre><code class="language-text">错误示例：
+if (x &gt; 0) println(1) else println(-1)
+
+正确写法：
+val result = if (x &gt; 0) 1 else -1
+
+解释：
+Scala 中 if 可以直接作为表达式返回值。
+</code></pre>
+<p><strong>易错点 2：Block 最后一行写成 println</strong></p>
+<pre><code class="language-text">错误示例：
+val r = {
+  val a = 1
+  println(a)
+}
+
+正确写法：
+val r = {
+  val a = 1
+  a
+}
+
+解释：
+Block 的返回值是最后一行，println 返回 Unit，不是你想要的数字。
+</code></pre>
+<p><strong>易错点 3：分号规则使用错误</strong></p>
+<pre><code class="language-text">错误示例：
+val a = 1
+val b = 2; val c = 3
+
+正确写法：
+val a = 1
+val b = 2
+val c = 3
+
+解释：
+Scala 一般不需要分号，平时一行一个语句最清晰。
+</code></pre>
+<p><strong>易错点 4：for 循环写成 Java 风格</strong></p>
+<pre><code class="language-text">错误示例：
+for (int i = 0; i &lt; 10; i++)
+
+正确写法：
+for (i &lt;- 0 until 10)
+
+解释：
+Scala for 循环使用生成器语法，不用 Java 的三段式写法。
+</code></pre>
+<p><strong>易错点 5：to 和 until 边界搞混</strong></p>
+<pre><code class="language-text">错误示例：
+for (i &lt;- 1 until 5)   // 以为包含 5，实际上不包含
+
+正确写法：
+for (i &lt;- 1 to 5)      // 包含 5
+
+解释：
+to 是闭区间，until 是左闭右开区间。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<p><strong>题目 1</strong>：Scala 中，下面哪个结构是有值的？</p>
+<p>A. 只有 <code>return</code> 才有值
+B. if 表达式
+C. 只有 print 才有值
+D. 只有 while 才有值</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：Scala 中 if 可以作为表达式直接返回值。</p>
+<hr>
+<p><strong>题目 2</strong>：下面代码运行后，<code>r</code> 的值是什么？</p>
+<pre><code class="language-scala">val r = {
+  val x = 2
+  val y = 3
+  x * y
+}
+</code></pre>
+<p>A. 2
+B. 3
+C. 5
+D. 6</p>
+<p><strong>正确答案</strong>：D</p>
+<p><strong>解析</strong>：Block 的最后一行是 <code>x * y</code>，结果为 6。</p>
+<hr>
+<p><strong>题目 3</strong>：以下哪个语句会在输出后换行？</p>
+<p>A. print(&quot;Hello&quot;)
+B. println(&quot;Hello&quot;)
+C. printline(&quot;Hello&quot;)
+D. echo(&quot;Hello&quot;)</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：<code>println</code> 会自动换行，<code>print</code> 不会。</p>
+<hr>
+<p><strong>题目 4</strong>：下面哪个循环会输出 1 到 4？</p>
+<p>A. <code>for (i &lt;- 1 to 4)</code>
+B. <code>for (i &lt;- 1 until 4)</code>
+C. <code>for (i &lt;- 0 to 4)</code>
+D. <code>for (i &lt;- 0 until 4)</code></p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：<code>1 until 4</code> 输出 1、2、3，不包含 4。若要输出 1 到 4，用 <code>to</code>。</p>
+<hr>
+<p><strong>题目 5</strong>：下面关于 Scala 分号的说法，正确的是？</p>
+<p>A. 每行末尾都必须写分号
+B. 只有 while 语句后面必须写分号
+C. Scala 大多数情况下可以省略分号
+D. Scala 不允许在一行写多个语句</p>
+<p><strong>正确答案</strong>：C</p>
+<p><strong>解析</strong>：Scala 通常可以省略分号，只有一行多个语句时才可能需要用分号分隔。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 表达式 —— 有值的代码结构，可以被赋给变量
+2. Block —— 大括号包裹的代码块，值是最后一行
+3. print —— 输出内容但不换行
+4. println —— 输出内容并换行
+5. for —— 遍历范围或集合的循环
+6. while —— 条件成立就重复执行的循环
+7. to —— 闭区间，包含终点
+8. until —— 左闭右开区间，不包含终点
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">1. 程序执行到 if 表达式。
+2. 判断条件是否成立（true 或 false）。
+3. 如果为 true，执行 if 分支；如果为 false，执行 else 分支。
+4. if 表达式返回一个结果值。
+5. 这个结果被赋给变量。
+6. 程序继续往下执行。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<p><strong>练习 1</strong>：编写一个程序，用 if 表达式判断一个整数是正数还是非正数，并输出结果。</p>
+<p><strong>考查知识点</strong>：if 表达式、条件判断、字符串输出</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object PositiveCheck {
+  def main(args: Array[String]): Unit = {
+    val n = -8
+    val result = if (n &gt; 0) &quot;正数&quot; else &quot;非正数&quot;
+    println(result)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：先定义一个整数，再用 if 表达式返回不同字符串。</p>
+<hr>
+<p><strong>练习 2</strong>：用 Block 表达式计算 10 和 20 的和，并把结果赋值给变量。</p>
+<p><strong>考查知识点</strong>：Block、最后一行返回值、val</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object BlockSum {
+  def main(args: Array[String]): Unit = {
+    val sum = {
+      val a = 10
+      val b = 20
+      a + b
+    }
+    println(sum)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：用大括号包起来，让最后一行成为返回值。</p>
+<hr>
+<p><strong>练习 3</strong>：分别使用 <code>print</code> 和 <code>println</code> 输出字符串 <code>Scala</code> 和 <code>Course</code>，观察输出效果。</p>
+<p><strong>考查知识点</strong>：print、println</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object PrintTest {
+  def main(args: Array[String]): Unit = {
+    print(&quot;Scala&quot;)
+    print(&quot;Course&quot;)
+    println(&quot; End&quot;)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：<code>print</code> 不换行，<code>println</code> 换行，观察光标位置即可。</p>
+<hr>
+<p><strong>练习 4</strong>：用 for 循环输出 1 到 10 的偶数。</p>
+<p><strong>考查知识点</strong>：for、to、if、步长</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object EvenNumbers {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10 if i % 2 == 0) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：用 <code>if</code> 过滤奇数，只输出偶数。</p>
+<hr>
+<p><strong>练习 5</strong>：用 while 循环输出 5 次 <code>Hello Scala</code>。</p>
+<p><strong>考查知识点</strong>：while、循环变量、自增</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object WhileDemo {
+  def main(args: Array[String]): Unit = {
+    var i = 1
+    while (i &lt;= 5) {
+      println(&quot;Hello Scala&quot;)
+      i += 1
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：定义计数器 <code>i</code>，每次循环后自增 1，直到不满足条件为止。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 第四课——语句、表达式、Block 与循环
+├── 语句与表达式
+│   ├── 表达式有值
+│   ├── if 可以是表达式
+│   └── 结果可以赋给变量
+├── Block 表达式
+│   ├── 大括号包裹的代码序列
+│   ├── 最后一行是返回值
+│   └── 可用于局部计算
+├── 输入输出
+│   ├── print（不换行）
+│   └── println（换行）
+├── 分号规则
+│   ├── Scala 大多可省略分号
+│   └── 同一行多个语句可用分号分隔
+├── 流程控制
+│   ├── if/else
+│   ├── for 循环
+│   └── while 循环
+└── 区间
+    ├── to（闭区间）
+    └── until（左闭右开）
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>scala-04-block-expression-if-loop</code></li>
+<li><strong>建议课程标题</strong>：Scala 语句、表达式、Block 与循环入门</li>
+<li><strong>建议章节</strong>：Scala 运算符与表达式 / Scala 流程控制</li>
+<li><strong>建议标签</strong>：语句、表达式、Block、if、print、println、for、while、to、until</li>
+<li><strong>适合放入 summary 的内容</strong>：6 条课堂摘要</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：7 个知识点的标题和简短解释</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：5 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：8 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：6 步 if 表达式流程</li>
+<li><strong>适合放入 exercises 的内容</strong>：5 道练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：5 条课后总结</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li><p>本节课的核心是让你明白：<strong>Scala 很多结构都是表达式</strong>，不是只做动作而没有结果。</p>
+</li>
+<li><p>学习 Scala 时要特别注意 <strong>Block 的最后一行</strong>，这是非常重要的规则，后面写函数、写推导式时都会频繁用到。</p>
+</li>
+<li><p>通过本节课，你应该能够正确使用 <code>print</code> / <code>println</code>，并写出基础的 <code>if</code>、<code>for</code>、<code>while</code> 代码。</p>
+</li>
+<li><p><code>to</code> 和 <code>until</code> 是非常容易出错的地方，建议课后多用几个数字自己验证一遍输出结果。</p>
+</li>
+<li><p>课后建议多练习：自己写 if 表达式做判断、用 Block 计算结果、用 for/while 输出数字。熟悉这些基础，后面学更复杂的集合循环才不会乱。</p>
+</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-03-05-part-1.html"><span>上一篇</span><strong>Scala基础-对象函数与元组</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-03-10-part-1.html"><span>下一篇</span><strong>Scala表达式与for循环基础</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

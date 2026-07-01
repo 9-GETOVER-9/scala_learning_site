@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java inheritance intro 课程标题 ：访问权限深入与继承入门 所属章节 ：Java 类与对象 → 继承 上课日期 ：2025 10 09 知识点标签 ： 访问权限 public protected default private" />
+  <title>访问权限深入与继承入门 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-inheritance-intro">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 13 课</p>
+      <h1>访问权限深入与继承入门</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">访问权限深入与继承入门</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-inheritance-intro</code></li>
+<li><strong>课程标题</strong>：访问权限深入与继承入门</li>
+<li><strong>所属章节</strong>：Java 类与对象 → 继承</li>
+<li><strong>上课日期</strong>：2025-10-09</li>
+<li><strong>知识点标签</strong>：<code>访问权限</code> <code>public</code> <code>protected</code> <code>default</code> <code>private</code> <code>继承</code> <code>extends</code> <code>父类</code> <code>子类</code> <code>单继承</code> <code>重写</code> <code>Override</code> <code>super</code> <code>树形结构</code></li>
+<li><strong>难度等级</strong>：基础-巩固</li>
+<li><strong>适合对象</strong>：已学完类与对象基础、正在学习面向对象核心特性的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课在深入复习四种访问权限修饰符在不同场景下的可见性之后，正式引入 Java 继承机制——通过&quot;家族族谱&quot;的类比系统讲解了父类/子类关系、单继承原则、继承规则、以及多态的第一种形式（重写/Override）。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 课堂前半段深入复习了四种访问权限修饰符（public/protected/default/private）在四种访问场景下的可见性——同一包同一类、同一包不同类、不同包子类、不同包非子类，老师通过现场代码演示逐一验证。
+2. 老师用&quot;银行卡&quot;类比 private（只属于自己）、用&quot;家族财产&quot;类比 protected（有血缘关系的可以继承），帮助学生理解访问权限的实际意义。
+3. 正式引入继承概念——继承是一种由已有类创建新类的机制，子类继承父类的非私有属性和方法，并可以增加自己新的状态和行为。
+4. 通过&quot;家族族谱/倒置二叉树&quot;的图示讲解了继承的树形结构：祖先节点→父亲节点→兄弟节点→子孙节点，每层之间是单线继承关系。
+5. 强调 Java 是单继承——一个子类有且只有一个直接父类，这是为避免&quot;二义性&quot;（两个父类有同名成员时无法判断来源）。
+6. 引入多态的第一种形式——重写（Override）：发生在不同类体中，方法头相同（方法名、参数列表、返回值类型相同），方法体不同。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能画出四种访问权限修饰符（public/protected/default/private）在四种访问场景下的&quot;对号错号表&quot;，并解释每一格的含义。
+2. 能用&quot;银行卡&quot;&quot;家族财产&quot;&quot;寝室水壶&quot;&quot;室友物品&quot;等生活类比解释四种访问权限的实际区别。
+3. 能说出继承的定义：由已有类创建新类的机制，子类继承父类的非私有属性和方法。
+4. 能写出继承的语法结构：class 子类名 extends 父类名 { }。
+5. 能解释为什么 Java 采用单继承（避免二义性），并说明 C++ 多继承与 Java 接口方案的差异。
+6. 能说出重写（Override）的三个条件：发生在不同类体中、方法头相同（方法名+参数列表+返回值类型）、方法体不同。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：四种访问权限的完整访问矩阵</h4>
+<h5>这个知识点是什么？</h5>
+<p>四种访问权限修饰符控制类成员（属性和方法）在四种访问场景下的可见性：</p>
+<table>
+<thead>
+<tr>
+<th>访问场景</th>
+<th align="center">public</th>
+<th align="center">protected</th>
+<th align="center">default</th>
+<th align="center">private</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>同一包下的同一个类</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td>同一包下的不同类</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td>不同包下的子类</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+<tr>
+<td>不同包下的非子类</td>
+<td align="center">✅</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+</tr>
+</tbody></table>
+<h5>为什么学？</h5>
+<p>老师强调：&quot;我们的项目是在不同包下传递值的——你想要哪一个包的谁来看到谁，就用这四种修饰符来限制你所访问的变量，方法也是同理。&quot;访问权限是面向对象<strong>封装</strong>的基础。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用四层递进的&quot;财产&quot;类比：</p>
+<ul>
+<li><strong>public（公有的）</strong>：寝室的水壶——谁都能用，全局可见</li>
+<li><strong>protected（受保护的）</strong>：家族财产（如房子）——有&quot;血缘关系&quot;的（同包 + 不同包子类）可以用，陌生人不行</li>
+<li><strong>default（缺省的/不写）</strong>：室友的东西——同寝室的可以借，但不是谁都能碰</li>
+<li><strong>private（私有的）</strong>：自己的银行卡——只有自己能用，谁也不能动，&quot;用了钱就没了&quot;</li>
+</ul>
+<h5>常见错误</h5>
+<blockquote>
+<p>以为 protected 比 default 只多了子类访问——实际上不同包下 default 连子类也访问不到。</p>
+</blockquote>
+<hr>
+<h4>知识点 2：继承的概念与生活类比</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>继承</strong>是一种由已有类创建新类的机制。利用继承，可以先创建一个共有属性的一般类（父类），再根据该类创建具有特殊属性和行为的新类（子类）。新类继承一般类的状态和行为。</p>
+<h5>为什么学？</h5>
+<p>避免代码重复——公有的属性和方法写在父类中，所有子类自动拥有，不需要每个子类重新写一遍。同时子类可以增加自己特有的功能，满足新的需求。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;家族遗传&quot;的比喻：</p>
+<blockquote>
+<p>&quot;你父亲浓眉大眼、天庭饱满、地阁方圆，那你很大几率就是这样——这叫继承属性。你父亲会唱歌、会跳舞、跑得很快，你也很大几率能继承下来——这叫继承方法。&quot;</p>
+</blockquote>
+<p>但继承不是全部照搬：</p>
+<blockquote>
+<p>&quot;你父亲只会唱红歌。你不仅会唱红歌，还会唱通俗、流行、摇滚、粤语、英语、法语——这是你产生的<strong>新方法</strong>。你既可以继承父亲的方法，也可以产生自己新的方法，这才属于你自己特殊的一个人。&quot;</p>
+</blockquote>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 父类（Super Class / Parent Class）
+public class People {
+    String name;
+    int age;
+    public void speak() {
+        System.out.println(&quot;I can speak&quot;);
+    }
+}
+
+// 子类（Sub Class / Child Class）
+public class Student extends People {
+    // Student 自动拥有 name、age、speak()
+    // 还可以添加自己的新属性和新方法
+    public void learnEnglish() {
+        System.out.println(&quot;I can speak English too!&quot;);
+    }
+}
+</code></pre>
+<p><strong>关键字</strong>：<code>extends</code>（扩展）
+<strong>格式</strong>：<code>class 子类名 extends 父类名</code></p>
+<hr>
+<h4>知识点 3：Java 的单继承原则</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 采用<strong>单继承</strong>机制：一个子类有且只有一个直接父类。</p>
+<h5>为什么 Java 是单继承？</h5>
+<p><strong>避免二义性</strong>（歧义性）。老师解释说：</p>
+<blockquote>
+<p>&quot;你想想，如果父亲 A 有个 name，父亲 B 也有个 name，那这个子类的 name 到底是从谁那继承来的？你就分不清了。这就叫二义性。&quot;</p>
+</blockquote>
+<h5>C++ 多继承 vs Java 方案</h5>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>继承方式</th>
+<th>如何解决二义性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C++</td>
+<td>多继承（一个子类可有多个父类）</td>
+<td>用特殊语法（虚继承）处理</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>单继承</td>
+<td>用**接口（interface）**来补充多继承的需求</td>
+</tr>
+</tbody></table>
+<p>老师说明：&quot;在 Java 面向对象里面，只有一个父亲节点。兄弟节点可以多个，但父亲只有一个。……Java 为了也能产生类似多继承的情况，用了最后一章的接口（interface）来做这件事。&quot;</p>
+<h5>生活中的类比</h5>
+<blockquote>
+<p>&quot;这两个孩子只能有一个父亲。……C++ 就可以有多继承。但你想，如果家庭离异了，又找到了一个——但那是第二个，跟他是没有关系的，它的属性是继承不了的。&quot;</p>
+</blockquote>
+<hr>
+<h4>知识点 4：继承的树形结构（倒置二叉树）</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 类按照继承关系形成<strong>树形结构</strong>，像一棵倒置的二叉树——树根在上，枝叶在下。</p>
+<pre><code>        祖先（根节点 root）
+         │
+        父类（父亲节点）
+        ┌┴┐
+    子类A  子类B（兄弟节点）
+     ┌┴┐
+  孙A  孙B（叶子节点 leaf）
+</code></pre>
+<h5>关键结论</h5>
+<ul>
+<li>每一个子节点有且只有一个父节点（单继承）</li>
+<li>兄弟节点可以有多个</li>
+<li>从祖先到叶子，从上到下逐层创建</li>
+<li>最底层的节点如果没有子类，称为<strong>叶子节点</strong></li>
+</ul>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;三代人&quot;的族谱类比：</p>
+<blockquote>
+<p>&quot;这是爷爷，父亲继承了爷爷的东西。到了父亲这一代，两个儿子——他俩是兄弟。再往下，孙子辈——你看他俩长得挺像的，但是他们的子女长得就不太像了。但又有点像他小叔、像他小姨——因为有个共同的奶奶啊！&quot;</p>
+</blockquote>
+<hr>
+<h4>知识点 5：重写（Override）——多态的第一种形式</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>重写（Override）<strong>是指子类定义一个与父类</strong>方法头完全相同</strong>但<strong>方法体不同</strong>的方法，从而隐藏父类的该方法。</p>
+<h5>重写的三个条件</h5>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发生位置</td>
+<td>不同的类体中（父类和子类之间）</td>
+</tr>
+<tr>
+<td>方法头</td>
+<td>完全相同——方法名、参数列表、返回值类型都一样</td>
+</tr>
+<tr>
+<td>方法体</td>
+<td>不同——子类提供自己的实现</td>
+</tr>
+</tbody></table>
+<h5>为什么学？</h5>
+<blockquote>
+<p>&quot;子类的功能无法满足我的要求，我不想再继承你的了。我要满足我新的要求——你不擅长，我擅长。&quot;</p>
+</blockquote>
+<p>重写让子类能够在继承的基础上&quot;改进&quot;父类的行为，是多态的重要实现方式。</p>
+<h5>重写 vs 重载</h5>
+<table>
+<thead>
+<tr>
+<th>比较维度</th>
+<th>重写（Override）</th>
+<th>重载（Overload）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>发生位置</td>
+<td>不同类体中（父子类之间）</td>
+<td>同一个类体中</td>
+</tr>
+<tr>
+<td>方法头</td>
+<td>完全相同</td>
+<td>方法名相同，参数列表不同</td>
+</tr>
+<tr>
+<td>方法体</td>
+<td>不同</td>
+<td>不同（或相同）</td>
+</tr>
+<tr>
+<td>典型例子</td>
+<td>子类重新定义父类的 speak()</td>
+<td>构造方法的不同参数版本</td>
+</tr>
+<tr>
+<td>关键字</td>
+<td>无需特殊关键字</td>
+<td>无需特殊关键字</td>
+</tr>
+</tbody></table>
+<h5>课堂代码演示</h5>
+<pre><code class="language-java">// 父类
+public class People {
+    public void speak() {
+        System.out.println(&quot;I can speak Chinese&quot;);
+    }
+}
+
+// 子类重写
+public class Student extends People {
+    @Override  // 注解，表示这是重写（可选但推荐）
+    public void speak() {
+        System.out.println(&quot;I like English!&quot;);  // 方法体不同
+    }
+}
+</code></pre>
+<p>当子类对象调用 <code>speak()</code> 时，执行的是子类重写后的版本，而不是父类的版本。</p>
+<hr>
+<h4>知识点 6：子类对象创建过程——先父后子</h4>
+<h5>这个知识点是什么？</h5>
+<p>创建子类对象时，<strong>必须先创建父类对象，再创建子类对象</strong>。在构造方法的调用链上，子类构造方法总是先调用父类的某个构造方法。</p>
+<h5>为什么？</h5>
+<blockquote>
+<p>&quot;你要想有，必须先有父亲。没有父亲，一定不会有你。&quot;</p>
+</blockquote>
+<p>从树形结构来看：创建对象时，必须从祖先节点开始，按层次从上到下依次创建，不能直接跳到子节点。</p>
+<h5>基本规则</h5>
+<ol>
+<li>如果父类有<strong>无参构造方法</strong>（系统自动提供或手动定义），子类构造方法会自动调用它</li>
+<li>如果父类<strong>只有带参数</strong>的构造方法，子类必须在构造方法的第一句用 <code>super(参数)</code> 明确指定调用哪个父类构造方法</li>
+<li>如果子类构造方法中没有写 <code>super(...)</code>，系统默认调用父类的无参构造方法</li>
+</ol>
+<h5>课堂代码演示</h5>
+<pre><code class="language-java">// 父类——只有带参构造方法
+public class Father {
+    String name;
+    public Father(String name) {
+        this.name = name;
+        System.out.println(&quot;父类构造方法被调用&quot;);
+    }
+}
+
+// 子类——必须用 super 明确调用父类构造方法
+public class Son extends Father {
+    public Son(String name) {
+        super(name);  // 必须写在第一句！
+        System.out.println(&quot;子类构造方法被调用&quot;);
+    }
+}
+
+// 测试
+public class Test {
+    public static void main(String[] args) {
+        Son s = new Son(&quot;小明&quot;);
+        // 输出：
+        // 父类构造方法被调用
+        // 子类构造方法被调用
+    }
+}
+</code></pre>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>private</td>
+<td>全局可见 vs 仅本类可见</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>default</td>
+<td>同包可见 + 不同包子类可见 vs 仅同包可见</td>
+</tr>
+<tr>
+<td>继承</td>
+<td>不继承（独立类）</td>
+<td>子类自动拥有父类的非私有成员 vs 每个类从零开始</td>
+</tr>
+<tr>
+<td>单继承（Java）</td>
+<td>多继承（C++）</td>
+<td>一个子类只有一个直接父类（避免二义性）vs 一个子类可有多个父类</td>
+</tr>
+<tr>
+<td>重写（Override）</td>
+<td>重载（Overload）</td>
+<td>不同类体、方法头相同、方法体不同 vs 同一类体、方法名相同、参数列表不同</td>
+</tr>
+<tr>
+<td>super</td>
+<td>this</td>
+<td>代表父类对象的引用 vs 代表当前对象的引用</td>
+</tr>
+<tr>
+<td>父类（Super Class）</td>
+<td>子类（Sub Class）</td>
+<td>被继承的类 vs 继承父类的类</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：四种访问权限的完整演示</h4>
+<p><strong>适用知识点</strong>：访问权限修饰符的四种访问场景</p>
+<pre><code class="language-java">// 文件：com/example/Welcome.java（包 com.example）
+package com.example;
+
+public class Welcome {
+    public    int pub = 1;     // 公有的
+    protected int pro = 2;     // 受保护的
+              int def = 3;     // 缺省的（default）
+    private   int pri = 4;     // 私有的
+
+    // 场景1：同一包下的同一个类——四个全可见
+    public void showInSameClass() {
+        System.out.println(pub);  // ✅
+        System.out.println(pro);  // ✅
+        System.out.println(def);  // ✅
+        System.out.println(pri);  // ✅
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 文件：com/example/First.java（同一包下的不同类）
+package com.example;
+
+public class First {
+    public void accessWelcome() {
+        Welcome w = new Welcome();
+        System.out.println(w.pub);  // ✅ public——可见
+        System.out.println(w.pro);  // ✅ protected——可见
+        System.out.println(w.def);  // ✅ default——可见
+        // System.out.println(w.pri);  // ❌ private——不可见！编译错误
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 文件：unit/Tools.java（不同包下的子类）
+package unit;                      // 注意：不同的包！
+import com.example.Welcome;
+
+public class Tools extends Welcome {
+    public void accessFromSubclass() {
+        System.out.println(pub);   // ✅ public——可见
+        System.out.println(pro);   // ✅ protected——子类可见
+        // System.out.println(def);  // ❌ default——不同包不可见
+        // System.out.println(pri);  // ❌ private——不可见
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 文件：unit/AfterPrint.java（不同包下的非子类）
+package unit;
+import com.example.Welcome;
+
+public class AfterPrint {
+    public void accessFromOutside() {
+        Welcome w = new Welcome();
+        System.out.println(w.pub);  // ✅ public——全局可见
+        // System.out.println(w.pro);  // ❌ protected——非子类不可见
+        // System.out.println(w.def);  // ❌ default——不同包不可见
+        // System.out.println(w.pri);  // ❌ private——不可见
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：各场景的可见性严格按访问矩阵执行。</p>
+<p><strong>初学者提示</strong>：最容易搞混的是 protected vs default——记住&quot;受保护的&quot;有&quot;血缘关系&quot;的跨包特权（子类），而 default 只在同包范围内有效，跨包后连子类都看不见。</p>
+<hr>
+<h4>示例 2：继承的基本使用——子类继承父类的属性和方法</h4>
+<p><strong>适用知识点</strong>：继承的概念、extends 关键字</p>
+<pre><code class="language-java">// 父类：人
+public class People {
+    String name;
+    int age;
+
+    public People() {}                   // 无参构造方法
+
+    public People(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void speak() {
+        System.out.println(name + &quot; can speak.&quot;);
+    }
+
+    public void run() {
+        System.out.println(name + &quot; can run.&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 子类：学生——什么都不用写就继承了父类的成员
+public class Student extends People {
+    // 空的！但已经拥有了 name、age、speak()、run()
+}
+</code></pre>
+<pre><code class="language-java">// 测试类
+public class Test {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.name = &quot;Charlie&quot;;
+        s.age = 20;
+        s.speak();  // 输出：Charlie can speak.
+        s.run();    // 输出：Charlie can run.
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>Charlie can speak.
+Charlie can run.
+</code></pre>
+<p><strong>解释</strong>：Student 类体中一行代码没写，但已经通过继承拥有了 People 的全部非私有成员。这就是继承的好处——<strong>公有代码不用重复写</strong>。</p>
+<p><strong>初学者提示</strong>：注意，Student 虽然什么都没有，但 <code>new Student()</code> 能成功，因为 People 有无参构造方法被自动调用。</p>
+<hr>
+<h4>示例 3：方法重写（Override）——子类改变父类的方法行为</h4>
+<p><strong>适用知识点</strong>：重写（Override）、多态</p>
+<pre><code class="language-java">// 父类
+public class People {
+    String name;
+    
+    public People(String name) {
+        this.name = name;
+    }
+    
+    public void speak() {
+        System.out.println(name + &quot; speaks Chinese.&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 子类——重写 speak() 方法
+public class Student extends People {
+    public Student(String name) {
+        super(name);  // 调用父类构造方法
+    }
+    
+    // 重写：方法头完全相同，方法体不同
+    @Override
+    public void speak() {
+        System.out.println(name + &quot; speaks English!&quot;);
+    }
+    
+    // 子类还可以有自己的新方法
+    public void learnFrench() {
+        System.out.println(name + &quot; is learning French.&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 测试类
+public class Test {
+    public static void main(String[] args) {
+        People p = new People(&quot;父亲&quot;);
+        p.speak();  // 输出：父亲 speaks Chinese.（父类自己的版本）
+        
+        Student s = new Student(&quot;查理&quot;);
+        s.speak();  // 输出：查理 speaks English!（子类重写后的版本）
+        s.learnFrench();  // 输出：查理 is learning French.（子类独有的方法）
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>父亲 speaks Chinese.
+查理 speaks English!
+查理 is learning French.
+</code></pre>
+<p><strong>解释</strong>：子类 Student 重写了 speak() 方法，所以当子类对象调用 speak() 时，执行的是子类的版本，而不是父类的版本。同时子类还增加了自己的新方法 learnFrench()——这就是&quot;既可以继承，也可以扩展&quot;。</p>
+<p><strong>初学者提示</strong>：</p>
+<ul>
+<li><code>@Override</code> 注解表示这是重写，它会让编译器帮你检查方法头是否与父类一致（推荐写）</li>
+<li>子类重写了父类的方法后，父类对象调用的还是父类自己的版本</li>
+<li>重写不能降低访问权限（父类是 public，子类不能改成 protected）</li>
+</ul>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：家族财产继承链</h4>
+<p><strong>课堂场景</strong>：老师用三代人的家族关系来解释继承和访问权限。</p>
+<pre><code>爷爷（祖先）
+ ├── 公有财产（public）：家族企业——谁都能看到
+ ├── 受保护财产（protected）：房子、家具——只有家族成员能继承
+ ├── 默认财产（default）：家族内部的东西——只有同族人能用
+ └── 私有财产（private）：小金库——只有自己知道，谁都不能动
+
+父亲继承爷爷 → 两个儿子继承父亲 → 孙子……
+</code></pre>
+<p><strong>教学要点</strong>：</p>
+<ul>
+<li>父亲继承了爷爷的非私有财产——对应子类继承父类的非私有成员</li>
+<li>父亲的私有财产（小金库）谁也不能动——对应 private 成员不可继承</li>
+<li>两个儿子（兄弟节点）共享受保护的家族财产——对应 protected 在同包和子类中可见</li>
+<li>孙子既像父亲也像叔叔（共同的奶奶）——对应继承链中的&quot;间接继承&quot;</li>
+</ul>
+<h4>案例 2：重写——父子两代人的&quot;唱歌&quot;</h4>
+<p><strong>课堂场景</strong>：用父亲和儿子的唱歌能力来解释重写。</p>
+<blockquote>
+<p>&quot;你父亲只会唱红歌——《井冈山》《洪湖赤卫队》。你继承了他的好嗓子，但你不仅能唱红歌，还能唱通俗、摇滚、粤语、英语、法语。你父亲不会的这些，你要产生一些新的方法，这才属于你自己特殊的一个人。&quot;</p>
+</blockquote>
+<p><strong>映射到代码</strong>：</p>
+<ul>
+<li>父类的 <code>sing()</code> 方法只会&quot;唱红歌&quot;</li>
+<li>子类重写 <code>sing()</code> 方法，加入更多曲风（方法体扩展）</li>
+<li>子类还可以新增 <code>singPop()</code>、<code>singRock()</code> 等父类没有的方法</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：以为子类能继承父类的一切——实际上 private 成员不可继承。父类的私有属性和方法只属于父类本身，子类也访问不到。如果需要访问，必须通过父类提供的 public 访问器（get/set）。
+
+易错点 2：把 protected 和 default 的跨包行为搞反——protected 的不同包子类可以访问，default 跨包后连子类都看不见。口诀：&quot;protected 有血缘关系的能跨包，default 只认同一个包。&quot;
+
+易错点 3：在子类构造方法中忘记用 super 调用父类构造方法——当父类没有无参构造方法时，子类构造方法的第一句必须写 super(参数)，否则编译错误。
+
+易错点 4：把重写（Override）和重载（Overload）混淆——重写发生在父子类之间（方法头完全相同），重载发生在同一个类中（方法名相同但参数列表不同）。
+
+易错点 5：忘记 Java 是单继承——以为一个子类可以同时 extends 多个父类，这在 Java 中是语法错误。需要多继承的效果时，应使用接口（interface）来实现。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：以下哪个访问权限修饰符修饰的成员，在&quot;不同包下的子类&quot;中也能访问？
+A. private  B. default  C. protected  D. 只有 public
+正确答案：C
+解析：protected 允许不同包下的子类访问。default 跨包后子类也看不到。public 也可以，但题目问的是&quot;也能&quot;，protected 的最低要求就是跨包子类可访问。
+
+题目 2：以下哪个关键字用于声明一个类继承另一个类？
+A. implements  B. extends  C. super  D. import
+正确答案：B
+解析：extends 是继承关键字，格式为 class 子类 extends 父类。implements 是实现接口的关键字。
+
+题目 3：Java 为什么采用单继承？
+A. 为了代码更简洁  B. 为了运行速度更快  C. 为了避免二义性  D. 因为 JDK 限制
+正确答案：C
+解析：单继承避免了多个父类有同名成员时的歧义性（不知道从哪个父类继承）。多继承需求通过接口来补充。
+
+题目 4：关于方法重写（Override），以下说法正确的是？
+A. 重写可以发生在同一个类中  B. 重写时方法头可以不同  C. 重写时方法头相同、方法体不同  D. 重写必须使用 @Override 注解
+正确答案：C
+解析：重写的核心条件是方法头完全相同、方法体不同，发生在不同类体中（父子类之间）。@Override 注解推荐但非必须。
+
+题目 5：子类对象创建时，构造方法的调用顺序是？
+A. 先子类后父类  B. 先父类后子类  C. 只调用子类  D. 随机调用
+正确答案：B
+解析：子类构造方法总是先调用父类的某个构造方法（隐式或显式通过 super），先完成父类的初始化，再初始化子类。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. public —— 公有的，全局可见，所有包都能访问
+2. protected —— 受保护的，同包和不同包子类可访问
+3. default（不写） —— 缺省的，仅同一包下可访问
+4. private —— 私有的，仅本类自身可访问
+5. extends —— Java 继承关键字，用于声明父子类关系
+6. 父类（Super Class） —— 被继承的类，提供共有的属性和方法
+7. 子类（Sub Class） —— 继承父类的类，可以增加新的属性和方法
+8. 单继承 —— Java 的继承机制，一个子类有且只有一个直接父类
+9. 二义性 —— 多继承中无法判断成员来源的问题，Java 通过单继承避免
+10. 重写（Override） —— 子类定义与父类方法头相同、方法体不同的方法
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">【子类对象创建过程——先父后子】
+
+步骤 1：执行 new Student(&quot;小明&quot;)
+步骤 2：JVM 发现 Student 继承自 People，先不创建 Student
+步骤 3：转向父类 People——调用 People 的构造方法，初始化父类部分
+步骤 4：父类构造方法执行完毕，父类层初始化完成
+步骤 5：回到子类 Student 的构造方法，执行子类特有的初始化
+步骤 6：子类对象创建完成，该对象拥有&quot;父类部分 + 子类部分&quot;的全部内容
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习题 1：写出四种访问权限修饰符在&quot;同一包不同类&quot;场景下的可见性（✅/❌）。
+知识点：访问权限修饰符
+参考答案：public ✅ / protected ✅ / default ✅ / private ❌
+解题思路：同一包下，只有 private 是本类独有的，其他三个都能在同包的不同类中访问。
+
+练习题 2：定义一个 Animal 父类（属性 name，方法 eat()），再定义一个 Cat 子类继承 Animal，并重写 eat() 方法输出&quot;猫吃鱼&quot;。
+知识点：继承语法、方法重写
+参考答案：
+class Animal { String name; void eat() { System.out.println(&quot;动物吃东西&quot;); } }
+class Cat extends Animal { @Override void eat() { System.out.println(&quot;猫吃鱼&quot;); } }
+解题思路：使用 extends 建立继承关系，子类中写与父类方法头相同的 eat() 但方法体改为&quot;猫吃鱼&quot;。
+
+练习题 3：解释&quot;上转型对象&quot;的含义。如果 Animal a = new Cat(); a.eat(); 会输出什么？为什么？
+知识点：上转型对象、多态
+参考答案：会输出&quot;猫吃鱼&quot;。虽然 a 的类型是 Animal（父类），但它实际引用的是 Cat 对象，调用方法时会调用 Cat 重写后的版本。这就是&quot;父亲花儿子挣的钱&quot;。
+解题思路：Java 的方法调用看实际对象类型（运行时多态），不看引用变量的声明类型。
+
+练习题 4：以下代码会编译错误吗？如果会，请说明原因并修正。
+class Father { int age; Father(int age) { this.age = age; } }
+class Son extends Father { String name; Son(String name) { this.name = name; } }
+知识点：子类构造方法与 super
+参考答案：会编译错误。父类没有无参构造方法，子类构造方法必须显式调用 super(参数)。修正：
+class Son extends Father {
+    String name;
+    Son(int age, String name) {
+        super(age);  // 第一句必须调用父类构造方法
+        this.name = name;
+    }
+}
+解题思路：当父类只有带参构造方法时，子类构造方法第一句必须写 super(参数)。
+
+练习题 5：简述重写（Override）和重载（Overload）的四个区别。
+知识点：多态的两种形式
+参考答案：
+① 发生位置：重写在父子类之间；重载在同一个类中。
+② 方法头：重写方法头完全相同；重载方法名相同但参数列表不同。
+③ 方法体：重写方法体不同；重载方法体可同可不同。
+④ 目的：重写用于改变继承来的方法行为；重载用于提供同一功能的不同参数版本。
+解题思路：记忆口诀——重写是&quot;不同类、同头不同体&quot;；重载是&quot;同类、同名不同参&quot;。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code>访问权限与继承入门
+├── 访问权限深入复习
+│   ├── 四种修饰符：public / protected / default / private
+│   ├── 四种访问场景：
+│   │   ├── 同一包同一类 → 四个全可见
+│   │   ├── 同一包不同类 → 除 private 外全可见
+│   │   ├── 不同包子类 → 仅 public + protected 可见
+│   │   └── 不同包非子类 → 仅 public 可见
+│   └── 核心原则：可见即可访问
+│
+├── 继承（Inheritance）
+│   ├── 概念：由已有类创建新类的机制
+│   ├── 关键字：extends
+│   ├── 语法：class 子类名 extends 父类名 { }
+│   ├── 继承规则：
+│   │   ├── 同一包下：除 private 外全部继承
+│   │   └── 不同包下：仅 protected + public 可继承
+│   ├── 单继承原则：一个子类只有一个直接父类
+│   │   ├── 原因：避免二义性
+│   │   └── 替代方案：接口（interface）
+│   ├── 树形结构：祖先→父亲→兄弟→叶子
+│   └── 对象创建顺序：先父后子
+│
+├── 重写（Override）
+│   ├── 条件：不同类体 + 方法头相同 + 方法体不同
+│   ├── 目的：隐藏父类方法，提供子类自己的实现
+│   └── 重写 vs 重载（Overload）区别
+│
+└── 相关关键字
+    ├── extends：声明继承
+    ├── super：代表父类对象
+    └── @Override：标注重写（可选但推荐）
+</code></pre>
+<hr>
+<h3>14. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是&quot;两条线&quot;：一条是访问权限的深入复习（四种修饰符 × 四种场景的完整矩阵），另一条是继承机制的正式引入（概念、语法、单继承、重写）。
+2. 访问权限是封装的基础——通过限制访问范围来保护数据。记住四句口诀：public 水壶随便用，protected 家族内部用，default 室友一起用，private 自己单独用。
+3. 继承的本质是&quot;复用&quot;——父类写好共有的东西，子类拿来就用，不用重复写。但继承不是&quot;全盘照抄&quot;——private 不继承，子类还可以重写（Override）不满意的方法。
+4. Java 是单继承（一个子类一个爹），这是为了避免&quot;两个爹争一个娃&quot;的二义性问题。多继承需要通过接口实现。
+5. 子类对象创建时&quot;先父后子&quot;——要创建儿子，必须先有父亲。父类有带参构造时，子类必须用 super(参数) 明确调用。
+</code></pre>
+<hr>
+<h3>15. 课堂学习方法建议</h3>
+<pre><code class="language-text">1. 老师反复强调&quot;回去整理笔记&quot;——因为继承是面向对象的核心和分水岭，这一章搞不清楚后面都学不了。
+2. 考试题型包括：选择、填空、问答、编程。编程题要从零开始写类和继承相关代码（接口可能不考）。
+3. 重点问答对比题：全局变量和局部变量的区别、构造方法和普通方法的区别、类方法和实例方法的区别、重写和重载的区别——这些&quot;区别题&quot;是高频考点。
+4. 班上学习委员建了群，有问题可以在群里问老师，不要在学习通上发消息（老师不太看）。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-12.html"><span>上一篇</span><strong>类与对象综合复习</strong></a><a class="article-pager-link next" rel="next" href="java-14.html"><span>下一篇</span><strong>Java类的继承深入及UML类图入门</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

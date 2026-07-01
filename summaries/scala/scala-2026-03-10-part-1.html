@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： scala 05 expression for loop 课程标题 ：Scala 表达式、for 循环与二维遍历基础 所属章节 ：Scala 流程控制 上课日期 ：2026 03 10（10:07 开始） 知识点标签 ：表达式、语句、模块化编程、f" />
+  <title>Scala表达式与for循环基础 - 上 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-03-10-expressions-for-basic">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-03-10 · 上半节</p>
+      <h1>Scala表达式与for循环基础 - 上</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala表达式与for循环基础 - 上</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>scala-05-expression-for-loop</code></li>
+<li><strong>课程标题</strong>：Scala 表达式、for 循环与二维遍历基础</li>
+<li><strong>所属章节</strong>：Scala 流程控制</li>
+<li><strong>上课日期</strong>：2026-03-10（10:07 开始）</li>
+<li><strong>知识点标签</strong>：表达式、语句、模块化编程、for 循环、二维遍历、区间、职业发展</li>
+<li><strong>难度等级</strong>：初级偏中</li>
+<li><strong>适合对象</strong>：已学习 Block、if 表达式、基础循环的学生</li>
+<li><strong>本节课一句话概括</strong>：本节课重点讲解“表达式有值”的 Scala 思维，并把 for 循环扩展到二维遍历场景，同时结合就业趋势强调打好编程和数学基础。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先再次强调表达式与语句的区别，指出 Scala 中表达式本身就有值，可以直接赋给变量或常量。</li>
+<li>课堂中通过“求两点间距离”的例子说明，Scala 倾向于把计算过程写进 Block 中，直接求值，而不是像 Java 那样先定义方法再传参。</li>
+<li>老师重点讲解了 Scala 的 for 循环基本写法：在括号中定义变量，通过左箭头 <code>&lt;-</code> 遍历一个 range 范围。</li>
+<li>本节课对比了 Java 的数组遍历和 Scala 的列表/范围遍历，说明 Scala 更简洁，不一定需要先创建数组。</li>
+<li>老师用三行三列矩阵的例子演示了 Java 里的双重循环，并说明 Scala 在同类场景中可以用更紧凑的写法完成二维遍历。</li>
+<li>课堂后半部分延伸到职业发展，强调 AI、智能体、数据架构师、算法工程师等方向的重要性，提醒学生打好数学和编程基础。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解 Scala 中“表达式有值”的概念，知道表达式可以直接赋值。</li>
+<li>能写出基本的 <code>for (i &lt;- 1 to 10)</code> 循环。</li>
+<li>理解 <code>range</code>、<code>to</code>、<code>until</code>、<code>by</code> 的基本作用。</li>
+<li>看懂 Java 中的双重循环如何对应到 Scala 的遍历写法。</li>
+<li>理解 Scala 为什么比 Java 更适合用简洁语法处理连续数据。</li>
+<li>初步认识编程、数学和未来职业方向之间的联系。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：表达式有值——Scala 的基础思维</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 中的表达式不是“只执行”的，而是会产生一个结果值。这个值可以赋给变量、常量，或者作为更大表达式的一部分继续使用。</p>
+<h5>为什么要学它？</h5>
+<p>表达式思维是 Scala 的核心。很多初学者一开始按 Java 思维理解 Scala，容易觉得代码“奇怪”。一旦明白“表达式本来就有值”，后面理解 if、Block、for 推导式都会顺很多。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val result = if (x &gt; 0) 1 else -1
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把表达式和高数里的函数联系起来：<code>f(x)</code> 后面不是一串表达式吗？表达式的作用就是“算出一个值”。Scala 里很多结构都遵循这个思路：前面写的是过程，最终拿到的是值。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把表达式当成“没有结果的动作”。</li>
+<li>以为只有 <code>return</code> 才能得到值。</li>
+<li>不知道 if、Block 这些结构都可以返回结果。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object ExpressionDemo {
+  def main(args: Array[String]): Unit = {
+    val x = 8
+    val sign = if (x &gt; 0) 1 else -1
+    println(sign)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>if (x &gt; 0) 1 else -1</code> 是一个表达式。</li>
+<li>条件成立返回 1，不成立返回 -1。</li>
+<li><code>sign</code> 接收这个返回值。</li>
+</ul>
+<hr>
+<h4>知识点 2：模块化编程——把计算放进 Block</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 倾向于把一段计算过程写成一个 Block（大括号块），然后直接让这个 Block 返回结果。这种写法可以把复杂计算拆成局部步骤。</p>
+<h5>为什么要学它？</h5>
+<p>相比 Java 中“先定义方法，再传参调用”的写法，Scala 这种方式更适合把逻辑组织成小块，代码更短、更清晰。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">val distance = {
+  val dx = x2 - x1
+  val dy = y2 - y1
+  math.sqrt(dx * dx + dy * dy)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用“求两点间距离”的例子说明：</p>
+<ul>
+<li>Java 里通常是先定义一个方法，再定义参数 x、y，最后传参调用。</li>
+<li>Scala 里可以直接把计算过程写成一个 Block，最后一行就是结果。</li>
+</ul>
+<p>老师把这种方式称为“模块化编程”或“块块化编程”——把流程分成一个个可返回值的块。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为 Block 只是“围起来的代码”，没有返回值。</li>
+<li>不知道最后一行是结果。</li>
+<li>写了很多中间变量，却忘了最后输出/返回真正要的值。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object DistanceBlock {
+  def main(args: Array[String]): Unit = {
+    val result = {
+      val x1 = 0
+      val y1 = 0
+      val x2 = 3
+      val y2 = 4
+      math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+    }
+    println(result)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>Block 里先定义坐标点。</li>
+<li>最后一行计算距离。</li>
+<li>整个 Block 的值就是距离。</li>
+</ul>
+<hr>
+<h4>知识点 3：for 循环的基本写法</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 的 <code>for</code> 循环通常写成 <code>for (i &lt;- range)</code>，其中 <code>&lt;-</code> 表示“从范围中取值”。</p>
+<h5>为什么要学它？</h5>
+<p>for 循环是遍历范围和集合的基本工具。后续学习集合、数组、推导式时都会频繁用到。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">for (i &lt;- 1 to 10) {
+  println(i)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师说，<code>i &lt;- range</code> 的意思就是：让 i 依次从范围里取值。和 Java 不同，Scala 不强调“创建数组再遍历数组”，而是可以直接遍历范围。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>&lt;-</code> 写成 <code>=</code>。</li>
+<li>不理解 <code>range</code> 是一个范围。</li>
+<li>仍然写 Java 风格的三段式 for。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object ForBasic {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 5) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li><code>1 to 5</code> 表示从 1 到 5 的范围。</li>
+<li><code>i &lt;- 1 to 5</code> 表示 i 依次取 1、2、3、4、5。</li>
+<li>每次取值后执行循环体。</li>
+</ul>
+<hr>
+<h4>知识点 4：二维遍历——Java 双重循环与 Scala 的简洁写法</h4>
+<h5>这个知识点是什么？</h5>
+<p>对于二维数据（如 3 行 3 列矩阵），Java 常用双重循环遍历；Scala 也能处理，但写法更紧凑。</p>
+<h5>为什么要学它？</h5>
+<p>二维遍历是矩阵、表格、图片处理等场景的基础。老师用这个例子说明 Scala 处理同类问题时更简洁。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">for {
+  i &lt;- 1 to 3
+  j &lt;- 1 to 3
+} {
+  println(&quot;A&quot; + i + j)
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师先用 Java 思维画出 3×3 矩阵：</p>
+<ul>
+<li>第一层循环控制行 i</li>
+<li>第二层循环控制列 j</li>
+<li>输出 A11、A12、A13、A21……A33</li>
+</ul>
+<p>然后说明 Scala 可以通过更紧凑的循环结构完成同样任务，不必先创建数组。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>不理解二维遍历是“外层控制行、内层控制列”。</li>
+<li>搞混 i 和 j 的含义。</li>
+<li>先想着数组，忘了 Scala 可以直接处理范围。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object MatrixTraverse {
+  def main(args: Array[String]): Unit = {
+    for {
+      i &lt;- 1 to 3
+      j &lt;- 1 to 3
+    } {
+      println(&quot;A&quot; + i + j)
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>外层 i 表示第几行。</li>
+<li>内层 j 表示第几列。</li>
+<li>输出结果按 A11 到 A33 的顺序生成。</li>
+</ul>
+<hr>
+<h4>知识点 5：数组与列表的思路差异</h4>
+<h5>这个知识点是什么？</h5>
+<p>老师强调：Scala 在很多场景下不强调先建数组，而更倾向于使用范围和列表来直接表达数据序列。</p>
+<h5>为什么要学它？</h5>
+<p>这体现了 Scala 对“连续、类型相同数据”的高层抽象。对初学者来说，先理解“可以直接遍历范围”，再回头学集合会更自然。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">for (i &lt;- 1 to 10) println(i)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师说 Java 经常要先建立数组、申请空间、再遍历；而 Scala 在某些情况下根本不必先建数组，直接用范围就可以开始循环。这让很多重复工作消失了。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>一听到“遍历”就先想数组。</li>
+<li>不敢直接用范围，觉得不安全。</li>
+<li>误以为 Scala 不能处理二维数据。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">object RangeAsData {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ul>
+<li>这里没有数组，但依然可以完成遍历。</li>
+<li>范围本身就像“虚拟的数据集合”。</li>
+</ul>
+<hr>
+<h4>知识点 6：职业发展与编程能力的关系</h4>
+<h5>这个知识点是什么？</h5>
+<p>老师用了很长一段时间讲 AI、智能体、数据架构师、算法工程师等职业方向，核心意思是：未来岗位会越来越依赖编程、数据和数学能力。</p>
+<h5>为什么要学它？</h5>
+<p>这是本节课的现实背景。老师不是单纯“讲大道理”，而是在提醒学生：Scala、Java、数学不是孤立的课程，而是未来职业能力的一部分。</p>
+<h5>基本语法</h5>
+<p>无代码语法——属于学习认知层面的内容。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师提到：</p>
+<ul>
+<li>Open Cloud / 交互式编程正在改变招聘需求；</li>
+<li>智能体相关岗位对高层次人才需求很大；</li>
+<li>想在未来不被替代，必须把编程思想、数学基础和数据思维练出来。</li>
+</ul>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>觉得这部分和课程无关。</li>
+<li>只关注“怎么写代码”，不关注“为什么要学”。</li>
+<li>忽略数学、算法和编程之间的联系。</li>
+</ol>
+<h5>正确示例</h5>
+<p>无需代码示例。</p>
+<h5>示例解释</h5>
+<ul>
+<li>这部分的“正确做法”不是写代码，而是建立学习方向感：用课程训练逻辑、为后续 AI / 数据岗位做准备。</li>
+</ul>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>语句</td>
+<td>表达式</td>
+<td>语句偏执行，表达式有值</td>
+<td><code>if (x &gt; 0) 1 else -1</code></td>
+</tr>
+<tr>
+<td>Java 方法调用</td>
+<td>Scala Block 求值</td>
+<td>Java 常先定义方法再传参；Scala 直接把计算放进块里</td>
+<td><code>val d = { ... }</code></td>
+</tr>
+<tr>
+<td>Java 三段式 for</td>
+<td>Scala for 生成器</td>
+<td>Java 手写初始化/条件/更新；Scala 用 <code>&lt;-</code> 遍历范围</td>
+<td><code>for (i &lt;- 1 to 10)</code></td>
+</tr>
+<tr>
+<td>数组</td>
+<td>范围/列表</td>
+<td>Scala 更常直接遍历范围，不一定先建数组</td>
+<td><code>1 to 10</code></td>
+</tr>
+<tr>
+<td>单重循环</td>
+<td>双重循环</td>
+<td>单重循环遍历一维数据，双重循环遍历二维结构</td>
+<td><code>i &lt;- 1 to 3; j &lt;- 1 to 3</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：表达式结果赋值</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">表达式有值、if 表达式
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object ExprValue {
+  def main(args: Array[String]): Unit = {
+    val x = 12
+    val result = if (x &gt; 10) &quot;大于10&quot; else &quot;不大于10&quot;
+    println(result)
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">大于10
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li>if 作为表达式返回字符串。</li>
+<li>结果赋给变量 result。</li>
+<li>最后输出 result。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">表达式不是“执行完就没了”，它能返回值。
+</code></pre>
+<hr>
+<h4>示例 2：Block 求两点距离</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">Block、模块化编程、math.sqrt
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object DistanceDemo {
+  def main(args: Array[String]): Unit = {
+    val d = {
+      val x1 = 0
+      val y1 = 0
+      val x2 = 6
+      val y2 = 8
+      math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+    }
+    println(d)
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">10.0
+</code></pre>
+<p>代码解释：</p>
+<ul>
+<li>Block 里先算中间值，再让最后一行返回结果。</li>
+<li>结果 10.0 被赋值给 d。</li>
+</ul>
+<p>初学者提示：</p>
+<pre><code class="language-text">Scala 里很多“先算后用”的场景都可以直接写成 Block。
+</code></pre>
+<hr>
+<h4>示例 3：二维遍历输出矩阵坐标</h4>
+<p>适用知识点：</p>
+<pre><code class="language-text">for、二维遍历、range
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-scala">object MatrixOutput {
+  def main(args: Array[String]): Unit = {
+    for {
+      i &lt;- 1 to 3
+      j &lt;- 1 to 3
+    } {
+      println(&quot;A&quot; + i + j)
+    }
+  }
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">A11
+A12
+A13
+A21
+A22
+A23
+A31
+A32
+A33
+</code></pre>
+<p>代码解释：</p>
+<ol>
+<li>外层 i 表示行。</li>
+<li>内层 j 表示列。</li>
+<li>每次输出一个坐标标识。</li>
+</ol>
+<p>初学者提示：</p>
+<pre><code class="language-text">双重循环的本质就是“先固定行，再遍历列”。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：计算两点间距离</h4>
+<ul>
+<li><strong>案例名称</strong>：直接用 Block 求距离</li>
+<li><strong>对应知识点</strong>：表达式、Block、模块化编程</li>
+<li><strong>案例背景</strong>：老师用“求两点间距离”说明 Scala 可以把计算过程直接写成一个表达式块。</li>
+<li><strong>解决思路</strong>：把中间变量和公式都写在大括号里，最后一行返回距离。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">val d = {
+  val dx = x2 - x1
+  val dy = y2 - y1
+  math.sqrt(dx * dx + dy * dy)
+}
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：表达式与 Block 的值返回规则。</li>
+</ul>
+<h4>案例 2：3×3 矩阵遍历</h4>
+<ul>
+<li><strong>案例名称</strong>：用双重循环输出矩阵位置</li>
+<li><strong>对应知识点</strong>：for、二维遍历、i/j 变量</li>
+<li><strong>案例背景</strong>：老师用 3 行 3 列矩阵说明如何遍历二维数据。</li>
+<li><strong>解决思路</strong>：外层循环控制行，内层循环控制列，逐个输出 Aij。</li>
+<li><strong>Scala 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-scala">for {
+  i &lt;- 1 to 3
+  j &lt;- 1 to 3
+} println(&quot;A&quot; + i + j)
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：双重循环如何映射到二维数据结构。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<p><strong>易错点 1：把表达式当成纯语句</strong></p>
+<pre><code class="language-text">错误示例：
+if (x &gt; 0) println(1)
+
+正确写法：
+val r = if (x &gt; 0) 1 else -1
+
+解释：
+Scala 中表达式可以直接返回值，不只是做动作。
+</code></pre>
+<p><strong>易错点 2：Block 最后一行写错</strong></p>
+<pre><code class="language-text">错误示例：
+val d = {
+  val x = 1
+  println(x)
+}
+
+正确写法：
+val d = {
+  val x = 1
+  x
+}
+
+解释：
+最后一行决定 Block 返回值。
+</code></pre>
+<p><strong>易错点 3：for 循环忘记 <code>&lt;-</code></strong></p>
+<pre><code class="language-text">错误示例：
+for (i = 1 to 10)
+
+正确写法：
+for (i &lt;- 1 to 10)
+
+解释：
+`&lt;-` 才是 Scala 的生成器写法。
+</code></pre>
+<p><strong>易错点 4：二维循环中 i/j 顺序混乱</strong></p>
+<pre><code class="language-text">错误示例：
+把行列顺序写反，导致输出坐标错误。
+
+正确思路：
+外层控制行 i，内层控制列 j。
+
+解释：
+先固定行，再遍历列，是二维遍历的基本方法。
+</code></pre>
+<p><strong>易错点 5：认为 Scala 处理数据一定要先建数组</strong></p>
+<pre><code class="language-text">错误理解：
+所有遍历都必须先数组化。
+
+正确理解：
+Scala 也可以直接遍历 range 或列表，不一定要先建数组。
+
+解释：
+这就是 Scala 更简洁的地方。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<p><strong>题目 1</strong>：Scala 中，表达式的特点是什么？</p>
+<p>A. 没有值
+B. 有值，可以赋给变量
+C. 只能打印不能使用
+D. 只能出现在 if 中</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：表达式是有值的，可以被变量接收。</p>
+<hr>
+<p><strong>题目 2</strong>：下面哪个写法是 Scala for 循环的正确形式？</p>
+<p>A. <code>for (int i = 0; i &lt; 10; i++)</code>
+B. <code>for (i = 1 to 10)</code>
+C. <code>for (i &lt;- 1 to 10)</code>
+D. <code>for i in 1..10</code></p>
+<p><strong>正确答案</strong>：C</p>
+<p><strong>解析</strong>：Scala 用 <code>&lt;-</code> 作为生成器符号。</p>
+<hr>
+<p><strong>题目 3</strong>：下面代码中，<code>distance</code> 的值最可能是什么？</p>
+<pre><code class="language-scala">val distance = {
+  val dx = 3
+  val dy = 4
+  math.sqrt(dx * dx + dy * dy)
+}
+</code></pre>
+<p>A. 5.0
+B. 7.0
+C. 12.0
+D. ()</p>
+<p><strong>正确答案</strong>：A</p>
+<p><strong>解析</strong>：3-4-5 直角三角形，结果是 5.0。</p>
+<hr>
+<p><strong>题目 4</strong>：<code>1 to 5</code> 和 <code>1 until 5</code> 的区别是？</p>
+<p>A. 没区别
+B. <code>to</code> 不包含 5，<code>until</code> 包含 5
+C. <code>to</code> 包含 5，<code>until</code> 不包含 5
+D. 两者都不包含 5</p>
+<p><strong>正确答案</strong>：C</p>
+<p><strong>解析</strong>：<code>to</code> 是闭区间，<code>until</code> 是左闭右开区间。</p>
+<hr>
+<p><strong>题目 5</strong>：二维遍历时，通常外层循环控制什么？</p>
+<p>A. 列
+B. 行
+C. 元素类型
+D. 输出格式</p>
+<p><strong>正确答案</strong>：B</p>
+<p><strong>解析</strong>：二维数组/矩阵遍历时，外层循环通常控制行，内层循环控制列。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 表达式 —— 有值的代码结构
+2. Block —— 大括号包裹的代码块，返回最后一行
+3. for —— 遍历范围或集合的循环
+4. to —— 包含终点的区间
+5. until —— 不包含终点的区间
+6. range —— 一个连续的值范围
+7. i —— 常用作行变量或循环变量
+8. j —— 常用作列变量或循环变量
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">1. 程序读取一个表达式，例如 if (x &gt; 0) 1 else -1。
+2. 判断条件是否成立。
+3. 根据条件选择返回值。
+4. 将返回值赋给变量。
+5. 程序继续执行后续语句。
+6. 如果表达式写在 Block 中，则整个 Block 的最后一行决定最终结果。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<p><strong>练习 1</strong>：用表达式判断一个数是否为偶数，并输出“偶数”或“奇数”。</p>
+<p><strong>考查知识点</strong>：表达式、if、取模运算</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object EvenOdd {
+  def main(args: Array[String]): Unit = {
+    val n = 7
+    val result = if (n % 2 == 0) &quot;偶数&quot; else &quot;奇数&quot;
+    println(result)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：利用 <code>%</code> 判断能否被 2 整除。</p>
+<hr>
+<p><strong>练习 2</strong>：写一个 Block 表达式，计算 5 和 7 的乘积，并赋给变量。</p>
+<p><strong>考查知识点</strong>：Block、最后一行返回值</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object BlockProduct {
+  def main(args: Array[String]): Unit = {
+    val result = {
+      val a = 5
+      val b = 7
+      a * b
+    }
+    println(result)
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：把计算写在 Block 中，最后一行返回乘积。</p>
+<hr>
+<p><strong>练习 3</strong>：用 for 循环输出 1 到 10。</p>
+<p><strong>考查知识点</strong>：for、to</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object RangePrint {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 1 to 10) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：范围使用 <code>1 to 10</code>，遍历即可。</p>
+<hr>
+<p><strong>练习 4</strong>：写一个嵌套 for 循环，输出 2 行 3 列的坐标编号，如 B11、B12、B13、B21、B22、B23。</p>
+<p><strong>考查知识点</strong>：二维遍历、for 嵌套</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object TwoRowThreeCol {
+  def main(args: Array[String]): Unit = {
+    for {
+      i &lt;- 1 to 2
+      j &lt;- 1 to 3
+    } {
+      println(&quot;B&quot; + i + j)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：外层遍历行，内层遍历列。</p>
+<hr>
+<p><strong>练习 5</strong>：用 <code>until</code> 输出 0 到 4。</p>
+<p><strong>考查知识点</strong>：until、区间边界</p>
+<p><strong>参考答案</strong>：</p>
+<pre><code class="language-scala">object UntilDemo {
+  def main(args: Array[String]): Unit = {
+    for (i &lt;- 0 until 5) {
+      println(i)
+    }
+  }
+}
+</code></pre>
+<p><strong>解题思路</strong>：<code>0 until 5</code> 会输出 0、1、2、3、4。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 第五课——表达式与 for 循环
+├── 表达式思维
+│   ├── 表达式有值
+│   └── 值可以赋给变量
+├── 模块化编程
+│   ├── Block 中写计算过程
+│   └── 最后一行返回结果
+├── for 循环
+│   ├── 生成器 `&lt;-`
+│   ├── range 范围遍历
+│   └── 简洁的循环写法
+├── 二维遍历
+│   ├── 行变量 i
+│   └── 列变量 j
+├── 区间
+│   ├── to（包含终点）
+│   └── until（不包含终点）
+└── 职业发展
+    ├── AI / 智能体
+    ├── 数据架构师
+    └── 算法工程师
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>scala-05-expression-for-loop</code></li>
+<li><strong>建议课程标题</strong>：Scala 表达式、for 循环与二维遍历基础</li>
+<li><strong>建议章节</strong>：Scala 流程控制</li>
+<li><strong>建议标签</strong>：表达式、Block、for、range、二维遍历、区间、职业发展</li>
+<li><strong>适合放入 summary 的内容</strong>：6 条课堂摘要</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：6 个知识点</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：5 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：8 组概念-解释</li>
+<li><strong>适合放入 flow 的内容</strong>：6 步 if/Block 流程</li>
+<li><strong>适合放入 exercises 的内容</strong>：5 道课后练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：5 条课后总结</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li><p>本节课的核心是帮你建立 <strong>Scala 表达式有值</strong> 的思维，这会直接影响你以后理解 if、Block 和 for 推导式。</p>
+</li>
+<li><p>学习 Scala 时要特别注意“把计算过程写成一个块，然后直接返回结果”的写法——这就是 Scala 很强的简洁性来源。</p>
+</li>
+<li><p>通过本节课，你应该能写出基本的 for 循环，也能理解二维循环在矩阵和数据遍历中的作用。</p>
+</li>
+<li><p>职业部分虽然看起来离代码远，但其实很重要：编程、数学、数据思维会决定你以后能否进入更有价值的岗位。</p>
+</li>
+<li><p>课后建议多练习：把 Java 里的题目改写成 Scala 版本，尤其是表达式、for 循环、二维遍历这三类题，多写几遍就能看出差异。</p>
+</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-03-05-part-2.html"><span>上一篇</span><strong>Scala语句表达式与循环入门</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-03-10-part-2.html"><span>下一篇</span><strong>Scala生成器守卫与reverse</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

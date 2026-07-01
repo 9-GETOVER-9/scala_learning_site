@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java method overload constructor 课程标题 ：方法分类、构造方法与重载详解 所属章节 ：Java 类与对象 上课日期 ：2025 09 18 知识点标签 ： 实例方法 类方法 static 构造方法 缺省构造 重载 " />
+  <title>方法分类与构造方法重载 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-method-overload-constructor">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 11 课</p>
+      <h1>方法分类与构造方法重载</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">方法分类与构造方法重载</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-method-overload-constructor</code></li>
+<li><strong>课程标题</strong>：方法分类、构造方法与重载详解</li>
+<li><strong>所属章节</strong>：Java 类与对象</li>
+<li><strong>上课日期</strong>：2025-09-18</li>
+<li><strong>知识点标签</strong>：<code>实例方法</code> <code>类方法</code> <code>static</code> <code>构造方法</code> <code>缺省构造</code> <code>重载</code> <code>值传递</code> <code>址传递</code></li>
+<li><strong>难度等级</strong>：进阶</li>
+<li><strong>适合对象</strong>：已理解类基本结构、正在学习方法分类和重载的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课深入讲解了方法的两大分类（实例方法/类方法）、构造方法的缺省机制与重载概念（一同三不同），以及参数传值的两种方式（值传递与址传递）。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先明确了方法由方法头（header）和方法体（body）两部分构成，返回值类型由 return 的值的类型决定。
+2. 课堂中重点讲解了实例方法与类方法的区别——无 static 的是实例方法（由对象调用），有 static 的是类方法（由类名调用）。
+3. 老师通过&quot;同一个模特换不同衣服走 T 台&quot;的生动类比，帮助理解构造方法的重载（Overload）——名称相同，参数列表不同（个数、类型、顺序）。
+4. 本节课还讲解了缺省构造方法——即使程序员不写，系统也会自动生成一个无参的构造方法来实例化对象。
+5. 最后通过&quot;子晴和高子晴&quot;的类比，深入区分了值传递（传副本，互不影响）和址传递（传地址，一处变处处变）。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能说出方法的两大分类——实例方法（无 static，对象调用）和类方法（有 static，类名调用）。
+2. 能写出构造方法，并理解构造方法的三个特点：名称与类名相同、无返回值类型、在创建对象时自动调用。
+3. 理解缺省构造方法的概念——程序员不写时系统自动提供，不写时也能 new 对象。
+4. 能解释方法重载（Overload）的含义：同一类中方法名相同、参数列表不同（个数/类型/顺序——&quot;一同三不同&quot;）。
+5. 能区分值传递（基本类型传副本）和址传递（引用类型传地址），并举例说明。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：实例方法与类方法</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中的方法根据是否有 <code>static</code> 修饰分为两类：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>修饰符</th>
+<th>由谁调用</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>实例方法</strong></td>
+<td>无 static</td>
+<td>对象调用</td>
+<td>可以先有类，等对象创建出来再调用</td>
+</tr>
+<tr>
+<td><strong>类方法</strong></td>
+<td>有 static</td>
+<td>类名直接调用</td>
+<td>&quot;在对象生成之前就存在了&quot;，类加载时就创建</td>
+</tr>
+</tbody></table>
+<h5>为什么重要？</h5>
+<p>理解两者的区别是后续学习 static 关键字、单例模式、工具类设计的基础。用错了调用方式代码会编译报错。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师反复强调：</p>
+<ul>
+<li>&quot;没有 static 的就是实例方法——用实例（对象）来调用。有 static 的就是类方法——用类名来调用。&quot;</li>
+<li>&quot;类方法是在对象生成之前就存在的。类体结构一写好，类方法就已经创建完了。&quot;</li>
+<li>为什么实例变量不能调用类方法？因为&quot;先有类，再 new 出对象。类方法在对象之前就存在了，你总不能让还没出生的对象去做事情吧？&quot;</li>
+</ul>
+<h5>基本语法</h5>
+<pre><code class="language-java">public class MyClass {
+    // 实例方法——无 static，由对象调用
+    public void instanceMethod() {
+        System.out.println(&quot;需要对象才能调用&quot;);
+    }
+
+    // 类方法——有 static，由类名调用
+    public static void classMethod() {
+        System.out.println(&quot;直接由类名调用&quot;);
+    }
+}
+
+// 调用方式
+MyClass obj = new MyClass();
+obj.instanceMethod();           // 对象调用实例方法
+MyClass.classMethod();          // 类名调用类方法
+</code></pre>
+<hr>
+<h4>知识点 2：构造方法的特点与缺省构造方法</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>构造方法</strong>是创建对象时自动调用的特殊方法。它有三个关键特征：</p>
+<ol>
+<li><strong>名称必须与类名完全相同</strong></li>
+<li><strong>没有返回值类型</strong>（连 void 也不写）</li>
+<li><strong>在 new 对象时自动调用</strong>，用于初始化对象</li>
+</ol>
+<p><strong>缺省构造方法</strong>：如果程序员没有手动写任何构造方法，Java 会自动提供一个无参数的构造方法（方法体为空），保证 <code>new 类名()</code> 能够执行。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师解释缺省构造方法：&quot;你不写它，当你创建对象的时候，Java 的 library（类库）会自动创建一个缺省的构造方法。参数列表是空的，body 里面也是空的。然后给对象进行实例化。&quot;</p>
+<p>对于有参构造方法，老师强调：&quot;参数列表决定了构造出什么样的对象。就像龙有九子，各有不同——为什么不同？因为参数不一样。虽然都是 people 的对象，但对象的特征不一样。&quot;</p>
+<hr>
+<h4>知识点 3：方法重载（Overload）</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>重载（Overload）</strong> 是指在<strong>同一个类</strong>中，允许多个方法拥有<strong>相同的名字</strong>，但<strong>参数列表必须不同</strong>。参数列表的不同体现在三个方面——<strong>个数、类型、顺序</strong>。简称&quot;<strong>一同三不同</strong>&quot;。</p>
+<ul>
+<li><strong>一同</strong>：方法名相同</li>
+<li><strong>三不同</strong>：参数个数不同 / 参数类型不同 / 参数顺序不同</li>
+</ul>
+<h5>为什么重要？</h5>
+<p>重载让同一个方法名可以根据不同的参数执行不同的逻辑。比如 <code>System.out.println()</code> 可以接受 int、double、String 等各种类型的参数——这就是重载。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用赵本山小品中的&quot;T 台走秀&quot;作类比：</p>
+<ul>
+<li>&quot;T 台的人（模特）是一样的，谁在变？衣服在变。人不变，参数变。&quot;</li>
+<li>person 有三个构造方法——第一个没有参数（穿睡衣），第二个有一个参数（穿内衣/春天），第三个有两个参数（穿大衣/冬天）。</li>
+<li>&quot;人一直没变，变的是身上的衣服——衣服就是参数。&quot;</li>
+</ul>
+<p>老师还特别强调术语——&quot;重载（overload），不是重写（override）。两者都是多态的体现，但重载发生在一个类体内部。&quot;</p>
+<hr>
+<h4>知识点 4：值传递 vs 址传递</h4>
+<h5>这个知识点是什么？</h5>
+<table>
+<thead>
+<tr>
+<th>传递方式</th>
+<th>适用类型</th>
+<th>特点</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>值传递</strong></td>
+<td>基本数据类型（int、double等）</td>
+<td>传递的是<strong>值的副本</strong>，修改副本不影响原值</td>
+<td>把文件复印一份给别人，别人改了复印件不影响原件</td>
+</tr>
+<tr>
+<td><strong>址传递</strong></td>
+<td>引用类型（数组、对象、String等）</td>
+<td>传递的是<strong>地址</strong>，多个引用指向同一块内存，一处变处处变</td>
+<td>把文件的位置（地址）告诉别人，别人直接改原件</td>
+</tr>
+</tbody></table>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;子晴和高子晴&quot;来解释：</p>
+<ul>
+<li>&quot;高子晴有一个小名叫子晴。子晴和高子晴都是同一个人。明年子晴长了一岁，高子晴也长了一岁——因为两个名字指向的是同一块地址。这就叫址传递。&quot;</li>
+<li>&quot;值传递就像两个人交换位置——你搬你的凳子，我搬我的凳子。互不影响。&quot;</li>
+</ul>
+<p><strong>三类传地址的数据</strong>：①引用 ②数组 ③对象。</p>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实例方法</td>
+<td>类方法</td>
+<td>无 static（对象调用） / 有 static（类名调用）</td>
+</tr>
+<tr>
+<td>构造方法</td>
+<td>普通方法</td>
+<td>无返回值类型、名与类同名、自动调用 / 有返回值类型、手动调用</td>
+</tr>
+<tr>
+<td>重载（Overload）</td>
+<td>重写（Override）</td>
+<td>同一类内、方法名同参数不同 / 父子类之间、方法签名完全相同</td>
+</tr>
+<tr>
+<td>值传递</td>
+<td>址传递</td>
+<td>基本类型传副本互不影响 / 引用类型传地址一处变处处变</td>
+</tr>
+<tr>
+<td>实参</td>
+<td>形参</td>
+<td>调用时传的具体值 / 定义时的占位变量</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：构造方法重载</h4>
+<pre><code class="language-java">public class Person {
+    String name;
+    int age;
+
+    // 构造方法1：无参（缺省）
+    public Person() {
+        name = &quot;未命名&quot;;
+        age = 0;
+    }
+
+    // 构造方法2：一个参数（重载）
+    public Person(String name) {
+        this.name = name;
+        this.age = 0;
+    }
+
+    // 构造方法3：两个参数（重载）
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void show() {
+        System.out.println(&quot;姓名：&quot; + name + &quot;，年龄：&quot; + age);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person();               // 调用构造方法1
+        Person p2 = new Person(&quot;Tom&quot;);          // 调用构造方法2
+        Person p3 = new Person(&quot;Alice&quot;, 20);    // 调用构造方法3
+
+        p1.show();  // 姓名：未命名，年龄：0
+        p2.show();  // 姓名：Tom，年龄：0
+        p3.show();  // 姓名：Alice，年龄：20
+    }
+}
+</code></pre>
+<h4>示例 2：实例方法与类方法的区别</h4>
+<pre><code class="language-java">public class Counter {
+    int instanceCount = 0;        // 实例变量
+    static int classCount = 0;    // 类变量（static）
+
+    // 实例方法
+    public void addInstance() {
+        instanceCount++;
+    }
+
+    // 类方法
+    public static void addClass() {
+        classCount++;
+        // instanceCount++;  ← 错误！类方法不能访问实例变量
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Counter.addClass();           // 类名调用类方法
+        System.out.println(Counter.classCount);  // 1
+
+        Counter c = new Counter();
+        c.addInstance();              // 对象调用实例方法
+        System.out.println(c.instanceCount);     // 1
+    }
+}
+</code></pre>
+<h4>示例 3：值传递与址传递对比</h4>
+<pre><code class="language-java">public class PassDemo {
+    // 值传递——基本类型
+    public static void changeValue(int x) {
+        x = 100;   // 只改了副本
+    }
+
+    // 址传递——数组（引用类型）
+    public static void changeArray(int[] arr) {
+        arr[0] = 100;  // 改了原数组！
+    }
+
+    public static void main(String[] args) {
+        // 值传递：原值不变
+        int a = 10;
+        changeValue(a);
+        System.out.println(&quot;值传递后 a = &quot; + a);   // 10（没变）
+
+        // 址传递：原数组被修改
+        int[] arr = {10, 20, 30};
+        changeArray(arr);
+        System.out.println(&quot;址传递后 arr[0] = &quot; + arr[0]);  // 100（变了！）
+    }
+}
+</code></pre>
+<hr>
+<h3>7. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：类方法（static）中访问实例变量
+错误：在 static 方法中直接写 this.name 或直接访问非 static 变量——编译错误。
+原因：类方法在对象创建前就存在，此时实例变量还没有内存空间。
+
+易错点 2：构造方法写了返回值类型
+错误：public void Person() { }——这已经不是构造方法了，变成普通方法了。
+正确：public Person() { }——构造方法没有返回值类型，连 void 都不能写。
+
+易错点 3：重载只改返回值类型不改参数
+错误：两个方法都是 public void test() 和 public int test()——参数相同只改返回值类型不叫重载，编译错误！
+正确：重载必须改参数列表（个数/类型/顺序）。
+
+易错点 4：址传递中意外修改了原始数据
+场景：把数组传给方法，在方法里修改了数组，方法外面数组也跟着变了——初学者常以为传的是副本。
+</code></pre>
+<hr>
+<h3>8. 小测验题目</h3>
+<pre><code class="language-text">题目 1：以下哪个是构造方法的正确声明？
+A. public void Person() { }
+B. public Person() { }
+C. public static Person() { }
+D. public int Person() { }
+正确答案：B（构造方法无返回值类型，连 void 也不能写）
+
+题目 2：方法重载的&quot;一同三不同&quot;中，&quot;三不同&quot;指的是？
+A. 返回值不同、方法名不同、参数不同
+B. 参数个数不同、参数类型不同、参数顺序不同
+C. 修饰符不同、返回值不同、方法体不同
+D. 类不同、包不同、方法名不同
+正确答案：B
+
+题目 3：以下关于 static 方法的说法正确的是？
+A. static 方法必须由对象调用
+B. static 方法可以访问实例变量
+C. static 方法属于类，由类名直接调用
+D. static 方法中可以使用 this
+正确答案：C
+
+题目 4：值传递和址传递的区别是？
+A. 值传递传地址，址传递传值
+B. 值传递传副本（互不影响），址传递传地址（共享修改）
+C. 两者没有区别
+D. 值传递只用于对象，址传递只用于基本类型
+正确答案：B
+
+题目 5：以下代码的输出是？
+int x = 5;
+changeValue(x);
+System.out.println(x);
+// changeValue方法：void changeValue(int n) { n = 100; }
+
+A. 5
+B. 100
+C. 编译错误
+正确答案：A（int 是基本类型，值传递，传的是副本，原值不变）
+</code></pre>
+<hr>
+<h3>9. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 实例方法 —— 无 static 修饰，必须由对象来调用
+2. 类方法 —— 有 static 修饰，直接用类名调用
+3. 构造方法 —— 与类同名、无返回值、创建对象时自动调用
+4. 缺省构造方法 —— 程序员不写时系统自动生成的无参构造方法
+5. 重载（Overload） —— 同一类中方法名相同、参数列表不同（一同三不同）
+6. 值传递 —— 基本类型参数传递，传的是副本，互不影响
+7. 址传递 —— 引用类型参数传递，传的是地址，一处变处处变
+8. 形参 —— 方法定义时声明的占位变量
+9. 实参 —— 方法调用时传入的具体数值
+10. static —— 关键字，修饰的成员属于类而非对象
+</code></pre>
+<hr>
+<h3>10. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是理解方法的两大分类（实例方法/类方法）、构造方法的特性与重载机制、以及参数传递的两种方式（值/址）。
+2. 学习方法时要特别注意 static 的用法——实例方法/变量属于对象，类方法/变量属于类本身（所有对象共享）。
+3. 重载是后续学习多态的基础——&quot;一同三不同&quot;（名称相同，个数/类型/顺序不同）是区分重载和其他概念的关键。
+4. 值传递和址传递的区别会影响方法内部修改是否影响外部数据——基本类型安全，引用类型&quot;一处变处处变&quot;。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-10.html"><span>上一篇</span><strong>类的定义结构与访问器详解</strong></a><a class="article-pager-link next" rel="next" href="java-12.html"><span>下一篇</span><strong>类与对象综合复习</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

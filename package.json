@@ -1,0 +1,12 @@
+{
+  "name": "scala-learning-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "build:summaries": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-summaries.ps1"
+  },
+  "devDependencies": {
+    "marked": "^15.0.12"
+  }
+}

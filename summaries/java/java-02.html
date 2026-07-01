@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java oop basics keywords 课程标题 ：Java 编程基础及面向对象入门 所属章节 ：Java 面向对象基础 上课日期 ：2025 08 25 知识点标签 ： 面向对象 类与对象 构造方法 继承 关键字 标识符 布尔类型 学习" />
+  <title>Java编程基础及面向对象入门 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-oop-basics-keywords">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 02 课</p>
+      <h1>Java编程基础及面向对象入门</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Java编程基础及面向对象入门</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-oop-basics-keywords</code></li>
+<li><strong>课程标题</strong>：Java 编程基础及面向对象入门</li>
+<li><strong>所属章节</strong>：Java 面向对象基础</li>
+<li><strong>上课日期</strong>：2025-08-25</li>
+<li><strong>知识点标签</strong>：<code>面向对象</code> <code>类与对象</code> <code>构造方法</code> <code>继承</code> <code>关键字</code> <code>标识符</code> <code>布尔类型</code> <code>学习方法</code></li>
+<li><strong>难度等级</strong>：入门</li>
+<li><strong>适合对象</strong>：已了解 Hello World 程序结构、正在学习 Java 面向对象思想的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课正式进入 Java 面向对象编程，重点讲解类、对象、构造方法和继承的概念，同时介绍了标识符、关键字、布尔类型等语言基础，并分享了编程学习方法。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先深入讲解了 new 关键字和构造方法的作用——构造方法决定了对象&quot;带着什么东西来到这个世界&quot;。
+2. 课堂中重点说明了类（class）的组成：属性（描述&quot;有什么&quot;）和方法（描述&quot;能做什么&quot;），以及对象如何调用它们。
+3. 老师通过&quot;父亲和儿子&quot;的生动类比，帮助理解继承关系——子类不需要重复定义父类已有的属性和方法。
+4. 本节课还讲解了标识符的定义规则（由字母、下划线、美元符号、数字组成，首字符不能是数字）和关键字的概念（不能用作标识符）。
+5. 最后讲解了布尔（boolean）类型，它只有 true 和 false 两个值，并复习了 System.out.println 的运行方式和常见数据类型。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 理解面向对象编程（OOP）中类、对象、属性、方法的关系。
+2. 能够解释 new 关键字和构造方法在创建对象时的作用。
+3. 能够说明什么是继承，以及继承如何实现代码复用（reusable）。
+4. 能区分标识符和关键字，并遵守标识符的命名规则。
+5. 能说出 boolean 类型的两个取值（true / false）及其使用场景。
+6. 能说出 int、double、float、char、String、boolean 等常见数据类型的基本用途。
+7. 能独立运行一个 Hello World 程序（至少知道三种运行方式）。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：new 关键字与构造方法</h4>
+<h5>这个知识点是什么？</h5>
+<p>当我们想创建一个对象时，使用 <code>new 类名()</code> 的语法。其中 <code>new</code> 是 Java 的关键字，负责<strong>向内存申请空间</strong>来存放这个对象。<code>类名()</code> 叫做<strong>构造方法</strong>，负责<strong>初始化</strong>这个对象，决定这个对象被创建时&quot;带着什么东西&quot;。</p>
+<h5>为什么要学它？</h5>
+<p>不写 <code>new</code>，对象就不会被创建（没有分配内存）。不理解构造方法，就无法理解对象的初始化过程。这是面向对象编程最基本、最重要的语法。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">类名 对象名 = new 类名();        // 无参构造
+类名 对象名 = new 类名(参数);    // 带参构造
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用了非常生动的&quot;出生&quot;比喻来解释构造方法：</p>
+<ul>
+<li><strong>new</strong>：就像&quot;我要声明一个 student 对象，你得给我分配一个空间&quot;。</li>
+<li><strong>构造方法</strong>：就像人出生前的&quot;孕育过程&quot;。&quot;你来到这个世界之前要孕育，那孕育的东西就称之为构造方法。构造一个 template（模板），那么这个 template 就称之为一个 object（对象）。&quot;</li>
+</ul>
+<p>老师还打了个比方：所有人都有头发、一对眼睛、一个鼻子、一张嘴——这些&quot;每个人生来都带着的东西&quot;就是构造方法中定义的。反过来，如果是后天获得的（比如学会了编程），那就不属于构造方法的内容。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 创建对象时忘记写 new 关键字，写成 Student stu = Student();（语法错误）。
+2. 忘记写构造方法后面的括号 ()，写成 new Student（语法错误）。
+3. 不理解 new 和构造方法的区别：new 负责分配空间，构造方法负责初始化。
+4. 以为每个类都必须手动写构造方法——其实 Java 会自动提供一个默认的无参构造方法。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class Student {
+    String name;
+    int age;
+
+    // 这是构造方法（无参的）
+    public Student() {
+        name = &quot;未命名&quot;;      // 每个学生对象创建时，name 默认为&quot;未命名&quot;
+        age = 0;              // age 默认为 0
+    }
+
+    public void introduce() {
+        System.out.println(&quot;我叫&quot; + name + &quot;，今年&quot; + age + &quot;岁。&quot;);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student stu = new Student();   // new 分配空间，Student() 构造方法初始化
+        stu.introduce();                // 输出：我叫未命名，今年0岁。
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. new Student() 做了两件事：① new 在内存中分配空间；② Student() 构造方法把 name 设为&quot;未命名&quot;，age 设为 0。
+2. 创建对象时必须同时做这两步——光有空间没有初始化，或者光有初始化没有空间，都不行。
+3. 构造方法的名字必须和类名完全一样（这里是 Student）。
+</code></pre>
+<hr>
+<h4>知识点 2：类的组成——属性与方法</h4>
+<h5>这个知识点是什么？</h5>
+<p>一个类（class）由两部分组成：<strong>属性</strong>（也叫成员变量/字段，描述这个类&quot;有什么&quot;）和<strong>方法</strong>（也叫函数，描述这个类&quot;能做什么&quot;）。对象可以调用类中定义的属性和方法。</p>
+<h5>为什么要学它？</h5>
+<p>理解类的组成是面向对象编程的基础。以后写的每一个 Java 类，本质上都是在定义属性和方法。分清楚&quot;是什么&quot;（属性）和&quot;做什么&quot;（方法），是设计好类的关键。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">public class 类名 {
+    // 属性：描述特征
+    数据类型 属性名;
+
+    // 方法：描述行为
+    public 返回值类型 方法名(参数) {
+        // 方法体
+    }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;班长和同学&quot;的场景来解释：</p>
+<ul>
+<li>班长进教室后可以<strong>点名</strong>、<strong>下达任务</strong>、<strong>传递信息</strong>、<strong>接收反馈</strong>——这些能力就是班长这个类中定义的方法。</li>
+<li>其他普通同学做不到这些事，因为他们所属的类不同——&quot;普通学生有普通学生的类，班干部有班干部的类&quot;。</li>
+<li>类的属性和方法是<strong>提前定义</strong>好的——&quot;在定义这个类的时候，就将这些方法放到了框架里边&quot;。</li>
+</ul>
+<p>老师还总结了面向对象的核心思维方式：<strong>对象能做什么事，取决于它所属的类中定义了哪些方法。</strong></p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把属性和方法的概念搞反——属性是名词（有什么），方法是动词（能做什么）。
+2. 以为所有的对象都能做任何事——对象的能力受它所属类的限制。
+3. 在方法外面直接写执行语句——执行语句必须写在方法体里面。
+4. 属性名和方法名重名——虽然可以但非常不推荐。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class Dog {
+    // ========== 属性 ==========
+    String name;      // 名字
+    String breed;     // 品种
+    int age;          // 年龄
+
+    // ========== 方法 ==========
+    public void bark() {
+        System.out.println(name + &quot;：汪汪！&quot;);
+    }
+
+    public void eat(String food) {
+        System.out.println(name + &quot;正在吃&quot; + food);
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. name、breed、age 是属性——回答&quot;狗有什么&quot;（有名字、有品种、有年龄）。
+2. bark()、eat()、getAge() 是方法——回答&quot;狗能做什么&quot;（能叫、能吃、能获取年龄）。
+3. 每个方法定义时都有返回值类型（void 表示没有返回值，int 表示返回整数）。
+4. 方法名后面括号里可以定义参数（如 eat 方法的 food）。
+</code></pre>
+<hr>
+<h4>知识点 3：继承——面向对象的三大特征之一</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>继承</strong>是面向对象编程的核心机制之一。一个类（子类）可以通过继承获得另一个类（父类）的属性和方法，而不需要重复定义。使用 <code>extends</code> 关键字实现继承。</p>
+<h5>为什么要学它？</h5>
+<p>继承的最核心价值是<strong>避免重复</strong>（reusable）。如果多个类有共同的属性和方法，可以把这些共同的部分提取到父类中，子类直接继承使用即可。这不仅减少了代码量，也让代码结构更清晰、更易维护。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 父类（基类）
+public class 父类名 {
+    // 公共的属性和方法
+}
+
+// 子类（派生类）继承父类
+public class 子类名 extends 父类名 {
+    // 子类独有的属性和方法
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;父亲和儿子&quot;的家庭关系来类比继承，这是本节课最精彩的比喻：</p>
+<ul>
+<li><strong>父类（Student）</strong>：就像所有学生的共同特征——有鼻子、有眼睛、有 name、有 age、有 grade 等属性，以及 speak（说话）、walk（走路）、run（跑步）、eat（吃饭）等方法。</li>
+<li><strong>子类（普通学生 / 学生会成员）</strong>：这两个都是学生，但又有各自的特殊性。&quot;他们不用再自己创造鼻子、眼睛、说话、行走、跑步、吃饭这些东西了，<strong>可以伸手向父亲去拿</strong>。这称之为<strong>继承过来</strong>。&quot;</li>
+</ul>
+<p>老师还解释了为什么要用继承——&quot;为了避免重复。不同的人要遵循同一个规则去做这个事情&quot;。在团队开发中，继承确保了代码的一致性和可维护性。</p>
+<p>老师特别提到：继承也是 Java 的&quot;三大特征&quot;之一（另外两个是封装和多态，后续课程会讲）。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 以为子类只能有一个父类——Java 中一个类只能继承一个父类（单继承）。
+2. 把 has-a（拥有）关系误认为是继承——比如&quot;汽车有发动机&quot;，应该用组合而非继承。
+3. 子类和父类之间用 is-a（是一个）关系来判断：子类 is-a 父类（学生会成员 是一个 学生）。
+4. 忘记 Java 中所有类默认继承 Object 类——即使不写 extends，类也有一个隐藏的父类。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">// 父类：定义所有学生的共同特征
+public class Student {
+    String name;
+    int age;
+
+    public void speak() {
+        System.out.println(name + &quot;正在发言&quot;);
+    }
+
+    public void walk() {
+        System.out.println(name + &quot;在走路&quot;);
+    }
+}
+
+// 子类：学生会成员（继承 Student）
+public class CommitteeMember extends Student {
+    String position;    // 职务（子类独有的属性）
+
+    public void organize() {
+        System.out.println(name + &quot;（&quot; + position + &quot;）正在组织活动&quot;);
+    }
+}
+
+// 测试
+public class Main {
+    public static void main(String[] args) {
+        CommitteeMember cm = new CommitteeMember();
+        cm.name = &quot;李四&quot;;           // 继承自父类的属性
+        cm.age = 20;                // 继承自父类的属性
+        cm.position = &quot;文艺部长&quot;;    // 子类自己的属性
+
+        cm.speak();                 // 继承自父类的方法
+        cm.organize();              // 子类自己的方法
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. CommitteeMember 使用 extends Student 继承了 Student 类。
+2. cm.name 和 cm.age 虽然定义在 Student 类中，但 CommitteeMember 通过继承获得了它们。
+3. cm.speak() 和 cm.walk() 也是从父类继承来的，不用在子类中再写一遍。
+4. position 属性和 organize() 方法是 CommitteeMember 独有的，父类没有。
+5. 如果不使用继承，CommitteeMember 就需要把 name、age、speak、walk 全部重写一遍——继承避免了这些重复。
+</code></pre>
+<hr>
+<h4>知识点 4：标识符（Identifier）</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>标识符</strong>就是我们在 Java 中自己定义的各种&quot;名字&quot;——包括类名、变量名、方法名、类型名、数组名、文件名等。凡是你可以自己起名字的东西，都叫标识符。</p>
+<p>简单记：<strong>标识符就是一个名称</strong>。</p>
+<h5>为什么要学它？</h5>
+<p>命名是编程中最频繁的操作之一。不了解标识符的规则，就会写出不合法的名字导致编译错误。而且，规范的命名是代码可读性的基础。</p>
+<h5>基本语法</h5>
+<p><strong>标识符的命名规则（需要记住）：</strong></p>
+<ol>
+<li>可以由<strong>字母</strong>、**下划线 _ **、<strong>美元符号 $</strong>、<strong>数字</strong> 组成（四大类）。</li>
+<li><strong>第一个字符不能是数字</strong>。</li>
+<li>长度没有限制。</li>
+<li><strong>不能是关键字</strong>（如 int、class、public 等）。</li>
+<li>区分大小写（Name 和 name 是两个不同的标识符）。</li>
+</ol>
+<h5>课堂中的理解方式</h5>
+<p>老师通过具体的例子让学生判断：</p>
+<ul>
+<li><code>int 1a;</code> → ❌ 第一个字符是数字，不可以。</li>
+<li><code>int a1;</code> → ✅ 第一个是字母，后面是数字，可以。</li>
+<li><code>int _name;</code> → ✅ 下划线开头可以。</li>
+<li><code>int $price;</code> → ✅ 美元符号开头可以。</li>
+</ul>
+<p>老师还特别强调，&quot;类名、变量名、方法名、类型名、数组名、文件名——这些都是你自己可以自定义的，都用标识符来框起来&quot;。标识符和关键字的关系是：<strong>关键字不能用做标识符</strong>。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 变量名以数字开头（如 int 1score;）。
+2. 变量名中包含空格（如 int my score;）。
+3. 把关键字当作标识符使用（如 int class; 是错的，class 是关键字）。
+4. 变量名用中文（虽然技术上有时可以不报错，但强烈不推荐）。
+5. 变量名无意义（如 int a, b, c;），降低了代码可读性。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class IdentifierDemo {
+    public static void main(String[] args) {
+        // ✅ 合法的标识符
+        int age = 18;            // 字母组成
+        int student_age = 20;    // 字母 + 下划线
+        int $price = 100;        // 美元符号开头
+        int score1 = 90;         // 字母 + 数字
+        int _count = 5;          // 下划线开头
+
+        // ❌ 不合法的标识符（以下是错误示例，实际无法编译）
+        // int 1score = 90;      // 错误：数字开头
+        // int my score = 90;    // 错误：包含空格
+        // int class = 10;       // 错误：class 是关键字
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. age、student_age、$price、score1、_count 都满足标识符规则。
+2. 1score 以数字开头，违反&quot;首字符不能是数字&quot;的规则。
+3. my score 中间有空格，空格是分隔符，不能出现在标识符中。
+4. class 是 Java 关键字，有特殊用途，不能用作标识符。
+</code></pre>
+<hr>
+<h4>知识点 5：关键字（Keyword）</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>关键字</strong>是 Java 语言中预先定义好的、具有<strong>特定含义和用途</strong>的单词。这些单词已经被 Java &quot;征用&quot;了，程序员不能再把它们当作变量名、方法名、类名等标识符来使用。</p>
+<h5>为什么要学它？</h5>
+<p>知道哪些是关键字，才不会把它们误用为标识符。同时，认识关键字也是阅读和理解 Java 代码的基础——看到 <code>class</code> 就知道在定义类，看到 <code>int</code> 就知道在声明整数。</p>
+<h5>基本语法</h5>
+<p>（关键字由 Java 语言规定，无需定义，直接使用即可。）</p>
+<p><strong>常见关键字分类：</strong></p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>常见关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据类型</td>
+<td><code>int</code> <code>double</code> <code>float</code> <code>char</code> <code>boolean</code> <code>byte</code> <code>short</code> <code>long</code></td>
+</tr>
+<tr>
+<td>流程控制</td>
+<td><code>if</code> <code>else</code> <code>for</code> <code>while</code> <code>do</code> <code>switch</code> <code>case</code> <code>break</code> <code>continue</code></td>
+</tr>
+<tr>
+<td>访问控制</td>
+<td><code>public</code> <code>private</code> <code>protected</code></td>
+</tr>
+<tr>
+<td>类相关</td>
+<td><code>class</code> <code>new</code> <code>extends</code> <code>implements</code> <code>this</code> <code>super</code></td>
+</tr>
+<tr>
+<td>其他</td>
+<td><code>static</code> <code>void</code> <code>return</code> <code>true</code> <code>false</code> <code>null</code> <code>try</code> <code>catch</code></td>
+</tr>
+</tbody></table>
+<h5>课堂中的理解方式</h5>
+<p>老师在课堂上逐个提问学生&quot;你知道哪些关键字？&quot;，学生的回答包括：<code>for</code>、<code>while</code>、<code>if</code>、<code>int</code>、<code>else</code>、<code>do</code>、<code>break</code>、<code>continue</code>、<code>try</code>、<code>long</code> 等等。</p>
+<p>老师特别强调了关键字的本质特征——&quot;它们不能做什么？不能作为<strong>变量名和函数名</strong>（标识符）&quot;。换句话说，关键字有特定的用途和范围（range），你不能&quot;抢来&quot;自己用。</p>
+<p>老师还指出，关键字通常是&quot;成对出现的&quot;——比如 <code>if</code> 对应 <code>else</code>，<code>break</code> 对应 <code>continue</code>，<code>while</code> 对应 <code>do while</code>。把这些成对的关键字放在一起记忆会更高效。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 用关键字当变量名：int class = 10;（class 是关键字，不能做变量名）。
+2. 用关键字当方法名：public void int() { }（int 是关键字，不能做方法名）。
+3. true、false、null 也是关键字（或称保留字），不能用作标识符。
+4. 记不住哪些是关键字——建议先把常用的十几个记住，用到新关键字时再查阅。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class KeywordDemo {
+    public static void main(String[] args) {
+        // ✅ 关键字按正确用途使用
+        int score = 100;          // int 是关键字，用来声明整数变量
+        boolean isPass = true;    // boolean 是关键字，true 是关键字
+        if (score &gt;= 60) {        // if 是关键字
+            System.out.println(&quot;及格&quot;);
+        } else {                  // else 是关键字
+            System.out.println(&quot;不及格&quot;);
+        }
+
+        // ❌ 下面都是错误用法（无法编译）
+        // int if = 10;           // 错误：if 是关键字，不能做变量名
+        // String class = &quot;一班&quot;;  // 错误：class 是关键字
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. int、boolean、true、if、else 都是 Java 关键字，它们有各自的语法作用。
+2. 不能把任何关键字用作变量名或方法名。
+3. 所有关键字都是小写的（Java 区分大小写，但关键字全是小写）。
+</code></pre>
+<hr>
+<h4>知识点 6：布尔类型（boolean）</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>boolean</strong> 是 Java 中的<strong>逻辑类型</strong>。它只有两个可能的取值：<strong>true</strong>（真）和 <strong>false</strong>（假）。布尔类型通常用于条件判断中。</p>
+<h5>为什么要学它？</h5>
+<p>程序中大量需要&quot;是/否&quot;&quot;对/错&quot;&quot;真/假&quot;的判断——比如&quot;分数是否及格&quot;&quot;用户是否登录&quot;&quot;数据是否为空&quot;。boolean 类型就是用来处理这些二元判断的基础工具。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">boolean 变量名 = true;   // 或者 false
+
+// 典型用法：条件判断
+if (布尔表达式) {
+    // 条件为 true 时执行
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师指出 boolean 类型有两个确定的值且<strong>只有两个</strong>：&quot;要不就真，要不就假&quot;。同时还提到 <strong>true 和 false 本身也是 Java 的关键字</strong>，不能用作标识符。</p>
+<p>老师回顾了 Python 中的类似概念——在 Python 中 condition（条件）为 True 就执行 statement，为 False 就不执行。Java 中的道理完全一样，只是写法是<strong>全小写</strong>的 true 和 false（Python 中是首字母大写的 True 和 False）。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把 true / false 写成 True / False（Java 中必须全部小写）。
+2. 给 boolean 变量赋其他值，如 boolean b = 1;（Java 不支持，只能用 true 或 false）。
+3. 混淆赋值 = 和比较 ==：if (isPass = true) 是把 true 赋给 isPass，条件永远成立；应该用 if (isPass == true) 或更简洁地 if (isPass)。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class BooleanDemo {
+    public static void main(String[] args) {
+        boolean isRaining = true;     // 下雨了
+        boolean hasUmbrella = false;  // 没带伞
+
+        if (isRaining &amp;&amp; !hasUmbrella) {
+            System.out.println(&quot;下雨了还没带伞，等雨停吧。&quot;);
+        }
+
+        if (!isRaining) {
+            System.out.println(&quot;没下雨，可以出门。&quot;);
+        }
+
+        // 直接输出 boolean 值
+        System.out.println(&quot;isRaining = &quot; + isRaining);   // true
+        System.out.println(&quot;hasUmbrella = &quot; + hasUmbrella); // false
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. boolean isRaining = true; 声明一个布尔变量表示&quot;是否在下雨&quot;，初始值为 true。
+2. if (isRaining &amp;&amp; !hasUmbrella) 中 &amp;&amp; 表示&quot;并且&quot;，! 表示&quot;取反&quot;（!hasUmbrella = true，因为没有伞）。
+3. 只有当 isRaining 为 true 且 hasUmbrella 为 false 时，才输出&quot;下雨了还没带伞&quot;。
+4. System.out.println 可以直接输出 boolean 变量的值，控制台显示 true 或 false。
+</code></pre>
+<hr>
+<h4>知识点 7：常见数据类型概览</h4>
+<h5>这个知识点是什么？</h5>
+<p>Java 中的数据类型分为两大类：<strong>基本数据类型</strong>（8 种）和<strong>引用数据类型</strong>（如类、数组、String 等）。本节课中通过师生问答的方式，复习了 int、float、double、char、boolean、String 等常见类型。</p>
+<h5>为什么要学它？</h5>
+<p>数据类型是 Java 语法的基础。声明变量时必须指定类型，赋值时必须类型匹配。不理解数据类型，后面学习变量、运算、方法参数都会遇到困难。</p>
+<h5>基本语法</h5>
+<pre><code class="language-java">// 常见类型变量声明
+int age = 18;               // 整数
+double price = 9.99;        // 双精度浮点数（小数）
+float weight = 65.5f;       // 单精度浮点数（后面要加 f）
+char grade = &#39;A&#39;;           // 单个字符（用单引号）
+boolean isPass = true;      // 布尔值
+String name = &quot;张三&quot;;        // 字符串（用双引号，String 是引用类型）
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>本节课通过师生互动复习了数据类型。老师问&quot;有哪些数据类型&quot;，学生回答包括：int（整形）、float（浮点型）、boolean（布尔型）、String（字符串）、list（列表——但老师纠正说 Java 中叫 List）、tuple（元组——Java 中不常用）、short、long 等。</p>
+<p>老师还让一个同学说出 true 和 false 是什么——它们&quot;不是值吗？&quot;——其实是 boolean 类型的两个取值。老师特别纠正了&quot;float 包含单精度和双精度&quot;这个不严谨的说法：单精度是 float，双精度是 double，它们是两个不同的类型。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 把 String 当成基本数据类型——String 实际上是引用类型（一个类），首字母大写。
+2. float 类型的值后面必须加 f（如 3.14f），否则会被当作 double 处理。
+3. char 使用单引号 &#39;A&#39;，String 使用双引号 &quot;A&quot;——单个字符的双引号用法是 String 不是 char。
+4. 混淆 short 和 int 的区别——short 占 2 字节，int 占 4 字节，short 的取值范围更小。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class DataTypeDemo {
+    public static void main(String[] args) {
+        // 整数类型
+        int age = 18;               // int：最常用的整数类型，占 4 字节
+        short smallNum = 100;       // short：小整数，占 2 字节
+        long bigNum = 100000L;      // long：大整数，后面加 L
+
+        // 浮点类型
+        float price = 9.99f;        // float：单精度，后面必须加 f
+        double pi = 3.1415926;      // double：双精度，小数默认类型
+
+        // 字符和字符串
+        char grade = &#39;A&#39;;           // char：单字符，单引号
+        String name = &quot;张三&quot;;       // String：字符串，双引号
+
+        // 布尔类型
+        boolean isPass = true;      // boolean：只有 true 或 false
+
+        // 输出
+        System.out.println(&quot;姓名：&quot; + name);
+        System.out.println(&quot;年龄：&quot; + age);
+        System.out.println(&quot;成绩等级：&quot; + grade);
+        System.out.println(&quot;是否及格：&quot; + isPass);
+        System.out.println(&quot;价格：&quot; + price);
+        System.out.println(&quot;圆周率：&quot; + pi);
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. 每种数据类型的声明格式都是：类型 变量名 = 值;
+2. float 后面必须跟 f，这是 Java 的语法规定——如果不加 f，3.14 默认是 double 类型。
+3. long 类型建议后面加 L（小写 l 容易和数字 1 混淆）。
+4. char 用单引号，String 用双引号——这是很容易混淆的地方。
+5. boolean 只有 true 和 false 两个值，不能赋其他内容。
+</code></pre>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类（class）</td>
+<td>对象（object）</td>
+<td>类是模板/类型定义；对象是 new 出来的具体实例</td>
+<td><code>Student</code> 是类；<code>new Student()</code> 是创建对象</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>方法</td>
+<td>属性描述&quot;有什么&quot;（名词）；方法描述&quot;能做什么&quot;（动词）</td>
+<td><code>String name;</code> 是属性；<code>void speak()</code> 是方法</td>
+</tr>
+<tr>
+<td>构造方法</td>
+<td>普通方法</td>
+<td>构造方法在创建对象时自动调用，无返回值；普通方法需要手动调用</td>
+<td><code>public Student() {}</code> vs <code>public void study() {}</code></td>
+</tr>
+<tr>
+<td>标识符</td>
+<td>关键字</td>
+<td>标识符是我们自己起的名字；关键字是 Java 预定义的保留词</td>
+<td><code>age</code> 是标识符；<code>int</code> 是关键字</td>
+</tr>
+<tr>
+<td>true</td>
+<td>false</td>
+<td>布尔类型的两个取值，互斥</td>
+<td><code>boolean b = true;</code> / <code>boolean b = false;</code></td>
+</tr>
+<tr>
+<td>float</td>
+<td>double</td>
+<td>float 单精度（4 字节，后面加 f）；double 双精度（8 字节，小数默认类型）</td>
+<td><code>float f = 3.14f;</code> / <code>double d = 3.14;</code></td>
+</tr>
+<tr>
+<td>char</td>
+<td>String</td>
+<td>char 单字符（单引号）；String 字符串（双引号，是一个类）</td>
+<td><code>char c = &#39;A&#39;;</code> / <code>String s = &quot;ABC&quot;;</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：创建对象并使用构造方法初始化</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">new 关键字、构造方法、类与对象、属性与方法
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class Car {
+    String brand;    // 品牌
+    String color;    // 颜色
+    int speed;       // 速度
+
+    // 构造方法：创建对象时自动调用，完成初始化
+    public Car(String b, String c) {
+        brand = b;
+        color = c;
+        speed = 0;   // 新车速度为 0
+    }
+
+    public void drive() {
+        speed = 60;
+        System.out.println(&quot;一辆&quot; + color + &quot;的&quot; + brand + &quot;正在行驶，速度&quot; + speed + &quot;km/h&quot;);
+    }
+
+    public void stop() {
+        speed = 0;
+        System.out.println(brand + &quot;已停下&quot;);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car(&quot;宝马&quot;, &quot;白色&quot;);   // 创建对象，传入品牌和颜色
+        myCar.drive();                          // 开车
+        myCar.stop();                           // 停车
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">一辆白色的宝马正在行驶，速度60km/h
+宝马已停下
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. Car 类有三个属性（brand、color、speed）和两个方法（drive、stop）。
+2. public Car(String b, String c) 是有参构造方法，创建对象时需要传入品牌和颜色。
+3. new Car(&quot;宝马&quot;, &quot;白色&quot;) 做了两件事：分配内存 + 调用构造方法把 brand 设为&quot;宝马&quot;，color 设为&quot;白色&quot;，speed 设为 0。
+4. drive() 方法将 speed 改为 60 并输出行驶信息。
+5. stop() 方法将 speed 改为 0 并输出停车信息。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 构造方法的名字必须和类名完全一致（这里是 Car）。
+- 构造方法没有返回值类型（连 void 都不写）。
+- 如果你不写任何构造方法，Java 会自动提供一个无参构造方法。
+</code></pre>
+<hr>
+<h4>示例 2：继承——子类复用父类代码</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">继承（extends）、代码复用、属性与方法继承
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">// 父类：手机的基本功能
+public class Phone {
+    String brand;
+    String model;
+
+    public void call(String number) {
+        System.out.println(&quot;正在拨打 &quot; + number);
+    }
+
+    public void sendMessage(String msg) {
+        System.out.println(&quot;发送消息：&quot; + msg);
+    }
+}
+
+// 子类：智能手机（继承 Phone，并增加新功能）
+public class SmartPhone extends Phone {
+    public void takePhoto() {
+        System.out.println(brand + model + &quot; 正在拍照&quot;);
+    }
+
+    public void browseInternet() {
+        System.out.println(brand + model + &quot; 正在上网&quot;);
+    }
+}
+
+// 测试
+public class Main {
+    public static void main(String[] args) {
+        SmartPhone sp = new SmartPhone();
+        sp.brand = &quot;华为&quot;;
+        sp.model = &quot;Mate 60&quot;;
+
+        sp.call(&quot;10086&quot;);             // 继承自父类的方法
+        sp.sendMessage(&quot;你好&quot;);        // 继承自父类的方法
+        sp.takePhoto();               // 子类自己的方法
+        sp.browseInternet();          // 子类自己的方法
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">正在拨打 10086
+发送消息：你好
+华为Mate 60 正在拍照
+华为Mate 60 正在上网
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. Phone 是父类，定义了所有手机都有的基本功能（打电话、发短信）。
+2. SmartPhone 使用 extends Phone 继承父类，自动获得了 brand、model 属性和 call()、sendMessage() 方法。
+3. SmartPhone 还增加了 takePhoto() 和 browseInternet() 这两个父类没有的新方法。
+4. 在 main 中，SmartPhone 的对象既能调用继承来的方法（call、sendMessage），也能调用自己的方法（takePhoto、browseInternet）。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- extends 关键字表示继承，写法是&quot;子类 extends 父类&quot;。
+- 继承就是&quot;拿来用&quot;——父类有的属性和方法，子类可以直接使用，不必重新定义。
+- 这是实现代码复用（reusable）的核心机制。
+</code></pre>
+<hr>
+<h4>示例 3：boolean 在条件判断中的使用</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">boolean 类型、if 判断、比较运算符
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class ScoreChecker {
+    public static void main(String[] args) {
+        int score = 85;
+
+        boolean isPass = score &gt;= 60;   // 判断是否及格，结果是一个 boolean 值
+        boolean isExcellent = score &gt;= 90;
+
+        System.out.println(&quot;分数：&quot; + score);
+        System.out.println(&quot;是否及格：&quot; + isPass);
+        System.out.println(&quot;是否优秀：&quot; + isExcellent);
+
+        // 根据不同条件输出不同信息
+        if (isExcellent) {
+            System.out.println(&quot;成绩优秀！&quot;);
+        } else if (isPass) {
+            System.out.println(&quot;成绩及格，继续加油！&quot;);
+        } else {
+            System.out.println(&quot;成绩不及格，需要努力！&quot;);
+        }
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">分数：85
+是否及格：true
+是否优秀：false
+成绩及格，继续加油！
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. score &gt;= 60 这个表达式的结果是 true 或 false，可以直接赋给 boolean 变量 isPass。
+2. score &gt;= 90 结果是 false，所以 isExcellent = false。
+3. if-else if-else 结构根据 boolean 条件依次判断：先看 isExcellent（false），跳过；再看 isPass（true），执行对应语句。
+4. 可以直接输出 boolean 变量的值，控制台会显示 true 或 false。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 关系运算符（&gt;=、&lt;=、==、!=、&gt;、&lt;）的结果都是 boolean 类型。
+- 可以在 if 中直接写 boolean 变量（如 if (isPass)），不需要写成 if (isPass == true)。
+- boolean 只有 true 和 false 两个值，没有第三个可能。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：人的出生——理解构造方法</h4>
+<ul>
+<li><strong>案例名称</strong>：人以什么姿态来到这个世界</li>
+<li><strong>对应知识点</strong>：构造方法的作用</li>
+<li><strong>案例背景</strong>：老师解释为什么类被称为&quot;模板&quot;（template），以及构造方法如何决定对象的初始状态。</li>
+<li><strong>解决思路</strong>：构造方法就像一个生命诞生前的&quot;孕育&quot;过程。所有人出生时都带有相同的&quot;标配&quot;——头发、眼睛、鼻子、嘴。这些&quot;标配&quot;就是在构造方法里定义的。后天的特征（如学会的技能）不属于构造方法的内容。</li>
+<li><strong>Java 代码或伪代码</strong>：</li>
+</ul>
+<pre><code class="language-java">public class Person {
+    String hairColor;     // 构造方法中初始化
+    String eyeColor;      // 构造方法中初始化
+
+    public Person() {
+        hairColor = &quot;黑色&quot;;   // 每个人出生时头发都是黑色的
+        eyeColor = &quot;棕色&quot;;    // 眼睛都是棕色的
+        System.out.println(&quot;一个新生命诞生了！&quot;);
+    }
+}
+</code></pre>
+<ul>
+<li><strong>这个案例帮助理解什么</strong>：帮助初学者形象理解构造方法的抽象概念——构造方法决定对象&quot;生来带什么&quot;。</li>
+</ul>
+<h4>案例 2：父亲与儿子——理解继承</h4>
+<ul>
+<li><strong>案例名称</strong>：父亲留下的财产</li>
+<li><strong>对应知识点</strong>：继承（extends）</li>
+<li><strong>案例背景</strong>：老师用&quot;普通学生&quot;和&quot;学生会成员&quot;都有共同特征（name、age、speak、walk），引出继承概念。</li>
+<li><strong>解决思路</strong>：普通学生（Student）和学生会成员（CommitteeMember）都是学生，有共同特征。把这些共同特征提取到父类 Student 中，子类通过 extends 继承父类，就不需要重复定义了。老师比喻为&quot;向父亲伸手拿&quot;——父亲有的，儿子自然有。</li>
+<li><strong>Java 代码或伪代码</strong>：见第 6 节示例 2。</li>
+<li><strong>这个案例帮助理解什么</strong>：帮助理解继承解决的核心问题——代码复用（避免重复），以及面向对象中&quot;is-a&quot;的关系判断。</li>
+</ul>
+<h4>案例 3：会议点名——理解类中的方法</h4>
+<ul>
+<li><strong>案例名称</strong>：班长为什么能点名</li>
+<li><strong>对应知识点</strong>：类中方法的定义和调用</li>
+<li><strong>案例背景</strong>：老师用班长和同学在教室中的不同角色来解释方法的作用范围。</li>
+<li><strong>解决思路</strong>：班长的类中定义了&quot;点名&quot;的方法，所以班长能点名。普通同学的类中没有定义这个方法，所以不能做。对象能做什么，取决于它的类中定义了哪些方法。就像&quot;你在定义类的时候，就将方法放到了框架里边&quot;。</li>
+<li><strong>这个案例帮助理解什么</strong>：帮助理解&quot;对象的能力由它的类决定&quot;这一面向对象核心思想。</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：创建对象忘记写 new
+错误示例：
+Student stu = Student();
+
+正确写法：
+Student stu = new Student();
+
+解释：
+new 关键字向内存申请空间，缺少 new 就等于没有给对象分配&quot;住所&quot;。语法上必须写 new。
+
+
+易错点 2：变量名以数字开头
+错误示例：
+int 1score = 90;
+
+正确写法：
+int score1 = 90;
+
+解释：
+标识符的规则之一是&quot;第一个字符不能是数字&quot;。数字可以放在中间或末尾，但不能放在开头。
+
+
+易错点 3：把关键字用作标识符
+错误示例：
+int class = 10;
+
+正确写法：
+int className = 10;    // 或者 int classNumber = 10;
+
+解释：
+class 是 Java 的关键字（用来定义类），不能用来做变量名。如果确实想表达&quot;班级&quot;，可以用 className 或 classNumber。
+
+
+易错点 4：true 和 false 写成大写
+错误示例：
+boolean b = True;
+
+正确写法：
+boolean b = true;
+
+解释：
+Java 严格区分大小写。所有关键字都是小写的，true 和 false 也不例外。Python 中是大写（True/False），注意不要混淆。
+
+
+易错点 5：char 和 String 的双引号/单引号用错
+错误示例：
+char grade = &quot;A&quot;;        // 错：用了双引号
+String name = &#39;张三&#39;;    // 错：用了单引号
+
+正确写法：
+char grade = &#39;A&#39;;        // char 用单引号
+String name = &quot;张三&quot;;    // String 用双引号
+
+解释：
+char 是单个字符类型，用单引号 &#39;&#39;；String 是字符串类型（可由多个字符组成），用双引号 &quot;&quot;。
+
+
+易错点 6：float 类型的值忘记加 f
+错误示例：
+float price = 9.99;
+
+正确写法：
+float price = 9.99f;
+
+解释：
+Java 中，小数默认是 double 类型。如果想把一个小数赋给 float 变量，必须在数字后面加上 f（或 F），告诉 Java &quot;这是 float 类型&quot;。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：以下创建对象的代码，正确的是？
+
+A. Student s = Student();
+B. Student s = new Student();
+C. new Student s = Student();
+D. Student s = new Student;
+
+正确答案：B
+
+解析：
+创建对象语法为&quot;类名 对象名 = new 类名();&quot;。A 缺少 new；C 语法完全错；D 缺少最后的括号 ()。
+
+
+题目 2：以下哪个标识符是不合法的？
+
+A. myName
+B. _value
+C. 2score
+D. $price
+
+正确答案：C
+
+解析：
+2score 以数字 2 开头，违反标识符&quot;首字符不能是数字&quot;的规则。其他三个都是合法的。
+
+
+题目 3：关于 boolean 类型，以下说法正确的是？
+
+A. boolean 可以取 true、false 和 null 三个值
+B. boolean 可以赋值为 0 或 1
+C. boolean 只有 true 和 false 两个取值
+D. boolean 的 true 和 false 可以写成大写
+
+正确答案：C
+
+解析：
+boolean 只有 true 和 false 两个取值（全小写）。不能赋 null、0、1 等其他值。
+
+
+题目 4：关于继承，以下说法错误的是？
+
+A. 子类可以继承父类的属性和方法
+B. Java 中一个子类可以有多个父类
+C. 继承使用 extends 关键字
+D. 继承的主要目的是实现代码复用
+
+正确答案：B
+
+解析：
+Java 中只支持单继承——一个子类只能有一个直接父类。A、C、D 都是正确的。
+
+
+题目 5：关于构造方法，以下说法正确的是？
+
+A. 构造方法的返回值类型是 void
+B. 构造方法的名字可以与类名不同
+C. 构造方法在创建对象时自动调用
+D. 一个类只能有一个构造方法
+
+正确答案：C
+
+解析：
+构造方法没有返回值类型（连 void 也不写），名字必须与类名完全相同，一个类可以有多个构造方法（重载）。创建对象时（new 类名()），构造方法自动被调用。
+
+
+题目 6：下面哪个不是 Java 的关键字？
+
+A. int
+B. class
+C. name
+D. public
+
+正确答案：C
+
+解析：
+name 不是 Java 的关键字，可以作为标识符使用。int、class、public 都是关键字。
+
+
+题目 7：char 类型和 String 类型在写法上有什么区别？
+
+A. 没有区别，可以混用
+B. char 用双引号，String 用单引号
+C. char 用单引号，String 用双引号
+D. Java 中没有 char 类型
+
+正确答案：C
+
+解析：
+char 表示单个字符，用单引号（如 &#39;A&#39;）；String 表示字符串，用双引号（如 &quot;Hello&quot;）。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. new —— 关键字，向内存申请空间来创建对象
+2. 构造方法 —— 在创建对象时自动调用，负责初始化对象
+3. 类（class） —— Java 程序的基本单位，包含属性和方法
+4. 对象（object） —— 根据类模板创建出来的具体实例
+5. 继承（extends） —— 子类获得父类属性和方法的机制，避免重复代码
+6. 标识符 —— 类名、变量名、方法名等自定义名称的总称
+7. 关键字 —— Java 预定义的具有特殊含义的单词，不能用作标识符
+8. boolean —— 逻辑类型，只有 true 和 false 两个值
+9. 属性 —— 描述类&quot;有什么&quot;的变量（如 name、age）
+10. 方法 —— 描述类&quot;能做什么&quot;的函数（如 speak、walk）
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">创建对象并调用方法的过程：
+
+1. 程序从 main 方法开始执行。
+2. 执行到 Student stu = new Student(); 语句。
+3. new 关键字向 JVM 申请内存空间，准备存放 Student 对象。
+4. JVM 调用 Student 类的构造方法 Student()，初始化对象（设置属性的默认值）。
+5. 构造方法执行完毕后，返回对象的地址，赋值给变量 stu。
+6. 程序继续执行 stu.name = &quot;张三&quot;; 通过对象名.属性名的方式给属性赋值。
+7. 程序执行 stu.speak(); 通过对象名.方法名() 的方式调用方法。
+8. JVM 根据 stu 找到对应的对象，再找到 Student 类中的 speak 方法并执行。
+9. speak 方法执行完毕后，程序返回 main 方法，继续执行后面的语句。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习 1：定义一个 Person 类，包含属性 name（String）和 age（int），以及一个 introduce() 方法（输出&quot;我叫xxx，今年xx岁&quot;）。然后在 main 方法中创建两个 Person 对象，分别设置不同的名字和年龄，并调用 introduce()。
+
+考查知识点：
+类定义、属性、方法、创建对象
+
+参考答案：
+
+public class Person {
+    String name;
+    int age;
+
+    public void introduce() {
+        System.out.println(&quot;我叫&quot; + name + &quot;，今年&quot; + age + &quot;岁。&quot;);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person p1 = new Person();
+        p1.name = &quot;张三&quot;;
+        p1.age = 20;
+        p1.introduce();
+
+        Person p2 = new Person();
+        p2.name = &quot;李四&quot;;
+        p2.age = 22;
+        p2.introduce();
+    }
+}
+
+解题思路：
+1. 定义 Person 类，包含两个属性（name、age）和一个方法（introduce）。
+2. 用 new 创建两个不同的对象。
+3. 分别给两个对象的属性赋值。
+4. 分别调用 introduce() 方法。
+
+
+练习 2：编写一个 Animal 父类和一个 Cat 子类。Animal 有 name 属性和 eat() 方法。Cat 继承 Animal，并增加一个 meow() 方法。
+
+考查知识点：
+继承（extends）、属性与方法继承
+
+参考答案：
+
+public class Animal {
+    String name;
+
+    public void eat() {
+        System.out.println(name + &quot;正在吃东西&quot;);
+    }
+}
+
+public class Cat extends Animal {
+    public void meow() {
+        System.out.println(name + &quot;：喵喵喵~&quot;);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Cat cat = new Cat();
+        cat.name = &quot;小花&quot;;      // 继承自 Animal 的属性
+        cat.eat();              // 继承自 Animal 的方法
+        cat.meow();             // Cat 自己的方法
+    }
+}
+
+解题思路：
+1. 先定义 Animal 父类，包含 name 和 eat()。
+2. Cat 用 extends Animal 继承父类。
+3. Cat 中新增 meow() 方法。
+4. 测试时发现 Cat 对象可以直接使用 name 和 eat()，无需在 Cat 中重复定义。
+
+
+练习 3：判断以下标识符是否合法，并说明原因。
+
+(1) myName
+(2) 2ndPlace
+(3) class
+(4) student_name
+(5) my name
+
+考查知识点：
+标识符命名规则、关键字
+
+参考答案：
+(1) myName —— ✅ 合法。字母组成。
+(2) 2ndPlace —— ❌ 不合法。首字符是数字。
+(3) class —— ❌ 不合法。class 是 Java 关键字。
+(4) student_name —— ✅ 合法。字母加下划线。
+(5) my name —— ❌ 不合法。包含空格。
+
+解题思路：
+依次检查每个标识符是否满足：① 由字母/下划线/美元符号/数字组成；② 首字符不是数字；③ 不是 Java 关键字；④ 不能有空格。
+
+
+练习 4：写一个程序，声明一个 boolean 变量 isWeekend 表示是否周末，声明一个 int 变量 hour 表示当前时间（0-23）。如果是周末且时间在 9-18 之间，输出&quot;周末白天，可以出去玩&quot;，否则输出&quot;不是周末白天，在家学习&quot;。
+
+考查知识点：
+boolean 类型、if 条件判断、逻辑运算符
+
+参考答案：
+
+public class WeekendCheck {
+    public static void main(String[] args) {
+        boolean isWeekend = true;
+        int hour = 14;
+
+        if (isWeekend &amp;&amp; hour &gt;= 9 &amp;&amp; hour &lt;= 18) {
+            System.out.println(&quot;周末白天，可以出去玩&quot;);
+        } else {
+            System.out.println(&quot;不是周末白天，在家学习&quot;);
+        }
+    }
+}
+
+解题思路：
+1. &amp;&amp; 表示&quot;并且&quot;，三个条件同时满足才执行第一个输出。
+2. 修改 isWeekend 或 hour 的值测试不同结果。
+
+
+练习 5：阅读以下代码，指出其中存在的 4 处错误。
+
+public class test {
+    public static void main(string[] args) {
+        int 1score = 100;
+        boolean b = True;
+        Student s = Student();
+        system.out.println(1score);
+    }
+}
+
+考查知识点：
+类名规范、String 大小写、标识符规则、boolean 大小写、new 关键字、System 大小写
+
+参考答案：
+错误1：类名 test 应首字母大写（建议改为 Test）。
+错误2：string[] args 中 String 的 S 必须大写。
+错误3：1score 以数字开头，不合法，应改为 score1。
+错误4：True 应全部小写 true。
+错误5：Student() 前面缺少 new。
+错误6：system 首字母 S 必须大写。
+
+解题思路：
+逐行检查代码，重点检查大小写、new 关键字、标识符规则和 boolean 值的大小写。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Java 编程基础及面向对象入门
+├── 面向对象核心概念
+│   ├── 类（class）
+│   │   ├── 属性——描述&quot;有什么&quot;（如 name、age）
+│   │   └── 方法——描述&quot;能做什么&quot;（如 speak、walk）
+│   ├── 对象（object）
+│   │   ├── 创建对象：类名 对象名 = new 类名();
+│   │   ├── 访问属性：对象名.属性名
+│   │   └── 调用方法：对象名.方法名()
+│   ├── 构造方法
+│   │   ├── 与类名同名
+│   │   ├── 无返回值（连 void 都不写）
+│   │   └── 创建对象时自动调用（初始化）
+│   └── 继承（extends）
+│       ├── 子类获得父类的属性和方法
+│       ├── 避免代码重复（reusable）
+│       └── 单继承（一个子类只能有一个父类）
+├── 标识符与关键字
+│   ├── 标识符（自定义名称）
+│   │   ├── 组成：字母、下划线、$、数字
+│   │   ├── 首字符不能是数字
+│   │   └── 不能是关键字
+│   └── 关键字
+│       ├── 数据类型关键字：int、double、float、char、boolean、byte、short、long
+│       ├── 流程控制关键字：if、else、for、while、do、switch、break、continue
+│       ├── 访问控制关键字：public、private、protected
+│       └── 其他：class、new、extends、static、void、return、true、false、null
+├── 数据类型概览
+│   ├── 基本数据类型
+│   │   ├── 整数：int、short、long、byte
+│   │   ├── 浮点：float（后面加 f）、double
+│   │   ├── 字符：char（单引号）
+│   │   └── 逻辑：boolean（true / false）
+│   └── 引用类型
+│       └── String（双引号，是一个类）
+└── 学习方法
+    ├── 读懂别人的代码
+    ├── 多写笔记、看目录回忆
+    ├── 盲敲键盘（输入速度很重要）
+    ├── 利用 AI 辅助但不要照抄
+    └── 团队协作——遵循统一的命名和编码规则
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID</strong>：<code>java-oop-basics-keywords</code></li>
+<li><strong>建议课程标题</strong>：Java 编程基础及面向对象入门</li>
+<li><strong>建议章节</strong>：Java 面向对象基础</li>
+<li><strong>建议标签</strong>：<code>面向对象</code> <code>类与对象</code> <code>构造方法</code> <code>继承</code> <code>关键字</code> <code>标识符</code> <code>boolean</code></li>
+<li><strong>适合放入 summary 的内容</strong>：第 2 节课堂摘要 5 条</li>
+<li><strong>适合放入 keyPoints 的内容</strong>：知识点 1-7 的核心概念和语法</li>
+<li><strong>适合放入 codeExamples 的内容</strong>：第 6 节的 3 个代码示例</li>
+<li><strong>适合放入 quiz 的内容</strong>：第 9 节的 7 道选择题</li>
+<li><strong>适合放入 dragMatch 的内容</strong>：第 10 节的 10 组匹配素材</li>
+<li><strong>适合放入 flow 的内容</strong>：第 11 节的&quot;创建对象并调用方法的过程&quot;</li>
+<li><strong>适合放入 exercises 的内容</strong>：第 12 节的 5 道练习题</li>
+<li><strong>适合放入 conclusion 的内容</strong>：第 15 节课后总结</li>
+<li><strong>额外建议</strong>：课堂案例（第 7 节）中&quot;构造方法 = 人的孕育过程&quot;和&quot;继承 = 向父亲拿&quot;这两个比喻特别适合做成教学插图或动画</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是理解面向对象编程中&quot;类、对象、构造方法、继承&quot;这四个最基础的概念。它们是整个 Java 学习的地基。
+2. 学习 Java 时要特别注意标识符的命名规则（首字符不能是数字、不能用关键字）和大小写问题（关键字全小写、类名首字母大写）。
+3. 通过本节课，应该能够区分属性和方法、理解 new 和构造方法的作用、知道继承为什么能实现代码复用。
+4. 继承这个知识点后面会和封装、多态一起，构成 Java 面向对象的&quot;三大特征&quot;，这是后续课程以及考试的重点内容。
+5. 课后建议多练习：① 创建各种类并用 new 创建对象；② 动手写一个简单的继承关系（如 Animal→Cat）；③ 把常见关键字抄写一遍并分类记忆；④ 继续练习盲敲键盘，目标是每分钟 120 个字母。
+</code></pre>
+<hr>
+<h3>学习方法建议</h3>
+<p>（以下内容整理自课堂中老师的经验分享）</p>
+<ol>
+<li><strong>记笔记，看目录回忆</strong>：把笔记做好，复习时对着教材目录回忆笔记内容。两个人可以互相提问——&quot;看着目录来说笔记&quot;。老师说&quot;考试的时候，你如果练过这个，看着目录，知识点就一串一串出来了&quot;。</li>
+<li><strong>多去图书馆</strong>：环境会改变习惯。&quot;你学不学都去，哪怕坐在那睡觉也去图书馆睡。周边的人都在学习，你第一天睡觉，第二天就不会一起睡了。&quot;坚持一个月后，你就会有目的地去看了。</li>
+<li><strong>坚持付出才能有回报</strong>：人是奇怪的动物——&quot;当你一旦付出，哪怕一点点，你都想要回报&quot;。利用这种心理，只要开始付出，就会有持续学习的动力。</li>
+<li><strong>编程的感觉</strong>：老师分享了自己学编程的经历——&quot;长达一个月的时间才把它搞清楚，那种感觉非常非常漂亮&quot;。找 bug、调通代码、给别人讲懂，这个过程中获得的成就感是很大的。</li>
+<li><strong>学会利用 AI 但不依赖 AI</strong>：用 AI 助手帮你分析问题、理解代码，但&quot;研究完了千万不要照抄，照抄就作废了。再自己默默敲一遍&quot;。</li>
+<li><strong>代码规范</strong>：变量名、类名都要有语义的（别用 a、b、c），命名遵循规范，这样别人才能看懂你的代码。&quot;你能看懂别人的，别人看不懂你的，说明有问题&quot;。</li>
+<li><strong>平时多练习打字</strong>：每天敲键盘，速度会自然提升。一个月从 10 个字母练到 40 个，坚持下去就能突破。&quot;键盘就像弹钢琴，手里握着鸡蛋去敲&quot;。</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-01.html"><span>上一篇</span><strong>Java编程课程介绍与基础入门</strong></a><a class="article-pager-link next" rel="next" href="java-03.html"><span>下一篇</span><strong>Java基本数据类型与数组入门</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

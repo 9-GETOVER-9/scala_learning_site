@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java array for review 课程标题 ：数组与 for 循环综合复习 所属章节 ：Java 数组 上课日期 ：2025 09 11 知识点标签 ： 一维数组 二维数组 双重for循环 数组赋值 数组默认值 循环嵌套 难度等级 ：基础" />
+  <title>数组与for循环综合复习 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-array-for-review">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 09 课</p>
+      <h1>数组与for循环综合复习</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">数组与for循环综合复习</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-array-for-review</code></li>
+<li><strong>课程标题</strong>：数组与 for 循环综合复习</li>
+<li><strong>所属章节</strong>：Java 数组</li>
+<li><strong>上课日期</strong>：2025-09-11</li>
+<li><strong>知识点标签</strong>：<code>一维数组</code> <code>二维数组</code> <code>双重for循环</code> <code>数组赋值</code> <code>数组默认值</code> <code>循环嵌套</code></li>
+<li><strong>难度等级</strong>：基础-巩固</li>
+<li><strong>适合对象</strong>：已学习数组和 for 循环、需要综合练习的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课是数组与 for 循环的复习巩固课——通过一维数组的赋值与取值、二维数组的双重 for 循环遍历，将数组和循环两大知识点融合在一起做综合练习。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 本节课首先布置了实验作业的提交要求——实验一和实验二合并、实验三和实验四合为两个档案袋，A4 纸手写代码，左侧叠线后装订。
+2. 课堂中通过一维数组的例题，回顾了数组声明（new）、数组下标从 0 开始以及默认值为 0 的关键概念。
+3. 老师重点演示了二维数组的双重 for 循环赋值过程——外层控制行（i），内层控制列（j），并详细讲解了二重循环的执行步骤。
+4. 本节课强调了&quot;赋值&quot;和&quot;取值&quot;的概念区别，并用具体代码演示了数组元素写入和读取的全过程。
+5. 最后老师要求学生将竖着输出的二维数组改成横着（表格形式）输出，作为课后练习。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能独立声明一维数组并正确赋值（注意下标从 0 开始）。
+2. 理解数组元素默认值的概念——int 类型默认为 0，未赋值的元素就是默认值。
+3. 能使用双重 for 循环为二维数组的每个元素赋值。
+4. 理解二重循环的执行过程——外层跑一次，内层跑一圈。
+5. 能区分&quot;赋值操作&quot;（arr[i]=值）和&quot;取值操作&quot;（读取 arr[i]）。
+6. 能将二维数组的输出从竖排改为横排（表格形式）。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：一维数组的声明、赋值与取值</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>数组操作</strong>包含两个核心动作：</p>
+<ul>
+<li><strong>赋值</strong>：把数据<strong>写入</strong>数组的某个位置（如 <code>arr[0] = 1</code>）</li>
+<li><strong>取值</strong>：从数组的某个位置<strong>读取</strong>数据（如 <code>int x = arr[0]</code>）</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>数组是存储多个数据的工具。&quot;存&quot;和&quot;取&quot;是数组最基本的两个操作。如果不清楚它们的区别，就会写出逻辑错误的代码。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用一个一维数组的例子生动地展示了<strong>下标从 0 开始</strong>的重要性：</p>
+<pre><code class="language-java">int[] A = new int[3];  // 3 个元素，下标 0,1,2
+for (int i = 1; i &lt; 4; i++) {
+    A[i] = i;  // ❌ 错误：i 从 1 开始，A[1] 是第二个元素，漏了 A[0]
+}
+</code></pre>
+<p>老师让学生发现这个错误——&quot;当 i=1 时是 A[1]，但数组是从 0 开始的！所以要改成 A[i-1] = i，这样才能让 A[0]=1, A[1]=2, A[2]=3。&quot;</p>
+<p>老师还强调了<strong>默认值</strong>：<code>int[] A = new int[3]</code> 创建后三个元素默认全是 0。如果只给前三个赋值（下标 0,1,2），下标 3 不存在。</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 以为 new int[3] 后元素是&quot;空的&quot;——实际都是默认值 0。
+2. for 循环中 i 从 1 开始给数组赋值，导致 A[0] 没有被赋值（仍是默认值 0）。
+3. 混淆赋值（arr[i]=值）和取值（x=arr[i]）的语法方向。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class ArrayAssignRead {
+    public static void main(String[] args) {
+        int[] A = new int[3];       // 默认值 {0, 0, 0}
+
+        // 赋值：从下标 0 开始
+        for (int i = 0; i &lt; A.length; i++) {
+            A[i] = i + 1;           // A[0]=1, A[1]=2, A[2]=3
+        }
+
+        // 取值：读取每个元素
+        for (int i = 0; i &lt; A.length; i++) {
+            System.out.println(&quot;A[&quot; + i + &quot;] = &quot; + A[i]);
+        }
+    }
+}
+</code></pre>
+<h5>示例解释</h5>
+<pre><code class="language-text">1. A[i] = i + 1 是赋值——把 i+1 的值存到数组的第 i 个位置。
+2. A[i] 出现在等号左边 = 赋值；出现在等号右边或 println 中 = 取值。
+3. 循环从 i=0 开始，确保数组的每一个位置（0,1,2）都被赋值。
+4. A.length = 3，下标范围是 0,1,2。
+</code></pre>
+<hr>
+<h4>知识点 2：二维数组的双重 for 循环赋值</h4>
+<h5>这个知识点是什么？</h5>
+<p>二维数组可以理解为一个<strong>表格</strong>，需要用两层 for 循环来遍历。<strong>外层 for 走行（i）、内层 for 走列（j）</strong>，这样就能访问到二维数组的每一个位置 <code>arr[i][j]</code>。</p>
+<h5>为什么要学它？</h5>
+<p>几乎所有涉及二维数组的操作——赋值、查找、求和、转置——都需要用到双重 for 循环。这是数组进阶操作的核心技能。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用详细的步骤推演展示了二重循环的完整执行过程：</p>
+<pre><code>i=0（第0行）
+  ├── j=0 → A[0][0] 被赋值 → j++
+  ├── j=1 → A[0][1] 被赋值 → j++
+  ├── j=2 → A[0][2] 被赋值 → j++
+  └── j=3 → 退出内层循环，i++
+i=1（第1行）
+  ├── j=0 → A[1][0] 被赋值 → j++
+  ├── j=1 → A[1][1] 被赋值 → j++
+  ...
+</code></pre>
+<p>老师总结：&quot;第二层的整个 for 循环是作为第一层的一个语句组存在的。当 i=0 的时候，j 跑一圈（0,1,2,3）。然后 i=1，j 又重头跑一圈。&quot;</p>
+<h5>初学者容易犯的错误</h5>
+<pre><code class="language-text">1. 内层循环变量 j 的声明写在错误的位置——应该写在内层 for 括号里。
+2. 数组声明时忘记写第二个方括号——int[] A = new int[3];（这是一维，二维要 int[][]）。
+3. new int[3][3] 后面的两个维度忘记写——只写 new int[3] 是一维。
+</code></pre>
+<h5>正确示例</h5>
+<pre><code class="language-java">public class TwoDimArray {
+    public static void main(String[] args) {
+        int[][] A = new int[3][3];   // 3 行 3 列的二维数组
+
+        // 双重 for 循环赋值
+        for (int i = 0; i &lt; 3; i++) {         // 外层：控制行
+            for (int j = 0; j &lt; 3; j++) {     // 内层：控制列
+                A[i][j] = (i + 1) * (j + 1);  // 赋值：行号 × 列号
+            }
+        }
+
+        // 双重 for 循环取值（输出）
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                System.out.print(A[i][j] + &quot;\t&quot;);
+            }
+            System.out.println();   // 每行结束换行
+        }
+    }
+}
+</code></pre>
+<h5>运行结果：</h5>
+<pre><code class="language-text">1	2	3	
+2	4	6	
+3	6	9
+</code></pre>
+<hr>
+<h4>知识点 3：竖排输出改为横排输出</h4>
+<h5>这个知识点是什么？</h5>
+<p>使用 <code>System.out.print()</code>（不换行）和 <code>System.out.println()</code>（换行）配合，可以控制二维数组的输出格式。<code>print</code> 在同一行连续输出，<code>println</code> 在每行结束后换行——这样就能把竖排（每输出一个元素就换行）改成横排（表格形式）。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师在演示时，默认用 <code>println</code> 输出——每个元素占一行，结果竖向排列。老师随即要求学生把它改成<strong>横着的表格形式</strong>：</p>
+<ul>
+<li>内层循环用 <code>print</code>（不换行）输出每个元素</li>
+<li>内层循环结束后用 <code>println()</code>（空换行）分行</li>
+</ul>
+<h5>正确示例</h5>
+<pre><code class="language-java">// ❌ 竖着输出（每个元素一行）
+for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        System.out.println(A[i][j]);   // 每次输出都换行
+    }
+}
+
+// ✅ 横着输出（表格形式）
+for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        System.out.print(A[i][j] + &quot;\t&quot;);   // print 不换行
+    }
+    System.out.println();   // 一行结束，换行
+}
+</code></pre>
+<hr>
+<h3>5. 代码示例整理</h3>
+<h4>示例 1：一维数组——区分赋值和取值</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">一维数组、for 循环、赋值与取值
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class OneDArrayDemo {
+    public static void main(String[] args) {
+        int[] A = new int[4];    // 长度 4，下标 0,1,2,3，默认全是 0
+
+        // ==== 赋值 ====
+        for (int i = 0; i &lt; A.length; i++) {
+            A[i] = i + 1;        // 把 1,2,3,4 依次写入数组
+        }
+
+        // ==== 取值（输出） ====
+        System.out.println(&quot;数组内容：&quot;);
+        for (int k = 0; k &lt; A.length; k++) {
+            System.out.println(&quot;A[&quot; + k + &quot;] = &quot; + A[k]);
+        }
+
+        // 未赋值的元素会保持默认值 0
+        int[] B = new int[5];
+        B[0] = 100;
+        B[1] = 200;
+        // B[2], B[3], B[4] 没赋值 → 默认值 0
+        System.out.println(&quot;\nB[2] = &quot; + B[2]);   // 0（默认值）
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">数组内容：
+A[0] = 1
+A[1] = 2
+A[2] = 3
+A[3] = 4
+
+B[2] = 0
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. new int[4] 创建长度为 4 的数组，由于是 int 类型，默认值全是 0。
+2. 第一个 for 循环用 A[i] = i+1 给每个位置赋值——这是&quot;写&quot;操作。
+3. 第二个 for 循环用 A[k] 读取值——这是&quot;读&quot;操作，等号右边或输出语句中的 A[k] 都是在读取。
+4. B[2] 没有被赋值过，输出的是默认值 0。
+</code></pre>
+<hr>
+<h4>示例 2：二维数组双重循环——分步演示</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">二维数组、双重 for 循环、外行内列
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class TwoDLoopDemo {
+    public static void main(String[] args) {
+        int[][] A = new int[3][3];   // 3行3列
+
+        // 赋值 + 分步输出，展示每一步
+        System.out.println(&quot;===== 双重循环赋值过程 =====&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            System.out.println(&quot;--- 进入第 &quot; + (i+1) + &quot; 行 ---&quot;);
+            for (int j = 0; j &lt; 3; j++) {
+                A[i][j] = (i + 1) * 10 + (j + 1);   // 行号×10 + 列号
+                System.out.println(&quot;  A[&quot; + i + &quot;][&quot; + j + &quot;] = &quot; + A[i][j]);
+            }
+        }
+
+        // 最终结果——横排表格输出
+        System.out.println(&quot;\n===== 最终矩阵 =====&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                System.out.print(A[i][j] + &quot;\t&quot;);
+            }
+            System.out.println();
+        }
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">===== 双重循环赋值过程 =====
+--- 进入第 1 行 ---
+  A[0][0] = 11
+  A[0][1] = 12
+  A[0][2] = 13
+--- 进入第 2 行 ---
+  A[1][0] = 21
+  A[1][1] = 22
+  A[1][2] = 23
+--- 进入第 3 行 ---
+  A[2][0] = 31
+  A[2][1] = 32
+  A[2][2] = 33
+
+===== 最终矩阵 =====
+11	12	13	
+21	22	23	
+31	32	33
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. 外层 i=0 时，内层 j 从 0 到 2 跑一整圈。A[0][0], A[0][1], A[0][2] 依次被赋值。
+2. 外层 i=1 时，内层 j 重新从 0 开始跑。A[1][0], A[1][1], A[1][2] 被赋值。
+3. 外层 i=2 时同理。
+4. 内层的整个 for 循环在外层看来只是一条&quot;大语句&quot;。
+5. 最后用 print（不换行）+ println（换行）输出表格格式。
+</code></pre>
+<p><strong>初学者提示</strong>：</p>
+<pre><code class="language-text">- 记口诀：&quot;外行内列&quot;——外层控制第几行，内层控制第几列。
+- 外层跑一次，内层跑一圈（完成一整行）。
+- 二维数组 A[行][列]——前面是行，后面是列，不要搞反。
+</code></pre>
+<hr>
+<h4>示例 3：竖排改横排——输出格式控制</h4>
+<p><strong>适用知识点</strong>：</p>
+<pre><code class="language-text">print vs println、输出格式控制
+</code></pre>
+<p><strong>代码</strong>：</p>
+<pre><code class="language-java">public class FormatOutput {
+    public static void main(String[] args) {
+        String[][] fruits = {
+            {&quot;苹果&quot;, &quot;红色&quot;, &quot;5元&quot;},
+            {&quot;香蕉&quot;, &quot;黄色&quot;, &quot;3元&quot;},
+            {&quot;葡萄&quot;, &quot;紫色&quot;, &quot;8元&quot;}
+        };
+
+        System.out.println(&quot;===== 竖排输出（不好看） =====&quot;);
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                System.out.println(fruits[i][j]);  // 每个一行
+            }
+        }
+
+        System.out.println(&quot;\n===== 横排输出（表格格式） =====&quot;);
+        System.out.println(&quot;名称\t颜色\t价格&quot;);     // 表头
+        for (int i = 0; i &lt; 3; i++) {
+            for (int j = 0; j &lt; 3; j++) {
+                System.out.print(fruits[i][j] + &quot;\t&quot;);  // 同行，用Tab分隔
+            }
+            System.out.println();   // 一行结束换行
+        }
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code class="language-text">===== 竖排输出（不好看） =====
+苹果
+红色
+5元
+香蕉
+黄色
+3元
+葡萄
+紫色
+8元
+
+===== 横排输出（表格格式） =====
+名称	颜色	价格
+苹果	红色	5元	
+香蕉	黄色	3元	
+葡萄	紫色	8元
+</code></pre>
+<p><strong>代码解释</strong>：</p>
+<pre><code class="language-text">1. 竖排输出：内层使用 println，每输出一个元素就换行——所有数据在一列中。
+2. 横排输出：内层使用 print（不换行），同一行的元素之间用 \t（Tab）分隔。
+3. 每行结束后用 println() 空换行——确保下一行从新行开始。
+4. 竖排适合看细节，横排适合看整体——根据需求灵活选择。
+</code></pre>
+<hr>
+<h3>6. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：数组下标从 0 开始但循环从 1 开始
+错误示例：
+int[] A = new int[3];
+for (int i = 1; i &lt;= 3; i++) {
+    A[i] = i;    // A[1]=1, A[2]=2, A[3]→越界！
+}
+
+正确写法：
+for (int i = 0; i &lt; A.length; i++) {
+    A[i] = i + 1;
+}
+
+解释：
+数组下标从 0 开始。长度为 3 的数组，下标是 0,1,2。arr[3] 不存在，会抛出异常。如果想让值从 1 开始，用 A[i] = i + 1。
+
+
+易错点 2：二维数组声明时忘记第二个方括号
+错误示例：
+int[] A = new int[3][3];    // 这声明的是两个变量，语法混乱
+
+正确写法：
+int[][] A = new int[3][3];   // 二维数组：两个方括号
+
+解释：
+二维数组的类型是 int[][]（两个方括号），new 后面的维度也要写两个方括号。
+
+
+易错点 3：内层循环变量和外层重名
+错误示例：
+for (int i = 0; i &lt; 3; i++) {
+    for (int i = 0; i &lt; 3; i++) {  // 错误！i 已经被外层使用了
+        ...
+    }
+}
+
+正确写法：
+for (int i = 0; i &lt; 3; i++) {      // 外层用 i
+    for (int j = 0; j &lt; 3; j++) {  // 内层用 j（不同的变量名）
+        ...
+    }
+}
+
+解释：
+内层和外层的循环变量不能同名——它们是嵌套的，内层会覆盖外层的变量，导致逻辑错误。习惯上外层用 i，内层用 j。
+
+
+易错点 4：未赋值的数组元素期望是别的值
+错误示例：
+int[] arr = new int[5];
+System.out.println(arr[0] * 2);  // 期望报错，实际输出 0（0*2=0）
+
+正确理解：
+int[] arr = new int[5];
+// arr[0] ~ arr[4] 全是 0（int 的默认值）
+// 如果需要其他初始值，必须手动赋值
+
+解释：
+Java 数组创建后会赋默认值。如果要用非默认值，必须逐个赋值。不要以为不赋值就是&quot;空&quot;或&quot;未定义&quot;。
+
+
+易错点 5：输出格式中混淆 print 和 println
+错误示例：
+for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        System.out.println(A[i][j]);   // 竖排输出
+    }
+}
+
+如果要横排表格输出：
+正确写法：
+for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        System.out.print(A[i][j] + &quot;\t&quot;);  // 内层用 print 不换行
+    }
+    System.out.println();   // 外层每行结束换行
+}
+
+解释：
+内层用 print 让同行元素连在一起，内层循环后用 println 换行。
+</code></pre>
+<hr>
+<h3>7. 小测验题目</h3>
+<pre><code class="language-text">题目 1：int[] arr = new int[5]; 创建后，arr[2] 的值是多少？
+
+A. null
+B. 0
+C. 未定义
+D. 2
+
+正确答案：B
+
+解析：
+int 类型数组的默认值是 0。new int[5] 创建后，所有 5 个元素都是 0。
+
+
+题目 2：遍历二维数组 int[][] arr = new int[3][4]; 时，以下哪个写法正确？
+
+A. for(int i=0; i&lt;3; i++) for(int j=0; j&lt;4; j++) arr[i][j]=0;
+B. for(int i=0; i&lt;4; i++) for(int j=0; j&lt;3; j++) arr[i][j]=0;
+C. for(int i=1; i&lt;=3; i++) for(int j=1; j&lt;=4; j++) arr[i][j]=0;
+D. for(int i=0; i&lt;3; i++) for(int i=0; i&lt;4; i++) arr[i][i]=0;
+
+正确答案：A
+
+解析：
+A 中 i 从 0 到 2（3 行），j 从 0 到 3（4 列），正确。B 行程列搞反。C 下标从 1 开始会越界。D 内外层用了同名变量 i。
+
+
+题目 3：以下代码输出什么？
+
+int[] arr = {10, 20, 30};
+arr[0] = 100;
+System.out.println(arr[1]);
+
+A. 10
+B. 20
+C. 100
+D. 0
+
+正确答案：B
+
+解析：
+arr[0]=100 只修改了第一个元素，arr[1] 仍是初始值 20。
+
+
+题目 4：对于以下代码，说法正确的是？
+
+for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 4; j++) {
+        System.out.print(&quot;*&quot;);
+    }
+    System.out.println();
+}
+
+A. 输出 3 行，每行 4 个 *
+B. 输出 4 行，每行 3 个 *
+C. 输出 12 行，每行 1 个 *
+D. 编译错误
+
+正确答案：A
+
+解析：
+外层 i 循环 3 次（控制行数），内层 j 循环 4 次（每行 4 个 *）。print(&quot;*&quot;) 不换行，内层结束后 println() 换行。
+
+
+题目 5：数组 int[] A = new int[4]; 共有几个元素？
+
+A. 3 个
+B. 4 个
+C. 5 个
+D. 不确定
+
+正确答案：B
+
+解析：
+new int[4] 创建了长度为 4 的数组。元素的下标从 0 到 3，共 4 个元素。
+
+
+题目 6：关于&quot;赋值&quot;和&quot;取值&quot;，以下说法正确的是？
+
+A. 赋值和取值是同一种操作
+B. arr[0] = 5 是取值
+C. int x = arr[0] 是赋值
+D. arr[0] = 5 是赋值，int x = arr[0] 是取值
+
+正确答案：D
+
+解析：
+arr[i] 出现在 = 左边时是赋值（写入）；出现在 = 右边或 println 中时是取值（读取）。
+</code></pre>
+<hr>
+<h3>8. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 一维数组 —— 通过一个下标访问元素，如 arr[0]
+2. 二维数组 —— 通过行和列两个下标访问元素，如 arr[行][列]
+3. 数组默认值 —— 创建数组后系统自动赋予的值，int 类型默认为 0
+4. 赋值 —— 把数据写入数组某个位置，如 A[0] = 5
+5. 取值 —— 从数组某个位置读取数据，如 int x = A[0]
+6. 双重 for 循环 —— 外层控制行（i），内层控制列（j），遍历二维数组的标准写法
+7. print —— 输出后不换行，适合在同一行连续输出
+8. println —— 输出后自动换行，适合一行输出结束后换到下一行
+9. \t —— 制表符（Tab），用于对齐表格列
+10. 下标越界 —— 访问不存在的下标时抛出的错误（ArrayIndexOutOfBoundsException）
+</code></pre>
+<hr>
+<h3>9. 流程动画素材</h3>
+<pre><code class="language-text">二维数组双重 for 循环的执行流程（以 2 行 3 列为例）：
+
+1. 外层循环 i=0（进入第 1 行）。
+2. 内层循环初始化 j=0。
+3. 判断 j&lt;3 → true → 执行 A[0][0] = 值 → j++ → j=1。
+4. 判断 j&lt;3 → true → 执行 A[0][1] = 值 → j++ → j=2。
+5. 判断 j&lt;3 → true → 执行 A[0][2] = 值 → j++ → j=3。
+6. 判断 j&lt;3 → false → 内层循环结束。
+7. 外层 i++ → i=1（进入第 2 行）。
+8. 内层重新初始化 j=0。
+9. j 从 0 到 2 再次跑一圈（A[1][0], A[1][1], A[1][2] 依次赋值）。
+10. 内层再次结束 → 外层 i++ → i=2。
+11. 判断 i&lt;2 → false → 双重循环全部结束。
+</code></pre>
+<hr>
+<h3>10. 课后练习题</h3>
+<pre><code class="language-text">练习 1：声明一个长度为 5 的 int 数组，用 for 循环从下标 0 到 4 依次赋值为 10, 20, 30, 40, 50，然后输出所有元素。
+
+考查知识点：
+一维数组、for 循环赋值
+
+参考答案：
+
+public class ArrayPractice {
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        for (int i = 0; i &lt; arr.length; i++) {
+            arr[i] = (i + 1) * 10;
+        }
+        for (int i = 0; i &lt; arr.length; i++) {
+            System.out.println(&quot;arr[&quot; + i + &quot;] = &quot; + arr[i]);
+        }
+    }
+}
+
+解题思路：
+arr[i] = (i+1)*10 可以让 i=0 时赋 10，i=1 时赋 20……以此类推。
+
+
+练习 2：声明一个 2 行 4 列的二维 int 数组，用双重 for 循环将所有元素赋值为行号和列号的乘积，然后以表格形式输出。
+
+考查知识点：
+二维数组、双重 for 循环
+
+参考答案：
+
+public class TwoDArrayPractice {
+    public static void main(String[] args) {
+        int[][] A = new int[2][4];
+
+        for (int i = 0; i &lt; 2; i++) {
+            for (int j = 0; j &lt; 4; j++) {
+                A[i][j] = (i + 1) * (j + 1);
+                System.out.print(A[i][j] + &quot;\t&quot;);
+            }
+            System.out.println();
+        }
+    }
+}
+
+解题思路：
+(i+1)*(j+1) 模拟行号×列号（因为下标从 0 开始，+1 后才是行列号）。
+
+
+练习 3：有一个数组 int[] scores = {85, 92, 78, 63, 95, 88}; 请计算所有分数的总和与平均值。
+
+考查知识点：
+一维数组遍历、累加求和、类型转换
+
+参考答案：
+
+public class AverageScore {
+    public static void main(String[] args) {
+        int[] scores = {85, 92, 78, 63, 95, 88};
+        int sum = 0;
+        for (int i = 0; i &lt; scores.length; i++) {
+            sum += scores[i];
+        }
+        double avg = sum * 1.0 / scores.length;  // 用 1.0 确保浮点除法
+        System.out.println(&quot;总分：&quot; + sum);
+        System.out.println(&quot;平均分：&quot; + avg);
+    }
+}
+
+解题思路：
+遍历数组累加得到 sum。平均值用 sum * 1.0 / length 得到精确的 double 结果。
+
+
+练习 4：找出以下代码中的所有错误。
+
+public class Test {
+    public static void main(String[] args) {
+        int[] A = new int[3];
+        for (int i = 1; i &lt;= 3; i++) {   // 错误1
+            A[i] = i;
+        }
+        int[][] B = new int[2];           // 错误2
+        B[0][0] = 1;                      // 错误3（B 不是二维数组）
+    }
+}
+
+考查知识点：
+数组下标、二维数组声明
+
+参考答案：
+错误1：int i=1; i&lt;=3 → 应该从 i=0 开始，i&lt;3。A[3] 越界。
+错误2：int[][] B = new int[2]; → 二维数组声明不完整，应为 new int[2][3]（需要两个维度）。
+错误3：B[0][0] → 因为错误2，B 没有得到正确的二维数组声明，无法赋值。
+
+
+练习 5：用双重 for 循环输出以下图案（每行递增一个 *）。
+
+*
+**
+***
+****
+*****
+
+考查知识点：
+双重 for 循环、内层循环次数由外层变量控制
+
+参考答案：
+
+public class StarPattern {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt;= 5; i++) {
+            for (int j = 1; j &lt;= i; j++) {   // j &lt;= i：第 i 行有 i 个 *
+                System.out.print(&quot;*&quot;);
+            }
+            System.out.println();
+        }
+    }
+}
+
+解题思路：
+内层的循环条件是 j&lt;=i——当 i=1 时内层跑 1 次，i=2 时跑 2 次……以此类推实现每行递增效果。
+</code></pre>
+<hr>
+<h3>11. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">数组与 for 循环综合复习
+├── 一维数组复习
+│   ├── 声明：int[] A = new int[长度];
+│   ├── 下标从 0 开始（A[0] 是第一个元素）
+│   ├── 默认值：int 类型默认 0
+│   ├── 赋值：A[i] = 值（写入）
+│   └── 取值：x = A[i]（读取）
+├── 二维数组 + 双重 for 循环
+│   ├── 声明：int[][] A = new int[行数][列数];
+│   ├── 外层循环 → 控制行（i）
+│   ├── 内层循环 → 控制列（j）
+│   ├── 执行过程：外层跑一次，内层跑一圈
+│   └── 赋值：A[i][j] = 值
+├── 输出格式控制
+│   ├── print()：不换行输出（同行动态拼接）
+│   ├── println()：输出后换行
+│   ├── \t：制表符对齐
+│   └── 横排表格输出：内层 print + 外层 println
+├── 常见错误
+│   ├── 下标从 1 开始导致越界
+│   ├── 二维数组声明不完整
+│   ├── 内层外层循环变量同名
+│   └── 混淆 print 和 println
+└── 学习方法
+    ├── 多看视频（有些同学看了 96 分钟，看了几遍）
+    └── 数组是基础中的基础——不会就没法学后面的
+</code></pre>
+<hr>
+<h3>12. 课后总结</h3>
+<pre><code class="language-text">1. 本节课的核心是将数组和 for 循环两个知识点融合起来——用 for 循环操作一维和二维数组的赋值与取值，这是 Java 编程中最高频的操作模式。
+2. 操作数组时一定要记住&quot;下标从 0 开始&quot;——这是写 for 循环遍历数组时最容易出错的点。
+3. 双重 for 循环的规则是&quot;外行内列&quot;——外层跑一次，内层跑一圈。理解这个模型后，操作任何二维数据都不会乱。
+4. 数组是后续学习集合（ArrayList）、算法（排序、查找）、数据结构的基础。现在多练习数组操作，后面会事半功倍。
+5. 课后建议多练习：(1) 用 for 循环给一维数组赋值并输出；(2) 用双重循环创建 3×3 和 4×4 的二维数组并输出表格；(3) 尝试修改代码把竖排输出改成横排输出；(4) 练习用双重循环输出不同的星号图案。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-08.html"><span>上一篇</span><strong>while循环与do-while循环</strong></a><a class="article-pager-link next" rel="next" href="java-10.html"><span>下一篇</span><strong>类的定义结构与访问器详解</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

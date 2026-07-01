@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结 1. 课程基本信息 课程 ID 建议 ： java oop polymorphism upcast 课程标题 ：面向对象三大特征与多态详解——重写、super、final 与上转型对象 所属章节 ：Java 类与对象 → 继承 → 多态 上课日期 ：2025 10 16 知识点标签 ： 封" />
+  <title>面向对象三大特征与多态详解 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=java-oop-polymorphism-upcast">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Java · 第 15 课</p>
+      <h1>面向对象三大特征与多态详解</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">面向对象三大特征与多态详解</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结</h2>
+<hr>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议</strong>：<code>java-oop-polymorphism-upcast</code></li>
+<li><strong>课程标题</strong>：面向对象三大特征与多态详解——重写、super、final 与上转型对象</li>
+<li><strong>所属章节</strong>：Java 类与对象 → 继承 → 多态</li>
+<li><strong>上课日期</strong>：2025-10-16</li>
+<li><strong>知识点标签</strong>：<code>封装</code> <code>继承</code> <code>多态</code> <code>重写</code> <code>重载</code> <code>super</code> <code>final</code> <code>上转型对象</code> <code>构造方法链</code> <code>隐藏</code> <code>访问权限</code></li>
+<li><strong>难度等级</strong>：进阶-核心</li>
+<li><strong>适合对象</strong>：已学完继承基础、正在学习面向对象核心机制多态的初学者</li>
+<li><strong>本节课一句话概括</strong>：本节课是面向对象章节的&quot;压轴大课&quot;——系统讲解了面向对象三大特征（封装/继承/多态）、方法重写的完整规则（条件/调用/权限限制）、super 与 final 关键字的使用、以及多态的核心机制——上转型对象（父类引用指向子类对象，调用的是子类重写后的方法）。</li>
+</ul>
+<hr>
+<h3>2. 课堂摘要</h3>
+<pre><code class="language-text">1. 课堂首先通过代码演示验证了&quot;创建子类对象时先创建父类对象&quot;的构造方法调用链——在父类和子类的构造方法中分别加输出语句，运行时父类构造方法先执行。
+2. 老师通过&quot;属性继承但值不继承&quot;的演示，帮助学生理解一个关键细节——子类继承父类的 name 属性，但如果子类不自己设置，输出的是 null（成员变量默认值），因为&quot;继承的是属性而不是属性的值&quot;。
+3. 正式总结了面向对象的三大特征：封装（类将属性和方法封装在类体中）、继承（子类继承父类非私有成员）、多态（对象不变、表现形式多样，通过重载和重写实现）。
+4. 深入讲解了重写（Override）的完整规则：方法头相同/方法体不同/发生在不同类体、不能降低访问权限、子类重写了就调用子类的版本，未重写就继承父类的版本。
+5. 引入 final 关键字——修饰类不可被继承（叶子节点/丁克家庭）、修饰变量是常量（如 PI）、修饰方法不能被重写。
+6. 最后重点讲解了上转型对象（Upcasting）——子类对象引用放入父类对象中，此时调用方法使用的是子类重写后的版本，&quot;虽然是父亲在花这个钱，但钱是儿子挣的&quot;。
+</code></pre>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<pre><code class="language-text">1. 能说出面向对象的三大特征——封装、继承、多态，并用一句话解释每个特征。
+2. 能画出子类对象创建时构造方法的调用链（从上到下：祖先→父亲→子类），并说明 super 必须写在子类构造方法的第一句。
+3. 能解释&quot;子类继承属性但不继承属性值&quot;的含义——属性名继承了，但值需要子类自己设置。
+4. 能完整说出重写（Override）的四条规则：发生在不同类体、方法头完全相同、方法体不同、不能降低访问权限。
+5. 能说出 final 关键字的三种用法——修饰类（不可继承）、修饰变量（常量）、修饰方法（不可重写）。
+6. 能写出一段上转型对象的代码并解释结果——Animal a = new Dog(); a.speak(); 调用的是 Dog 重写后的 speak()。
+</code></pre>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：子类对象创建时构造方法的调用链</h4>
+<h5>这个知识点是什么？</h5>
+<p>当创建子类对象时，构造方法的调用顺序是<strong>从上到下</strong>——从继承树的最顶层（祖先）开始，逐层向下，直到目标子类。</p>
+<p>核心结论：</p>
+<ol>
+<li>创建子类对象时，<strong>先创建父类对象，再创建子类对象</strong></li>
+<li>子类构造方法总是先调用父类的某个构造方法</li>
+<li>如果没有显式写 <code>super(...)</code>，系统默认调用父类的无参构造方法</li>
+</ol>
+<h5>课堂代码验证</h5>
+<p>老师在父类和子类的构造方法中各加了一句输出语句，直观地展示了调用顺序：</p>
+<pre><code class="language-java">// 父类
+public class Father {
+    public Father() {
+        System.out.println(&quot;父类构造方法被调用&quot;);  // 先输出
+    }
+}
+
+// 子类
+public class Son extends Father {
+    public Son() {
+        System.out.println(&quot;子类构造方法被调用&quot;);  // 后输出
+    }
+}
+
+// 测试
+new Son();
+// 输出：
+// 父类构造方法被调用
+// 子类构造方法被调用
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<blockquote>
+<p>&quot;我并没有调用父类。但是当我生成子类的时候，我先生成父类的构造方法，再生成子类的构造方法。创建父类的时候是没有子类的，但是创建子类的时候一定先创建父类。&quot;</p>
+</blockquote>
+<p>老师进一步总结：</p>
+<blockquote>
+<p>&quot;创建对象必须得从上面摸下来，你不能突兀地就用你自己。……你想有，必须先有父亲。没有父亲，一定不会有你。&quot;</p>
+</blockquote>
+<h5>super 关键字的两个规则</h5>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>位置</td>
+<td>super(参数) 必须出现在子类构造方法的<strong>第一句</strong></td>
+</tr>
+<tr>
+<td>必要性</td>
+<td>如果父类没有无参构造方法，super(参数) <strong>必须写</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h4>知识点 2：继承中的&quot;隐藏&quot;——继承属性但不继承属性值</h4>
+<h5>这个知识点是什么？</h5>
+<p>子类继承父类的<strong>属性名</strong>（如 name、age），但<strong>不继承属性的值</strong>。子类需要自己给继承来的属性赋值。</p>
+<h5>课堂代码演示</h5>
+<pre><code class="language-java">// 父类
+public class Father {
+    String name;  // 属性
+    
+    public Father(String name) {
+        this.name = name;
+    }
+    
+    public String getName() {
+        return name;
+    }
+}
+
+// 子类——也定义了一个 name
+public class Son extends Father {
+    String name;  // 子类自己的 name（隐藏了父类的 name）
+    
+    public Son(String fatherName, String sonName) {
+        super(fatherName);
+        this.name = sonName;
+    }
+    
+    public String getName() {
+        return name;  // 返回的是子类自己的 name
+    }
+}
+</code></pre>
+<h5>关键验证</h5>
+<p>老师通过一个微妙的测试来证明&quot;值不继承&quot;：</p>
+<blockquote>
+<p>&quot;我只给父类的 name 赋了值，但没有给子类的 name 赋值。我用子类对象调用 getName()，输出的是 null——因为子类继承的是属性（有 name 这个变量），但值需要子类自己去设置。&quot;</p>
+</blockquote>
+<h5>课堂中的理解方式</h5>
+<blockquote>
+<p>&quot;你有年龄，你父亲的年龄比方说是 50，你的年龄是 20。你只继承了这个年龄的<strong>属性</strong>，但是这个<strong>值</strong>是不能继承的。你必须要自己去设置它。&quot;</p>
+</blockquote>
+<p>这个知识点还验证了一个之前的结论——成员变量（全局变量）不赋值时系统给默认值（String 默认 null），这和局部变量（不初始化就报错）完全不同。</p>
+<hr>
+<h4>知识点 3：面向对象的三大特征</h4>
+<h5>这个知识点是什么？</h5>
+<p>面向对象编程有三大基本特征，它们是整个 Java 面向对象体系的核心支柱：</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>一句话解释</th>
+<th>课堂类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>封装（Encapsulation）</strong></td>
+<td>类将属性和方法包装在类体内部，通过访问权限控制外部访问</td>
+<td>&quot;一个 p 对象过来，里面封装了 name、language、age……什么都有&quot;</td>
+</tr>
+<tr>
+<td><strong>继承（Inheritance）</strong></td>
+<td>子类继承父类的非私有属性和方法，并可以增加自己的新成员</td>
+<td>&quot;你继承了你父亲唱歌的能力和浓眉大眼的特征&quot;</td>
+</tr>
+<tr>
+<td><strong>多态（Polymorphism）</strong></td>
+<td>同一个对象可以表现出多种不同的形态（通过重载和重写实现）</td>
+<td>&quot;时装秀——模特（对象）不变，衣服（表现形式）变化&quot;</td>
+</tr>
+</tbody></table>
+<h5>课堂中的理解方式</h5>
+<p>老师用&quot;时装秀&quot;来解释多态：</p>
+<blockquote>
+<p>&quot;你看这些模特们，就这一批人，一会春季、一会秋季的，一会是这种衣服、一会是那种衣服。对象是不变的，衣服是变化的——这就是多态。&quot;</p>
+</blockquote>
+<h5>多态的两种实现方式</h5>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>英文</th>
+<th>发生位置</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>重载</td>
+<td>Overload</td>
+<td>同一个类中</td>
+<td>方法名相同，参数列表不同</td>
+</tr>
+<tr>
+<td>重写</td>
+<td>Override</td>
+<td>不同类体中（父子类）</td>
+<td>方法头完全相同，方法体不同</td>
+</tr>
+</tbody></table>
+<hr>
+<h4>知识点 4：方法重写（Override）的完整规则</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>重写（Override）<strong>是子类定义一个与父类</strong>方法头完全相同</strong>但<strong>方法体不同</strong>的方法，从而用子类自己的实现<strong>隐藏</strong>父类的该方法。</p>
+<h5>重写的核心条件</h5>
+<pre><code class="language-text">✅ 发生在不同类体中（子类 vs 父类）
+✅ 方法头完全相同：方法名 + 参数列表 + 返回值类型完全一致
+✅ 方法体不同
+</code></pre>
+<blockquote>
+<p>&quot;你就记得方法头相同、方法体不同，就完事了。&quot;</p>
+</blockquote>
+<h5>重写的调用规则</h5>
+<blockquote>
+<p>&quot;子类创建对象，如果子类重写了父类的方法，运行时调用的是子类重写后的方法。如果子类没有重写，就继承使用父类的方法。&quot;</p>
+</blockquote>
+<pre><code class="language-java">// 父类
+public class People {
+    public void speak() {
+        System.out.println(&quot;I speak Chinese&quot;);
+    }
+}
+
+// 子类重写
+public class Student extends People {
+    @Override
+    public void speak() {
+        System.out.println(&quot;I like English!&quot;);  // 重写后的版本
+    }
+}
+
+// 测试
+Student s = new Student();
+s.speak();  // 输出：I like English! ——调用子类的版本
+</code></pre>
+<h5>重写不能降低访问权限</h5>
+<blockquote>
+<p>&quot;你不能降低它的可见性。但是你可以扩大——大于等于都可以，但是不能小于。&quot;</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">父类方法的权限</th>
+<th align="center">子类重写可用的权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public</td>
+<td align="center">✅ 只能是 public</td>
+</tr>
+<tr>
+<td align="center">protected</td>
+<td align="center">✅ public 或 protected</td>
+</tr>
+<tr>
+<td align="center">default</td>
+<td align="center">✅ public、protected 或 default</td>
+</tr>
+<tr>
+<td align="center">private</td>
+<td align="center">❌ 不能被重写（子类看不到）</td>
+</tr>
+</tbody></table>
+<p>课堂代码验证——老师现场尝试将 protected 的方法重写成 private，编译器报错：<code>Cannot reduce the visibility of the inherited method</code>。</p>
+<h5>重写 vs 重载（对比表）</h5>
+<table>
+<thead>
+<tr>
+<th>比较维度</th>
+<th align="center">重写（Override）</th>
+<th align="center">重载（Overload）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>英文名</td>
+<td align="center">Override</td>
+<td align="center">Overload</td>
+</tr>
+<tr>
+<td>发生位置</td>
+<td align="center">不同类体（父子类之间）</td>
+<td align="center">同一个类体中</td>
+</tr>
+<tr>
+<td>方法头</td>
+<td align="center">完全相同</td>
+<td align="center">方法名相同，参数列表不同</td>
+</tr>
+<tr>
+<td>方法体</td>
+<td align="center">不同</td>
+<td align="center">可以相同也可以不同</td>
+</tr>
+<tr>
+<td>修改权限</td>
+<td align="center">不能降低，可以扩大</td>
+<td align="center">无限制</td>
+</tr>
+<tr>
+<td>典型例子</td>
+<td align="center">子类重新定义 speak()</td>
+<td align="center">构造方法的不同参数版本</td>
+</tr>
+<tr>
+<td>关键记忆</td>
+<td align="center">&quot;不同类、同头不同体&quot;</td>
+<td align="center">&quot;同类、同名不同参&quot;（一同三不同）</td>
+</tr>
+</tbody></table>
+<hr>
+<h4>知识点 5：final 关键字——最后的、不可变的</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>final</code> 是 Java 的一个关键字，意思是**&quot;最终的/不可改变的&quot;**。它可以修饰类、变量和方法，各有不同的语义。</p>
+<h5>final 的三种用法</h5>
+<table>
+<thead>
+<tr>
+<th>修饰目标</th>
+<th>含义</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>修饰类</strong></td>
+<td>该类<strong>不能被继承</strong>（成为叶子节点）</td>
+<td>&quot;丁克家庭——不生孩子&quot;</td>
+</tr>
+<tr>
+<td><strong>修饰变量</strong></td>
+<td>该变量是<strong>常量</strong>，赋值后不可修改</td>
+<td>&quot;π = 3.1415926——永远不会变&quot;</td>
+</tr>
+<tr>
+<td><strong>修饰方法</strong></td>
+<td>该方法<strong>不能被重写</strong></td>
+<td>&quot;最终版本——不接受修改&quot;</td>
+</tr>
+</tbody></table>
+<h5>具体示例</h5>
+<pre><code class="language-java">// 1. final 修饰类——不能被继承
+final class FinalClass {
+    // 这个类不能有子类
+}
+// class TryExtend extends FinalClass { }  // ❌ 编译错误！
+
+// 2. final 修饰变量——常量
+final double PI = 3.1415926;
+// PI = 3.14;  // ❌ 编译错误！不能修改常量的值
+
+// 3. final 修饰方法——不能被重写
+public class Father {
+    public final void importantRule() {
+        System.out.println(&quot;这是不可改变的规则&quot;);
+    }
+}
+public class Son extends Father {
+    // @Override
+    // public void importantRule() { }  // ❌ 编译错误！final 方法不能重写
+}
+</code></pre>
+<h5>叶子节点的概念</h5>
+<blockquote>
+<p>&quot;什么叫叶子节点呢？用 final 修饰的类，就是叶子节点。它就叫做丁克——不生孩子的。他就不生子女了，就没有继承了。&quot;</p>
+</blockquote>
+<hr>
+<h4>知识点 6：上转型对象（Upcasting）——多态的核心机制</h4>
+<h5>这个知识点是什么？</h5>
+<p><strong>上转型对象</strong>是指：把一个子类对象（引用）赋值给一个父类类型的变量。此时，通过父类变量调用方法时，<strong>实际执行的是子类重写后的方法</strong>。</p>
+<h5>语法形式</h5>
+<pre><code class="language-java">父类类型 变量名 = new 子类类型();
+// 或者
+父类类型 变量名 = 子类对象引用;
+</code></pre>
+<h5>课堂代码演示</h5>
+<pre><code class="language-java">// 父类
+public class Animal {
+    public void speak() {
+        System.out.println(&quot;This is Animal&quot;);
+    }
+}
+
+// 子类——重写 speak()
+public class Dog extends Animal {
+    @Override
+    public void speak() {
+        System.out.println(&quot;This is Dog&quot;);
+    }
+}
+
+// 测试——上转型对象
+public class Test {
+    public static void main(String[] args) {
+        // 情况 1：父类引用指向父类对象
+        Animal a1 = new Animal();
+        a1.speak();  // 输出：This is Animal
+
+        // 情况 2：父类引用指向子类对象（上转型！）
+        Animal a2 = new Dog();
+        a2.speak();  // 输出：This is Dog ← 调用的是子类的方法！
+    }
+}
+</code></pre>
+<h5>运行结果</h5>
+<pre><code>This is Animal
+This is Dog
+</code></pre>
+<p><strong>关键发现</strong>：<code>a2</code> 的声明类型是 <code>Animal</code>（父类），但它引用的是 <code>Dog</code> 对象（子类）。当调用 <code>a2.speak()</code> 时，执行的是 <code>Dog</code> 重写后的版本——这就是多态。</p>
+<h5>课堂中的理解方式</h5>
+<p>老师用了一个&quot;父子花钱&quot;的经典类比：</p>
+<blockquote>
+<p>&quot;你长大了，在外面工作了，兜里揣着钱。回家过年，你爸伸手把钱掏出来——虽然是你爸在花这个钱、拿这个钱，但是钱是你挣的！&quot;</p>
+</blockquote>
+<p>翻译成 Java 语言：</p>
+<ul>
+<li>父亲伸手（Father reference）→ 父类变量 <code>Animal a2</code></li>
+<li>掏儿子的钱（Child&#39;s money）→ 实际指向 <code>new Dog()</code></li>
+<li>花儿子的钱（Spending child&#39;s money）→ 调用的是 Dog 重写后的方法</li>
+</ul>
+<h5>为什么叫&quot;上转型&quot;？</h5>
+<ul>
+<li>&quot;上&quot;是指从子类转向父类（沿着继承树向上）</li>
+<li>Dog（子/下）→ Animal（父/上）→ 所以叫<strong>向上转型</strong></li>
+<li>&quot;转型&quot;是指引用的类型发生了变化</li>
+</ul>
+<blockquote>
+<p>&quot;明明是 Dog 的对象（B），放到了 Animal 的类型（A）里面。所以 B 的这个对象叫 A 的上转型对象。&quot;</p>
+</blockquote>
+<h5>反向操作可行吗？</h5>
+<pre><code class="language-java">// ❌ 不可以——父类对象不能赋值给子类变量
+Dog d = new Animal();  // 编译错误！Type mismatch
+</code></pre>
+<blockquote>
+<p>&quot;父亲是不能给你实例化的。为什么？因为当你创建对象的时候，是先创建父类的方法。有父亲的时候不一定有你，但有你就一定有父亲。&quot;</p>
+</blockquote>
+<h5>为什么上转型对象如此重要？</h5>
+<p>老师强调：</p>
+<blockquote>
+<p>&quot;这是本章重点当中的重点。考试不考，但是编程的时候 100% 会用。&quot;</p>
+</blockquote>
+<p>上转型对象是实现<strong>多态</strong>的关键机制。在真实开发中，它允许我们编写&quot;面向父类编程&quot;的通用代码——一个方法接收父类类型的参数，但可以传入任意子类对象，从而自动适配不同的子类行为。</p>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>封装</td>
+<td>继承</td>
+<td>把属性和方法包装在类体内 vs 子类复用父类的非私有成员</td>
+</tr>
+<tr>
+<td>继承</td>
+<td>多态</td>
+<td>子类&quot;有&quot;父类的东西（代码复用） vs 子类&quot;变成&quot;父类的形态（行为多样化）</td>
+</tr>
+<tr>
+<td>重写（Override）</td>
+<td>重载（Overload）</td>
+<td>不同类体、方法头完全相同 vs 同一类体、方法名相同参数不同</td>
+</tr>
+<tr>
+<td>super</td>
+<td>this</td>
+<td>代表父类对象的引用 vs 代表当前对象的引用</td>
+</tr>
+<tr>
+<td>final 类</td>
+<td>普通类</td>
+<td>不能被继承（叶子节点） vs 可以被继承</td>
+</tr>
+<tr>
+<td>final 变量</td>
+<td>普通变量</td>
+<td>常量，值不可改变 vs 变量，值可以改变</td>
+</tr>
+<tr>
+<td>上转型对象</td>
+<td>普通对象</td>
+<td>父类引用指向子类对象（调用子类方法） vs 引用和对象类型一致</td>
+</tr>
+<tr>
+<td>子类 → 父类赋值</td>
+<td>父类 → 子类赋值</td>
+<td>✅ 可以（上转型） vs ❌ 不可以（编译错误）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：构造方法调用链完整演示</h4>
+<p><strong>适用知识点</strong>：子类对象创建顺序、super 关键字</p>
+<pre><code class="language-java">// 祖先类（爷爷）
+public class GrandFather {
+    public GrandFather() {
+        System.out.println(&quot;① GrandFather 构造方法&quot;);
+    }
+}
+
+// 父类（父亲）——继承 GrandFather
+public class Father extends GrandFather {
+    public Father() {
+        System.out.println(&quot;② Father 构造方法&quot;);
+    }
+
+    public Father(String name) {
+        System.out.println(&quot;② Father(String) 构造方法，name=&quot; + name);
+    }
+}
+
+// 子类（儿子）——继承 Father
+public class Son extends Father {
+    public Son() {
+        // 自动调用 Father()
+        System.out.println(&quot;③ Son 构造方法&quot;);
+    }
+
+    public Son(String name) {
+        super(name);  // 显式调用 Father(String)
+        System.out.println(&quot;③ Son(String) 构造方法&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 测试类
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(&quot;=== 无参构造 ===&quot;);
+        new Son();
+
+        System.out.println(&quot;\n=== 带参构造 ===&quot;);
+        new Son(&quot;小明&quot;);
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>=== 无参构造 ===
+① GrandFather 构造方法
+② Father 构造方法
+③ Son 构造方法
+
+=== 带参构造 ===
+① GrandFather 构造方法
+② Father(String) 构造方法，name=小明
+③ Son(String) 构造方法
+</code></pre>
+<p><strong>解释</strong>：创建 Son 对象时，构造方法的调用顺序是 GrandFather → Father → Son，严格按照继承树的从上到下的顺序。即使 Son 只写了 <code>super(name)</code>，系统也会自动沿着继承链逐层向上调用。</p>
+<p><strong>初学者提示</strong>：可以用这个&quot;三层嵌套的输出&quot;来记住构造方法的调用顺序——最顶层的祖先先初始化，最下面的子类最后初始化。</p>
+<hr>
+<h4>示例 2：重写的访问权限限制——扩大可以，缩小不行</h4>
+<p><strong>适用知识点</strong>：重写规则、访问权限限制</p>
+<pre><code class="language-java">// 父类
+public class Father {
+    protected void show() {       // protected 权限
+        System.out.println(&quot;Father&#39;s show()&quot;);
+    }
+
+    public void display() {       // public 权限
+        System.out.println(&quot;Father&#39;s display()&quot;);
+    }
+}
+
+// 子类
+public class Son extends Father {
+    // ✅ 可以——扩大访问权限（protected → public）
+    @Override
+    public void show() {
+        System.out.println(&quot;Son&#39;s show()——权限从 protected 扩大到 public&quot;);
+    }
+
+    // ❌ 不可以——这行代码会编译错误！
+    // @Override
+    // protected void display() {   // 试图把 public 降到 protected
+    //     System.out.println(&quot;Error!&quot;);
+    // }
+    // 错误信息：Cannot reduce the visibility of the inherited method
+}
+</code></pre>
+<pre><code class="language-java">// 测试类
+public class Test {
+    public static void main(String[] args) {
+        Son s = new Son();
+        s.show();     // 输出：Son&#39;s show()——权限从 protected 扩大到 public
+        s.display();  // 输出：Father&#39;s display()（继承来的，没有重写）
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>Son&#39;s show()——权限从 protected 扩大到 public
+Father&#39;s display()
+</code></pre>
+<p><strong>解释</strong>：子类重写父类方法时，访问权限可以<strong>扩大</strong>（protected → public ✅），但不能<strong>缩小</strong>（public → protected ❌）。这是 Java 语言的安全设计——如果子类缩小了权限，原来可以通过父类引用访问该方法的地方，换成子类后反而访问不了了，这违背了多态的原则。</p>
+<p><strong>初学者提示</strong>：实际开发中，如果父类方法已经是 public，子类重写时用 <code>public</code> 即可。最安全的重写策略是<strong>保持权限不变</strong>。</p>
+<hr>
+<h4>示例 3：上转型对象——多态的经典演示</h4>
+<p><strong>适用知识点</strong>：上转型对象、多态、方法重写</p>
+<pre><code class="language-java">// 父类：动物
+public class Animal {
+    String name;
+
+    public Animal() { }
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void speak() {
+        System.out.println(name + &quot;发出声音&quot;);
+    }
+
+    public void eat() {
+        System.out.println(name + &quot;吃东西&quot;);
+    }
+}
+
+// 子类：狗——重写 speak()
+public class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public void speak() {
+        System.out.println(name + &quot;汪汪叫！🐶&quot;);
+    }
+
+    // Dog 独有的方法
+    public void wagTail() {
+        System.out.println(name + &quot;摇尾巴~&quot;);
+    }
+}
+
+// 子类：猫——重写 speak()
+public class Cat extends Animal {
+    public Cat(String name) {
+        super(name);
+    }
+
+    @Override
+    public void speak() {
+        System.out.println(name + &quot;喵喵叫！🐱&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">// 测试类——上转型对象 + 多态演示
+public class Test {
+    public static void main(String[] args) {
+        // ===== 普通用法：什么类型就调什么方法 =====
+        Dog d = new Dog(&quot;旺财&quot;);
+        d.speak();  // 旺财汪汪叫！🐶
+
+        Cat c = new Cat(&quot;咪咪&quot;);
+        c.speak();  // 咪咪喵喵叫！🐱
+
+        System.out.println(&quot;---&quot;);
+
+        // ===== 上转型对象：父类引用指向子类对象 =====
+        Animal a1 = new Dog(&quot;小黑&quot;);   // Dog 对象放入 Animal 变量
+        Animal a2 = new Cat(&quot;小白&quot;);   // Cat 对象放入 Animal 变量
+
+        // 调用的是各自子类重写后的版本！
+        a1.speak();  // 小黑汪汪叫！🐶 ← 不是&quot;发出声音&quot;！
+        a2.speak();  // 小白喵喵叫！🐱 ← 不是&quot;发出声音&quot;！
+        a1.eat();    // 小黑吃东西（没有重写，用父类的版本）
+
+        // a1.wagTail();  // ❌ 编译错误！Animal 类型没有 wagTail() 方法
+
+        System.out.println(&quot;---&quot;);
+
+        // ===== 多态的应用：统一处理不同类型的子类 =====
+        Animal[] pets = { new Dog(&quot;阿黄&quot;), new Cat(&quot;花花&quot;), new Dog(&quot;大毛&quot;) };
+        for (Animal pet : pets) {
+            pet.speak();  // 每个 pet 根据实际类型调用对应的方法
+        }
+    }
+}
+</code></pre>
+<p><strong>运行结果</strong>：</p>
+<pre><code>旺财汪汪叫！🐶
+咪咪喵喵叫！🐱
+---
+小黑汪汪叫！🐶
+小白喵喵叫！🐱
+小黑吃东西
+---
+阿黄汪汪叫！🐶
+花花喵喵叫！🐱
+大毛汪汪叫！🐶
+</code></pre>
+<p><strong>解释</strong>：</p>
+<ul>
+<li><code>a1</code> 的声明类型是 <code>Animal</code>，但实际引用的对象是 <code>Dog</code>。调用 <code>a1.speak()</code> 时，JVM 在运行时发现实际对象是 Dog，于是执行 Dog 重写后的 <code>speak()</code>。</li>
+<li><code>a1</code> 不能调用 Dog 独有的 <code>wagTail()</code>，因为 Animal 类型中没有这个方法——&quot;父亲不知道儿子还会摇尾巴&quot;。</li>
+<li>最后的多态数组演示了上转型对象的实际用途——可以用同一个父类类型的数组统一管理所有子类对象。</li>
+</ul>
+<p><strong>初学者提示</strong>：</p>
+<ul>
+<li>上转型对象的&quot;上&quot;是指沿着继承树向上（子类 → 父类）</li>
+<li>方法调用看<strong>实际对象类型</strong>（运行时决定），字段访问看<strong>引用变量类型</strong>（编译时决定）</li>
+<li>上转型对象只能调用父类中定义过的方法，子类独有的方法调用不了</li>
+</ul>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：父亲花钱——上转型对象的经典类比</h4>
+<p><strong>课堂场景</strong>：这是老师在本节课中最精彩的一个类比，用来解释上转型对象。</p>
+<blockquote>
+<p>&quot;你长大了，在外面工作了。回家过年，你兜里揣着钱。你爸伸手，把钱掏出来——虽然是你爸在花这个钱、拿这个钱，但是钱是你挣的！&quot;</p>
+</blockquote>
+<p><strong>对应的代码逻辑</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>生活场景</th>
+<th>Java 代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>父亲伸手（Father 类型）</td>
+<td><code>Animal a = ...</code></td>
+</tr>
+<tr>
+<td>掏儿子的钱</td>
+<td><code>= new Dog()</code></td>
+</tr>
+<tr>
+<td>花儿子的钱</td>
+<td><code>a.speak()</code> → 调用 Dog 的 speak()</td>
+</tr>
+</tbody></table>
+<p><strong>为什么父亲不能给儿子钱（反向转型不行）</strong>：</p>
+<blockquote>
+<p>&quot;有父亲的时候不一定有你。但是有你就一定有父亲。……当创建你的时候就先创建了父亲，所以父亲可以用你的方法。&quot;</p>
+</blockquote>
+<p><strong>反向类比</strong>：</p>
+<blockquote>
+<p>&quot;反过来，你爸能给你实例化吗？不能。因为创建你的时候先创建父亲，父亲存在的时候你还不一定存在。&quot;</p>
+</blockquote>
+<hr>
+<h4>案例 2：时装秀——多态的视觉化类比</h4>
+<p><strong>课堂场景</strong>：老师用时装秀来解释多态。</p>
+<blockquote>
+<p>&quot;你看那些时装秀的模特们，就这一批人。一会春季的服装、一会秋季的、一会这种风格、一会那种风格。对象是不变的（同一批模特），衣服是变化的（不同的展示形式）——这就是多态。&quot;</p>
+</blockquote>
+<p><strong>映射到 Java</strong>：</p>
+<ul>
+<li><strong>对象不变</strong> = 同一个对象（如一个 Student 对象）</li>
+<li><strong>表现形式多样</strong> = 同一个方法可以有多种行为（通过重载和重写）</li>
+<li>重载：<code>print(int)</code>、<code>print(double)</code>、<code>print(String)</code>——同一个方法名，不同参数</li>
+<li>重写：父类 <code>speak()</code> 说中文，子类 <code>speak()</code> 说英文——同一个方法头，不同实现</li>
+</ul>
+<hr>
+<h3>8. 易错点总结</h3>
+<pre><code class="language-text">易错点 1：以为子类继承父类属性的同时也继承了属性值——实际上只继承属性名，值需要子类自己设置。父类的 name=&quot;Tom&quot;，子类的 name 如果不赋值则是 null（成员变量默认值）。
+
+易错点 2：把重写和重载搞混——&quot;一同三不同&quot;是重载（同一个类、方法名相同、参数列表不同、方法体可同可不同）；&quot;同头异体跨类&quot;是重写（不同类、方法头相同、方法体不同）。
+
+易错点 3：重写时试图降低访问权限——父类是 public，子类不能改成 protected 或 private。编译器报错：Cannot reduce the visibility of the inherited method。可以扩大但不能缩小。
+
+易错点 4：以为上转型对象调用的是父类的方法——实际上调用的是子类重写后的版本。Animal a = new Dog(); a.speak(); 输出的是 Dog 的 speak()，不是 Animal 的。&quot;父亲花的钱是儿子挣的。&quot;
+
+易错点 5：试图把父类对象赋值给子类变量——Dog d = new Animal(); 是编译错误。因为&quot;有父亲的时候不一定有孩子&quot;，子类变量要求对象至少是子类类型，父类对象不满足。
+</code></pre>
+<hr>
+<h3>9. 小测验题目</h3>
+<pre><code class="language-text">题目 1：面向对象的三大特征不包括以下哪一个？
+A. 封装  B. 继承  C. 抽象  D. 多态
+正确答案：C
+解析：面向对象的三大特征是封装、继承、多态。抽象（abstract）虽然也是重要概念，但不属于三大特征。
+
+题目 2：final 关键字修饰类时，表示什么意思？
+A. 该类不能被实例化  B. 该类不能被继承  C. 该类的方法不能被调用  D. 该类是抽象类
+正确答案：B
+解析：final 修饰类表示该类是&quot;最终类&quot;——不能被任何类继承，是继承树的叶子节点。
+
+题目 3：以下哪个代码是正确的上转型对象写法？
+A. Dog d = new Animal();  B. Animal a = new Dog();  C. Animal a = (Dog) new Animal();  D. Dog d = (Animal) new Dog();
+正确答案：B
+解析：上转型对象是父类引用指向子类对象——Animal a = new Dog();。反过来的 A 选项是编译错误。
+
+题目 4：子类重写父类方法时，关于访问权限的正确说法是？
+A. 必须和父类完全相同  B. 可以任意修改  C. 可以扩大但不能缩小  D. 可以缩小但不能扩大
+正确答案：C
+解析：重写时访问权限只能扩大（如 protected → public），不能缩小（如 public → protected）。
+
+题目 5：关于 super 关键字，以下说法错误的是？
+A. super 代表父类对象的引用  B. super(参数) 必须写在子类构造方法的第一句  C. super 和 this 可以在同一个构造方法中共存  D. super 可以调用父类的任意 private 方法
+正确答案：D
+解析：super 代表父类引用，但不能访问父类的 private 成员（和子类一样受访问权限限制）。C 选项是错的——super(参数) 和 this(参数) 不能同时出现在一个构造方法中，因为两者都要求在第一句。
+</code></pre>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<pre><code class="language-text">1. 封装（Encapsulation） —— 类将属性和方法包装在类体内部，通过访问权限控制外部访问
+2. 继承（Inheritance） —— 子类自动获得父类的非私有属性和方法，使用 extends 关键字
+3. 多态（Polymorphism） —— 同一个对象可以表现出多种不同的形态，通过重载和重写实现
+4. 重写（Override） —— 子类定义与父类方法头相同、方法体不同的方法，隐藏父类的方法
+5. 重载（Overload） —— 同一个类中方法名相同、参数列表不同，提供同一功能的多个版本
+6. super —— 代表父类对象的引用，在子类构造方法第一句调用父类构造方法
+7. final 类 —— 不能被继承的类，是继承树的&quot;叶子节点&quot;（类比丁克家庭）
+8. final 变量 —— 常量，一旦赋值就不能修改（如 final double PI = 3.1415926）
+9. final 方法 —— 不能被重写的方法，是方法的&quot;最终版本&quot;
+10. 上转型对象 —— 父类引用指向子类对象，调用方法时执行子类重写后的版本
+</code></pre>
+<hr>
+<h3>11. 流程动画素材</h3>
+<pre><code class="language-text">【上转型对象的工作流程】
+
+步骤 1：声明一个父类类型的变量 —— Animal a;
+步骤 2：创建一个子类对象 —— new Dog(&quot;旺财&quot;)
+步骤 3：JVM 调用 Dog 的构造方法（自动先调用 Animal 的构造方法）
+步骤 4：将子类对象的引用赋值给父类变量 —— a = new Dog(&quot;旺财&quot;)
+步骤 5：通过父类变量调用方法 —— a.speak()
+步骤 6：JVM 在运行时检查 a 实际指向的对象类型 → 发现是 Dog
+步骤 7：查找 Dog 类中是否有 speak() 方法 → 有！且是重写后的版本
+步骤 8：执行 Dog 的 speak() → 输出&quot;旺财汪汪叫！🐶&quot;
+
+关键点：第 6 步是&quot;运行时决定&quot;——编译时看 Animal 类型，运行时看实际对象 Dog 类型
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<pre><code class="language-text">练习题 1：写出面向对象的三大特征，并用生活例子分别解释。
+知识点：封装、继承、多态的概念
+参考答案：
+① 封装：把数据和操作数据的方法包装在一个类中，只暴露必要的接口。例子：手机把复杂的电路封装在里面，用户只通过屏幕按钮操作。
+② 继承：子类自动获得父类的非私有成员，避免代码重复。例子：儿子继承父亲的房产和姓氏。
+③ 多态：同一个方法调用可以根据对象类型表现出不同行为。例子：同样是&quot;叫&quot;，狗汪汪、猫喵喵——都是 animal.speak()，但结果不同。
+解题思路：用生活中的例子类比，封装 → 黑盒，继承 → 遗传，多态 → 多种形态。
+
+练习题 2：以下代码的输出结果是什么？并解释为什么。
+class A { public void show() { System.out.println(&quot;A&quot;); } }
+class B extends A { public void show() { System.out.println(&quot;B&quot;); } }
+public class Test {
+    public static void main(String[] args) {
+        A obj = new B();
+        obj.show();
+    }
+}
+知识点：上转型对象、多态
+参考答案：输出 &quot;B&quot;。虽然 obj 的声明类型是 A，但它实际引用的是 B 的对象。由于 B 重写了 show() 方法，运行时 JVM 调用的是 B 的 show()。
+解题思路：方法调用看实际对象类型（运行时多态），不看引用变量的声明类型。
+
+练习题 3：以下代码能否通过编译？如果不能，说明原因。
+class Father { public Father(String s) { } }
+class Son extends Father { public Son() { } }
+知识点：子类构造方法的 super 调用规则
+参考答案：不能编译。Father 只有带参构造方法 Father(String s)，没有无参构造方法。Son 的构造方法中没有写 super(参数)，系统默认尝试调用 Father()，但 Father() 不存在，所以编译错误。修复方法：要么给 Father 加上无参构造方法，要么在 Son 的构造方法第一句写 super(&quot;默认值&quot;)。
+解题思路：父类没有无参构造方法时，子类必须显式用 super(参数) 调用。
+
+练习题 4：简述 final 关键字的三种用法及各自含义，每种给一个代码示例。
+知识点：final 关键字
+参考答案：
+① 修饰类——不可被继承：final class A { }
+② 修饰变量——常量，不可修改：final int MAX = 100;
+③ 修饰方法——不可被重写：public final void rule() { }
+解题思路：final = &quot;最终的&quot;，分别作用在类/变量/方法上，表达&quot;不可改变&quot;的含义。记住三个对应：类 → 不被继承，变量 → 不改变值，方法 → 不被重写。
+
+练习题 5：编写一个多态应用——定义 Animal 父类（方法 speak()），Dog 和 Cat 子类重写 speak()。写一个方法 makeSound(Animal a)，用上转型对象实现&quot;传入什么动物就叫什么声音&quot;。
+知识点：多态、上转型对象的实际应用
+参考答案：
+class Animal { public void speak() { System.out.println(&quot;动物叫&quot;); } }
+class Dog extends Animal { @Override public void speak() { System.out.println(&quot;汪汪&quot;); } }
+class Cat extends Animal { @Override public void speak() { System.out.println(&quot;喵喵&quot;); } }
+public class Zoo {
+    public static void makeSound(Animal a) {  // 参数用父类类型
+        a.speak();  // 多态调用——自动匹配实际类型
+    }
+    public static void main(String[] args) {
+        makeSound(new Dog());  // 汪汪
+        makeSound(new Cat());  // 喵喵
+    }
+}
+解题思路：makeSound 方法的参数类型是 Animal（父类），但可以传入任意 Animal 的子类对象。方法内部调用 a.speak() 时，JVM 自动根据实际对象类型执行对应的重写版本。这就是多态在真实开发中最常见的用法。
+</code></pre>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code>面向对象三大特征与多态详解
+├── 面向对象三大特征
+│   ├── 封装（Encapsulation）
+│   │   └── 类将属性和方法包装在类体中，控制访问权限
+│   ├── 继承（Inheritance）
+│   │   └── 子类 extends 父类，继承非私有成员
+│   └── 多态（Polymorphism）
+│       ├── 重载（Overload）：同类、同名不同参
+│       └── 重写（Override）：不同类、同头不同体
+│
+├── 构造方法调用链
+│   ├── 创建子类对象 → 先创建父类 → 再创建子类
+│   ├── 顺序：祖先 → 父亲 → 子类（从上到下）
+│   └── super(参数)：放在子类构造方法第一句
+│
+├── 重写（Override）完整规则
+│   ├── 条件：不同类体 + 方法头相同 + 方法体不同
+│   ├── 调用规则：重写了调子类，没重写调父类
+│   ├── 权限限制：不能降低，只能扩大
+│   └── 继承注意：继承属性名但不继承属性值
+│
+├── final 关键字
+│   ├── final 类 → 不可被继承（叶子节点）
+│   ├── final 变量 → 常量（不可修改）
+│   └── final 方法 → 不可被重写
+│
+└── 上转型对象（Upcasting）
+    ├── 语法：父类类型 变量 = new 子类类型();
+    ├── 方法调用：执行子类重写后的版本
+    ├── 经典类比：&quot;父亲花儿子挣的钱&quot;
+    ├── 反向不行：父类对象不能赋给子类变量
+    └── 实际用途：统一处理不同类型子类（多态）
+</code></pre>
+<hr>
+<h3>14. 课后总结</h3>
+<pre><code class="language-text">1. 本节课是面向对象章节的&quot;压轴&quot;内容——从面向对象三大特征（封装/继承/多态）到多态的两种实现（重载/重写），再到 final 关键字和上转型对象，形成了从理论到实践的完整闭环。
+2. 多态是面向对象的灵魂——它让代码更灵活、更可扩展。&quot;上转型对象 + 重写&quot;是多态的经典组合，记住口诀：&quot;声明看左边（父类），执行看右边（子类）&quot;。
+3. 重写 vs 重载的区别是期末考试的高频题——重写是&quot;不同类、同头不同体&quot;，重载是&quot;同类、同名不同参&quot;。一定要分清楚。
+4. final 关键字的三种用法各记一个例子：final class A（不生孩子的丁克）、final double PI（不变的常量）、final void rule()（不能改的规则）。
+5. 本章内容较多，老师安排了后续任务——整理笔记（检查送成绩）、完成学习通作业、周六日预习课本 122-134 页、下周四带作业本做测验。建议按照&quot;封装→继承→多态&quot;的顺序逐层梳理笔记。
+</code></pre>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="java-14.html"><span>上一篇</span><strong>Java类的继承深入及UML类图入门</strong></a><a class="article-pager-link next" rel="next" href="java-16.html"><span>下一篇</span><strong>抽象类详解</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>

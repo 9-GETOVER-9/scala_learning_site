@@ -1,0 +1,2041 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="课程总结：2026 04 21 Scala 继承与 Java 继承的对比 1. 课程基本信息 课程 ID 建议： scala inheritance java compare 课程标题： 2026 04 21 Scala 继承与 Java 继承的对比 所属章节： Scala 继承、Scala 多态 " />
+  <title>Scala继承与Java继承对比 - 下 - 课程总结</title>
+  <link rel="icon" href="../../assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/style.css" />
+</head>
+<body>
+  <header class="article-header">
+    <nav class="top-nav compact">
+      <a class="brand" href="../../index.html">Scala Learn</a>
+      <div class="nav-links">
+        <a href="../../summaries.html">课程总结</a>
+        <a href="../../lesson.html?id=scala-2026-04-21-inheritance-override-fields">互动课程</a>
+      </div>
+    </nav>
+    <div class="container article-title-wrap">
+      <p class="eyebrow">Scala · 2026-04-21 · 下半节</p>
+      <h1>Scala继承与Java继承对比 - 下</h1>
+      <p class="hero-text">由课程 Markdown 总结生成，适合复习与查阅。</p>
+    </div>
+  </header>
+  <main class="container article-layout">
+    <nav class="article-breadcrumb" aria-label="面包屑">
+      <a href="../../index.html">首页</a><span aria-hidden="true">/</span>
+      <a href="../../summaries.html">课程总结</a><span aria-hidden="true">/</span>
+      <span aria-current="page">Scala继承与Java继承对比 - 下</span>
+    </nav>
+    <article class="summary-article panel">
+      <h2>课程总结：2026-04-21 Scala 继承与 Java 继承的对比</h2>
+<h3>1. 课程基本信息</h3>
+<ul>
+<li><strong>课程 ID 建议：</strong> <code>scala-inheritance-java-compare</code></li>
+<li><strong>课程标题：</strong> 2026-04-21 Scala 继承与 Java 继承的对比</li>
+<li><strong>所属章节：</strong> Scala 继承、Scala 多态</li>
+<li><strong>上课日期：</strong> 2026-04-21</li>
+<li><strong>知识点标签：</strong> Scala 继承、Java 继承对比、extends、super、override、主构造器、辅助构造器、字段重写、方法重写、final、protected、访问权限、单继承、toString</li>
+<li><strong>难度等级：</strong> 初级到中级入门</li>
+<li><strong>适合对象：</strong> 已经学习过 Java 继承，并已掌握 Scala 类、对象、主构造器和辅助构造器基础的学生</li>
+<li><strong>本节课一句话概括：</strong> 本节课通过对比 Java 与 Scala 的继承语法，重点讲解 Scala 中子类继承父类、构造器参数传递、<code>override</code> 使用规则、<code>super</code> 调用、字段重写和访问控制。</li>
+</ul>
+<blockquote>
+<p>说明：原始转写中“主步骤函数”“主过滤器”“主路由器”均按上下文整理为“主构造器”；“基类”“超类”“父类”在本总结中统一使用“父类/超类”。<br>原文后半段关于 <code>val</code> 与 <code>var</code> 字段重写存在明显混乱和自我修正。本总结按 Scala 通用规则整理：<strong>非 <code>final</code> 的 <code>val</code> 可以被子类用 <code>override val</code> 重写；抽象 <code>var</code> 可以由子类实现；具体 <code>var</code> 通常不建议也不能像普通方法那样随意重写。</strong> 初学阶段重点掌握“<code>val</code> 可重写、具体 <code>var</code> 不要重写、重写非抽象成员必须写 <code>override</code>”。</p>
+</blockquote>
+<hr>
+<h3>2. 课堂摘要</h3>
+<ol>
+<li>本节课首先强调了 Scala 继承中构造器参数传递的特殊规则：只有子类主构造器可以直接向父类构造器传递参数。</li>
+<li>课堂中对比了 Java 与 Scala 的继承写法，说明二者都使用 <code>extends</code> 表示继承，但 Scala 类名后可以直接带主构造器参数。</li>
+<li>老师重点讲解了 <code>override</code> 的使用规则：Scala 中重写非抽象方法或字段时必须写 <code>override</code>，实现抽象成员时可以省略但建议保留。</li>
+<li>本节课通过 <code>Point</code> 和 <code>Location</code> 的例子说明了子类可以继承父类的字段和方法，也可以重写父类方法或字段。</li>
+<li>课堂总结了 Scala 和 Java 在继承特性上的共同点：子类可以继承父类非私有成员，可以增加自己的成员，可以重写父类成员，访问权限不能缩小。</li>
+<li>本节课说明了 Scala 只支持单继承，一个类只能直接继承一个父类；这点与 Java 的类继承规则相似。</li>
+<li>老师讲解了 <code>final</code> 的作用：<code>final</code> 类不能被继承，<code>final</code> 方法不能被重写，<code>final</code> 字段不能再被覆盖。</li>
+<li>课堂中通过 <code>Animal</code> 和 <code>Dog</code> 例子说明了方法重写，强调重写非抽象方法时必须写 <code>override</code>。</li>
+<li>本节课还通过 <code>Person</code> 和 <code>Employee</code> 的 <code>toString</code> 示例说明了如何使用 <code>super</code> 调用父类方法，并在子类中扩展输出内容。</li>
+<li>课堂最后讲解了字段重写，特别说明 <code>val</code> 字段类似无参取值方法，可以被同名 <code>override val</code> 重写；这部分是 Scala 与 Java 差异较大的内容。</li>
+</ol>
+<hr>
+<h3>3. 本节课学习目标</h3>
+<p>学完本节课后，你应该能够：</p>
+<ol>
+<li>理解 Scala 中继承的基本语法，能使用 <code>extends</code> 定义子类。</li>
+<li>能区分父类、子类、超类、基类这些概念，并知道它们在继承关系中的含义。</li>
+<li>能说明 Java 和 Scala 继承的相同点，例如都支持代码复用、方法重写、访问权限约束。</li>
+<li>能说明 Scala 和 Java 继承的关键差异，尤其是 Scala 主构造器直接参与继承参数传递。</li>
+<li>能正确使用 <code>override</code> 重写父类的非抽象方法和非抽象字段。</li>
+<li>能理解实现抽象方法时 <code>override</code> 可以省略，但为了代码清晰建议写上。</li>
+<li>能使用 <code>super</code> 调用父类方法，并在子类中扩展父类行为。</li>
+<li>能理解 <code>final</code> 修饰类、方法、字段时分别产生什么限制。</li>
+<li>能理解 <code>protected</code> 的基本含义，知道它与继承和访问范围有关。</li>
+<li>能理解 <code>val</code> 字段、<code>var</code> 字段、无参 <code>def</code> 与字段重写之间的关系。</li>
+<li>能看懂 <code>Person</code>、<code>Employee</code>、<code>Animal</code>、<code>Dog</code>、<code>Point</code>、<code>Location</code> 等继承案例。</li>
+<li>能整理出考试中可能出现的概念题答案，例如 Scala 继承与 Java 继承的异同点。</li>
+</ol>
+<hr>
+<h3>4. 知识点详细整理</h3>
+<h4>知识点 1：继承的基本概念</h4>
+<h5>这个知识点是什么？</h5>
+<p>继承是面向对象编程的重要特性。通过继承，子类可以复用父类已有的字段和方法，并在此基础上扩展自己的功能。</p>
+<p>在 Scala 中，使用 <code>extends</code> 表示继承：</p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物发出声音&quot;)
+  }
+}
+
+class Dog extends Animal {
+  def run(): Unit = {
+    println(&quot;狗在跑&quot;)
+  }
+}
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><code>Animal</code> 是父类，也可以叫超类、基类。</li>
+<li><code>Dog</code> 是子类，也可以叫派生类。</li>
+<li><code>Dog</code> 继承了 <code>Animal</code> 的非私有成员。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>继承可以解决代码复用问题。如果多个类有相同的属性和行为，可以把公共部分抽取到父类中，再让子类继承父类。这样可以减少重复代码，也便于后续学习多态、抽象类和特质。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 父类名 {
+  // 父类字段和方法
+}
+
+class 子类名 extends 父类名 {
+  // 子类新增字段和方法
+}
+</code></pre>
+<p>如果父类有主构造器参数：</p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String, val grade: Int) extends Person(name)
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把继承理解为“子类继承父类的特征和行为”。父类中通用的属性和方法可以被子类复用，子类还可以增加自己的特殊属性和方法。如果父类已有的方法不符合子类需求，子类还可以重写。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>忘记使用 <code>extends</code>。</li>
+<li>以为子类能继承父类所有成员，包括 <code>private</code> 成员。</li>
+<li>不理解父类构造器参数需要通过子类主构造器传递。</li>
+<li>把继承和创建对象混淆。</li>
+<li>以为 Scala 一个类可以继承多个父类。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物发出声音&quot;)
+  }
+}
+
+class Dog extends Animal {
+  def run(): Unit = {
+    println(&quot;狗在跑&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val dog = new Dog()
+    dog.sound()
+    dog.run()
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Animal</code> 定义父类。</li>
+<li><code>sound()</code> 是父类方法。</li>
+<li><code>Dog extends Animal</code> 表示 <code>Dog</code> 继承 <code>Animal</code>。</li>
+<li><code>Dog</code> 可以调用继承来的 <code>sound()</code>。</li>
+<li><code>run()</code> 是 <code>Dog</code> 自己新增的方法。</li>
+</ol>
+<hr>
+<h4>知识点 2：Scala 与 Java 继承的共同点</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 和 Java 都支持面向对象继承。二者有许多共同点：</p>
+<ol>
+<li>都使用 <code>extends</code> 表示类继承。</li>
+<li>子类可以继承父类的非私有成员。</li>
+<li>子类可以新增自己的字段和方法。</li>
+<li>子类可以重写父类的方法。</li>
+<li><code>final</code> 修饰的类不能被继承。</li>
+<li><code>final</code> 修饰的方法不能被重写。</li>
+<li>子类重写方法时，访问权限不能比父类更小。</li>
+<li>子类可以使用 <code>super</code> 调用父类方法。</li>
+</ol>
+<h5>为什么要学它？</h5>
+<p>学生已经学过 Java 继承。把相同点先找出来，可以降低学习 Scala 继承的难度。Scala 不是完全重新发明继承，而是在继承思想上与 Java 基本一致，只是语法细节不同。</p>
+<h5>基本语法</h5>
+<p>Java：</p>
+<pre><code class="language-java">class Dog extends Animal {
+}
+</code></pre>
+<p>Scala：</p>
+<pre><code class="language-scala">class Dog extends Animal {
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师反复强调：Scala 和 Java 在继承思想上基本相同。父类负责抽取共性，子类负责扩展个性；子类继承父类非私有成员，重写已有功能，增加新功能。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为 Scala 继承和 Java 完全不同。</li>
+<li>忽略 Scala 与 Java 在继承思想上的共同基础。</li>
+<li>误以为 <code>private</code> 成员也能被子类直接访问。</li>
+<li>误以为重写方法可以缩小访问权限。</li>
+<li>忘记 <code>final</code> 的限制。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person {
+  def speak(): Unit = {
+    println(&quot;人可以说话&quot;)
+  }
+}
+
+class Student extends Person {
+  def study(): Unit = {
+    println(&quot;学生在学习&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student()
+    s.speak()
+    s.study()
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Student</code> 继承 <code>Person</code>。</li>
+<li><code>speak()</code> 是父类方法，子类可以使用。</li>
+<li><code>study()</code> 是子类新增方法。</li>
+<li>这体现了继承的代码复用和扩展能力。</li>
+</ol>
+<hr>
+<h4>知识点 3：Scala 继承的特殊点：主构造器传参</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 中类名后的参数列表就是主构造器。子类继承父类时，只有子类主构造器可以直接调用父类构造器并传递参数。</p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String, val grade: Int) extends Person(name)
+</code></pre>
+<p>这里：</p>
+<ul>
+<li><code>Student</code> 的主构造器接收 <code>name</code> 和 <code>grade</code>。</li>
+<li><code>extends Person(name)</code> 把 <code>name</code> 传给父类 <code>Person</code> 的主构造器。</li>
+<li>辅助构造器必须先调用本类其他构造器，不能绕过主构造器直接传给父类。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>这是 Scala 和 Java 继承的重要差异。Java 中构造方法写在类体里，构造方法之间通过 <code>super(...)</code> 调用父类构造器；Scala 中主构造器写在类名后，因此继承时参数传递也写在类声明位置。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 父类名(父类参数: 类型)
+
+class 子类名(子类参数: 类型) extends 父类名(传给父类的参数)
+</code></pre>
+<p>带辅助构造器：</p>
+<pre><code class="language-scala">class Student(name: String, val grade: Int) extends Person(name) {
+  def this(name: String) = {
+    this(name, 1)
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师强调“只有主构造器才能把参数传给父类构造器”。原因是 Scala 的辅助构造器是基于主构造器产生的，辅助构造器第一行必须调用本类已有构造器，最终仍然回到主构造器。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>在辅助构造器中直接写 <code>super(...)</code>。</li>
+<li>忘记在 <code>extends 父类(...)</code> 中传递父类需要的参数。</li>
+<li>把 Java 构造方法写法搬到 Scala 中。</li>
+<li>不理解类名后的参数列表就是主构造器。</li>
+<li>子类构造器参数和父类构造器参数对应不上。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person(val name: String) {
+  override def toString: String = {
+    &quot;Person(name = &quot; + name + &quot;)&quot;
+  }
+}
+
+class Student(name: String, val grade: Int) extends Person(name) {
+  def this(name: String) = {
+    this(name, 1)
+  }
+
+  override def toString: String = {
+    &quot;Student(name = &quot; + name + &quot;, grade = &quot; + grade + &quot;)&quot;
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s1 = new Student(&quot;Tom&quot;, 3)
+    val s2 = new Student(&quot;Jerry&quot;)
+
+    println(s1)
+    println(s2)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Person</code> 的主构造器需要 <code>name</code>。</li>
+<li><code>Student(name, grade) extends Person(name)</code> 把 <code>name</code> 传给父类。</li>
+<li><code>def this(name: String)</code> 是辅助构造器。</li>
+<li>辅助构造器调用 <code>this(name, 1)</code>，最终仍会调用主构造器。</li>
+<li>主构造器负责完成父类构造器参数传递。</li>
+</ol>
+<hr>
+<h4>知识点 4：override 的使用规则</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>override</code> 表示重写父类成员。Scala 对 <code>override</code> 的要求比 Java 更严格。</p>
+<p>一般规则：</p>
+<ol>
+<li>重写父类的<strong>非抽象方法</strong>，必须写 <code>override</code>。</li>
+<li>重写父类的<strong>非抽象 <code>val</code> 字段</strong>，必须写 <code>override</code>。</li>
+<li>实现父类的<strong>抽象方法</strong>时，可以不写 <code>override</code>，但建议写上。</li>
+<li>如果写了 <code>override</code>，但父类没有可被重写的成员，编译器会报错。</li>
+</ol>
+<h5>为什么要学它？</h5>
+<p><code>override</code> 能帮助编译器和程序员确认：当前成员确实是在重写父类成员，而不是不小心写了一个新成员。Scala 中如果重写非抽象成员却不写 <code>override</code>，通常会编译失败。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物声音&quot;)
+  }
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = {
+    println(&quot;汪汪&quot;)
+  }
+}
+</code></pre>
+<p>抽象方法：</p>
+<pre><code class="language-scala">abstract class Action {
+  def run(): Unit
+}
+
+class OpenAction extends Action {
+  override def run(): Unit = {
+    println(&quot;打开&quot;)
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师多次强调：重写非抽象方法时必须写 <code>override</code>；重写抽象方法时可以不写，但要知道它是在实现父类规则。这是考试可能考查的概念点。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>重写普通方法时忘记 <code>override</code>。</li>
+<li>以为 Scala 和 Java 一样，<code>override</code> 只是可选注解。</li>
+<li>把重写和重载混淆。</li>
+<li>父类没有对应成员，却误写 <code>override</code>。</li>
+<li>实现抽象方法时不写 <code>override</code>，虽然可能通过，但代码不够清楚。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物发出声音&quot;)
+  }
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = {
+    println(&quot;狗叫：汪汪&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val dog = new Dog()
+    dog.sound()
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Animal</code> 中的 <code>sound()</code> 是普通方法。</li>
+<li><code>Dog</code> 中重新定义 <code>sound()</code>。</li>
+<li>因为这是重写非抽象方法，所以必须写 <code>override</code>。</li>
+<li>调用 <code>dog.sound()</code> 时执行子类版本。</li>
+</ol>
+<hr>
+<h4>知识点 5：重写 Override 与重载 Overload 的区别</h4>
+<h5>这个知识点是什么？</h5>
+<p>重写和重载是两个不同概念。</p>
+<p><strong>重写 Override：</strong></p>
+<ul>
+<li>发生在父类和子类之间。</li>
+<li>方法名、参数列表通常相同。</li>
+<li>子类改变父类方法的实现。</li>
+<li>Scala 中重写非抽象方法必须写 <code>override</code>。</li>
+</ul>
+<p><strong>重载 Overload：</strong></p>
+<ul>
+<li>可以发生在同一个类中。</li>
+<li>方法名相同，参数列表不同。</li>
+<li>根据参数个数或类型选择不同方法。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>课堂中提到“重写和重载是两个不同的概念”。初学者经常混淆二者，尤其是考试概念题中容易出错。</p>
+<h5>基本语法</h5>
+<p>重写：</p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = println(&quot;animal&quot;)
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = println(&quot;dog&quot;)
+}
+</code></pre>
+<p>重载：</p>
+<pre><code class="language-scala">class Calculator {
+  def add(a: Int, b: Int): Int = a + b
+
+  def add(a: Double, b: Double): Double = a + b
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用“方法头”和“方法体”解释重写：重写时方法头保持一致，方法体不同。重载则是方法名一样，但参数列表不同。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>认为只要方法名相同就是重写。</li>
+<li>把同一个类中的多个同名方法叫重写。</li>
+<li>重写时改变了参数列表，结果变成重载。</li>
+<li>重写非抽象方法忘记写 <code>override</code>。</li>
+<li>不理解重写体现的是多态，重载体现的是多种调用形式。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Parent {
+  def show(): Unit = {
+    println(&quot;父类 show&quot;)
+  }
+}
+
+class Child extends Parent {
+  override def show(): Unit = {
+    println(&quot;子类 show&quot;)
+  }
+
+  def show(message: String): Unit = {
+    println(&quot;子类 show: &quot; + message)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Child()
+    c.show()
+    c.show(&quot;hello&quot;)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Child</code> 中的 <code>override def show()</code> 是重写父类方法。</li>
+<li><code>def show(message: String)</code> 是重载，因为参数列表不同。</li>
+<li>调用 <code>c.show()</code> 执行无参方法。</li>
+<li>调用 <code>c.show(&quot;hello&quot;)</code> 执行有参方法。</li>
+</ol>
+<hr>
+<h4>知识点 6：使用 super 调用父类方法</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>super</code> 用来在子类中调用父类的方法。常见场景是：子类想保留父类已有逻辑，同时增加自己的逻辑。</p>
+<pre><code class="language-scala">class Person(val name: String) {
+  override def toString: String = {
+    &quot;Person(name = &quot; + name + &quot;)&quot;
+  }
+}
+
+class Employee(name: String, val salary: Double) extends Person(name) {
+  override def toString: String = {
+    super.toString + &quot;, salary = &quot; + salary
+  }
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>继承不是只能完全替换父类方法，也可以在父类方法基础上扩展。<code>super</code> 可以避免重复写父类已有逻辑。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">super.父类方法名(参数)
+</code></pre>
+<p>无参方法：</p>
+<pre><code class="language-scala">super.toString
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师通过 <code>Person</code> 和 <code>Employee</code> 的 <code>toString</code> 例子讲解：父类 <code>Person</code> 输出人的姓名，子类 <code>Employee</code> 在此基础上增加薪水信息。子类用 <code>super.toString</code> 复用父类输出，再拼接自己的内容。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>忘记用 <code>super</code>，导致重复写父类逻辑。</li>
+<li>在没有父类方法时调用 <code>super.方法名</code>。</li>
+<li>以为 <code>super</code> 是创建父类对象。</li>
+<li>在重写方法中无限调用自己，导致递归错误。</li>
+<li>不理解 <code>toString</code> 是很多对象默认会使用的方法。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person(val name: String) {
+  override def toString: String = {
+    &quot;Person(name = &quot; + name + &quot;)&quot;
+  }
+}
+
+class Employee(name: String, val salary: Double) extends Person(name) {
+  override def toString: String = {
+    super.toString + &quot;, salary = &quot; + salary
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val e = new Employee(&quot;Tom&quot;, 8000)
+    println(e)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Person</code> 重写了 <code>toString</code>，输出姓名。</li>
+<li><code>Employee</code> 继承 <code>Person</code>。</li>
+<li><code>Employee</code> 的 <code>toString</code> 使用 <code>super.toString</code> 调用父类版本。</li>
+<li>然后拼接薪水信息。</li>
+<li><code>println(e)</code> 会自动调用 <code>e.toString</code>。</li>
+</ol>
+<hr>
+<h4>知识点 7：final 的作用</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>final</code> 表示“最终的、不能再被改变继承关系的”。</p>
+<p>在 Scala 中：</p>
+<ul>
+<li><code>final class</code>：类不能被继承。</li>
+<li><code>final def</code>：方法不能被重写。</li>
+<li><code>final val</code>：字段不能被重写。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>有些类或方法不希望被子类改变，例如安全相关逻辑、固定算法、不可变常量等。<code>final</code> 可以限制继承和重写。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">final class FinalClass
+
+class Parent {
+  final def fixedMethod(): Unit = {
+    println(&quot;不能被重写&quot;)
+  }
+
+  final val id: Int = 100
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师把 <code>final</code> 和 Java 中的用法进行对比，强调二者基本一致。<code>final</code> 修饰类时不能继承；修饰方法时不能重写；修饰字段时不能被覆盖。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>继承 <code>final class</code>。</li>
+<li>重写 <code>final def</code>。</li>
+<li>重写 <code>final val</code>。</li>
+<li>把 <code>final</code> 和 <code>val</code> 完全等同。</li>
+<li>以为 <code>final</code> 只在 Java 中有用，Scala 中不用。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Parent {
+  final def id(): Int = {
+    100
+  }
+
+  def name(): String = {
+    &quot;parent&quot;
+  }
+}
+
+class Child extends Parent {
+  override def name(): String = {
+    &quot;child&quot;
+  }
+
+  // 不能写：
+  // override def id(): Int = 200
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>id()</code> 被 <code>final</code> 修饰，子类不能重写。</li>
+<li><code>name()</code> 没有被 <code>final</code> 修饰，子类可以重写。</li>
+<li>如果尝试重写 <code>id()</code>，会编译失败。</li>
+</ol>
+<hr>
+<h4>知识点 8：protected 与访问权限</h4>
+<h5>这个知识点是什么？</h5>
+<p>访问权限控制成员能在什么地方被访问。常见访问级别包括：</p>
+<ul>
+<li><code>public</code>：Scala 默认成员通常是公有的。</li>
+<li><code>private</code>：只能在本类内部访问。</li>
+<li><code>protected</code>：通常允许在类内部和子类中访问。</li>
+<li>包访问相关规则：Scala 和 Java 在包级可见性上存在差异，初学阶段先掌握类继承层面的 <code>private</code> 和 <code>protected</code>。</li>
+</ul>
+<h5>为什么要学它？</h5>
+<p>继承中并不是父类所有东西都能被子类随意访问。访问权限决定了字段和方法能否在子类中使用、能否在类外访问。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class Parent {
+  private val secret = &quot;private&quot;
+  protected val code = &quot;protected&quot;
+  val name = &quot;public&quot;
+}
+
+class Child extends Parent {
+  def show(): Unit = {
+    println(code)
+    println(name)
+    // println(secret) // 不可以
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师用 Java 的访问权限三角形进行类比：<code>public</code> 范围最大，<code>private</code> 范围最小，<code>protected</code> 与继承关系有关。课堂中也提到 Scala 的包访问比 Java 更复杂，本节课不展开。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>认为 <code>private</code> 可以被子类直接访问。</li>
+<li>认为 <code>protected</code> 和 <code>public</code> 完全一样。</li>
+<li>不理解子类重写时访问权限不能缩小。</li>
+<li>忽略 Scala 和 Java 在包可见性上的差异。</li>
+<li>把访问权限和变量可变性混淆。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Parent {
+  private val secret = &quot;父类私有信息&quot;
+  protected val protectedInfo = &quot;父类受保护信息&quot;
+  val publicInfo = &quot;父类公开信息&quot;
+}
+
+class Child extends Parent {
+  def printInfo(): Unit = {
+    println(protectedInfo)
+    println(publicInfo)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Child()
+    c.printInfo()
+    println(c.publicInfo)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>secret</code> 是私有字段，子类不能直接访问。</li>
+<li><code>protectedInfo</code> 是受保护字段，子类内部可以访问。</li>
+<li><code>publicInfo</code> 是公有字段，类外也可以访问。</li>
+<li>访问权限决定了继承中的可见范围。</li>
+</ol>
+<hr>
+<h4>知识点 9：重写 val 字段</h4>
+<h5>这个知识点是什么？</h5>
+<p>在 Scala 中，<code>val</code> 字段可以理解为一个无参的取值方法。因此，子类可以用同名 <code>override val</code> 重写父类中的非 <code>final val</code> 字段。</p>
+<pre><code class="language-scala">class Person {
+  val role: String = &quot;普通人&quot;
+}
+
+class Student extends Person {
+  override val role: String = &quot;学生&quot;
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>这是 Scala 与 Java 差异较大的地方。Java 中字段重写不是常规多态重点，而 Scala 中 <code>val</code> 字段和无参方法关系密切，因此可以像方法一样被重写。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 父类 {
+  val 字段名: 类型 = 值
+}
+
+class 子类 extends 父类 {
+  override val 字段名: 类型 = 新值
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师回顾了前面讲过的观点：<code>val</code> 可以看作一个无参取值方法。既然方法可以被重写，那么非 <code>final</code> 的 <code>val</code> 也可以被同名 <code>override val</code> 重写。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>重写 <code>val</code> 时忘记写 <code>override</code>。</li>
+<li>重写时字段名不一致。</li>
+<li>尝试重写 <code>final val</code>。</li>
+<li>把 <code>val</code> 和 <code>var</code> 的重写规则混淆。</li>
+<li>认为字段重写和字段重新赋值是一回事。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person {
+  val role: String = &quot;普通人&quot;
+}
+
+class Student extends Person {
+  override val role: String = &quot;学生&quot;
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person()
+    val s = new Student()
+
+    println(p.role)
+    println(s.role)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Person</code> 中定义 <code>val role</code>。</li>
+<li><code>Student</code> 中使用 <code>override val role</code> 重写父类字段。</li>
+<li><code>p.role</code> 输出“普通人”。</li>
+<li><code>s.role</code> 输出“学生”。</li>
+<li>重写的是取值逻辑，不是对父类对象字段重新赋值。</li>
+</ol>
+<hr>
+<h4>知识点 10：var 字段重写的注意点</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>var</code> 字段比 <code>val</code> 复杂，因为它不仅有取值器，还有修改器。Scala 中具体 <code>var</code> 通常不能像普通 <code>val</code> 或方法那样随意重写。</p>
+<p>更适合初学者记住的规则是：</p>
+<ol>
+<li><strong>非 <code>final val</code> 可以用 <code>override val</code> 重写。</strong></li>
+<li><strong>抽象 <code>var</code> 可以在子类中实现。</strong></li>
+<li><strong>具体 <code>var</code> 不要尝试直接重写，容易出错，也不是推荐写法。</strong></li>
+</ol>
+<p>抽象 <code>var</code> 示例：</p>
+<pre><code class="language-scala">abstract class Person {
+  var age: Int
+}
+
+class Student extends Person {
+  var age: Int = 18
+}
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>原始课堂转写中关于 <code>var</code> 的说法出现混乱，这也是学生最容易记错的地方。为了考试和实际编程，建议先掌握稳定规则，不要把 <code>var</code> 当成普通方法随意覆盖。</p>
+<h5>基本语法</h5>
+<p>抽象 <code>var</code> 的实现：</p>
+<pre><code class="language-scala">abstract class 父类 {
+  var 字段名: 类型
+}
+
+class 子类 extends 父类 {
+  var 字段名: 类型 = 初始值
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师在课堂最后也发现这部分有混乱，并提到需要再查证。根据 Scala 常规规则，<code>var</code> 由 getter 和 setter 组成，因此比 <code>val</code> 重写复杂。初学阶段应避免在父类中定义具体 <code>var</code> 后再让子类重写它。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>把 <code>var</code> 和 <code>val</code> 的重写规则完全当成一样。</li>
+<li>尝试重写父类具体 <code>var</code>。</li>
+<li>忘记 <code>var</code> 包含取值和修改两个动作。</li>
+<li>对抽象 <code>var</code> 实现时没有给初始值。</li>
+<li>不理解 <code>var</code> 的可变性会增加继承中的复杂度。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">abstract class Person {
+  var age: Int
+}
+
+class Student extends Person {
+  var age: Int = 18
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student()
+    println(s.age)
+
+    s.age = 20
+    println(s.age)
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>Person</code> 是抽象类。</li>
+<li><code>var age: Int</code> 是抽象字段，没有初始值。</li>
+<li><code>Student</code> 实现了这个抽象 <code>var</code>。</li>
+<li><code>s.age</code> 可以读取。</li>
+<li><code>s.age = 20</code> 可以修改。</li>
+</ol>
+<hr>
+<h4>知识点 11：主构造器执行顺序与类体执行</h4>
+<h5>这个知识点是什么？</h5>
+<p>Scala 的主构造器不只是类名后的参数列表。类体中不属于方法内部的语句，也会作为主构造器的一部分，在创建对象时从上到下执行。</p>
+<pre><code class="language-scala">class Person(val name: String) {
+  println(&quot;创建 Person: &quot; + name)
+
+  def sayHello(): Unit = {
+    println(&quot;Hello&quot;)
+  }
+}
+</code></pre>
+<p>创建对象：</p>
+<pre><code class="language-scala">val p = new Person(&quot;Tom&quot;)
+</code></pre>
+<p>会执行类体中的 <code>println</code>。</p>
+<h5>为什么要学它？</h5>
+<p>这是 Scala 与 Java 很不同的地方。Java 中类体里普通方法不会在创建对象时自动执行；Scala 中类体中的直接语句属于主构造器逻辑，对象创建时会执行。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">class 类名(参数列表) {
+  // 这些直接写在类体中的语句属于主构造器逻辑
+  println(&quot;构造时执行&quot;)
+
+  def method(): Unit = {
+    // 只有调用方法时才执行
+  }
+}
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师强调，Scala 中创建类对象时，伴生类的主构造器逻辑会从头到尾执行一遍。因此，不适合在类体中随便写大量无关代码；静态或工具性内容应该放到对象或伴生对象中。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>以为类体中的直接语句不会执行。</li>
+<li>在类体中写大量耗时逻辑，导致创建对象时自动执行。</li>
+<li>不区分“类体直接语句”和“方法体语句”。</li>
+<li>把 Java 构造方法思想完全照搬到 Scala。</li>
+<li>不理解为什么有些内容应放到 <code>object</code> 中。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person(val name: String) {
+  println(&quot;正在创建 Person 对象：&quot; + name)
+
+  def hello(): Unit = {
+    println(&quot;你好，&quot; + name)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person(&quot;Tom&quot;)
+    p.hello()
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>new Person(&quot;Tom&quot;)</code> 创建对象。</li>
+<li>类体中的 <code>println(&quot;正在创建...&quot;)</code> 会立即执行。</li>
+<li><code>hello()</code> 方法不会自动执行。</li>
+<li>只有调用 <code>p.hello()</code> 时，方法体才执行。</li>
+</ol>
+<hr>
+<h4>知识点 12：isInstanceOf 判断对象类型</h4>
+<h5>这个知识点是什么？</h5>
+<p><code>isInstanceOf</code> 可以判断一个对象是否属于某个类型，类似 Java 中的 <code>instanceof</code>。</p>
+<pre><code class="language-scala">val p = new Student(&quot;Tom&quot;)
+
+println(p.isInstanceOf[Student])
+println(p.isInstanceOf[Person])
+</code></pre>
+<h5>为什么要学它？</h5>
+<p>继承后，对象可能既属于子类类型，也属于父类类型。类型判断可以帮助理解继承层级。不过在 Scala 中，更推荐使用模式匹配处理类型分支。</p>
+<h5>基本语法</h5>
+<pre><code class="language-scala">对象.isInstanceOf[类型]
+</code></pre>
+<h5>课堂中的理解方式</h5>
+<p>老师提到它与 Java 中的 <code>instanceof</code> 类似，用于判断对象是否属于某个类。如果属于，结果为 <code>true</code>；否则为 <code>false</code>。</p>
+<h5>初学者容易犯的错误</h5>
+<ol>
+<li>写成 Java 风格 <code>p instanceof Student</code>。</li>
+<li>忘记 Scala 类型写在方括号中。</li>
+<li>过度使用 <code>isInstanceOf</code>，不学习模式匹配。</li>
+<li>不理解子类对象也属于父类类型。</li>
+<li>判断后直接强制使用字段，忽略类型安全。</li>
+</ol>
+<h5>正确示例</h5>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String) extends Person(name)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student(&quot;Tom&quot;)
+
+    println(s.isInstanceOf[Student])
+    println(s.isInstanceOf[Person])
+  }
+}
+</code></pre>
+<h5>示例解释</h5>
+<ol>
+<li><code>s</code> 是 <code>Student</code> 对象。</li>
+<li><code>Student</code> 继承 <code>Person</code>。</li>
+<li><code>s.isInstanceOf[Student]</code> 为 <code>true</code>。</li>
+<li><code>s.isInstanceOf[Person]</code> 也为 <code>true</code>，因为子类对象也是父类对象的一种。</li>
+</ol>
+<hr>
+<h3>5. 重点概念对比</h3>
+<table>
+<thead>
+<tr>
+<th>概念 A</th>
+<th>概念 B</th>
+<th>区别</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>父类</td>
+<td>子类</td>
+<td>父类抽取共性；子类继承父类并扩展个性</td>
+<td><code>class Animal</code>；<code>class Dog extends Animal</code></td>
+</tr>
+<tr>
+<td>Java 继承</td>
+<td>Scala 继承</td>
+<td>都用 <code>extends</code>；Scala 类声明中可直接带主构造器参数</td>
+<td><code>class Dog extends Animal</code>；<code>class Student(name: String) extends Person(name)</code></td>
+</tr>
+<tr>
+<td>Java 构造方法</td>
+<td>Scala 主构造器</td>
+<td>Java 构造方法写在类体中；Scala 主构造器写在类名后</td>
+<td><code>public Person(String name)</code>；<code>class Person(val name: String)</code></td>
+</tr>
+<tr>
+<td>主构造器</td>
+<td>辅助构造器</td>
+<td>主构造器能直接向父类构造器传参；辅助构造器必须先调用本类构造器</td>
+<td><code>extends Person(name)</code>；<code>def this() = this(&quot;Tom&quot;)</code></td>
+</tr>
+<tr>
+<td>override</td>
+<td>overload</td>
+<td>override 是子类重写父类方法；overload 是同名方法参数列表不同</td>
+<td><code>override def show()</code>；<code>def show(msg: String)</code></td>
+</tr>
+<tr>
+<td>抽象方法</td>
+<td>非抽象方法</td>
+<td>抽象方法没有方法体；非抽象方法已有实现</td>
+<td><code>def run(): Unit</code>；<code>def run(): Unit = println(&quot;run&quot;)</code></td>
+</tr>
+<tr>
+<td>实现抽象方法</td>
+<td>重写普通方法</td>
+<td>实现抽象方法可省略 <code>override</code>；重写普通方法必须写 <code>override</code></td>
+<td><code>override def run()</code>；<code>override def sound()</code></td>
+</tr>
+<tr>
+<td><code>super</code></td>
+<td><code>this</code></td>
+<td><code>super</code> 指父类；<code>this</code> 指当前对象或当前类构造器</td>
+<td><code>super.toString</code>；<code>this(name, age)</code></td>
+</tr>
+<tr>
+<td><code>final class</code></td>
+<td>普通 class</td>
+<td><code>final class</code> 不能被继承；普通类可以被继承</td>
+<td><code>final class A</code>；<code>class B</code></td>
+</tr>
+<tr>
+<td><code>final def</code></td>
+<td>普通 def</td>
+<td><code>final def</code> 不能被重写；普通方法可以被重写</td>
+<td><code>final def id()</code>；<code>def name()</code></td>
+</tr>
+<tr>
+<td><code>val</code> 字段</td>
+<td><code>var</code> 字段</td>
+<td><code>val</code> 只读，类似无参取值方法，可重写非 final val；<code>var</code> 可读写，重写规则更复杂</td>
+<td><code>override val role</code>；<code>var age</code></td>
+</tr>
+<tr>
+<td><code>private</code></td>
+<td><code>protected</code></td>
+<td><code>private</code> 仅本类访问；<code>protected</code> 通常子类可访问</td>
+<td><code>private val secret</code>；<code>protected val code</code></td>
+</tr>
+<tr>
+<td><code>isInstanceOf</code></td>
+<td>模式匹配</td>
+<td><code>isInstanceOf</code> 判断类型；模式匹配可判断并提取</td>
+<td><code>x.isInstanceOf[Student]</code>；<code>case s: Student =&gt;</code></td>
+</tr>
+<tr>
+<td>继承</td>
+<td>组合</td>
+<td>继承表示“是一个”；组合表示“有一个”</td>
+<td>学生是人；学生有书包</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>6. 代码示例整理</h3>
+<h4>示例 1：基本继承与方法调用</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">extends、父类、子类、继承方法、新增方法
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物发出声音&quot;)
+  }
+}
+
+class Dog extends Animal {
+  def run(): Unit = {
+    println(&quot;狗在跑&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val dog = new Dog()
+
+    dog.sound()
+    dog.run()
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">动物发出声音
+狗在跑
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Animal</code> 是父类。</li>
+<li><code>Dog extends Animal</code> 表示 <code>Dog</code> 继承 <code>Animal</code>。</li>
+<li><code>sound()</code> 是父类方法。</li>
+<li><code>run()</code> 是子类新增方法。</li>
+<li><code>dog</code> 可以调用继承来的方法，也可以调用自己的方法。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">继承的核心作用是复用父类已有功能，并在子类中扩展新功能。
+</code></pre>
+<hr>
+<h4>示例 2：重写非抽象方法必须写 override</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">override、方法重写、非抽象方法
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物发出声音&quot;)
+  }
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = {
+    println(&quot;狗叫：汪汪&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val dog = new Dog()
+    dog.sound()
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">狗叫：汪汪
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li>父类 <code>Animal</code> 已经定义了 <code>sound()</code> 方法。</li>
+<li>子类 <code>Dog</code> 重新定义 <code>sound()</code>。</li>
+<li>因为父类方法是非抽象方法，所以子类必须写 <code>override</code>。</li>
+<li>调用时执行子类重写后的方法。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 中重写普通方法时，override 不是装饰，而是必须遵守的语法规则。
+</code></pre>
+<hr>
+<h4>示例 3：主构造器向父类构造器传参</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">主构造器、继承参数传递、extends
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Person(val name: String) {
+  def introduce(): Unit = {
+    println(&quot;姓名：&quot; + name)
+  }
+}
+
+class Student(name: String, val grade: Int) extends Person(name) {
+  def showGrade(): Unit = {
+    println(&quot;年级：&quot; + grade)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val student = new Student(&quot;Tom&quot;, 3)
+
+    student.introduce()
+    student.showGrade()
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">姓名：Tom
+年级：3
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Person</code> 的主构造器需要 <code>name</code>。</li>
+<li><code>Student</code> 的主构造器接收 <code>name</code> 和 <code>grade</code>。</li>
+<li><code>extends Person(name)</code> 把 <code>name</code> 传给父类。</li>
+<li><code>Student</code> 继承了 <code>introduce()</code>。</li>
+<li><code>showGrade()</code> 是子类自己的方法。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 中父类构造器参数通常写在 extends 后面，由子类主构造器传入。
+</code></pre>
+<hr>
+<h4>示例 4：使用 super 扩展父类 toString</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">super、toString、方法重写、父类方法复用
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Person(val name: String) {
+  override def toString: String = {
+    &quot;Person(name = &quot; + name + &quot;)&quot;
+  }
+}
+
+class Employee(name: String, val salary: Double) extends Person(name) {
+  override def toString: String = {
+    super.toString + &quot;, salary = &quot; + salary
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val employee = new Employee(&quot;Alice&quot;, 9000)
+
+    println(employee)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">Person(name = Alice), salary = 9000.0
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Person</code> 重写 <code>toString</code>，输出姓名。</li>
+<li><code>Employee</code> 继承 <code>Person</code>。</li>
+<li><code>Employee</code> 重写 <code>toString</code>。</li>
+<li><code>super.toString</code> 调用父类的字符串输出。</li>
+<li>子类再追加薪水信息。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">super 常用于“保留父类原有功能 + 增加子类新功能”的场景。
+</code></pre>
+<hr>
+<h4>示例 5：重写 val 字段</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">val 字段、override、字段重写
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">class Person {
+  val role: String = &quot;普通人&quot;
+}
+
+class Teacher extends Person {
+  override val role: String = &quot;老师&quot;
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val p = new Person()
+    val t = new Teacher()
+
+    println(p.role)
+    println(t.role)
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">普通人
+老师
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Person</code> 中定义 <code>val role</code>。</li>
+<li><code>Teacher</code> 中使用 <code>override val role</code> 重写父类字段。</li>
+<li><code>p.role</code> 输出父类字段值。</li>
+<li><code>t.role</code> 输出子类重写后的字段值。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">Scala 中 val 字段类似无参取值方法，因此非 final 的 val 可以被重写。
+</code></pre>
+<hr>
+<h4>示例 6：抽象方法的实现</h4>
+<p><strong>适用知识点：</strong></p>
+<pre><code class="language-text">抽象类、抽象方法、override、实现规则
+</code></pre>
+<p><strong>代码：</strong></p>
+<pre><code class="language-scala">abstract class Shape {
+  def area(): Double
+}
+
+class Rectangle(val width: Double, val height: Double) extends Shape {
+  override def area(): Double = {
+    width * height
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val r = new Rectangle(3, 4)
+
+    println(r.area())
+  }
+}
+</code></pre>
+<p><strong>运行结果：</strong></p>
+<pre><code class="language-text">12.0
+</code></pre>
+<p><strong>代码解释：</strong></p>
+<ol>
+<li><code>Shape</code> 是抽象类。</li>
+<li><code>area()</code> 是抽象方法。</li>
+<li><code>Rectangle</code> 继承 <code>Shape</code>。</li>
+<li>子类实现了 <code>area()</code>。</li>
+<li>虽然实现抽象方法时 <code>override</code> 可省略，但写上更清晰。</li>
+</ol>
+<p><strong>初学者提示：</strong></p>
+<pre><code class="language-text">抽象方法没有方法体，子类必须补充具体实现。
+</code></pre>
+<hr>
+<h3>7. 课堂案例整理</h3>
+<h4>案例 1：Point 与 Location 的继承</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">主构造器、继承、字段重写、方法重写
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到 <code>Point</code> 类包含坐标 <code>x</code> 和 <code>y</code>，<code>Location</code> 类继承 <code>Point</code>，并可能重写父类字段或移动方法。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义 <code>Point</code> 父类，保存坐标。</li>
+<li>定义 <code>move</code> 方法移动坐标。</li>
+<li>定义 <code>Location</code> 子类，继承 <code>Point</code>。</li>
+<li>子类可以重写 <code>move</code> 方法，增加自己的输出逻辑。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Point(var x: Int, var y: Int) {
+  def move(dx: Int, dy: Int): Unit = {
+    x += dx
+    y += dy
+    println(&quot;Point moved to (&quot; + x + &quot;, &quot; + y + &quot;)&quot;)
+  }
+}
+
+class Location(x: Int, y: Int, val name: String) extends Point(x, y) {
+  override def move(dx: Int, dy: Int): Unit = {
+    super.move(dx, dy)
+    println(name + &quot; 的位置已经更新&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val loc = new Location(10, 20, &quot;鼠标位置&quot;)
+    loc.move(3, 5)
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解子类如何把参数传给父类主构造器，并在重写方法时使用 <code>super</code> 复用父类逻辑。</p>
+<hr>
+<h4>案例 2：Animal 与 Dog 的方法重写</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">继承、override、非抽象方法重写
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中通过动物发声说明方法重写：父类 <code>Animal</code> 有通用声音方法，子类 <code>Dog</code> 需要改成狗叫。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>父类定义普通方法 <code>sound()</code>。</li>
+<li>子类继承父类。</li>
+<li>子类使用 <code>override</code> 重写 <code>sound()</code>。</li>
+<li>调用子类对象的方法时执行子类版本。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;Animal makes sound&quot;)
+  }
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = {
+    println(&quot;Dog barks&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val dog = new Dog()
+    dog.sound()
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>这个案例帮助学生理解非抽象方法重写必须写 <code>override</code>，也帮助区分父类默认行为和子类特有行为。</p>
+<hr>
+<h4>案例 3：Person 与 Employee 的 toString 重写</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">toString、super、override、继承扩展
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中讲到父类 <code>Person</code> 输出姓名，子类 <code>Employee</code> 在此基础上输出薪水。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>父类 <code>Person</code> 重写 <code>toString</code> 输出姓名。</li>
+<li>子类 <code>Employee</code> 继承 <code>Person</code>，增加薪水字段。</li>
+<li>子类重写 <code>toString</code>。</li>
+<li>使用 <code>super.toString</code> 获取父类输出，再拼接薪水。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Person(val name: String) {
+  override def toString: String = {
+    &quot;name = &quot; + name
+  }
+}
+
+class Employee(name: String, val salary: Double) extends Person(name) {
+  override def toString: String = {
+    super.toString + &quot;, salary = &quot; + salary
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解 <code>super</code> 不是重新创建父类对象，而是在子类中调用父类已有方法。</p>
+<hr>
+<h4>案例 4：使用 val 重写角色字段</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">val 字段、字段重写、override
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂后半段重点讨论了 <code>val</code> 字段能否重写。整理后可以用“身份角色”案例帮助理解。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>父类定义通用身份 <code>role</code>。</li>
+<li>子类重写 <code>role</code>。</li>
+<li>输出不同对象的身份。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">class Person {
+  val role: String = &quot;Person&quot;
+}
+
+class Student extends Person {
+  override val role: String = &quot;Student&quot;
+}
+
+class Teacher extends Person {
+  override val role: String = &quot;Teacher&quot;
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    println(new Person().role)
+    println(new Student().role)
+    println(new Teacher().role)
+  }
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解 Scala 中 <code>val</code> 可以看作无参取值方法，因此非 <code>final val</code> 可以被子类重写。</p>
+<hr>
+<h4>案例 5：抽象 Shape 与具体 Rectangle</h4>
+<p><strong>对应知识点：</strong></p>
+<pre><code class="language-text">抽象类、抽象方法、继承、实现规则
+</code></pre>
+<p><strong>案例背景：</strong></p>
+<p>课堂中提到抽象方法实现规则。可以用图形面积计算帮助理解。</p>
+<p><strong>解决思路：</strong></p>
+<ol>
+<li>定义抽象父类 <code>Shape</code>。</li>
+<li>抽象方法 <code>area()</code> 表示所有图形都应该能计算面积。</li>
+<li>子类 <code>Rectangle</code> 实现面积计算。</li>
+<li>通过对象调用具体实现。</li>
+</ol>
+<p><strong>Scala 代码：</strong></p>
+<pre><code class="language-scala">abstract class Shape {
+  def area(): Double
+}
+
+class Rectangle(val width: Double, val height: Double) extends Shape {
+  override def area(): Double = width * height
+}
+</code></pre>
+<p><strong>这个案例帮助理解什么：</strong></p>
+<p>它帮助学生理解抽象类定义规则，子类负责实现规则。</p>
+<hr>
+<h3>8. 易错点总结</h3>
+<h4>易错点 1：忘记使用 extends</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Dog Animal {
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Animal
+
+class Dog extends Animal {
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 和 Java 一样，类继承使用 <code>extends</code> 关键字。</p>
+<hr>
+<h4>易错点 2：子类没有向父类构造器传参</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(val grade: Int) extends Person
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String, val grade: Int) extends Person(name)
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>父类 <code>Person</code> 的主构造器需要 <code>name</code> 参数，子类继承时必须通过主构造器传给父类。</p>
+<hr>
+<h4>易错点 3：在辅助构造器中直接调用父类构造器</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String, val grade: Int) extends Person(name) {
+  def this() = {
+    super(&quot;Tom&quot;)
+  }
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String, val grade: Int) extends Person(name) {
+  def this() = {
+    this(&quot;Tom&quot;, 1)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 辅助构造器必须先调用本类已有构造器，不能直接绕过主构造器调用父类构造器。</p>
+<hr>
+<h4>易错点 4：重写普通方法忘记写 override</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = println(&quot;animal&quot;)
+}
+
+class Dog extends Animal {
+  def sound(): Unit = println(&quot;dog&quot;)
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = println(&quot;animal&quot;)
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = println(&quot;dog&quot;)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>Scala 中重写非抽象方法必须写 <code>override</code>。</p>
+<hr>
+<h4>易错点 5：把重载当成重写</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Parent {
+  def show(): Unit = println(&quot;parent&quot;)
+}
+
+class Child extends Parent {
+  def show(msg: String): Unit = println(msg)
+}
+</code></pre>
+<p>误以为 <code>show(msg: String)</code> 重写了父类 <code>show()</code>。</p>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Parent {
+  def show(): Unit = println(&quot;parent&quot;)
+}
+
+class Child extends Parent {
+  override def show(): Unit = println(&quot;child&quot;)
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>重写要求方法名和参数列表匹配。参数列表不同的是重载，不是重写。</p>
+<hr>
+<h4>易错点 6：重写 final 方法</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Parent {
+  final def id(): Int = 1
+}
+
+class Child extends Parent {
+  override def id(): Int = 2
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Parent {
+  final def id(): Int = 1
+}
+
+class Child extends Parent {
+  def name(): String = &quot;child&quot;
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>final</code> 方法不能被子类重写。</p>
+<hr>
+<h4>易错点 7：直接访问父类 private 成员</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Parent {
+  private val secret = &quot;abc&quot;
+}
+
+class Child extends Parent {
+  def show(): Unit = {
+    println(secret)
+  }
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Parent {
+  private val secret = &quot;abc&quot;
+
+  protected def getSecret: String = secret
+}
+
+class Child extends Parent {
+  def show(): Unit = {
+    println(getSecret)
+  }
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p><code>private</code> 成员不能被子类直接访问。如果需要子类使用，可以通过受保护方法间接提供。</p>
+<hr>
+<h4>易错点 8：重写 val 字段忘记 override</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person {
+  val role = &quot;person&quot;
+}
+
+class Student extends Person {
+  val role = &quot;student&quot;
+}
+</code></pre>
+<p><strong>正确写法：</strong></p>
+<pre><code class="language-scala">class Person {
+  val role = &quot;person&quot;
+}
+
+class Student extends Person {
+  override val role = &quot;student&quot;
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>重写父类非抽象 <code>val</code> 字段时需要写 <code>override</code>。</p>
+<hr>
+<h4>易错点 9：把具体 var 当成普通 val 随意重写</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person {
+  var age: Int = 18
+}
+
+class Student extends Person {
+  override var age: Int = 20
+}
+</code></pre>
+<p><strong>正确写法之一：使用抽象 var</strong></p>
+<pre><code class="language-scala">abstract class Person {
+  var age: Int
+}
+
+class Student extends Person {
+  var age: Int = 20
+}
+</code></pre>
+<p><strong>解释：</strong></p>
+<p>具体 <code>var</code> 同时包含 getter 和 setter，重写规则比 <code>val</code> 复杂。初学阶段不要直接重写父类具体 <code>var</code>。</p>
+<hr>
+<h4>易错点 10：不理解 Scala 类体语句会在构造时执行</h4>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-scala">class Person(val name: String) {
+  println(&quot;这句话什么时候执行？&quot;)
+}
+</code></pre>
+<p>误以为这句话永远不会自动执行。</p>
+<p><strong>正确理解：</strong></p>
+<pre><code class="language-scala">val p = new Person(&quot;Tom&quot;)
+</code></pre>
+<p>创建对象时，类体中的直接语句会执行。</p>
+<p><strong>解释：</strong></p>
+<p>Scala 类体中的直接语句属于主构造器逻辑，创建对象时会从上到下执行。</p>
+<hr>
+<h3>9. 小测验题目</h3>
+<h4>题目 1：Scala 中类继承使用哪个关键字？</h4>
+<p>A. <code>implements</code><br>B. <code>extends</code><br>C. <code>inherits</code><br>D. <code>override</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 和 Java 一样，类继承使用 <code>extends</code>。</p>
+<hr>
+<h4>题目 2：下面哪个说法正确？</h4>
+<p>A. Scala 一个类可以同时继承多个普通父类<br>B. Scala 不支持继承<br>C. Scala 类只能直接继承一个父类<br>D. Scala 继承不需要 <code>extends</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 与 Java 类继承类似，一个类只能直接继承一个父类。多个能力组合通常通过特质实现。</p>
+<hr>
+<h4>题目 3：Scala 中谁可以直接向父类主构造器传递参数？</h4>
+<p>A. 子类主构造器<br>B. 子类任意普通方法<br>C. 子类辅助构造器直接调用 <code>super(...)</code><br>D. 伴生对象中的任意方法</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中父类构造器参数通常在 <code>extends 父类(...)</code> 位置传入，这由子类主构造器完成。</p>
+<hr>
+<h4>题目 4：重写父类非抽象方法时，Scala 中必须写什么关键字？</h4>
+<p>A. <code>final</code><br>B. <code>static</code><br>C. <code>override</code><br>D. <code>private</code></p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中重写非抽象方法必须写 <code>override</code>。</p>
+<hr>
+<h4>题目 5：下面哪个是正确的重写写法？</h4>
+<p>A. <code>def sound(): Unit = println(&quot;dog&quot;)</code><br>B. <code>override def sound(): Unit = println(&quot;dog&quot;)</code><br>C. <code>overload def sound(): Unit = println(&quot;dog&quot;)</code><br>D. <code>static def sound(): Unit = println(&quot;dog&quot;)</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>重写父类普通方法时，应使用 <code>override def</code>。</p>
+<hr>
+<h4>题目 6：<code>super.toString</code> 的作用是什么？</h4>
+<p>A. 创建一个父类对象<br>B. 调用父类的 <code>toString</code> 方法<br>C. 删除子类对象<br>D. 调用伴生对象方法</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>super</code> 表示父类部分，<code>super.toString</code> 用来调用父类的 <code>toString</code> 方法。</p>
+<hr>
+<h4>题目 7：<code>final class A</code> 表示什么？</h4>
+<p>A. A 必须被继承<br>B. A 不能被继承<br>C. A 中所有字段都是 var<br>D. A 是抽象类</p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>final</code> 修饰类时，表示该类不能再被继承。</p>
+<hr>
+<h4>题目 8：关于 <code>val</code> 字段重写，下面说法正确的是？</h4>
+<p>A. 所有 <code>val</code> 都不能被重写<br>B. 非 <code>final val</code> 可以被子类用同名 <code>override val</code> 重写<br>C. <code>val</code> 只能被 <code>var</code> 重写<br>D. 重写 <code>val</code> 不需要 <code>override</code></p>
+<p><strong>正确答案：B</strong></p>
+<p><strong>解析：</strong></p>
+<p>Scala 中 <code>val</code> 类似无参取值方法，非 <code>final val</code> 可以被重写，但需要写 <code>override</code>。</p>
+<hr>
+<h4>题目 9：下面哪个成员不能被子类直接访问？</h4>
+<p>A. 父类 public 成员<br>B. 父类 protected 成员<br>C. 父类 private 成员<br>D. 父类非 private 方法</p>
+<p><strong>正确答案：C</strong></p>
+<p><strong>解析：</strong></p>
+<p><code>private</code> 成员只在本类内部可见，子类不能直接访问。</p>
+<hr>
+<h4>题目 10：重写和重载的主要区别是什么？</h4>
+<p>A. 重写发生在父子类之间，重载通常是同名方法参数不同<br>B. 重写和重载完全一样<br>C. 重载必须使用 <code>override</code><br>D. 重写只能发生在 object 中</p>
+<p><strong>正确答案：A</strong></p>
+<p><strong>解析：</strong></p>
+<p>重写是子类改变父类方法实现；重载是方法名相同但参数列表不同。</p>
+<hr>
+<h3>10. 拖拽匹配素材</h3>
+<ol>
+<li><code>extends</code> —— 表示继承</li>
+<li>父类 —— 被继承的类</li>
+<li>子类 —— 继承父类的类</li>
+<li><code>override</code> —— 表示重写父类成员</li>
+<li><code>super</code> —— 调用父类成员</li>
+<li><code>final class</code> —— 不能被继承的类</li>
+<li><code>final def</code> —— 不能被重写的方法</li>
+<li><code>private</code> —— 只能在本类内部访问</li>
+<li><code>protected</code> —— 子类中通常可以访问</li>
+<li>主构造器 —— 类名后的参数列表</li>
+<li>辅助构造器 —— 使用 <code>def this(...)</code> 定义</li>
+<li>方法重写 —— 子类重新实现父类方法</li>
+<li>方法重载 —— 同名方法参数列表不同</li>
+<li><code>val</code> 重写 —— 使用同名 <code>override val</code></li>
+<li><code>isInstanceOf</code> —— 判断对象是否属于某个类型</li>
+<li><code>toString</code> —— 返回对象的字符串表示</li>
+<li>单继承 —— 一个类只能直接继承一个父类</li>
+<li>访问权限不能缩小 —— 子类重写时权限不能比父类更小</li>
+</ol>
+<hr>
+<h3>11. 流程动画素材</h3>
+<h4>流程主题：创建子类对象时的构造器执行流程</h4>
+<pre><code class="language-text">1. 程序执行到 new Student(&quot;Tom&quot;, 3)。
+2. Scala 找到 Student 类的主构造器。
+3. Student 主构造器接收参数 name = &quot;Tom&quot;，grade = 3。
+4. 程序看到 Student 继承 Person，并写有 extends Person(name)。
+5. Student 主构造器把 name 参数传给 Person 主构造器。
+6. Person 主构造器先完成父类字段初始化。
+7. Person 类体中的主构造器逻辑从上到下执行。
+8. 父类构造完成后，继续执行 Student 类体中的主构造器逻辑。
+9. Student 自己的字段 grade 被初始化。
+10. Student 类体中的直接语句从上到下执行。
+11. 所有构造逻辑执行完成。
+12. 程序得到一个 Student 对象。
+13. 后续可以通过该对象调用继承来的方法和子类自己的方法。
+</code></pre>
+<hr>
+<h3>12. 课后练习题</h3>
+<h4>练习 1：定义父类和子类</h4>
+<p><strong>题目：</strong></p>
+<p>定义父类 <code>Animal</code>，包含方法 <code>eat()</code> 输出“动物吃东西”。定义子类 <code>Cat</code> 继承 <code>Animal</code>，新增方法 <code>catchMouse()</code> 输出“猫抓老鼠”。创建 <code>Cat</code> 对象并调用两个方法。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">继承、extends、父类方法、子类新增方法
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def eat(): Unit = {
+    println(&quot;动物吃东西&quot;)
+  }
+}
+
+class Cat extends Animal {
+  def catchMouse(): Unit = {
+    println(&quot;猫抓老鼠&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val cat = new Cat()
+
+    cat.eat()
+    cat.catchMouse()
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>使用 <code>extends</code> 建立继承关系。子类对象既能调用父类方法，也能调用自己新增的方法。</p>
+<hr>
+<h4>练习 2：重写父类方法</h4>
+<p><strong>题目：</strong></p>
+<p>定义父类 <code>Animal</code>，包含方法 <code>sound()</code> 输出“动物叫”。定义子类 <code>Dog</code> 重写 <code>sound()</code>，输出“汪汪”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">override、方法重写、非抽象方法
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Animal {
+  def sound(): Unit = {
+    println(&quot;动物叫&quot;)
+  }
+}
+
+class Dog extends Animal {
+  override def sound(): Unit = {
+    println(&quot;汪汪&quot;)
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val dog = new Dog()
+    dog.sound()
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>父类 <code>sound()</code> 已有方法体，是非抽象方法。子类重写时必须写 <code>override</code>。</p>
+<hr>
+<h4>练习 3：主构造器传参</h4>
+<p><strong>题目：</strong></p>
+<p>定义父类 <code>Person(name: String)</code>，定义子类 <code>Student(name: String, grade: Int)</code> 继承 <code>Person</code>。创建学生对象并输出姓名和年级。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">主构造器、继承传参、字段定义
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String, val grade: Int) extends Person(name)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student(&quot;Tom&quot;, 2)
+
+    println(s.name)
+    println(s.grade)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>父类需要 <code>name</code>，子类主构造器接收 <code>name</code> 后，在 <code>extends Person(name)</code> 中传给父类。</p>
+<hr>
+<h4>练习 4：使用 super 扩展 toString</h4>
+<p><strong>题目：</strong></p>
+<p>定义 <code>Person(name: String)</code>，重写 <code>toString</code> 输出姓名。定义 <code>Employee(name: String, salary: Double)</code> 继承 <code>Person</code>，重写 <code>toString</code>，在父类输出基础上增加工资。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">super、toString、override、继承扩展
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Person(val name: String) {
+  override def toString: String = {
+    &quot;name = &quot; + name
+  }
+}
+
+class Employee(name: String, val salary: Double) extends Person(name) {
+  override def toString: String = {
+    super.toString + &quot;, salary = &quot; + salary
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val e = new Employee(&quot;Alice&quot;, 8000)
+    println(e)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>先让父类负责输出姓名，再让子类通过 <code>super.toString</code> 复用父类输出，并追加自己的薪水字段。</p>
+<hr>
+<h4>练习 5：重写 val 字段</h4>
+<p><strong>题目：</strong></p>
+<p>定义父类 <code>Role</code>，包含 <code>val name = &quot;普通角色&quot;</code>。定义子类 <code>AdminRole</code>，重写 <code>name</code> 为“管理员”。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">val 字段重写、override
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Role {
+  val name: String = &quot;普通角色&quot;
+}
+
+class AdminRole extends Role {
+  override val name: String = &quot;管理员&quot;
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val role = new AdminRole()
+    println(role.name)
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>非 <code>final val</code> 可以被同名 <code>override val</code> 重写。重写时必须写 <code>override</code>。</p>
+<hr>
+<h4>练习 6：实现抽象类方法</h4>
+<p><strong>题目：</strong></p>
+<p>定义抽象类 <code>Shape</code>，包含抽象方法 <code>area(): Double</code>。定义子类 <code>Circle(radius: Double)</code>，实现面积计算。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">抽象类、抽象方法、继承、override
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">abstract class Shape {
+  def area(): Double
+}
+
+class Circle(val radius: Double) extends Shape {
+  override def area(): Double = {
+    3.14 * radius * radius
+  }
+}
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val c = new Circle(2)
+    println(c.area())
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>抽象类定义规则，子类必须实现 <code>area()</code> 方法。虽然实现抽象方法时 <code>override</code> 可以省略，但写上更清晰。</p>
+<hr>
+<h4>练习 7：判断对象类型</h4>
+<p><strong>题目：</strong></p>
+<p>定义父类 <code>Person</code> 和子类 <code>Student</code>。创建 <code>Student</code> 对象，使用 <code>isInstanceOf</code> 判断它是否属于 <code>Student</code> 和 <code>Person</code>。</p>
+<p><strong>考查知识点：</strong></p>
+<pre><code class="language-text">isInstanceOf、继承层级、类型判断
+</code></pre>
+<p><strong>参考答案：</strong></p>
+<pre><code class="language-scala">class Person(val name: String)
+
+class Student(name: String) extends Person(name)
+
+object Main {
+  def main(args: Array[String]): Unit = {
+    val s = new Student(&quot;Tom&quot;)
+
+    println(s.isInstanceOf[Student])
+    println(s.isInstanceOf[Person])
+  }
+}
+</code></pre>
+<p><strong>解题思路：</strong></p>
+<p>子类对象既是子类类型，也是父类类型的一种，因此两个判断都为 <code>true</code>。</p>
+<hr>
+<h3>13. 本节课知识结构图文字版</h3>
+<pre><code class="language-text">Scala 继承与 Java 继承对比
+├── 继承基础
+│   ├── 父类
+│   ├── 子类
+│   ├── extends
+│   ├── 代码复用
+│   └── 扩展新功能
+├── Scala 与 Java 共同点
+│   ├── 都使用 extends
+│   ├── 子类继承父类非私有成员
+│   ├── 子类可新增成员
+│   ├── 子类可重写父类成员
+│   ├── final 类不能被继承
+│   ├── final 方法不能被重写
+│   └── 访问权限不能缩小
+├── Scala 特殊点
+│   ├── 类名后是主构造器
+│   ├── 主构造器可向父类构造器传参
+│   ├── 辅助构造器基于主构造器
+│   ├── 重写非抽象成员必须写 override
+│   └── val 字段可像无参方法一样重写
+├── 构造器
+│   ├── 主构造器
+│   │   ├── 类名后的参数列表
+│   │   ├── 可以向父类传参
+│   │   └── 类体直接语句会执行
+│   └── 辅助构造器
+│       ├── def this(...)
+│       ├── 第一行调用本类构造器
+│       └── 不能直接绕过主构造器调用父类构造器
+├── 方法重写
+│   ├── override
+│   ├── 非抽象方法必须写
+│   ├── 抽象方法实现时可省略但建议写
+│   ├── 方法头保持一致
+│   └── 方法体重新实现
+├── 字段重写
+│   ├── val 字段
+│   │   ├── 类似无参取值方法
+│   │   ├── 可被 override val 重写
+│   │   └── final val 不能重写
+│   └── var 字段
+│       ├── 包含 getter 和 setter
+│       ├── 抽象 var 可实现
+│       └── 具体 var 不建议直接重写
+├── super
+│   ├── 调用父类方法
+│   ├── 常用于扩展父类行为
+│   └── 示例：super.toString
+├── 访问控制
+│   ├── public 默认公有
+│   ├── private 本类内部访问
+│   ├── protected 子类中可访问
+│   └── 子类重写权限不能缩小
+├── final
+│   ├── final class 不能继承
+│   ├── final def 不能重写
+│   └── final val 不能重写
+└── 类型判断
+    ├── isInstanceOf
+    ├── 子类对象属于子类类型
+    └── 子类对象也属于父类类型
+</code></pre>
+<hr>
+<h3>14. 后续生成网页时可使用的数据建议</h3>
+<ul>
+<li><strong>建议课程 ID：</strong> <code>scala-inheritance-java-compare</code></li>
+<li><strong>建议课程标题：</strong> 2026-04-21 Scala 继承与 Java 继承的对比</li>
+<li><strong>建议章节：</strong> Scala 继承、Scala 多态</li>
+<li><strong>建议标签：</strong><ul>
+<li>Scala 继承</li>
+<li>Java 继承对比</li>
+<li>extends</li>
+<li>override</li>
+<li>super</li>
+<li>final</li>
+<li>protected</li>
+<li>private</li>
+<li>主构造器</li>
+<li>辅助构造器</li>
+<li>字段重写</li>
+<li>方法重写</li>
+<li>val 重写</li>
+<li>var 注意点</li>
+<li>toString</li>
+<li>isInstanceOf</li>
+</ul>
+</li>
+<li><strong>适合放入 summary 的内容：</strong><ul>
+<li>本节课对比 Scala 与 Java 的继承，重点讲解 Scala 主构造器传参、<code>override</code> 规则、<code>super</code> 调用和字段重写。</li>
+<li>Scala 和 Java 都使用 <code>extends</code>，继承思想基本一致，但 Scala 的主构造器写在类名后，继承传参方式不同。</li>
+<li>Scala 重写非抽象成员必须写 <code>override</code>，非 <code>final val</code> 可以被同名 <code>override val</code> 重写。</li>
+</ul>
+</li>
+<li><strong>适合放入 keyPoints 的内容：</strong><ul>
+<li>子类使用 <code>extends</code> 继承父类。</li>
+<li>Scala 只允许单继承一个父类。</li>
+<li>子类主构造器负责向父类构造器传参。</li>
+<li>重写非抽象方法必须写 <code>override</code>。</li>
+<li>使用 <code>super</code> 调用父类方法。</li>
+<li><code>final</code> 类不能被继承，<code>final</code> 方法不能被重写。</li>
+<li>非 <code>final val</code> 可以被重写。</li>
+</ul>
+</li>
+<li><strong>适合放入 codeExamples 的内容：</strong><ul>
+<li><code>Animal</code> 与 <code>Dog</code> 基础继承。</li>
+<li><code>Dog</code> 重写 <code>sound()</code>。</li>
+<li><code>Student</code> 向 <code>Person</code> 主构造器传参。</li>
+<li><code>Employee</code> 使用 <code>super.toString</code>。</li>
+<li><code>Student</code> 重写父类 <code>val role</code>。</li>
+<li>抽象类 <code>Shape</code> 与子类 <code>Circle</code>。</li>
+</ul>
+</li>
+<li><strong>适合放入 quiz 的内容：</strong><ul>
+<li><code>extends</code> 关键字。</li>
+<li>主构造器传参规则。</li>
+<li><code>override</code> 使用规则。</li>
+<li><code>super</code> 的作用。</li>
+<li><code>final</code> 的作用。</li>
+<li><code>val</code> 字段重写。</li>
+<li>访问权限不能缩小。</li>
+</ul>
+</li>
+<li><strong>适合放入 dragMatch 的内容：</strong><ul>
+<li><code>extends</code> —— 表示继承</li>
+<li><code>override</code> —— 重写父类成员</li>
+<li><code>super</code> —— 调用父类成员</li>
+<li><code>final</code> —— 禁止继承或重写</li>
+<li><code>protected</code> —— 子类可访问</li>
+<li>主构造器 —— 类名后的参数列表</li>
+<li><code>isInstanceOf</code> —— 判断对象类型</li>
+</ul>
+</li>
+<li><strong>适合放入 flow 的内容：</strong><ul>
+<li>创建子类对象 → 子类主构造器接收参数 → 参数传给父类主构造器 → 父类构造逻辑执行 → 子类构造逻辑执行 → 对象创建完成。</li>
+</ul>
+</li>
+<li><strong>适合放入 exercises 的内容：</strong><ul>
+<li>定义父类和子类。</li>
+<li>重写父类方法。</li>
+<li>主构造器传参。</li>
+<li>使用 <code>super.toString</code>。</li>
+<li>重写 <code>val</code> 字段。</li>
+<li>实现抽象方法。</li>
+<li>使用 <code>isInstanceOf</code> 判断类型。</li>
+</ul>
+</li>
+<li><strong>适合放入 conclusion 的内容：</strong><ul>
+<li>本节课是 Scala 面向对象继承的核心内容。</li>
+<li>学生应重点掌握 Scala 与 Java 相同的继承思想，以及 Scala 独有的主构造器和 <code>override</code> 规则。</li>
+<li>字段重写尤其是 <code>val</code> 重写是考试和理解 Scala 语法差异的重要点。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>15. 课后总结</h3>
+<ol>
+<li>本节课的核心是 Scala 继承与 Java 继承的对比，思想上二者相似，语法细节上 Scala 更特殊。</li>
+<li>Scala 和 Java 都使用 <code>extends</code> 表示继承，子类可以复用父类的非私有成员，并扩展自己的成员。</li>
+<li>Scala 一个类只能直接继承一个父类，这与 Java 的类继承规则类似。</li>
+<li>Scala 与 Java 最大的差别之一是构造器：Scala 主构造器写在类名后，子类主构造器负责向父类构造器传参。</li>
+<li>辅助构造器不能直接绕过主构造器调用父类构造器，它必须先调用本类其他构造器。</li>
+<li>Scala 中重写非抽象方法或字段时必须写 <code>override</code>，这是考试中非常容易考到的规则。</li>
+<li>实现抽象方法时 <code>override</code> 可以省略，但为了代码清晰和统一，建议初学者保留。</li>
+<li><code>super</code> 用来调用父类方法，常用于在父类行为基础上增加子类自己的逻辑。</li>
+<li><code>final</code> 的作用与 Java 类似：修饰类不能继承，修饰方法不能重写，修饰字段不能覆盖。</li>
+<li><code>val</code> 字段可以理解为无参取值方法，因此非 <code>final val</code> 可以被子类使用同名 <code>override val</code> 重写。</li>
+<li>具体 <code>var</code> 的重写规则较复杂，初学阶段建议不要直接重写父类具体 <code>var</code>，只需掌握抽象 <code>var</code> 可以由子类实现。</li>
+<li>Scala 类体中的直接语句属于主构造器逻辑，创建对象时会从上到下执行，这一点与 Java 类体结构不同。</li>
+<li>课后复习时，应把“Java 与 Scala 继承相同点”和“Scala 特有规则”分开背诵，便于考试答概念题。</li>
+<li>本节课为后续学习多态、抽象类、特质 <code>trait</code> 和面向接口编程打基础。</li>
+<li>建议课后至少手写三类代码：普通继承、方法重写、主构造器传参，再单独练习 <code>super.toString</code> 和 <code>override val</code>。</li>
+</ol>
+
+    </article>
+    <nav class="article-pager" aria-label="文章翻页"><a class="article-pager-link" rel="prev" href="scala-2026-04-21-part-1.html"><span>上一篇</span><strong>Scala覆盖重写抽象类与Trait</strong></a><a class="article-pager-link next" rel="next" href="scala-2026-04-23.html"><span>下一篇</span><strong>Scala特质Trait相关知识讲解</strong></a></nav>
+  </main>
+  <footer class="site-footer"><p><a href="../../summaries.html">返回课程总结资料馆</a></p></footer>
+</body>
+</html>
