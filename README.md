@@ -1,12 +1,26 @@
-# Scala 课程交互式学习网站
+<div align="center">
 
-把课程笔记、代码示例与练习放在同一处，用搜索、筛选和互动练习回顾 Java 与 Scala。
+# Scala 学习站
 
-**静态网站 · 课程检索 · 互动练习 · GitHub Pages**
+**把课程阅读、知识总结与互动练习放在同一条学习路径上。**
+
+`静态站点` · `课程导航` · `交互练习` · `课程总结`
+
+[![GitHub Stars](https://img.shields.io/github/stars/9-GETOVER-9/scala_learning_site?style=for-the-badge&color=839778)](https://github.com/9-GETOVER-9/scala_learning_site/stargazers)
+
+[快速开始](#section-2) · [功能矩阵](#section-3) · [功能](#section-6)
+
+</div>
+
+---
+
+<a id="section-1"></a>
 
 ## 一句话介绍
 
 一个以 HTML、CSS 和 JavaScript 构建的课程学习网站，提供课程详情、知识点拆解、测验、拖拽匹配和课程总结资料馆。
+
+<a id="section-2"></a>
 
 ## 快速开始
 
@@ -18,6 +32,8 @@ npm run build:summaries
 npm test
 ```
 
+<a id="section-3"></a>
+
 ## 功能矩阵
 
 | 功能 | 说明 |
@@ -27,11 +43,15 @@ npm test
 | 互动练习 | 即时测验、拖拽匹配和流程动画 |
 | 总结资料馆 | 汇总 Java / Scala 课程笔记并提供搜索 |
 
+<a id="section-4"></a>
+
 ## 核心工作流
 
 ```text
 搜索课程 → 阅读知识点 → 运行示例 → 完成练习 → 回看课程总结
 ```
+
+<a id="section-5"></a>
 
 ## 项目结构
 
@@ -43,9 +63,12 @@ npm test
 | `scripts/` | 总结页面生成脚本 |
 | `tests/` | 自动化测试 |
 
-## 详细说明
+<details>
+<summary>展开配置、维护与详细使用说明</summary>
 
 这是一个纯 HTML / CSS / JavaScript 的静态课程学习网站，适合部署到 GitHub Pages。
+
+<a id="section-6"></a>
 
 ## 功能
 
@@ -65,6 +88,8 @@ npm test
 - Java / Scala 课程总结资料馆
 - 课程总结关键词搜索和语言筛选
 - 从互动课程直达完整总结
+
+<a id="section-7"></a>
 
 ## 文件结构
 
@@ -96,6 +121,8 @@ npm test
     └── icons/
 ```
 
+<a id="section-8"></a>
+
 ## 如何新增一节课
 
 打开 `js/data.js`，在 `lessons` 数组中新增一个课程对象。
@@ -117,6 +144,8 @@ npm test
 - `conclusion`：课后总结
 
 新增完成后，首页会自动显示课程，并支持搜索和筛选。
+
+<a id="section-9"></a>
 
 ## 如何更新课程总结
 
@@ -142,12 +171,18 @@ npm run build:summaries
 npm test
 ```
 
+<a id="section-10"></a>
+
 ## 部署方式
 
 将本项目文件上传到 GitHub 仓库，开启 GitHub Pages 后即可访问。
 
 如果仓库已经部署，只需要把这些文件复制到仓库根目录，提交并 push 即可更新网站。
 
+<a id="section-11"></a>
+
 ## 说明
 
 本网站不需要后端、不需要数据库、不保存学生成绩。
+
+</details>
